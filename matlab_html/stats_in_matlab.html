@@ -1,0 +1,1280 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,IE=9,chrome=1"><meta name="generator" content="MATLAB 2023b"><title>Statistics in Matlab</title><style type="text/css">.rtcContent { padding: 30px; } .S0 { margin: 3px 10px 5px 4px; padding: 0px; line-height: 28.8px; min-height: 0px; white-space: pre-wrap; color: rgb(192, 76, 11); font-family: Helvetica, Arial, sans-serif; font-style: normal; font-size: 24px; font-weight: 400; text-align: left;  }
+.S1 { margin: 2px 10px 9px 4px; padding: 0px; line-height: 21px; min-height: 0px; white-space: pre-wrap; color: rgb(33, 33, 33); font-family: Helvetica, Arial, sans-serif; font-style: normal; font-size: 14px; font-weight: 400; text-align: left;  }
+.CodeBlock { background-color: #F5F5F5; margin: 10px 0 10px 0; }
+.S2 { border-left: 1.11111px solid rgb(217, 217, 217); border-right: 1.11111px solid rgb(217, 217, 217); border-top: 1.11111px solid rgb(217, 217, 217); border-bottom: 1.11111px solid rgb(217, 217, 217); border-radius: 4px 4px 0px 0px; padding: 6px 45px 4px 13px; line-height: 18.004px; min-height: 0px; white-space: nowrap; color: rgb(33, 33, 33); font-family: Menlo, Monaco, Consolas, "Courier New", monospace; font-size: 14px;  }
+.S3 { color: rgb(33, 33, 33); padding: 10px 0px 6px 17px; background: rgb(255, 255, 255) none repeat scroll 0% 0% / auto padding-box border-box; font-family: Menlo, Monaco, Consolas, "Courier New", monospace; font-size: 14px; overflow-x: hidden; line-height: 17.234px;  }
+/* Styling that is common to warnings and errors is in diagnosticOutput.css */.embeddedOutputsErrorElement {    min-height: 18px;    max-height: 550px;}
+.embeddedOutputsErrorElement .diagnosticMessage-errorType {    overflow: auto;}
+.embeddedOutputsErrorElement.inlineElement {}
+.embeddedOutputsErrorElement.rightPaneElement {}
+/* Styling that is common to warnings and errors is in diagnosticOutput.css */.embeddedOutputsWarningElement {    min-height: 18px;    max-height: 550px;}
+.embeddedOutputsWarningElement .diagnosticMessage-warningType {    overflow: auto;}
+.embeddedOutputsWarningElement.inlineElement {}
+.embeddedOutputsWarningElement.rightPaneElement {}
+/* Copyright 2015-2023 The MathWorks, Inc. *//* In this file, styles are not scoped to rtcContainer since they could be in the Dojo Tooltip */.diagnosticMessage-wrapper {    font-family: Menlo, Monaco, Consolas, "Courier New", monospace;    font-size: 12px;}
+.diagnosticMessage-wrapper.diagnosticMessage-warningType {    /*This fallback value will be used for appdesigner warnings*/    color: var(--rtc-warning-output-color, var(--mw-color-matlabWarning));}
+.diagnosticMessage-wrapper.diagnosticMessage-warningType a {    /*This fallback value will be used for appdesigner warnings*/    color: var(--rtc-warning-output-color, var(--mw-color-matlabWarning));    text-decoration: underline;}
+.rtcThemeDefaultOverride .diagnosticMessage-wrapper.diagnosticMessage-warningType,.rtcThemeDefaultOverride .diagnosticMessage-wrapper.diagnosticMessage-warningType a {    color: var(--mw-color-matlabWarning) !important;}
+.diagnosticMessage-wrapper.diagnosticMessage-errorType {    /*This fallback value will be used in appdesigner error tooltip text*/    color: var(--rtc-error-output-color, var(--mw-color-matlabErrors));}
+.diagnosticMessage-wrapper.diagnosticMessage-errorType a {    /*This fallback value will be used in appdesigner error tooltip text*/    color: var(--rtc-error-output-color, var(--mw-color-matlabErrors));    text-decoration: underline;}
+.rtcThemeDefaultOverride .diagnosticMessage-wrapper.diagnosticMessage-errorType,.rtcThemeDefaultOverride .diagnosticMessage-wrapper.diagnosticMessage-errorType a {    color: var(--mw-color-matlabErrors) !important;}
+.diagnosticMessage-wrapper .diagnosticMessage-messagePart,.diagnosticMessage-wrapper .diagnosticMessage-causePart {    white-space: pre-wrap;}
+.diagnosticMessage-wrapper .diagnosticMessage-stackPart {    white-space: pre;}
+.embeddedOutputsTextElement,.embeddedOutputsVariableStringElement {    white-space: pre;    word-wrap:  initial;    min-height: 18px;    max-height: 550px;}
+.embeddedOutputsTextElement .textElement,.embeddedOutputsVariableStringElement .textElement {    overflow: auto;}
+.textElement,.rtcDataTipElement .textElement {    padding-top: 2px;}
+.embeddedOutputsTextElement.inlineElement,.embeddedOutputsVariableStringElement.inlineElement {}
+.inlineElement .textElement {}
+.embeddedOutputsTextElement.rightPaneElement,.embeddedOutputsVariableStringElement.rightPaneElement {    min-height: 16px;}
+.rightPaneElement .textElement {    padding-top: 2px;    padding-left: 9px;}
+.S4 { margin: 10px 10px 9px 4px; padding: 0px; line-height: 21px; min-height: 0px; white-space: pre-wrap; color: rgb(33, 33, 33); font-family: Helvetica, Arial, sans-serif; font-style: normal; font-size: 14px; font-weight: 400; text-align: left;  }
+.S5 { margin-bottom: 20px; padding-bottom: 4px;  }
+.S6 { margin: 0px; padding: 10px 0px 10px 5px; line-height: 21px; min-height: 0px; white-space: pre-wrap; color: rgb(33, 33, 33); font-family: Helvetica, Arial, sans-serif; font-style: normal; font-size: 14px; font-weight: 700; text-align: start;  }
+.S7 { margin: -1px 0px 0px; padding: 10px 0px 10px 7px; line-height: 21px; min-height: 0px; white-space: pre-wrap; color: rgb(33, 33, 33); font-family: Helvetica, Arial, sans-serif; font-style: normal; font-size: 14px; font-weight: 400; text-align: start;  }
+.S8 { margin: 15px 10px 5px 4px; padding: 0px; line-height: 18px; min-height: 0px; white-space: pre-wrap; color: rgb(33, 33, 33); font-family: Helvetica, Arial, sans-serif; font-style: normal; font-size: 17px; font-weight: 700; text-align: left;  }
+.S9 { margin: 10px 0px 20px; padding-left: 0px; font-family: Helvetica, Arial, sans-serif; font-size: 14px;  }
+.S10 { margin-left: 56px; line-height: 21px; min-height: 0px; text-align: left; white-space: pre-wrap;  }
+.S11 { border-left: 0px none rgb(33, 33, 33); border-right: 0px none rgb(33, 33, 33); border-top: 0px none rgb(33, 33, 33); border-bottom: 0px none rgb(33, 33, 33); border-radius: 0px; padding: 0px; line-height: 15.6px; min-height: 16px; white-space: pre; color: rgb(33, 33, 33); font-family: Menlo, Monaco, Consolas, "Courier New", monospace; font-size: 12px;  }
+.S12 { margin: 3px 10px 5px 4px; padding: 0px; line-height: 18px; min-height: 0px; white-space: pre-wrap; color: rgb(33, 33, 33); font-family: Helvetica, Arial, sans-serif; font-style: normal; font-size: 17px; font-weight: 700; text-align: left;  }
+.S13 { border-left: 1.11111px solid rgb(217, 217, 217); border-right: 1.11111px solid rgb(217, 217, 217); border-top: 1.11111px solid rgb(217, 217, 217); border-bottom: 0px none rgb(33, 33, 33); border-radius: 4px 4px 0px 0px; padding: 6px 45px 0px 13px; line-height: 18.004px; min-height: 0px; white-space: nowrap; color: rgb(33, 33, 33); font-family: Menlo, Monaco, Consolas, "Courier New", monospace; font-size: 14px;  }
+.S14 { border-left: 1.11111px solid rgb(217, 217, 217); border-right: 1.11111px solid rgb(217, 217, 217); border-top: 0px none rgb(33, 33, 33); border-bottom: 1.11111px solid rgb(217, 217, 217); border-radius: 0px; padding: 0px 45px 4px 13px; line-height: 18.004px; min-height: 0px; white-space: nowrap; color: rgb(33, 33, 33); font-family: Menlo, Monaco, Consolas, "Courier New", monospace; font-size: 14px;  }
+.S15 { border-left: 1.11111px solid rgb(217, 217, 217); border-right: 1.11111px solid rgb(217, 217, 217); border-top: 0px none rgb(33, 33, 33); border-bottom: 0px none rgb(33, 33, 33); border-radius: 0px; padding: 0px 45px 0px 13px; line-height: 18.004px; min-height: 0px; white-space: nowrap; color: rgb(33, 33, 33); font-family: Menlo, Monaco, Consolas, "Courier New", monospace; font-size: 14px;  }
+.S16 { border-left: 1.11111px solid rgb(217, 217, 217); border-right: 1.11111px solid rgb(217, 217, 217); border-top: 1.11111px solid rgb(217, 217, 217); border-bottom: 1.11111px solid rgb(217, 217, 217); border-radius: 0px; padding: 6px 45px 4px 13px; line-height: 18.004px; min-height: 0px; white-space: nowrap; color: rgb(33, 33, 33); font-family: Menlo, Monaco, Consolas, "Courier New", monospace; font-size: 14px;  }
+.embeddedOutputsMatrixElement,.eoOutputWrapper .matrixElement {    min-height: 18px;    box-sizing: border-box;}
+.embeddedOutputsMatrixElement .matrixElement,.eoOutputWrapper  .matrixElement,.rtcDataTipElement .matrixElement {    position: relative;}
+.matrixElement .variableValue,.rtcDataTipElement .matrixElement .variableValue {    white-space: pre;    display: inline-block;    vertical-align: top;    overflow: hidden;}
+.embeddedOutputsMatrixElement.inlineElement {}
+.embeddedOutputsMatrixElement.inlineElement .topHeaderWrapper {    display: none;}
+.embeddedOutputsMatrixElement.inlineElement .veTable .body {    padding-top: 0 !important;    max-height: 100px;}
+.inlineElement .matrixElement {    max-height: 300px;}
+.embeddedOutputsMatrixElement.rightPaneElement {}
+.rightPaneElement .matrixElement,.rtcDataTipElement .matrixElement {    overflow: hidden;    padding-left: 9px;}
+.rightPaneElement .matrixElement {    margin-bottom: -1px;}
+.embeddedOutputsMatrixElement .matrixElement .valueContainer,.eoOutputWrapper .matrixElement .valueContainer,.rtcDataTipElement .matrixElement .valueContainer {    white-space: nowrap;    margin-bottom: 3px;}
+.embeddedOutputsMatrixElement .matrixElement .valueContainer .horizontalEllipsis.hide,.embeddedOutputsMatrixElement .matrixElement .verticalEllipsis.hide,.eoOutputWrapper .matrixElement .valueContainer .horizontalEllipsis.hide,.eoOutputWrapper .matrixElement .verticalEllipsis.hide,.rtcDataTipElement .matrixElement .valueContainer .horizontalEllipsis.hide,.rtcDataTipElement .matrixElement .verticalEllipsis.hide {    display: none;}
+.embeddedOutputsVariableMatrixElement .matrixElement .valueContainer.hideEllipses .verticalEllipsis, .embeddedOutputsVariableMatrixElement .matrixElement .valueContainer.hideEllipses .horizontalEllipsis {    display:none;}
+.embeddedOutputsMatrixElement .matrixElement .valueContainer .horizontalEllipsis,.eoOutputWrapper .matrixElement .valueContainer .horizontalEllipsis {    margin-bottom: -3px;}
+.eoOutputWrapper .embeddedOutputsVariableMatrixElement .matrixElement .valueContainer {    cursor: default !important;}
+.embeddedOutputsVariableElement {    white-space: pre-wrap;    word-wrap: break-word;    min-height: 18px;    max-height: 250px;    overflow: auto;}
+.eoOutputWrapper .variableElement {    padding-top: 2px;}
+.embeddedOutputsVariableElement.inlineElement {}
+.inlineElement .variableElement {}
+.embeddedOutputsVariableElement.rightPaneElement {    min-height: 16px;}
+.rightPaneElement .variableElement {    padding-left: 9px;}
+.outputsOnRight .embeddedOutputsVariableElement.rightPaneElement .eoOutputContent {    /* Remove extra space allocated for navigation border */    margin-top: 0;    margin-bottom: 0;}
+.variableNameElement {    margin-bottom: 3px;    display: inline-block;}
+/* * Ellipses as base64 for HTML export. */.matrixElement .horizontalEllipsis,.rtcDataTipElement .matrixElement .horizontalEllipsis {    display: inline-block;    margin-top: 3px;    /* base64 encoded version of images-liveeditor/HEllipsis.png */    width: 30px;    height: 12px;    background-repeat: no-repeat;    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB0AAAAJCAYAAADO1CeCAAAAJUlEQVR42mP4//8/A70xw0i29BUDFPxnAEtTW37wWDqakIa4pQDvOOG89lHX2gAAAABJRU5ErkJggg==");}
+.matrixElement .verticalEllipsis,.textElement .verticalEllipsis,.rtcDataTipElement .matrixElement .verticalEllipsis,.rtcDataTipElement .textElement .verticalEllipsis {    margin-left: 35px;    /* base64 encoded version of images-liveeditor/VEllipsis.png */    width: 12px;    height: 30px;    background-repeat: no-repeat;    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAZCAYAAAAIcL+IAAAALklEQVR42mP4//8/AzGYgWyFMECMwv8QddRS+P//KyimlmcGUOFoOI6GI/UVAgDnd8Dd4+NCwgAAAABJRU5ErkJggg==");}
+.S17 { border-left: 1.11111px solid rgb(217, 217, 217); border-right: 1.11111px solid rgb(217, 217, 217); border-top: 1.11111px solid rgb(217, 217, 217); border-bottom: 0px none rgb(33, 33, 33); border-radius: 0px; padding: 6px 45px 0px 13px; line-height: 18.004px; min-height: 0px; white-space: nowrap; color: rgb(33, 33, 33); font-family: Menlo, Monaco, Consolas, "Courier New", monospace; font-size: 14px;  }
+.S18 { margin: 3px 10px 5px 4px; padding: 0px; line-height: 18px; min-height: 0px; white-space: pre-wrap; color: rgb(33, 33, 33); font-family: Helvetica, Arial, sans-serif; font-style: normal; font-size: 15px; font-weight: 700; text-align: left;  }</style></head><body><div class = rtcContent><h1  class = 'S0' id = 'T_2FC8101F' ><span>Statistics in Matlab</span></h1><div  class = 'S1'><span></span></div><div  class = 'S1'><span>Matlab has a large and growing library of programs for computation and statistical inference.  One entry point is here:</span></div><div class="CodeBlock"><div class="inlineWrapper outputs"><div  class = 'S2'><span style="white-space: pre"><span >help </span><span style="color: #a709f5;">stats</span></span></div><div  class = 'S3'><div class="inlineElement eoOutputWrapper disableDefaultGestureHandling embeddedOutputsTextElement scrollableOutput" uid="65A982EC" prevent-scroll="true" data-testid="output_0" tabindex="-1" style="width: 1208.02px; white-space: pre; font-style: normal; color: rgb(33, 33, 33); font-size: 12px;"><div class="textElement eoOutputContent scrollArea" data-previous-available-width="1171" data-previous-scroll-height="9210" data-hashorizontaloverflow="false" style="max-height: 261px; white-space: pre; font-style: normal; color: rgb(33, 33, 33); font-size: 12px;" tabindex="-1">  <strong style="white-space: pre; font-style: normal; color: rgb(33, 33, 33); font-size: 12px;">Statistics and Machine Learning Toolbox</strong>
+  Version 23.2 (R2023b) 19-May-2023
+ 
+  Distributions.
+   Parameter estimation.
+    betafit     - Beta parameter estimation.
+    binofit     - Binomial parameter estimation.
+    distributionFitter - Distribution fitting app.
+    evfit       - Extreme value parameter estimation.
+    expfit      - Exponential parameter estimation.
+    fitdist     - Distribution fitting.
+    fitgmdist   - Fit a Gaussian mixture model to data.
+    gamfit      - Gamma parameter estimation.
+    gevfit      - Generalized extreme value parameter estimation.
+    gpfit       - Generalized Pareto parameter estimation.
+    lognfit     - Lognormal parameter estimation.
+    makedist    - Make probability distribution.
+    mle         - Maximum likelihood estimation (MLE).
+    mlecov      - Asymptotic covariance matrix of MLE.
+    nbinfit     - Negative binomial parameter estimation.
+    normfit     - Normal parameter estimation.
+    paretotails - Empirical cdf with generalized Pareto tails.
+    poissfit    - Poisson parameter estimation.
+    raylfit     - Rayleigh parameter estimation.
+    unifit      - Uniform parameter estimation.
+    wblfit      - Weibull parameter estimation.
+ 
+   Probability density functions (pdf).
+    betapdf     - Beta density.
+    binopdf     - Binomial density.
+    chi2pdf     - Chi square density.
+    evpdf       - Extreme value density.
+    exppdf      - Exponential density.
+    fpdf        - F density.
+    gampdf      - Gamma density.
+    geopdf      - Geometric density.
+    gevpdf      - Generalized extreme value density.
+    gppdf       - Generalized Pareto density.
+    hygepdf     - Hypergeometric density.
+    lognpdf     - Lognormal density.
+    mnpdf       - Multinomial probability density function.
+    mvnpdf      - Multivariate normal density.
+    mvtpdf      - Multivariate t density.
+    nbinpdf     - Negative binomial density.
+    ncfpdf      - Noncentral F density.
+    nctpdf      - Noncentral t density.
+    ncx2pdf     - Noncentral Chi-square density.
+    normpdf     - Normal (Gaussian) density.
+    pdf         - Density function for a specified distribution.
+    pearspdf    - Pearson density.
+    poisspdf    - Poisson density.
+    raylpdf     - Rayleigh density.
+    tpdf        - T density.
+    unidpdf     - Discrete uniform density.
+    unifpdf     - Uniform density.
+    wblpdf      - Weibull density.
+ 
+   Cumulative Distribution functions (cdf).
+    betacdf     - Beta cumulative distribution function.
+    binocdf     - Binomial cumulative distribution function.
+    cdf         - Specified cumulative distribution function.
+    chi2cdf     - Chi square cumulative distribution function.
+    ecdf        - Empirical cumulative distribution function (Kaplan-Meier estimate).
+    evcdf       - Extreme value cumulative distribution function.
+    expcdf      - Exponential cumulative distribution function.
+    fcdf        - F cumulative distribution function.
+    gamcdf      - Gamma cumulative distribution function.
+    geocdf      - Geometric cumulative distribution function.
+    gevcdf      - Generalized extreme value cumulative distribution function.
+    gpcdf       - Generalized Pareto cumulative distribution function.
+    hygecdf     - Hypergeometric cumulative distribution function.
+    logncdf     - Lognormal cumulative distribution function.
+    mvncdf      - Multivariate normal cumulative distribution function.
+    mvtcdf      - Multivariate t cumulative distribution function.
+    nbincdf     - Negative binomial cumulative distribution function.
+    ncfcdf      - Noncentral F cumulative distribution function.
+    nctcdf      - Noncentral t cumulative distribution function.
+    ncx2cdf     - Noncentral Chi-square cumulative distribution function.
+    normcdf     - Normal (Gaussian) cumulative distribution function.
+    pearscdf    - Pearson cumulative distribution function.
+    poisscdf    - Poisson cumulative distribution function.
+    raylcdf     - Rayleigh cumulative distribution function.
+    tcdf        - T cumulative distribution function.
+    unidcdf     - Discrete uniform cumulative distribution function.
+    unifcdf     - Uniform cumulative distribution function.
+    wblcdf      - Weibull cumulative distribution function.
+ 
+   Critical Values of Distribution functions.
+    betainv     - Beta inverse cumulative distribution function.
+    binoinv     - Binomial inverse cumulative distribution function.
+    chi2inv     - Chi square inverse cumulative distribution function.
+    evinv       - Extreme value inverse cumulative distribution function.
+    expinv      - Exponential inverse cumulative distribution function.
+    finv        - F inverse cumulative distribution function.
+    gaminv      - Gamma inverse cumulative distribution function.
+    geoinv      - Geometric inverse cumulative distribution function.
+    gevinv      - Generalized extreme value inverse cumulative distribution function.
+    gpinv       - Generalized Pareto inverse cumulative distribution function.
+    hygeinv     - Hypergeometric inverse cumulative distribution function.
+    icdf        - Specified inverse cumulative distribution function.
+    logninv     - Lognormal inverse cumulative distribution function.
+    nbininv     - Negative binomial inverse distribution function.
+    ncfinv      - Noncentral F inverse cumulative distribution function.
+    nctinv      - Noncentral t inverse cumulative distribution function.
+    ncx2inv     - Noncentral Chi-square inverse distribution function.
+    norminv     - Normal (Gaussian) inverse cumulative distribution function.
+    poissinv    - Poisson inverse cumulative distribution function.
+    raylinv     - Rayleigh inverse cumulative distribution function.
+    tinv        - T inverse cumulative distribution function.
+    unidinv     - Discrete uniform inverse cumulative distribution function.
+    unifinv     - Uniform inverse cumulative distribution function.
+    wblinv      - Weibull inverse cumulative distribution function.
+ 
+   Random Number Generators.
+    betarnd     - Beta random numbers.
+    binornd     - Binomial random numbers.
+    chi2rnd     - Chi square random numbers.
+    datasample  - Randomly sample from data, with or without replacement.
+    evrnd       - Extreme value random numbers.
+    exprnd      - Exponential random numbers.
+    frnd        - F random numbers.
+    gamrnd      - Gamma random numbers.
+    geornd      - Geometric random numbers.
+    gevrnd      - Generalized extreme value random numbers.
+    gprnd       - Generalized Pareto inverse random numbers.
+    hmcSampler  - Hamiltonian Monte Carlo sampler.
+    hygernd     - Hypergeometric random numbers.
+    iwishrnd    - Inverse Wishart random matrix.
+    johnsrnd    - Random numbers from the Johnson system of distributions.
+    lognrnd     - Lognormal random numbers.
+    mhsample    - Metropolis-Hastings algorithm.
+    mnrnd       - Multinomial random vectors.
+    mvnrnd      - Multivariate normal random vectors.
+    mvtrnd      - Multivariate t random vectors.
+    nbinrnd     - Negative binomial random numbers.
+    ncfrnd      - Noncentral F random numbers.
+    nctrnd      - Noncentral t random numbers.
+    ncx2rnd     - Noncentral Chi-square random numbers.
+    normrnd     - Normal (Gaussian) random numbers.
+    pearsrnd    - Random numbers from the Pearson system of distributions.
+    poissrnd    - Poisson random numbers.
+    randg       - Gamma random numbers (unit scale).
+    random      - Random numbers from specified distribution.
+    randsample  - Random sample from finite population.
+    raylrnd     - Rayleigh random numbers.
+    slicesample - Slice sampling method.
+    trnd        - T random numbers.
+    unidrnd     - Discrete uniform random numbers.
+    unifrnd     - Uniform random numbers.
+    wblrnd      - Weibull random numbers.
+    wishrnd     - Wishart random matrix.
+ 
+   Quasi-Random Number Generators.
+    haltonset   - Halton sequence point set.       
+    qrandstream - Quasi-random stream.
+    sobolset    - Sobol sequence point set.
+ 
+   Statistics.
+    betastat    - Beta mean and variance.
+    binostat    - Binomial mean and variance.
+    chi2stat    - Chi square mean and variance.
+    evstat      - Extreme value mean and variance.
+    expstat     - Exponential mean and variance.
+    fstat       - F mean and variance.
+    gamstat     - Gamma mean and variance.
+    geostat     - Geometric mean and variance.
+    gevstat     - Generalized extreme value mean and variance.
+    gpstat      - Generalized Pareto inverse mean and variance.
+    hygestat    - Hypergeometric mean and variance.
+    lognstat    - Lognormal mean and variance.
+    nbinstat    - Negative binomial mean and variance.
+    ncfstat     - Noncentral F mean and variance.
+    nctstat     - Noncentral t mean and variance.
+    ncx2stat    - Noncentral Chi-square mean and variance.
+    normstat    - Normal (Gaussian) mean and variance.
+    poisstat    - Poisson mean and variance.
+    raylstat    - Rayleigh mean and variance.
+    tstat       - T mean and variance.
+    unidstat    - Discrete uniform mean and variance.
+    unifstat    - Uniform mean and variance.
+    wblstat     - Weibull mean and variance.
+ 
+   Likelihood functions.
+    betalike    - Negative beta log-likelihood.
+    evlike      - Negative extreme value log-likelihood.
+    explike     - Negative exponential log-likelihood.
+    gamlike     - Negative gamma log-likelihood.
+    gevlike     - Generalized extreme value log-likelihood.
+    gplike      - Generalized Pareto inverse log-likelihood.
+    lognlike    - Negative lognormal log-likelihood.
+    nbinlike    - Negative binomial log-likelihood.
+    normlike    - Negative normal likelihood.
+    wbllike     - Negative Weibull log-likelihood.
+ 
+  Descriptive Statistics.
+    bootci      - Bootstrap confidence intervals.
+    bootstrp    - Bootstrap statistics.
+    corr        - Linear or rank correlation coefficient.
+    corrcoef    - Linear correlation coefficient (in MATLAB toolbox).
+    cov         - Covariance (in MATLAB toolbox).
+    crosstab    - Cross tabulation.
+    geomean     - Geometric mean.
+    grpstats    - Summary statistics by group.
+    harmmean    - Harmonic mean.
+    jackknife   - Jackknife statistics.
+    kurtosis    - Kurtosis.
+    mad         - Median Absolute Deviation.
+    mean        - Sample average (in MATLAB toolbox).
+    median      - 50th percentile of a sample (in MATLAB toolbox).
+    mode        - Mode, or most frequent value in a sample (in MATLAB toolbox).
+    moment      - Moments of a sample.
+    nearcorr    - Nearest correlation matrix.
+    partialcorr - Linear or rank partial correlation coefficient.
+    partialcorri - Partial correlation coefficients with internal adjustments.
+    range       - Range.
+    robustcov   - Robust estimation of covariance and mean.
+    skewness    - Skewness.
+    std         - Standard deviation (in MATLAB toolbox).
+    tabulate    - Frequency table.
+    trimmean    - Trimmed mean.
+    var         - Variance (in MATLAB toolbox).
+ 
+  Parametric Regression Analysis.
+   Regression Model Building.
+    fitcox      - Fit Cox proportional hazards model.
+    fitglm      - Fit generalized linear model.
+    fitlm       - Fit linear model by least squares or robust fitting.
+    fitlme      - Fit linear mixed effects model.
+    fitlmematrix - Fit linear mixed effects model to matrix data.
+    fitglme     - Fit generalized linear mixed effects model.
+    fitmnr      - Fit multinomial regression model.
+    fitnlm      - Fit nonlinear model by least squares or robust fitting.
+    fitrm       - Fit repeated measures model.
+    stepwiseglm - Fit generalized linear model by stepwise regression.
+    stepwiselm  - Fit linear model by stepwise regression.
+ 
+   Analysis of Variance.
+    anova       - Create an anova object to perform analysis of variance.
+    anova1      - One-way analysis of variance.
+    anova2      - Two-way analysis of variance.
+    anovan      - N-way analysis of variance.
+    aoctool     - Interactive tool for analysis of covariance.
+    friedman    - Friedman's test (nonparametric two-way anova).
+    kruskalwallis - Kruskal-Wallis test (nonparametric one-way anova).
+    manova      - Multivariate analysis of variance.
+    manova1     - One-way multivariate analysis of variance.
+    manovacluster - Draw clusters of group means for manova1.
+    multcompare - Multiple comparisons of means and other estimates.
+    gardnerAltmanPlot - Gardner-Altman plot for two-sample effect size.
+    meanEffectSize - One-sample or two-sample effect size computations.
+ 
+   Linear Regression
+    dummyvar    - Dummy-variable coding.
+    glmfit      - Generalized linear model coefficient estimation.
+    glmval      - Evaluate fitted values for generalized linear model.
+    invpred     - Inverse prediction for simple linear regression.
+    leverage    - Regression diagnostic.
+    lscov       - Ordinary, weighted, or generalized least-squares (in MATLAB toolbox).
+    lsqnonneg   - Non-negative least-squares (in MATLAB toolbox).
+    multcompare - Multiple comparisons of means and other estimates.
+    mvregress   - Multivariate regression with missing data.
+    mvregresslike - Negative log-likelihood for multivariate regression.
+    polyconf    - Polynomial evaluation and confidence interval estimation.
+    polyfit     - Least-squares polynomial fitting (in MATLAB toolbox).
+    polyval     - Predicted values for polynomial functions (in MATLAB toolbox).
+    regress     - Multiple linear regression using least squares.
+    regstats    - Regression diagnostics.
+    ridge       - Ridge regression.
+    robustfit   - Robust regression model fitting.
+    stepwise    - Interactive tool for stepwise regression.
+    stepwisefit - Non-interactive stepwise regression.
+    x2fx        - Factor settings matrix (x) to design matrix (fx).
+ 
+   Nonlinear Regression.
+    coxphfit    - Cox proportional hazards regression.
+    nlinfit     - Nonlinear least-squares coefficient estimation.
+    nlintool    - Interactive graphical tool for prediction in nonlinear models.
+    nlmefit     - Nonlinear mixed-effects data fitting.
+    nlmefitoutputfcn - Output function example for nlmefit and nlmefitsa.
+    nlmefitsa   - Fit nonlinear mixed effects model with stochastic EM algorithm.
+    nlpredci    - Confidence intervals for prediction.
+    nlparci     - Confidence intervals for parameters.
+ 
+   Regression Plots.
+    addedvarplot - Created added-variable plot for stepwise regression.
+    nlintool    - Interactive graphical tool for prediction in nonlinear models.
+    polytool    - Interactive graph for prediction of fitted polynomials.
+    rcoplot     - Residuals case order plot.
+    robustdemo  - Interactive tool to compare robust and least squares fits.
+    rsmdemo     - Reaction simulation (DOE, RSM, nonlinear curve fitting).
+    rstool      - Multidimensional response surface visualization (RSM).
+ 
+  Design of Experiments (DOE).
+    bbdesign    - Box-Behnken design.
+    candexch    - D-optimal design (row exchange algorithm for candidate set).
+    candgen     - Candidates set for D-optimal design generation.
+    ccdesign    - Central composite design.
+    cordexch    - D-optimal design (coordinate exchange algorithm).
+    daugment    - Augment D-optimal design.
+    dcovary     - D-optimal design with fixed covariates.
+    fracfactgen - Fractional factorial design generators.
+    ff2n        - Two-level full-factorial design.
+    fracfact    - Two-level fractional factorial design.
+    fullfact    - Mixed-level full-factorial design.
+    hadamard    - Hadamard matrices (orthogonal arrays) (in MATLAB toolbox).
+    lhsdesign   - Latin hypercube sampling design.
+    lhsnorm     - Latin hypercube multivariate normal sample.
+    rowexch     - D-optimal design (row exchange algorithm).
+ 
+  Statistical Process Control (SPC).
+    capability  - Capability indices.
+    capaplot    - Capability plot.
+    controlchart - Shewhart control chart.
+    controlrules - Control rules (Western Electric or Nelson) for SPC data.
+    gagerr      - Gage repeatability and reproducibility (R&amp;R) study.
+    histfit     - Histogram with superimposed normal density.
+    normspec    - Plot normal density between specification limits.
+    runstest    - Runs test for randomness.
+ 
+  Multivariate Statistics.
+   Cluster Analysis.
+    cophenet    - Cophenetic coefficient.
+    cluster     - Construct clusters from LINKAGE output.
+    clusterdata - Construct clusters from data.
+    dbscan      - DBSCAN Clustering.
+    dendrogram  - Generate dendrogram plot.
+    evalclusters - Evaluate clustering solutions to select number of clusters.
+    fitgmdist   - Fit a Gaussian mixture model to data.
+    inconsistent - Inconsistent values of a cluster tree.
+    kmeans      - K-means clustering.
+    kmedoids    - K-medoids clustering.
+    linkage     - Hierarchical cluster information.
+    pdist       - Pairwise distance between observations.
+    silhouette  - Silhouette plot of clustered data.
+    spectralcluster - Spectral Clustering.
+    squareform  - Square matrix formatted distance.
+    optimalleaforder - optimal leaf ordering for hierarchical clustering.
+ 
+   Parametric Classification.
+    classify    - Linear discriminant analysis.
+    fitcdiscr   - Fit linear discriminant analysis model with regularization.
+    makecdiscr  - Make a discriminant from class means and covariance matrix.
+ 
+   Dimension Reduction Techniques.
+    factoran    - Factor analysis.
+    nnmf        - Non-negative matrix factorization.
+    pca         - Principal components analysis (PCA) from raw data.
+    pcacov      - Principal components analysis (PCA) from covariance matrix.
+    pcares      - Residuals from principal components analysis (PCA).
+    ppca        - Probabilistic PCA.
+    rica        - Reconstruction ICA (Independent Component Analysis).
+    rotatefactors - Rotation of factor analysis or PCA loadings.
+    sparsefilt  - Sparse filtering.
+    tsne        - t-distributed stochastic neighbor embedding.
+ 
+   Copulas.
+    copulacdf   - Cumulative probability function for a copula.
+    copulafit   - Fit a parametric copula to data.
+    copulaparam - Copula parameters as a function of rank correlation.
+    copulapdf   - Probability density function for a copula.
+    copularnd   - Random vectors from a copula.
+    copulastat  - Rank correlation for a copula.
+ 
+   Nearest Neighbor Methods.
+    fitcknn     - Fit K nearest neighbor classification model.
+    createns    - Create a NeighborSearcher object for nearest neighbor search.
+    ExhaustiveSearcher - Nearest neighbor search object using exhaustive search.
+    knnsearch   - Find K nearest neighbors.
+    KDTreeSearcher - Nearest neighbor search object using kd-tree.
+    pdist2      - Pairwise distance between two sets of observations.
+    rangesearch - Find neighbors within specified radius.
+ 
+   Plotting.
+    andrewsplot - Andrews plot for multivariate data.
+    biplot      - Biplot of variable/factor coefficients and scores.
+    interactionplot - Interaction plot for factor effects.
+    maineffectsplot - Main effects plot for factor effects.
+    glyphplot   - Plot stars or Chernoff faces for multivariate data.
+    gplotmatrix - Matrix of scatter plots grouped by a common variable.
+    multivarichart - Multi-vari chart of factor effects.
+    parallelcoords - Parallel coordinates plot for multivariate data.
+ 
+   Other Multivariate Methods.
+    barttest    - Bartlett's test for dimensionality.
+    canoncorr   - Canonical correlation analysis.
+    cmdscale    - Classical multidimensional scaling.
+    mahal       - Mahalanobis distance.
+    manova1     - One-way multivariate analysis of variance.
+    mdscale     - Metric and non-metric multidimensional scaling.
+    mvregress   - Multivariate regression with missing data.
+    plsregress  - Partial least squares regression.
+    procrustes  - Procrustes analysis.
+ 
+  Supervised Learning.
+    classificationLearner - Classification machine learning app.
+    CompactTreeBagger - Lightweight ensemble of bagged decision trees.
+    designecoc  - Coding matrix for reducing a multiclass problem to a set of binary problems.
+    fitcauto    - Optimize classifier across models and hyperparameters.
+    fitcecoc    - Fit a multiclass model for Support Vector Machine or other classifiers.
+    fitcgam     - Fit a generalized additive models classifier.
+    fitckernel  - Fit a kernel classification model by explicit feature expansion.
+    fitclinear  - Fit a linear classification model to high-dimensional data.
+    fitcnb      - Fit a Naive Bayes classifier.
+    fitcnet     - Fit a neural network classifier.
+    fitcsvm     - Fit a classification Support Vector Machine (SVM).
+    fitctree    - Fit decision tree for classification.
+    fitrauto    - Optimize regression across models and hyperparameters.
+    fitrgam     - Fit a generalized additive models regression.
+    fitrgp      - Fit a Gaussian Process (GP) regression model.
+    fitrkernel  - Fit a kernel regression model by explicit feature expansion.
+    fitrlinear  - Fit a linear regression model to high-dimensional data.
+    fitrnet     - Fit a regression neural network.
+    fitrsvm     - Fit a regression Support Vector Machine (SVM).
+    fitrtree    - Fit decision tree for regression.
+    fitcensemble - Fit ensemble of classification learners.
+    fitrensemble - Fit ensemble of regression learners.                    
+    fitSVMPosterior - Fit posterior probabilities for a Support Vector Machine model.
+    regressionLearner - Regression machine learning app.
+    testcholdout - Compare accuracies of two sets of predicted class labels.
+    testckfold  - Compare accuracies of two classifiers by repeated cross-validation.
+    TreeBagger  - Ensemble of bagged decision trees.
+ 
+  Semi-supervised Learning.
+    fitsemigraph - Fit graph-based semi-supervised model.
+    fitsemiself  - Fit self-training semi-supervised model.
+ 
+  Time series forecasting.
+    directforecaster - Fit a direct forecasting model.
+ 
+  Incremental Learning.
+    incrementalClassificationECOC - Incremental learning for multi-class classification models.
+    incrementalClassificationKernel - Incremental learning for binary classification kernel models.
+    incrementalClassificationLinear - Incremental learning for linear classification models.
+    incrementalClassificationNaiveBayes - Incremental learning for naive Bayes models.
+    incrementalConceptDriftDetector - Incremental concept drift detector.
+    incrementalDriftAwareLearner - Drift aware model for incremental learning.
+    incrementalOneClassSVM - Incremental learning using one-class SVM.         
+    incrementalRobustRandomCutForest - Incremental learning using robust random cut forest.
+    incrementalRegressionLinear - Incremental learning for linear regression models.
+    incrementalRegressionKernel - Incremental learning for regression kernel model.
+    detectdrift - Drift detection.
+ 
+  Interpretable machine learning.
+    lime        - Local interpretable model-agnostic explanations.
+    partialDependence - Compute partial dependence for 1 or 2 predictors.
+    plotPartialDependence - Plot partial dependence for 1 or 2 predictors.
+    shapley     - Shapley values for model explanations.
+ 
+  Fair machine learning.
+    disparateImpactRemover - Remove disparate impact to create fairness.
+    fairnessMetrics - Evaluate data or model fairness using bias and group metrics.
+    fairnessThresholder - Optimize classification threshold to create fairness. 
+    fairnessWeights - Reweight observations for fairness in binary classification.
+ 
+  Anomaly and outlier detection.
+    iforest     - Fit isolation forest.
+    lof         - Local Outlier Factor.
+    ocsvm       - Fit one-class Support Vector Machine (SVM).
+    rrcforest   - Fit Robust Random Cut Forest.
+ 
+  Hypothesis Tests.
+    ansaribradley - Ansari-Bradley two-sample test for equal dispersions.
+    dwtest      - Durbin-Watson test for autocorrelation in linear regression.
+    linhyptest  - Linear hypothesis test on parameter estimates.
+    ranksum     - Wilcoxon rank sum test (independent samples).
+    runstest    - Runs test for randomness.
+    sampsizepwr - Sample size and power calculation for hypothesis test.
+    signrank    - Wilcoxon sign rank test (paired samples).
+    signtest    - Sign test (paired samples).
+    ttest       - One-sample and paired-sample t test.
+    ttest2      - Two-sample t test.
+    vartest     - One-sample test of variance.
+    vartest2    - Two-sample F test for equal variances.
+    vartestn    - Test for equal variances across multiple groups.
+    ztest       - Z test.
+ 
+  Distribution Testing.
+    adtest      - Anderson-Darling goodness-of-fit test.
+    chi2gof     - Chi-square goodness-of-fit test.
+    jbtest      - Jarque-Bera test of normality.
+    kstest      - Kolmogorov-Smirnov test for one sample.
+    kstest2     - Kolmogorov-Smirnov test for two samples.
+    lillietest  - Lilliefors test of normality.
+ 
+  Nonparametric Functions.
+    fishertest  - Fisher's exact test
+    friedman    - Friedman's test (nonparametric two-way anova).
+    kruskalwallis - Kruskal-Wallis test (nonparametric one-way anova).
+    ksdensity   - Kernel smoothing density estimation.
+    mvksdensity - Multivariate kernel smoothing density estimation.
+    ranksum     - Wilcoxon rank sum test (independent samples).
+    signrank    - Wilcoxon sign rank test (paired samples).
+    signtest    - Sign test (paired samples).
+ 
+  Hidden Markov Models.
+    hmmdecode   - Calculate HMM posterior state probabilities.
+    hmmestimate - Estimate HMM parameters given state information.
+    hmmgenerate - Generate random sequence for HMM.
+    hmmtrain    - Calculate maximum likelihood estimates for HMM parameters.
+    hmmviterbi  - Calculate most probable state path for HMM sequence.
+ 
+  Model Assessment.
+    confusionmat - Confusion matrix for classification algorithms.
+    crossval    - Loss estimate using cross-validation.
+    cvpartition - Cross-validation partition.
+    perfcurve   - ROC and other performance measures for classification algorithms.
+    rocmetrics  - ROC and other metrics.
+    tspartition - Cross-validation partition for time series data.
+ 
+  Model Selection.
+    fscmrmr     - Importance of features for classification using MRMR algorithm.               
+    fscnca      - Feature selection for classification using NCA.
+    fscchi2     - Univariate feature selection for classification using chi-square test.            
+    fsrftest    - Univariate feature selection for regression using F-test.
+    fsrmrmr     - Importance of features for regression using MRMR algorithm.
+    fsrnca      - Feature selection for regression using NCA.
+    fsulaplacian - Importance of features for unsupervised learning using Laplacian scores.
+    gencfeatures - Automated feature engineering for classification.
+    genrfeatures - Automated feature engineering for regression.
+    lasso       - Lasso and elastic net linear regression.
+    lassoglm    - Lasso and elastic net generalized linear regression.
+    lassoPlot   - Lasso and elastic net plotting.
+    sequentialfs - Sequential feature selection.
+    stepwise    - Interactive tool for stepwise regression.
+    stepwisefit - Non-interactive stepwise regression.
+    relieff     - Importance of attributes (predictors) using ReliefF algorithm.
+ 
+  Machine Learning Utilities.
+    bayesopt    - Find the global minimum of a function using Bayesian optimization.
+    optimizableVariable - Define a variable to be optimized using bayesopt.
+    hyperparameters - Determine hyperparameters that can be optimized for a fit function.
+    copyFunctionHandleToWorkers - Copy objective function to parallel workers.
+ 
+  Statistical Plotting.
+    andrewsplot - Andrews plot for multivariate data.
+    biplot      - Biplot of variable/factor coefficients and scores.
+    boxplot     - Boxplots of a data matrix (one per column).
+    cdfplot     - Plot of empirical cumulative distribution function.
+    confusionchart - Plot a confusion matrix.
+    ecdf        - Empirical cdf (Kaplan-Meier estimate).
+    ecdfhist    - Histogram calculated from empirical cdf.
+    fsurfht     - Interactive contour plot of a function.
+    gline       - Point, drag and click line drawing on figures.
+    glyphplot   - Plot stars or Chernoff faces for multivariate data.
+    gname       - Interactive point labeling in x-y plots.
+    gplotmatrix - Matrix of scatter plots grouped by a common variable.
+    gscatter    - Scatter plot of two variables grouped by a third.
+    hist        - Histogram (in MATLAB toolbox).
+    hist3       - Three-dimensional histogram of bivariate data.
+    ksdensity   - Kernel smoothing density estimation.
+    lsline      - Add least-square fit line to scatter plot.
+    normplot    - Normal probability plot.
+    parallelcoords - Parallel coordinates plot for multivariate data.
+    probplot    - Probability plot.
+    qqplot      - Quantile-Quantile plot.
+    refcurve    - Reference polynomial curve.
+    refline     - Reference line.
+    scatterhist - 2D scatter plot with marginal histograms.
+    surfht      - Interactive contour plot of a data grid.
+    wblplot     - Weibull probability plot.
+ 
+  Data Objects
+    dataset     - Create datasets from workspace variables or files.
+    dataset2table - Convert dataset array to table.
+    cell2dataset - Convert cell array to dataset array.
+    mat2dataset - Convert matrix to dataset array.
+    struct2dataset - Convert structure array to dataset array.
+    table2dataset - Convert table to dataset array.
+    nominal     - Create arrays of nominal data.
+    ordinal     - Create arrays of ordinal data.
+ 
+  Statistics Demos.
+    aoctool     - Interactive tool for analysis of covariance.
+    disttool    - GUI tool for exploring probability distribution functions.
+    polytool    - Interactive graph for prediction of fitted polynomials.
+    randtool    - GUI tool for generating random numbers.
+    rsmdemo     - Reaction simulation (DOE, RSM, nonlinear curve fitting).
+    robustdemo  - Interactive tool to compare robust and least squares fits.
+ 
+  File Based I/O.
+    tblread     - Read in data in tabular format.
+    tblwrite    - Write out data in tabular format to file.
+    tdfread     - Read in text and numeric data from tab-delimited file.
+    caseread    - Read in case names.
+    casewrite   - Write out case names to file.
+    xptread     - Create a dataset array from a SAS XPORT format file.
+ 
+  Code Generation.
+    generateLearnerDataTypeFcn - Create function for fixed-point data types.
+    learnerCoderConfigurer - Create coder configurer for machine learning model.
+    loadCompactModel - Construct compact model from a struct in a mat file.
+    loadLearnerForCoder - Construct model from a struct in a mat file.     
+    saveCompactModel - Save compact fitted model to a struct in a mat file.
+    saveLearnerForCoder - Save fitted model to a struct in a mat file. 
+ 
+  Utility Functions.
+    cholcov     - Cholesky-like decomposition for covariance matrix.
+    combnk      - Enumeration of all combinations of n objects k at a time.
+    corrcov     - Convert covariance matrix to correlation matrix.
+    groupingvariable - Help information for grouping variables.
+    grp2idx     - Convert grouping variable to indices and array of names.
+    hougen      - Prediction function for Hougen model (nonlinear example).
+    onehotdecode - One-hot decoding.
+    onehotencode - One-hot encoding.
+    parallelstats - Help information for parallel computing options.
+    statget     - Get <strong style="white-space: pre; font-style: normal; color: rgb(33, 33, 33); font-size: 12px;">stats</strong> options parameter value.
+    statset     - Set <strong style="white-space: pre; font-style: normal; color: rgb(33, 33, 33); font-size: 12px;">stats</strong> options parameter value.
+    templateDiscriminant - Create a discriminant template.  
+    templateECOC - Create a template for ECOC learning.
+    templateEnsemble - Create an ensemble template.
+    templateGAM - Create a template for generalized additive models.
+    templateGP - Create a template for Gaussian process regression.                    
+    templateNeuralNetwork - Create a template for neural networks.           
+    templateLinear - Create a linear model template for high-dimensional data.
+    templateKernel - Create a kernel model template.
+    templateKNN - Create a classification KNN template.
+    templateNaiveBayes - Create a naive Bayes template.
+    templateSVM - Create a support vector machine template.     
+    templateTree - Create a decision tree template.           
+    tiedrank    - Compute ranks of sample, adjusting for ties.
+    zscore      - Normalize matrix columns to mean 0, variance 1.
+
+    Statistics and Machine Learning Toolbox Documentation
+    Other uses of stats</div></div></div></div></div><div  class = 'S4'><span>In this module, we'll take a brief overview of some of the functions available and give some pointers to how they work.</span></div><div  class = 'S5'><div  class = 'S6'><span style=' font-weight: bold;'>Table of Contents</span></div><div  class = 'S7'><a href = "#H_57FB5453"><span>Why Matlab?  
+</span></a><a href = "#H_86A41141"><span>A brief list of selected statistics functions
+</span></a><a href = "#H_583FC32A"><span>Discovering statistics objects
+</span></a><span>    </span><a href = "#H_78D64D31"><span>Methods and properties
+</span></a><span>    </span><a href = "#H_66E953E1"><span>Choices: Objects and classical functions
+</span></a><a href = "#H_5CD7DDC8"><span>Trying out a model on a sample dataset
+</span></a><a href = "#H_DF57BD4B"><span>Help and doc
+</span></a><a href = "#H_ABAEF38A"><span>Activity: Explore by fitting a statistics model to a dataset</span></a></div></div><h3  class = 'S8' id = 'H_57FB5453' ><span>Why Matlab?  </span></h3><div  class = 'S1'><span>First and foremost, this is the language &amp; environment I know best. Python is more popular and has some substantial advantages, but here are some dimensions I think Matlab is better on:</span></div><ul  class = 'S9'><li  class = 'S10'><span>Professionally implemented algorithms designed to work well together</span></li><li  class = 'S10'><span>Stable, platform-independent functionality with few external dependencies (runs seamlessly on all computer architectures)</span></li><li  class = 'S10'><span>Long-term backward compatibility (my scripts from 2002 still run!)</span></li><li  class = 'S10'><span>Easy, transparent coding with great </span><span style=' font-weight: bold;'>editor</span><span> and </span><span style=' font-weight: bold;'>great debugging</span></li><li  class = 'S10'><span>Great help tutorials and examples </span></li></ul><div class = 'preformatted-matlab' style = 'margin: 10px 3px 10px 55px; padding: 10px 10px 10px 5px; '><div  class = 'S11'><span style="white-space: pre"><span style="color: #008013;">% for help:</span></span></div><div  class = 'S11'><span style="white-space: pre"><span >doc</span></span></div></div><div  class = 'S1'><span>Matlab is not so good at being free, so access without a licence or Uni site license is the biggest issue. It's also not so good at seamless deployment on servers to run processes in the cloud.  They are working on these things within the "not free" constraints, but this is a major reason to use Python.  Matlab is, however, actively working on some new things:</span></div><ul  class = 'S9'><li  class = 'S10'><span>Matlab online -- cloud-based, in-browser analysis</span></li><li  class = 'S10'><span>Jupyter notebook integration (a Matlab kernel now exists)</span></li><li  class = 'S10'><span>Deep learning -- many pre-trained models and tutorials</span></li><li  class = 'S10'><span>Machine learning (including fair ML, interpretable ML)</span></li><li  class = 'S10'><span>Live scripts (</span><span style=' font-weight: bold;'>.mlx</span><span> files)</span></li><li  class = 'S10'><span>Table objects to import, export, and store datasets (improved in recent years!)</span></li><li  class = 'S10'><span>Probably many, many other things I won't cover (e.g., hardware control, simulink)</span></li></ul><h3  class = 'S8' id = 'H_86A41141' ><span>A brief list of selected statistics functions</span></h3><div  class = 'S1'><span>Here are some sections in the statistics and machine learning toolbox, along with a selection of functions I think are likely to be particularly useful. This is one of many toolboxes (also not free) that inter-operate with the core Matlab distribution:</span></div><ul  class = 'S9'><li  class = 'S10'><span style=' font-weight: bold;'>Probability distributions</span><span>: PDFs, CDFs, parameters, fitting (parameter estimation),  critical values (for inference), and likelihood functions for many distributions.  </span></li><li  class = 'S10'><span>Analysis of variance (</span><span style=' text-decoration: underline;'>anovan</span><span>, </span><span style=' text-decoration: underline;'>manova)</span><span> and repeated measures (</span><span style=' text-decoration: underline;'>fitrm</span><span>) </span></li><li  class = 'S10'><span style=' font-weight: bold;'>GLM  </span><span>(e.g., </span><span style=' text-decoration: underline;'>glmfit, regress</span><span>), including robust estimation (</span><span style=' text-decoration: underline;'>fitlm</span><span>, </span><span style=' text-decoration: underline;'>robustfit</span><span>), generalized models, time series models / autocorrelation, penalized models (</span><span style=' text-decoration: underline;'>ridge</span><span>, </span><span style=' font-style: italic;'>lasso, elasticnet), </span><span>regression diagnostics (</span><span style=' text-decoration: underline;'>regstats</span><span>), model selection (</span><span style=' text-decoration: underline;'>stepwisefit</span><span>) .</span></li><li  class = 'S10'><span style=' font-weight: bold;'>Linear mixed effects models </span><span style=' text-decoration: underline;'>(fitlme)</span><span>, </span></li><li  class = 'S10'><span style=' font-weight: bold;'>Randomization tests:</span><span> Bootstrapping, permutation, </span></li><li  class = 'S10'><span style=' font-weight: bold;'>Design of experiments</span></li><li  class = 'S10'><span style=' font-weight: bold;'>Clustering</span><span> (e.g., </span><span style=' text-decoration: underline;'>clusterdata</span><span>)</span></li><li  class = 'S10'><span style=' font-weight: bold;'>Classification: LDA</span><span> (e.g., </span><span style=' text-decoration: underline;'>classify</span><span>, </span><span style=' text-decoration: underline;'>fitcdiscr</span><span>), KNN (</span><span style=' text-decoration: underline;'>fitcknn</span><span>), SVM (</span><span style=' text-decoration: underline;'>fitcsvm</span><span>), Naive Bayes (</span><span style=' text-decoration: underline;'>fitcnb</span><span>), neural networks (</span><span style=' text-decoration: underline;'>fitcnet</span><span>), GAMs (</span><span style=' text-decoration: underline;'>fitcgam</span><span>), classification trees (</span><span style=' text-decoration: underline;'>fitctree, TreeBagger</span><span>), ensembles (</span><span style=' text-decoration: underline;'>fitcensemble</span><span>), model search (</span><span style=' text-decoration: underline;'>fitcauto</span><span>), </span></li><li  class = 'S10'><span style=' font-weight: bold;'>Dimension reduction and component analysis:</span><span> PCA (</span><span style=' text-decoration: underline;'>pca</span><span>), ICA (</span><span style=' text-decoration: underline;'>rica</span><span>), factor analysis (</span><span style=' text-decoration: underline;'>factoran</span><span>), non-neg matrix factorization (</span><span style=' text-decoration: underline;'>nnmf</span><span>), tsne (</span><span style=' text-decoration: underline;'>tsne</span><span>), MDS (</span><span style=' text-decoration: underline;'>cmdscale</span><span>).</span></li><li  class = 'S10'><span style=' font-weight: bold;'>Multivariate regression/prediction</span><span>: PLS (</span><span style=' text-decoration: underline;'>plsregress</span><span>), canonical correlation (</span><span style=' text-decoration: underline;'>canoncorr</span><span>), SVR (</span><span style=' text-decoration: underline;'>fitrsvm</span><span>), Gaussian processes(</span><span style=' text-decoration: underline;'>fitrgp</span><span>), neural networks (</span><span style=' text-decoration: underline;'>fitrnet</span><span>), GAMs (</span><span style=' text-decoration: underline;'>fitrgam</span><span>), classification trees (</span><span style=' text-decoration: underline;'>fitrtree</span><span>), ensembles (</span><span style=' text-decoration: underline;'>fitrensemble</span><span>), model search (</span><span style=' text-decoration: underline;'>fitrauto</span><span>), </span></li></ul><div  class = 'S1'><span>There are also Graphic User Interface (GUI) Apps that allow you to explore things (e.g., deep learning, curve fitting, distribution fitting)</span></div><ul  class = 'S9'><li  class = 'S10'><span>distributionFitter</span></li><li  class = 'S10'><span>robustdemo</span></li><li  class = 'S10'><span>nlintool </span></li><li  class = 'S10'><span>aoctool</span></li><li  class = 'S10'><span>classificationLearner</span></li><li  class = 'S10'><span>regressionLearner</span></li></ul><h3  class = 'S12' id = 'H_583FC32A' ><span>Discovering statistics objects</span></h3><div  class = 'S1'><span>Matlab has been moving steadily towards the use of </span><span style=' font-weight: bold;'>objects</span><span> and </span><span style=' font-weight: bold;'>object-oriented programming</span><span>, which is a general design feature of modern languages and toolboxes.  Objects are "collections" of variables with pre-defined </span><span style=' font-weight: bold;'>properties</span><span> and </span><span style=' font-weight: bold;'>methods</span><span>. The have a </span><span style=' font-weight: bold;'>class</span><span>, which means each object type is its own unique type of variable.   </span><span style=' font-weight: bold;'>Properties</span><span> are data fields attached to the objects. </span><span style=' font-weight: bold;'>Methods</span><span> are functions that can be run on the object.  Each object has a </span><span style=' font-weight: bold;'>constructor</span><span> method for the object type that builds and returns the object.</span></div><div  class = 'S1'><span>Python and R (and some other packages) work similarly, so what you do with Matlab will transfer to some degree.</span></div><div  class = 'S1'><span>For example, the code below gives you some help on a few of the common types of objects used in stats in Matlab, including their properties and methods:</span></div><div class="CodeBlock"><div class="inlineWrapper"><div  class = 'S13'><span style="white-space: pre"><span style="color: #008013;">% Table objects are the preferred way to store datasets</span></span></div></div><div class="inlineWrapper outputs"><div  class = 'S14'><span style="white-space: pre"><span >help </span><span style="color: #a709f5;">table</span></span></div><div  class = 'S3'><div class="inlineElement eoOutputWrapper disableDefaultGestureHandling embeddedOutputsTextElement scrollableOutput" uid="AEC09B86" prevent-scroll="true" data-testid="output_1" tabindex="-1" style="width: 1208.02px; white-space: pre; font-style: normal; color: rgb(33, 33, 33); font-size: 12px;"><div class="textElement eoOutputContent scrollArea" data-previous-available-width="1171" data-previous-scroll-height="2437" data-hashorizontaloverflow="false" style="max-height: 261px; white-space: pre; font-style: normal; color: rgb(33, 33, 33); font-size: 12px;" tabindex="-1"> <strong style="white-space: pre; font-style: normal; color: rgb(33, 33, 33); font-size: 12px;">table</strong> Table.
+    Tables are used to collect heterogeneous data and metadata into a single
+    container.  Tables are suitable for storing column-oriented or tabular data
+    that are often stored as columns in a text file or in a spreadsheet.  Tables
+    can accommodate variables of different types, sizes, units, etc.  They are
+    often used to store experimental data, with rows representing different
+    observations and columns representing different measured variables.
+ 
+    Use the <strong style="white-space: pre; font-style: normal; color: rgb(33, 33, 33); font-size: 12px;">table</strong> constructor to create a table from variables in the MATLAB
+    workspace.  Use the readtable function to create a table by reading data
+    from a text or spreadsheet file.
+ 
+    The <strong style="white-space: pre; font-style: normal; color: rgb(33, 33, 33); font-size: 12px;">table</strong> constructor can also be used to create tables without
+    providing workspace variables, by providing the size and variable
+    types.
+ 
+    Tables can be subscripted using parentheses much like ordinary numeric
+    arrays, but in addition to numeric and logical indices, you can use a
+    table's variable names, row names, and patterns matching variable or
+    row names as indices.  You can access individual variables in a table
+    much like fields in a structure, using dot subscripting.  You can
+    access the contents of one or more variables using brace subscripting.
+ 
+    Tables can contain different kinds of variables, including numeric,
+    logical, character, string, categorical, and cell.  However, a table is
+    a different class than the variables that it contains.  For example,
+    even a table that contains only variables that are double arrays cannot
+    be operated on as if it were itself a double array.  However, using dot
+    subscripting, you can operate on a variable in a table as if it were a
+    workspace variable.  Using brace subscripting, you can operate on one
+    or more variables in a table as if they were in a homogeneous array.
+ 
+    A table T has properties that store metadata such as its variable and row
+    names.  Access or assign to a property using P = T.Properties.PropName or
+    T.Properties.PropName = P, where PropName is one of the following:
+ 
+    <strong style="white-space: pre; font-style: normal; color: rgb(33, 33, 33); font-size: 12px;">table</strong> metadata properties:
+        Description          - A character vector describing the table
+        DimensionNames       - A two-element cell array of character vectors containing names of
+                               the dimensions of the table
+        VariableNames        - A cell array containing names of the variables in the table
+        VariableDescriptions - A cell array of character vectors containing descriptions of the
+                               variables in the table
+        VariableUnits        - A cell array of character vectors containing units for the variables
+                               in table
+        VariableContinuity   - An array containing a matlab.tabular.Continuity value for each table 
+                               variable, specifying whether a variable represents continuous or discrete 
+                               data values. You can assign 'unset', 'continuous', 'step', or 'event' to
+                               elements of VariableContinuity.
+        RowNames             - A cell array of nonempty, distinct character vectors containing names
+                               of the rows in the table
+        UserData             - A variable containing any additional information associated
+                               with the table.  You can assign any value to this property.
+        CustomProperties     - A container for user-defined per-table or per-variable custom 
+                               metadata fields.
+ 
+    <strong style="white-space: pre; font-style: normal; color: rgb(33, 33, 33); font-size: 12px;">table</strong> methods and functions:
+      Construction and conversion:
+        table              - Create a table from workspace variables.
+        array2table        - Convert homogeneous array to table.
+        cell2table         - Convert cell array to table.
+        struct2table       - Convert structure array to table.
+        table2array        - Convert table to a homogeneous array.
+        table2cell         - Convert table to cell array.
+        table2struct       - Convert table to structure array.
+      Import and export:
+        readtable          - Create a table by reading from a file.
+        writetable         - Write a table to a file.
+        write              - Write a table to a file.
+      Size and shape:
+        istable            - True for tables.
+        size               - Size of a table.
+        width              - Number of variables in a table.
+        height             - Number of rows in a table.
+        ndims              - Number of dimensions of a table.
+        numel              - Number of elements in a table.
+        horzcat            - Horizontal concatenation for tables.
+        vertcat            - Vertical concatenation for tables.
+      Set membership:
+        intersect          - Find rows common to two tables.
+        ismember           - Find rows in one table that occur in another table.
+        setdiff            - Find rows that occur in one table but not in another.
+        setxor             - Find rows that occur in one or the other of two tables, but not both.
+        unique             - Find unique rows in a table.
+        union              - Find rows that occur in either of two tables.
+      Data manipulation and reorganization:
+        summary            - Print summary of a table.
+        addvars            - Insert new variables at a specified location in a table.
+        movevars           - Move table variables to a specified location.
+        removevars         - Delete the specified table variables.
+        splitvars          - Splits multi-column variables into separate variables.
+        mergevars          - Merges multiple variables into one multi-column variable or a nested table.
+        convertvars        - Converts table variables to a specified data type.
+        renamevars         - Rename variables in table.
+        sortrows           - Sort rows of a table.
+        stack              - Stack up data from multiple variables into a single variable.
+        unstack            - Unstack data from a single variable into multiple variables.
+        join               - Merge two tables by matching up rows using key variables.
+        innerjoin          - Inner join between two tables.
+        outerjoin          - Outer join between two tables.
+        rows2vars          - Reorient rows to be variables of output table.
+        inner2outer        - Invert a nested table-in-table hierarchy.
+        ismissing          - Find elements in a table that contain missing values.
+        standardizeMissing - Insert missing data indicators into a table.
+      Computations on tables:
+        varfun             - Apply a function to variables in a table.
+        rowfun             - Apply a function to rows of a table.
+        List of math operations that support tables.
+      Subscripting into tables:
+        vartype            - Table variable subscripting by variable type.
+        rowfilter          - Table row filtering by variable data.
+ 
+    Examples:
+ 
+       % Create a table from individual workspace variables.
+       load patients
+       patients = table(LastName,Gender,Age,Height,Weight,Smoker,Systolic,Diastolic)
+ 
+       % Select the rows for patients who smoke, and a subset of the variables.
+       smokers = patients(patients.Smoker == true, {'LastName' 'Gender' 'Systolic' 'Diastolic'})
+ 
+       % Convert the two blood pressure variables into a single variable.
+       patients.BloodPressure = [patients.Systolic patients.Diastolic];
+       patients(:,{'Systolic' 'Diastolic'}) = []
+ 
+       % Pick out two specific patients by the LastName variable.
+       patients(ismember(patients.LastName,{'Smith' 'Jones'}), :)
+ 
+       % Convert the LastName variable into row names.
+       patients.Properties.RowNames = patients.LastName;
+       patients.LastName = []
+ 
+       % Use the row names to pick out two specific patients.
+       patients({'Smith' 'Jones'},:)
+ 
+       % Add metadata to the table.
+       patients.Properties.Description = 'Simulated patient data';
+       patients.Properties.VariableUnits =  {''  'Yrs'  'In'  'Lbs'  ''  'mm Hg'};
+       patients.Properties.VariableDescriptions{6} = 'Systolic/Diastolic';
+       summary(patients)
+ 
+       % Create a new variable in the table from existing variables.
+       patients.BMI = (patients.Weight * 0.453592) ./ (patients.Height * 0.0254).^2
+       patients.Properties.VariableUnits{'BMI'} =  'kg/m^2';
+       patients.Properties.VariableDescriptions{'BMI'} = 'Body Mass Index';
+ 
+       % Sort the table based on the new variable.
+       sortrows(patients,'BMI')
+ 
+       % Make a scatter plot of two of the table's variables.
+       plot(patients.Height,patients.Weight,'o')
+ 
+       % Create tables from text and spreadsheet files
+       patients2 = readtable('patients.dat','ReadRowNames',true)
+       patients3 = readtable('patients.xls','ReadRowNames',true)
+ 
+       % Create a table from a numeric matrix
+       load tetmesh.mat
+       t = array2table(X,'VariableNames',{'x' 'y' 'z'});
+       plot3(t.x,t.y,t.z,'.')
+ 
+    See also table, categorical
+
+    Documentation for table
+    Other uses of table</div></div></div></div></div><div class="CodeBlock"><div class="inlineWrapper"><div  class = 'S13'><span style="white-space: pre"><span style="color: #008013;">% RepeatedMeasuresModel is an object related to ANOVA/RMANOVA/MANOVA models</span></span></div></div><div class="inlineWrapper outputs"><div  class = 'S14'><span style="white-space: pre"><span >help </span><span style="color: #a709f5;">RepeatedMeasuresModel</span></span></div><div  class = 'S3'><div class="inlineElement eoOutputWrapper disableDefaultGestureHandling embeddedOutputsTextElement scrollableOutput" uid="406BEAFC" prevent-scroll="true" data-testid="output_2" tabindex="-1" style="width: 1208.02px; white-space: pre; font-style: normal; color: rgb(33, 33, 33); font-size: 12px;"><div class="textElement eoOutputContent scrollArea" data-previous-available-width="1171" data-previous-scroll-height="563" data-hashorizontaloverflow="false" style="max-height: 261px; white-space: pre; font-style: normal; color: rgb(33, 33, 33); font-size: 12px;" tabindex="-1"> <strong style="white-space: pre; font-style: normal; color: rgb(33, 33, 33); font-size: 12px;">RepeatedMeasuresModel</strong> - Repeated measures model.
+    RM = FITRM(T,MODELSPEC) fits the model specified by MODELSPEC to
+    data in the table T, and returns the <strong style="white-space: pre; font-style: normal; color: rgb(33, 33, 33); font-size: 12px;">RepeatedMeasuresModel</strong> RM.
+    T is a table containing the values of the response variables and
+    the between-subject factors to be used as predictors in the model.
+    MODELSPEC specifies the response variable names and model terms
+    as a string such as 'y1-y5 ~ x1 + x2 + x3*x4'.
+ 
+    <strong style="white-space: pre; font-style: normal; color: rgb(33, 33, 33); font-size: 12px;">RepeatedMeasuresModel</strong> methods:
+        anova       - Analysis of variance for between-subject effects.
+        coeftest    - Hypothesis test on coefficients.
+        margmean    - Estimated marginal means.
+        epsilon     - Epsilon adjustment for repeated measures anova.
+        grpstats    - Descriptive statistics by group.
+        manova      - Multivariate analysis of variance.
+        mauchly     - Mauchly's test of sphericity.
+        multcompare - Multiple comparisons of marginal means.
+        plot        - Plot data with optional grouping.
+        plotprofile - Plot expected marginal means with optional grouping.
+        predict     - Compute predicted values.
+        random      - Generate new random response values.
+        ranova     - Repeated measures analysis of variance.
+ 
+    <strong style="white-space: pre; font-style: normal; color: rgb(33, 33, 33); font-size: 12px;">RepeatedMeasuresModel</strong> properties:
+        BetweenDesign      - Design for between-subject factors.
+        BetweenModel       - Model for between-subject factors.
+        BetweenFactorNames - Names of between-subject factors.
+        ResponseNames      - Names of responses.
+        WithinDesign       - Design for within-subject factors.
+        WithinModel        - Model for within-subject factors.
+        WithinFactorNames  - Names of within-subject factors.
+        Coefficients       - Table of estimated coefficients.
+        Covariance         - Table of estimated response covariances.
+        DFE                - Degrees of freedom for error.
+  
+    See also fitrm.
+
+    Documentation for RepeatedMeasuresModel</div></div></div></div></div><div  class = 'S4'><span>You would use the function fitrm, for example, to fit a repeated measures model to some data and return a model object with estimated parameters (and other associated properties) as output. </span></div><div class="CodeBlock"><div class="inlineWrapper"><div  class = 'S13'><span style="white-space: pre"><span style="color: #008013;">% LinearMixedModel is an object related to mixed effects models (akin to</span></span></div></div><div class="inlineWrapper"><div  class = 'S15'><span style="white-space: pre"><span style="color: #008013;">% lmer in R software)</span></span></div></div><div class="inlineWrapper outputs"><div  class = 'S14'><span style="white-space: pre"><span >help </span><span style="color: #a709f5;">LinearMixedModel</span></span></div><div  class = 'S3'><div class="inlineElement eoOutputWrapper disableDefaultGestureHandling embeddedOutputsTextElement scrollableOutput" uid="38657F13" prevent-scroll="true" data-testid="output_3" tabindex="-1" style="width: 1208.02px; white-space: pre; font-style: normal; color: rgb(33, 33, 33); font-size: 12px;"><div class="textElement eoOutputContent scrollArea" data-previous-available-width="1171" data-previous-scroll-height="814" data-hashorizontaloverflow="false" style="max-height: 261px; white-space: pre; font-style: normal; color: rgb(33, 33, 33); font-size: 12px;" tabindex="-1"> <strong style="white-space: pre; font-style: normal; color: rgb(33, 33, 33); font-size: 12px;">LinearMixedModel</strong> Fitted linear mixed effects model.
+    LME = FITLME(...) fits a linear mixed effects model to data. The fitted
+    model LME is a <strong style="white-space: pre; font-style: normal; color: rgb(33, 33, 33); font-size: 12px;">LinearMixedModel</strong> modeling a response variable as a
+    linear function of fixed effect predictors and random effect
+    predictors.
+ 
+    <strong style="white-space: pre; font-style: normal; color: rgb(33, 33, 33); font-size: 12px;">LinearMixedModel</strong> methods:
+        coefCI - Coefficient confidence intervals
+        coefTest - Linear hypothesis test on coefficients
+        predict - Compute predicted values given predictor values
+        random - Generate random response values given predictor values
+        partialDependence - Partial Dependence values.
+        plotPartialDependence - Plot Partial Dependence.
+        plotResiduals - Plot of residuals
+        designMatrix - Fixed and random effects design matrices
+        fixedEffects - Stats on fixed effects
+        randomEffects - Stats on random effects
+        covarianceParameters - Stats on covariance parameters
+        fitted - Fitted response
+        residuals - Various types of residuals
+        response - Response used to fit the model
+        compare - Compare fitted models
+        anova - Marginal tests for fixed effect terms           
+        disp - Display a fitted model                                                                                                                 
+ 
+    <strong style="white-space: pre; font-style: normal; color: rgb(33, 33, 33); font-size: 12px;">LinearMixedModel</strong> properties:
+        FitMethod - Method used for fitting (either 'ML' or 'REML')
+        MSE - Mean squared error (estimate of residual variance)
+        Formula - Representation of the model used in this fit
+        LogLikelihood - Log of likelihood function at coefficient estimates
+        DFE - Degrees of freedom for residuals
+        SSE - Error sum of squares
+        SST - Total sum of squares
+        SSR - Regression sum of squares
+        CoefficientCovariance - Covariance matrix for coefficient estimates
+        CoefficientNames - Coefficient names
+        NumCoefficients - Number of coefficients
+        NumEstimatedCoefficients - Number of estimated coefficients
+        Coefficients - Coefficients and related statistics
+        Rsquared - R-squared and adjusted R-squared
+        ModelCriterion - AIC and other model criteria
+        VariableInfo - Information about variables used in the fit
+        ObservationInfo - Information about observations used in the fit
+        Variables - Table of variables used in fit
+        NumVariables - Number of variables used in fit
+        VariableNames - Names of variables used in fit
+        NumPredictors - Number of predictors
+        PredictorNames - Names of predictors
+        ResponseName - Name of response
+        NumObservations - Number of observations in the fit
+        ObservationNames - Names of observations in the fit
+ 
+    See also fitlme, fitlmematrix, LinearModel, GeneralizedLinearModel, NonLinearModel.
+
+    Documentation for LinearMixedModel</div></div></div></div></div><div  class = 'S4'><span>You would use the function fitlme, for example, to fit a mixed effects model to  data and return a model object with estimated parameters (and other associated properties) as output. </span></div><div  class = 'S1'><span>Related object types are:  </span><span style=' text-decoration: underline;'>LinearModel</span><span>, </span><span style=' text-decoration: underline;'>GeneralizedLinearModel</span><span>, </span><span style=' text-decoration: underline;'>NonLinearModel</span></div><div class="CodeBlock"><div class="inlineWrapper"><div  class = 'S13'><span style="white-space: pre"><span style="color: #008013;">% ClassificationSVM is an object related to multivariate classification. </span></span></div></div><div class="inlineWrapper outputs"><div  class = 'S14'><span style="white-space: pre"><span >help </span><span style="color: #a709f5;">ClassificationSVM</span></span></div><div  class = 'S3'><div class="inlineElement eoOutputWrapper disableDefaultGestureHandling embeddedOutputsTextElement scrollableOutput" uid="2E7A943D" prevent-scroll="true" data-testid="output_4" tabindex="-1" style="width: 1208.02px; white-space: pre; font-style: normal; color: rgb(33, 33, 33); font-size: 12px;"><div class="textElement eoOutputContent scrollArea" data-previous-available-width="1171" data-previous-scroll-height="1064" data-hashorizontaloverflow="false" style="max-height: 261px; white-space: pre; font-style: normal; color: rgb(33, 33, 33); font-size: 12px;" tabindex="-1"> <strong style="white-space: pre; font-style: normal; color: rgb(33, 33, 33); font-size: 12px;">ClassificationSVM</strong> Support Vector Machine model for classification.
+    <strong style="white-space: pre; font-style: normal; color: rgb(33, 33, 33); font-size: 12px;">ClassificationSVM</strong> is an SVM model for classification with one or two
+    classes. This model can predict response for new data. This model also
+    stores data used for training and can compute resubstitution
+    predictions.
+ 
+    An object of this class cannot be created by calling the constructor.
+    Use FITCSVM to create a <strong style="white-space: pre; font-style: normal; color: rgb(33, 33, 33); font-size: 12px;">ClassificationSVM</strong> object by fitting an SVM
+    model to training data.
+ 
+    This class is derived from CompactClassificationSVM.
+ 
+    <strong style="white-space: pre; font-style: normal; color: rgb(33, 33, 33); font-size: 12px;">ClassificationSVM</strong> properties:
+        NumObservations       - Number of observations.
+        X                     - Matrix of predictors used to train this model.
+        Y                     - True class labels used to train this model.
+        W                     - Weights of observations used to train this model.
+        ModelParameters       - SVM parameters.
+        PredictorNames        - Names of predictors used for this model.
+        ExpandedPredictorNames - Names of expanded predictors.
+        ResponseName          - Name of the response variable.
+        ClassNames            - Names of classes in Y.
+        Cost                  - Misclassification costs.
+        Prior                 - Prior class probabilities.
+        ScoreTransform        - Transformation applied to predicted classification scores.
+        Alpha                 - Coefficients obtained by solving the dual problem.
+        Beta                  - Coefficients for the primal linear problem.
+        Bias                  - Bias term.
+        KernelParameters      - Kernel parameters.
+        Mu                    - Predictor means.
+        Sigma                 - Predictor standard deviations.
+        SupportVectors        - Support vectors.
+        SupportVectorLabels   - Support vector labels (+1 and -1).
+        BoxConstraints        - Box constraints.
+        CacheInfo             - Cache information.
+        ConvergenceInfo       - Convergence information.
+        Gradient              - Gradient values in the training data.
+        IsSupportVector       - Indices of support vectors in the training data.
+        Nu                    - Nu parameter for one-class learning.
+        NumIterations         - Number of iterations taken by optimization.
+        OutlierFraction       - Expected fraction of outliers in the training data.
+        ShrinkagePeriod       - Number of iterations between reductions of the active set.
+        Solver                - Name of the used solver.
+        RowsUsed              - Logical index for rows used in fit. 
+        HyperparameterOptimizationResults - An object or table describing the results of hyperparameter optimization. 
+ 
+    <strong style="white-space: pre; font-style: normal; color: rgb(33, 33, 33); font-size: 12px;">ClassificationSVM</strong> methods:
+        compact               - Compact this model.
+        compareHoldout        - Compare two models using test data.
+        crossval              - Cross-validate this model.
+        discardSupportVectors - Discard support vectors for linear SVM.
+        edge                  - Classification edge.
+        fitPosterior          - Find transformation from SVM scores to class posterior probabilities.
+        incrementalLearner    - Return an incremental binary classification linear model.
+        loss                  - Classification loss.
+        margin                - Classification margins.
+        partialDependence     - Partial Dependence values.
+        plotPartialDependence - Plot Partial Dependence.
+        predict               - Predicted response of this model.
+        resubEdge             - Resubstitution classification edge.
+        resubLoss             - Resubstitution classification loss.
+        resubMargin           - Resubstitution classification margins.
+        resubPredict          - Resubstitution predicted response.
+        resume                - Resume training.
+ 
+    Example: Train an SVM model on ionosphere data.
+        load ionosphere
+        svm = fitcsvm(X,Y,'KernelFunction','gaussian','standardize',true)
+ 
+    See also fitcsvm, classreg.learning.classif.CompactClassificationSVM.
+
+    Documentation for ClassificationSVM</div></div></div></div></div><div  class = 'S4'><span>Notice the list of related functions at the bottom, including </span><span style=' text-decoration: underline;'>fitcsvm</span><span>, the constructor method for the object type that builds and returns the object. You may also see related object types. </span></div><div  class = 'S1'><span>The code below lists types of objects related to classification and regression:</span></div><div class="CodeBlock"><div class="inlineWrapper outputs"><div  class = 'S2'><span style="white-space: pre"><span >disp(</span><span style="color: #a709f5;">'Classification models'</span><span >)</span></span></div><div  class = 'S3'><div class="inlineElement eoOutputWrapper disableDefaultGestureHandling embeddedOutputsTextElement" uid="3BAA2948" prevent-scroll="true" data-testid="output_5" tabindex="-1" style="width: 1208.02px; white-space: pre; font-style: normal; color: rgb(33, 33, 33); font-size: 12px;"><div class="textElement eoOutputContent" data-previous-available-width="1171" data-previous-scroll-height="17" data-hashorizontaloverflow="false" style="max-height: 261px; white-space: pre; font-style: normal; color: rgb(33, 33, 33); font-size: 12px;" tabindex="-1">Classification models</div></div></div></div><div class="inlineWrapper outputs"><div  class = 'S16'><span style="white-space: pre"><span >classreg.learning.classificationModels</span></span></div><div  class = 'S3'><div class="inlineElement eoOutputWrapper disableDefaultGestureHandling embeddedOutputsTextMatrixElement embeddedOutputsVariableMatrixElement" uid="DA15F0A2" prevent-scroll="true" data-testid="output_6" data-width="1178" tabindex="-1" style="width: 1208.02px; white-space: normal; font-style: normal; color: rgb(33, 33, 33); font-size: 12px;"><div class="matrixElement veSpecifier eoOutputContent" style="white-space: normal; font-style: normal; color: rgb(33, 33, 33); font-size: 12px;"><div class="veVariableName variableNameElement" style="width: 1178px; white-space: normal; font-style: normal; color: rgb(33, 33, 33); font-size: 12px;"><div class="headerElementClickToInteract" style="white-space: normal; font-style: normal; color: rgb(33, 33, 33); font-size: 12px;"><span style="white-space: normal; font-style: normal; color: rgb(33, 33, 33); font-size: 12px;">ans = </span><span class="veVariableValueSummary headerElement" style="white-space: normal; font-style: italic; color: rgb(97, 97, 97); font-size: 12px;">1×22 cell</span></div></div><div class="valueContainer" data-layout="{&quot;totalRows&quot;:1,&quot;totalColumns&quot;:22}" style="white-space: pre; font-style: normal; color: rgb(33, 33, 33); font-size: 12px;"><div class="variableValue" style="width: 1123px; white-space: pre; font-style: normal; color: rgb(33, 33, 33); font-size: 12px;">'Tree'      'ByBinaryRegr''Discriminant''KNN'       'SVM'       'ECOC'      'NaiveBayes''Linear'    'Bag'       'AdaBoostM1''AdaBoostM2''AdaBoostMH''RobustBoost''LogitBoost''GentleBoost''Subspace'  'RUSBoost'  'LPBoost'   'TotalBoost''Kernel'    'NeuralNetwork''GAM'       <br></div><div class="horizontalEllipsis" style="white-space: pre; font-style: normal; color: rgb(33, 33, 33); font-size: 12px;"></div><div class="verticalEllipsis hide" style="white-space: pre; font-style: normal; color: rgb(33, 33, 33); font-size: 12px;"></div></div></div><div class="outputLayer selectedOutputDecorationLayer doNotExport" style="white-space: normal; font-style: normal; color: rgb(33, 33, 33); font-size: 12px;"></div><div class="outputLayer activeOutputDecorationLayer doNotExport" style="white-space: normal; font-style: normal; color: rgb(33, 33, 33); font-size: 12px;"></div><div class="outputLayer scrollableOutputDecorationLayer doNotExport" style="white-space: normal; font-style: normal; color: rgb(33, 33, 33); font-size: 12px;"></div><div class="outputLayer navigationFocusLayer doNotExport" tabindex="-1" style="white-space: normal; font-style: normal; color: rgb(33, 33, 33); font-size: 12px;"></div></div></div></div><div class="inlineWrapper"><div  class = 'S17'>&nbsp;</div></div><div class="inlineWrapper outputs"><div  class = 'S14'><span style="white-space: pre"><span >disp(</span><span style="color: #a709f5;">' '</span><span >)</span></span></div><div  class = 'S3'><div class="inlineElement eoOutputWrapper disableDefaultGestureHandling embeddedOutputsTextElement" uid="0AD0A122" prevent-scroll="true" data-testid="output_7" tabindex="-1" style="width: 1208.02px; white-space: pre; font-style: normal; color: rgb(33, 33, 33); font-size: 12px;"><div class="textElement eoOutputContent" data-previous-available-width="1171" data-previous-scroll-height="17" data-hashorizontaloverflow="false" style="max-height: 261px; white-space: pre; font-style: normal; color: rgb(33, 33, 33); font-size: 12px;" tabindex="-1"> </div></div></div></div><div class="inlineWrapper outputs"><div  class = 'S16'><span style="white-space: pre"><span >disp(</span><span style="color: #a709f5;">'Regression models'</span><span >)</span></span></div><div  class = 'S3'><div class="inlineElement eoOutputWrapper disableDefaultGestureHandling embeddedOutputsTextElement" uid="A20D8D6B" prevent-scroll="true" data-testid="output_8" tabindex="-1" style="width: 1208.02px; white-space: pre; font-style: normal; color: rgb(33, 33, 33); font-size: 12px;"><div class="textElement eoOutputContent" data-previous-available-width="1171" data-previous-scroll-height="17" data-hashorizontaloverflow="false" style="max-height: 261px; white-space: pre; font-style: normal; color: rgb(33, 33, 33); font-size: 12px;" tabindex="-1">Regression models</div></div></div></div><div class="inlineWrapper outputs"><div  class = 'S16'><span style="white-space: pre"><span >classreg.learning.regressionModels</span></span></div><div  class = 'S3'><div class="inlineElement eoOutputWrapper disableDefaultGestureHandling embeddedOutputsTextMatrixElement embeddedOutputsVariableMatrixElement" uid="A35DC814" prevent-scroll="true" data-testid="output_9" data-width="1178" tabindex="-1" style="width: 1208.02px; white-space: normal; font-style: normal; color: rgb(33, 33, 33); font-size: 12px;"><div class="matrixElement veSpecifier eoOutputContent" style="white-space: normal; font-style: normal; color: rgb(33, 33, 33); font-size: 12px;"><div class="veVariableName variableNameElement" style="width: 1178px; white-space: normal; font-style: normal; color: rgb(33, 33, 33); font-size: 12px;"><div class="headerElementClickToInteract" style="white-space: normal; font-style: normal; color: rgb(33, 33, 33); font-size: 12px;"><span style="white-space: normal; font-style: normal; color: rgb(33, 33, 33); font-size: 12px;">ans = </span><span class="veVariableValueSummary headerElement" style="white-space: normal; font-style: italic; color: rgb(97, 97, 97); font-size: 12px;">1×10 cell</span></div></div><div class="valueContainer" data-layout="{&quot;totalRows&quot;:1,&quot;totalColumns&quot;:10}" style="white-space: pre; font-style: normal; color: rgb(33, 33, 33); font-size: 12px;"><div class="variableValue" style="width: 846px; white-space: pre; font-style: normal; color: rgb(33, 33, 33); font-size: 12px;">'Tree'      'Bag'       'LSBoost'   'Subspace'  'SVM'       'GP'        'Linear'    'Kernel'    'GAM'       'NeuralNetwork'<br></div><div class="horizontalEllipsis hide" style="white-space: pre; font-style: normal; color: rgb(33, 33, 33); font-size: 12px;"></div><div class="verticalEllipsis hide" style="white-space: pre; font-style: normal; color: rgb(33, 33, 33); font-size: 12px;"></div></div></div><div class="outputLayer selectedOutputDecorationLayer doNotExport" style="white-space: normal; font-style: normal; color: rgb(33, 33, 33); font-size: 12px;"></div><div class="outputLayer activeOutputDecorationLayer doNotExport" style="white-space: normal; font-style: normal; color: rgb(33, 33, 33); font-size: 12px;"></div><div class="outputLayer scrollableOutputDecorationLayer doNotExport" style="white-space: normal; font-style: normal; color: rgb(33, 33, 33); font-size: 12px;"></div><div class="outputLayer navigationFocusLayer doNotExport" tabindex="-1" style="white-space: normal; font-style: normal; color: rgb(33, 33, 33); font-size: 12px;"></div></div></div></div></div><div  class = 'S4'><span>You can then get help on these other object classes using "Classification" or "Regression" joined with the type:</span></div><div class = 'preformatted-matlab' style = 'margin: 10px 3px 10px 55px; padding: 10px 10px 10px 5px; '><div  class = 'S11'><span style="white-space: pre"><span >help </span><span style="color: #a709f5;">ClassificationTree</span></span></div><div  class = 'S11'><span style="white-space: pre"><span >help </span><span style="color: #a709f5;">RegressionTree</span></span></div></div><h4  class = 'S18' id = 'H_78D64D31' ><span style=' font-weight: bold;'>Methods and properties</span></h4><div  class = 'S1'><span>To get associated methods for an object, type "methods &lt;objectClass&gt;"</span></div><div class="CodeBlock"><div class="inlineWrapper outputs"><div  class = 'S2'><span style="white-space: pre"><span >properties </span><span style="color: #a709f5;">LinearMixedModel</span></span></div><div  class = 'S3'><div class="inlineElement eoOutputWrapper disableDefaultGestureHandling embeddedOutputsTextElement" uid="EA71033C" prevent-scroll="true" data-testid="output_10" tabindex="-1" style="width: 1208.02px; white-space: pre; font-style: normal; color: rgb(33, 33, 33); font-size: 12px;"><div class="textElement eoOutputContent" data-previous-available-width="1171" data-previous-scroll-height="400" data-hashorizontaloverflow="false" style="max-height: 411px; white-space: pre; font-style: normal; color: rgb(33, 33, 33); font-size: 12px;" tabindex="-1">Properties for class LinearMixedModel:
+
+    FitMethod
+    MSE
+    VariableInfo
+    NumVariables
+    VariableNames
+    NumPredictors
+    PredictorNames
+    ResponseName
+    NumObservations
+    ObservationInfo
+    Variables
+    ObservationNames
+    Formula
+    LogLikelihood
+    DFE
+    CoefficientCovariance
+    CoefficientNames
+    NumCoefficients
+    Coefficients
+    Rsquared
+    ModelCriterion
+    SSE
+    SST
+    SSR
+    NumEstimatedCoefficients</div></div></div></div><div class="inlineWrapper outputs"><div  class = 'S16'><span style="white-space: pre"><span >methods </span><span style="color: #a709f5;">LinearMixedModel</span></span></div><div  class = 'S3'><div class="inlineElement eoOutputWrapper disableDefaultGestureHandling embeddedOutputsTextElement scrollableOutput" uid="089F3EA7" prevent-scroll="true" data-testid="output_11" tabindex="-1" style="width: 1208.02px; white-space: pre; font-style: normal; color: rgb(33, 33, 33); font-size: 12px;"><div class="textElement eoOutputContent scrollArea" data-previous-available-width="1171" data-previous-scroll-height="46" data-hashorizontaloverflow="true" style="max-height: 261px; white-space: pre; font-style: normal; color: rgb(33, 33, 33); font-size: 12px;" tabindex="-1">Methods for class LinearMixedModel:
+
+anova                  coefCI                 coefTest               compare                covarianceParameters   designMatrix           disp                   fitted                 fixedEffects           partialDependence      plotPartialDependence  plotResiduals          predict                random                 randomEffects          residuals              response               </div></div></div></div></div><h4  class = 'S18' id = 'H_66E953E1' ><span style=' font-weight: bold;'>Choices: Objects and classical functions</span></h4><ul  class = 'S9'><li  class = 'S10'><span>Over time, older functions that run statistical algorithms have been replaced with object-oriented methods. You can use either, depending on your use case and preference. </span></li><li  class = 'S10'><span>For example, to fit a multiple regression model, you can use the functions regress or glmfit (which includes logistic/logit/generalized linear modeling with different link functions), which works perfectly fine.  Or you can use fitlm with the </span><span style=' text-decoration: underline;'>LinearModel</span><span> object.</span></li></ul><h3  class = 'S12' id = 'H_5CD7DDC8' ><span style=' font-weight: bold;'>Trying out a model on a sample dataset</span></h3><div  class = 'S1'><span>Many fitting methods include sample code in their help.  e.g., type "help fitlme", and you get the code below. Try it, and you load a dataset and fit a linear mixed effects model with a random intercept:</span></div><div class="CodeBlock"><div class="inlineWrapper"><div  class = 'S13'><span style="white-space: pre"><span >load </span><span style="color: #a709f5;">carsmall</span></span></div></div><div class="inlineWrapper"><div  class = 'S15'><span style="white-space: pre"><span >ds = dataset(MPG,Weight,Model_Year);</span></span></div></div><div class="inlineWrapper outputs"><div  class = 'S14'><span style="white-space: pre"><span >lme = fitlme(ds,</span><span style="color: #a709f5;">'MPG ~ Weight + (1|Model_Year)'</span><span >)</span></span></div><div  class = 'S3'><div class="inlineElement eoOutputWrapper disableDefaultGestureHandling embeddedOutputsVariableStringElement" uid="A409AEB8" prevent-scroll="true" data-testid="output_12" tabindex="-1" style="width: 1208.02px; white-space: pre; font-style: normal; color: rgb(33, 33, 33); font-size: 12px;"><div class="textElement eoOutputContent" data-previous-available-width="1171" data-previous-scroll-height="433" data-hashorizontaloverflow="false" style="max-height: 444px; white-space: pre; font-style: normal; color: rgb(33, 33, 33); font-size: 12px;" tabindex="-1"><div style="white-space: pre; font-style: normal; color: rgb(33, 33, 33); font-size: 12px;"><span class="variableNameElement" style="white-space: pre; font-style: normal; color: rgb(33, 33, 33); font-size: 12px;">lme = </span></div><div style="white-space: pre; font-style: normal; color: rgb(33, 33, 33); font-size: 12px;"><strong style="white-space: pre; font-style: normal; color: rgb(33, 33, 33); font-size: 12px;">Linear mixed-effects model fit by ML</strong>
+
+<strong style="white-space: pre; font-style: normal; color: rgb(33, 33, 33); font-size: 12px;">Model information:</strong>
+    Number of observations              94
+    Fixed effects coefficients           2
+    Random effects coefficients          3
+    Covariance parameters                2
+
+<strong style="white-space: pre; font-style: normal; color: rgb(33, 33, 33); font-size: 12px;">Formula:</strong>
+    MPG ~ 1 + Weight + (1 | Model_Year)
+
+<strong style="white-space: pre; font-style: normal; color: rgb(33, 33, 33); font-size: 12px;">Model fit statistics:</strong>
+    AIC       BIC       LogLikelihood    Deviance
+    486.09    496.26    -239.04          478.09  
+
+<strong style="white-space: pre; font-style: normal; color: rgb(33, 33, 33); font-size: 12px;">Fixed effects coefficients (95% CIs):</strong>
+    Name                   Estimate      SE           tStat      DF    pValue        Lower         Upper     
+    {'(Intercept)'}            43.575       2.3038     18.915    92    1.8371e-33            39        48.151
+    {'Weight'     }        -0.0067097    0.0004242    -15.817    92    5.5373e-28    -0.0075522    -0.0058672
+
+<strong style="white-space: pre; font-style: normal; color: rgb(33, 33, 33); font-size: 12px;">Random effects covariance parameters (95% CIs):</strong>
+Group: Model_Year (3 Levels)
+    Name1                  Name2                  Type           Estimate    Lower     Upper 
+    {'(Intercept)'}        {'(Intercept)'}        {'std'}        3.301       1.4448    7.5421
+
+Group: Error
+    Name               Estimate    Lower     Upper 
+    {'Res Std'}        2.8997      2.5075    3.3532
+</div></div></div></div></div></div><div  class = 'S4'><span>Then, you can explore the model's properties and methods.</span></div><div  class = 'S1'><span>Let's display a couple of the properties of the estimated model:</span></div><div class="CodeBlock"><div class="inlineWrapper outputs"><div  class = 'S2'><span style="white-space: pre"><span >lme.Rsquared </span><span style="color: #008013;">% Variance explained</span></span></div><div  class = 'S3'><div class="inlineElement eoOutputWrapper disableDefaultGestureHandling embeddedOutputsVariableStringElement" uid="EA7A6213" prevent-scroll="true" data-testid="output_13" tabindex="-1" style="width: 1208.02px; white-space: pre; font-style: normal; color: rgb(33, 33, 33); font-size: 12px;"><div class="textElement eoOutputContent" data-previous-available-width="1171" data-previous-scroll-height="49" data-hashorizontaloverflow="false" style="max-height: 261px; white-space: pre; font-style: normal; color: rgb(33, 33, 33); font-size: 12px;" tabindex="-1"><div style="white-space: pre; font-style: normal; color: rgb(33, 33, 33); font-size: 12px;"><span class="variableNameElement" style="white-space: pre; font-style: normal; color: rgb(33, 33, 33); font-size: 12px;">ans = <span class="headerElement" style="white-space: pre; font-style: normal; color: rgb(33, 33, 33); font-size: 12px;">struct with fields:</span></span></div><div style="white-space: pre; font-style: normal; color: rgb(33, 33, 33); font-size: 12px;">    Ordinary: 0.8714
+    Adjusted: 0.8700
+</div></div></div></div></div><div class="inlineWrapper outputs"><div  class = 'S16'><span style="white-space: pre"><span >lme.MSE      </span><span style="color: #008013;">% Mean squared error</span></span></div><div  class = 'S3'><div class='variableElement' style='font-family: Menlo, Monaco, Consolas, "Courier New", monospace; font-size: 12px; '>ans = 8.4083</div></div></div></div><h3  class = 'S12' id = 'H_DF57BD4B' ><span>Help and doc</span></h3><div  class = 'S1'><span>Help &lt;function name&gt; brings up the help text for that function (or object class).</span></div><div  class = 'S1'><span>doc &lt;function name&gt; brings up an interactive browser with even more help and examples.</span></div><div class = 'preformatted-matlab' style = 'margin: 10px 3px 10px 55px; padding: 10px 10px 10px 5px; '><div  class = 'S11'><span style="white-space: pre"><span >doc </span><span style="color: #a709f5;">LinearMixedModel</span></span></div></div><div  class = 'S1'><span></span></div><h3  class = 'S12' id = 'H_ABAEF38A' ><span>Activity: Explore by fitting a statistics model to a dataset</span></h3><div  class = 'S1'><span>Choose a model object or function. </span></div><div  class = 'S1'><span>Get the help on that function. </span></div><div  class = 'S1'><span>Use the help to fit the model.  </span></div><div  class = 'S1'><span>What are the outputs? If an object, what are some of the properties and methods?</span></div><div  class = 'S1' id = 'H_BE619E98' ><span>   </span></div><div  class = 'S1'></div>
+<br>
+<!-- 
+##### SOURCE BEGIN #####
+%% Statistics in Matlab
+% 
+% 
+% Matlab has a large and growing library of programs for computation and statistical 
+% inference.  One entry point is here:
+
+help stats
+%% 
+% In this module, we'll take a brief overview of some of the functions available 
+% and give some pointers to how they work.
+% Why Matlab?  
+% First and foremost, this is the language & environment I know best. Python 
+% is more popular and has some substantial advantages, but here are some dimensions 
+% I think Matlab is better on:
+%% 
+% * Professionally implemented algorithms designed to work well together
+% * Stable, platform-independent functionality with few external dependencies 
+% (runs seamlessly on all computer architectures)
+% * Long-term backward compatibility (my scripts from 2002 still run!)
+% * Easy, transparent coding with great *editor* and *great debugging*
+% * Great help tutorials and examples 
+%%
+% 
+%   % for help:
+%   doc
+%
+%% 
+% Matlab is not so good at being free, so access without a licence or Uni site 
+% license is the biggest issue. It's also not so good at seamless deployment on 
+% servers to run processes in the cloud.  They are working on these things within 
+% the "not free" constraints, but this is a major reason to use Python.  Matlab 
+% is, however, actively working on some new things:
+%% 
+% * Matlab online REPLACE_WITH_DASH_DASH cloud-based, in-browser analysis
+% * Jupyter notebook integration (a Matlab kernel now exists)
+% * Deep learning REPLACE_WITH_DASH_DASH many pre-trained models and tutorials
+% * Machine learning (including fair ML, interpretable ML)
+% * Live scripts (*.mlx* files)
+% * Table objects to import, export, and store datasets (improved in recent 
+% years!)
+% * Probably many, many other things I won't cover (e.g., hardware control, 
+% simulink)
+% A brief list of selected statistics functions
+% Here are some sections in the statistics and machine learning toolbox, along 
+% with a selection of functions I think are likely to be particularly useful. 
+% This is one of many toolboxes (also not free) that inter-operate with the core 
+% Matlab distribution:
+%% 
+% * *Probability distributions*: PDFs, CDFs, parameters, fitting (parameter 
+% estimation),  critical values (for inference), and likelihood functions for 
+% many distributions.  
+% * Analysis of variance (anovan, manova) and repeated measures (fitrm) 
+% * *GLM*  (e.g., glmfit, regress), including robust estimation (fitlm, robustfit), 
+% generalized models, time series models / autocorrelation, penalized models (ridge, 
+% _lasso, elasticnet),_ regression diagnostics (regstats), model selection (stepwisefit) 
+% .
+% * *Linear mixed effects models* (fitlme), 
+% * *Randomization tests:* Bootstrapping, permutation, 
+% * *Design of experiments*
+% * *Clustering* (e.g., clusterdata)
+% * *Classification: LDA* (e.g., classify, fitcdiscr), KNN (fitcknn), SVM (fitcsvm), 
+% Naive Bayes (fitcnb), neural networks (fitcnet), GAMs (fitcgam), classification 
+% trees (fitctree, TreeBagger), ensembles (fitcensemble), model search (fitcauto), 
+% * *Dimension reduction and component analysis:* PCA (pca), ICA (rica), factor 
+% analysis (factoran), non-neg matrix factorization (nnmf), tsne (tsne), MDS (cmdscale).
+% * *Multivariate regression/prediction*: PLS (plsregress), canonical correlation 
+% (canoncorr), SVR (fitrsvm), Gaussian processes(fitrgp), neural networks (fitrnet), 
+% GAMs (fitrgam), classification trees (fitrtree), ensembles (fitrensemble), model 
+% search (fitrauto), 
+%% 
+% There are also Graphic User Interface (GUI) Apps that allow you to explore 
+% things (e.g., deep learning, curve fitting, distribution fitting)
+%% 
+% * distributionFitter
+% * robustdemo
+% * nlintool 
+% * aoctool
+% * classificationLearner
+% * regressionLearner
+% Discovering statistics objects
+% Matlab has been moving steadily towards the use of *objects* and *object-oriented 
+% programming*, which is a general design feature of modern languages and toolboxes.  
+% Objects are "collections" of variables with pre-defined *properties* and *methods*. 
+% The have a *class*, which means each object type is its own unique type of variable.   
+% *Properties* are data fields attached to the objects. *Methods* are functions 
+% that can be run on the object.  Each object has a *constructor* method for the 
+% object type that builds and returns the object.
+% 
+% Python and R (and some other packages) work similarly, so what you do with 
+% Matlab will transfer to some degree.
+% 
+% For example, the code below gives you some help on a few of the common types 
+% of objects used in stats in Matlab, including their properties and methods:
+
+% Table objects are the preferred way to store datasets
+help table
+%%
+% RepeatedMeasuresModel is an object related to ANOVA/RMANOVA/MANOVA models
+help RepeatedMeasuresModel
+%% 
+% You would use the function fitrm, for example, to fit a repeated measures 
+% model to some data and return a model object with estimated parameters (and 
+% other associated properties) as output. 
+
+% LinearMixedModel is an object related to mixed effects models (akin to
+% lmer in R software)
+help LinearMixedModel
+%% 
+% You would use the function fitlme, for example, to fit a mixed effects model 
+% to  data and return a model object with estimated parameters (and other associated 
+% properties) as output. 
+% 
+% Related object types are:  LinearModel, GeneralizedLinearModel, NonLinearModel
+
+% ClassificationSVM is an object related to multivariate classification. 
+help ClassificationSVM
+%% 
+% Notice the list of related functions at the bottom, including fitcsvm, the 
+% constructor method for the object type that builds and returns the object. You 
+% may also see related object types. 
+% 
+% The code below lists types of objects related to classification and regression:
+
+disp('Classification models')
+classreg.learning.classificationModels
+
+disp(' ')
+disp('Regression models')
+classreg.learning.regressionModels
+%% 
+% You can then get help on these other object classes using "Classification" 
+% or "Regression" joined with the type:
+%%
+% 
+%   help ClassificationTree
+%   help RegressionTree
+%
+% *Methods and properties*
+% To get associated methods for an object, type "methods <objectClass>"
+
+properties LinearMixedModel
+methods LinearMixedModel
+% *Choices: Objects and classical functions*
+%% 
+% * Over time, older functions that run statistical algorithms have been replaced 
+% with object-oriented methods. You can use either, depending on your use case 
+% and preference. 
+% * For example, to fit a multiple regression model, you can use the functions 
+% regress or glmfit (which includes logistic/logit/generalized linear modeling 
+% with different link functions), which works perfectly fine.  Or you can use 
+% fitlm with the LinearModel object.
+% *Trying out a model on a sample dataset*
+% Many fitting methods include sample code in their help.  e.g., type "help 
+% fitlme", and you get the code below. Try it, and you load a dataset and fit 
+% a linear mixed effects model with a random intercept:
+
+load carsmall
+ds = dataset(MPG,Weight,Model_Year);
+lme = fitlme(ds,'MPG ~ Weight + (1|Model_Year)')
+%% 
+% Then, you can explore the model's properties and methods.
+% 
+% Let's display a couple of the properties of the estimated model:
+
+lme.Rsquared % Variance explained
+lme.MSE      % Mean squared error
+% Help and doc
+% Help <function name> brings up the help text for that function (or object 
+% class).
+% 
+% doc <function name> brings up an interactive browser with even more help and 
+% examples.
+%%
+% 
+%   doc LinearMixedModel
+%
+%% 
+% 
+% Activity: Explore by fitting a statistics model to a dataset
+% Choose a model object or function. 
+% 
+% Get the help on that function. 
+% 
+% Use the help to fit the model.  
+% 
+% What are the outputs? If an object, what are some of the properties and methods?
+% 
+% 
+% 
+%
+##### SOURCE END #####
+-->
+</div></body></html>
