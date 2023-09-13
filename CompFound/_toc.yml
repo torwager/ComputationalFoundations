@@ -7,6 +7,6 @@ parts:
   - caption: Course Overview
     chapters:
       - file: statsinmatlab
-  - caption: Part 1
+  - caption: General linear model (GLM)
     chapters:
-      - file: markdown
+      - file: glm1.md
