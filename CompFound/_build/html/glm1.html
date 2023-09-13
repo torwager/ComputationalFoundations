@@ -406,11 +406,96 @@ document.write(`
 \[ y = X\beta + \epsilon \]</div>
 <p>Where:</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\( y \)</span> is the dependent variable (a vector of observed values).</p></li>
-<li><p><span class="math notranslate nohighlight">\( X \)</span> is the design matrix (it contains the values of the predictors, including a column of ones for the intercept).</p></li>
-<li><p><span class="math notranslate nohighlight">\( \beta \)</span> is a vector of the parameters or coefficients.</p></li>
-<li><p><span class="math notranslate nohighlight">\( \epsilon \)</span> is the error term (a vector of residuals).</p></li>
+<li><p><span class="math notranslate nohighlight">\( y \)</span> is <span class="math notranslate nohighlight">\(n \times 1\)</span> vector of observed responses (the dependent variable).</p></li>
+<li><p><span class="math notranslate nohighlight">\( X \)</span> is the <span class="math notranslate nohighlight">\(n \times p\)</span> design matrix (it contains the values of the predictors, including a column of ones for the intercept).</p></li>
+<li><p><span class="math notranslate nohighlight">\( \beta \)</span> is a <span class="math notranslate nohighlight">\(p \times 1\)</span> vector of the parameters or coefficients.</p></li>
+<li><p><span class="math notranslate nohighlight">\( \epsilon \)</span> is the <span class="math notranslate nohighlight">\(n \times 1\)</span> vector of errors (residuals).</p></li>
 </ul>
+<p>Expanded, the matrix multiplication looks like this:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{bmatrix}
+y_1 \\
+y_2 \\
+\vdots \\
+y_n \\
+\end{bmatrix}
+=
+\begin{bmatrix}
+1 &amp; x_{11} &amp; x_{12} &amp; \ldots &amp; x_{1p} \\
+1 &amp; x_{21} &amp; x_{22} &amp; \ldots &amp; x_{2p} \\
+\vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+1 &amp; x_{n1} &amp; x_{n2} &amp; \ldots &amp; x_{np} \\
+\end{bmatrix}
+*
+\begin{bmatrix}
+\beta_0 \\
+\beta_1 \\
+\vdots \\
+\beta_p \\
+\end{bmatrix}
++
+\begin{bmatrix}
+\epsilon_1 \\
+\epsilon_2 \\
+\vdots \\
+\epsilon_n \\
+\end{bmatrix}
+\end{split}\]</div>
+<p>This is the same as multiplying each column of <span class="math notranslate nohighlight">\(X\)</span> by it’s corresponding <span class="math notranslate nohighlight">\(\beta\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{bmatrix}
+y_1 \\
+y_2 \\
+\vdots \\
+y_n \\
+\end{bmatrix}
+=
+\beta_0
+*
+\begin{bmatrix}
+1 \\
+1 \\
+\vdots \\
+1 \\
+\end{bmatrix}
++
+\beta_1
+*
+\begin{bmatrix}
+x_{11} \\
+x_{21} \\
+\vdots \\
+x_{n1} \\
+\end{bmatrix}
++
+\beta_2
+*
+\begin{bmatrix}
+x_{12} \\
+x_{22} \\
+\vdots \\
+x_{n2} \\
+\end{bmatrix}
+\ldots
++
+\beta_0
+*
+\begin{bmatrix}
+x_{1p} \\
+x_{2p} \\
+\vdots \\
+x_{np} \\
+\end{bmatrix}
++
+\begin{bmatrix}
+\epsilon_1 \\
+\epsilon_2 \\
+\vdots \\
+\epsilon_n \\
+\end{bmatrix}
+\end{split}\]</div>
 </section>
 <section id="error-structure">
 <h2>Error Structure<a class="headerlink" href="#error-structure" title="Permalink to this heading">#</a></h2>
@@ -433,6 +518,10 @@ document.write(`
 <p>Taking the derivative with respect to <span class="math notranslate nohighlight">\( \beta \)</span> and setting it to zero gives the normal equations:</p>
 <div class="math notranslate nohighlight">
 \[ X^TX\beta = X^Ty \]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(X'X\)</span> is called the Gram matrix, which is a symmetric matrix related to the predictor covariance. It is related to the Fisher Information, which in turn is related to the precision with which each parameter can be estimated.</p></li>
+<li><p><span class="math notranslate nohighlight">\(X'Y\)</span> is a product of the transpose of the design matrix and the response vector.</p></li>
+</ul>
 </section>
 <section id="estimation-of-coefficients">
 <h2>Estimation of Coefficients<a class="headerlink" href="#estimation-of-coefficients" title="Permalink to this heading">#</a></h2>
@@ -440,6 +529,16 @@ document.write(`
 <div class="math notranslate nohighlight">
 \[ \hat{\beta} = (X^TX)^{-1}X^Ty \]</div>
 <p>Where <span class="math notranslate nohighlight">\( \hat{\beta} \)</span> represents the estimated coefficients that minimize the sum of squared residuals.</p>
+<p>Geometrically, this is the <strong>orthogonal projection</strong> of <span class="math notranslate nohighlight">\(y\)</span> onto the model subspace, a <span class="math notranslate nohighlight">\(p\)</span>-dimensional space defined by the columns of <span class="math notranslate nohighlight">\(X\)</span>.</p>
+<p>The <strong>model fits</strong> <span class="math notranslate nohighlight">\(X\hat{\beta}\)</span> provide the fitted values, the best linear combination of columns of <span class="math notranslate nohighlight">\(X\)</span>, where “best” minimizes the SSE.</p>
+<p>The figure below illustrates this for a dataset with 3 data points, meaning <span class="math notranslate nohighlight">\(y\)</span> is a 3-length vector describing a point in 3-D space. This extends to n-D space with <span class="math notranslate nohighlight">\(n\)</span> independent observations. The axes are orthogonal if the observations are independent (as assumed in the GLM). <span class="math notranslate nohighlight">\(X\)</span> has 2 columns and spans a 2-D space (a plane). The fitted values are contained in the vector closest to the data that lies in the model subspace (in the <strong>image</strong> in algebraic terms). The error values are contained in the vector orthogonal to the fits (in the <strong>kernel</strong> in algebra) that, when added to the fits, matches the data.</p>
+<p><img alt="Geometry of GLM fits" src="_images/glm_geometry.png" /></p>
+<p><strong>multicolinearity</strong>
+Importantly, the projection estimates the best overall linear combination. In an algebraic sense, the <span class="math notranslate nohighlight">\(X_{.i}\hat{\beta}\)</span> partial fits combine to reach the point in the model subspace closest to the data <span class="math notranslate nohighlight">\(y\)</span>. Each <span class="math notranslate nohighlight">\(\hat{\beta_i}\)</span> is thus estimated “controlling for” the other predictors, and are often interpreted as the <strong>unique effects</strong> that cannot be accounted for by other predictors in the model.</p>
+<ul class="simple">
+<li><p>If any of the predictors in <span class="math notranslate nohighlight">\(X\)</span> is a perfect linear combination of the other predictors, <span class="math notranslate nohighlight">\(X\)</span> is <strong>rank-deficient</strong> and does not span the a subspace equal to the number of predictors. In this case, there is no unique solution for <span class="math notranslate nohighlight">\(\hat{\beta}\)</span>, and the matrix <span class="math notranslate nohighlight">\( (X^TX)^{-1} \)</span> is not invertible.</p></li>
+<li><p>If predictors are correlated but still linearly independent, the variance increases</p></li>
+</ul>
 </section>
 <section id="residuals">
 <h2>Residuals<a class="headerlink" href="#residuals" title="Permalink to this heading">#</a></h2>

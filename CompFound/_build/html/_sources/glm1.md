@@ -9,10 +9,97 @@ The general formulation of the GLM is:
 $$ y = X\beta + \epsilon $$
 
 Where:
-- $ y $ is the dependent variable (a vector of observed values).
-- $ X $ is the design matrix (it contains the values of the predictors, including a column of ones for the intercept).
-- $ \beta $ is a vector of the parameters or coefficients.
-- $ \epsilon $ is the error term (a vector of residuals).
+- $ y $ is $n \times 1$ vector of observed responses (the dependent variable).
+- $ X $ is the $n \times p$ design matrix (it contains the values of the predictors, including a column of ones for the intercept).
+- $ \beta $ is a $p \times 1$ vector of the parameters or coefficients.
+- $ \epsilon $ is the $n \times 1$ vector of errors (residuals).
+
+Expanded, the matrix multiplication looks like this:
+
+$$
+\begin{bmatrix}
+y_1 \\
+y_2 \\
+\vdots \\
+y_n \\
+\end{bmatrix}
+=
+\begin{bmatrix}
+1 & x_{11} & x_{12} & \ldots & x_{1p} \\
+1 & x_{21} & x_{22} & \ldots & x_{2p} \\
+\vdots & \vdots & \vdots & \ddots & \vdots \\
+1 & x_{n1} & x_{n2} & \ldots & x_{np} \\
+\end{bmatrix}
+*
+\begin{bmatrix}
+\beta_0 \\
+\beta_1 \\
+\vdots \\
+\beta_p \\
+\end{bmatrix}
++
+\begin{bmatrix}
+\epsilon_1 \\
+\epsilon_2 \\
+\vdots \\
+\epsilon_n \\
+\end{bmatrix}
+$$
+
+This is the same as multiplying each column of $X$ by it's corresponding $\beta$:
+
+$$
+\begin{bmatrix}
+y_1 \\
+y_2 \\
+\vdots \\
+y_n \\
+\end{bmatrix}
+=
+\beta_0
+*
+\begin{bmatrix}
+1 \\
+1 \\
+\vdots \\
+1 \\
+\end{bmatrix}
++
+\beta_1
+*
+\begin{bmatrix}
+x_{11} \\
+x_{21} \\
+\vdots \\
+x_{n1} \\
+\end{bmatrix}
++
+\beta_2
+*
+\begin{bmatrix}
+x_{12} \\
+x_{22} \\
+\vdots \\
+x_{n2} \\
+\end{bmatrix}
+\ldots
++
+\beta_0
+*
+\begin{bmatrix}
+x_{1p} \\
+x_{2p} \\
+\vdots \\
+x_{np} \\
+\end{bmatrix}
++
+\begin{bmatrix}
+\epsilon_1 \\
+\epsilon_2 \\
+\vdots \\
+\epsilon_n \\
+\end{bmatrix}
+$$
 
 ## Error Structure
 
@@ -38,6 +125,9 @@ Taking the derivative with respect to $ \beta $ and setting it to zero gives the
 
 $$ X^TX\beta = X^Ty $$
 
+- $X'X$ is called the Gram matrix, which is a symmetric matrix related to the predictor covariance. It is related to the Fisher Information, which in turn is related to the precision with which each parameter can be estimated.
+- $X'Y$ is a product of the transpose of the design matrix and the response vector.
+
 ## Estimation of Coefficients
 
 By solving the normal equations, given that $ X^TX $ is invertible, we get estimates of the coefficients $ \beta $:
@@ -45,6 +135,23 @@ By solving the normal equations, given that $ X^TX $ is invertible, we get estim
 $$ \hat{\beta} = (X^TX)^{-1}X^Ty $$
 
 Where $ \hat{\beta} $ represents the estimated coefficients that minimize the sum of squared residuals.
+
+Geometrically, this is the **orthogonal projection** of $y$ onto the model subspace, a $p$-dimensional space defined by the columns of $X$.
+
+The **model fits** $X\hat{\beta}$ provide the fitted values, the best linear combination of columns of $X$, where "best" minimizes the SSE.
+
+The figure below illustrates this for a dataset with 3 data points, meaning $y$ is a 3-length vector describing a point in 3-D space. This extends to n-D space with $n$ independent observations. The axes are orthogonal if the observations are independent (as assumed in the GLM). $X$ has 2 columns and spans a 2-D space (a plane). The fitted values are contained in the vector closest to the data that lies in the model subspace (in the **image** in algebraic terms). The error values are contained in the vector orthogonal to the fits (in the **kernel** in algebra) that, when added to the fits, matches the data. 
+
+![Geometry of GLM fits](images/glm_geometry.png)
+
+**multicolinearity**
+Importantly, the projection estimates the best overall linear combination. In an algebraic sense, the $X_{.i}\hat{\beta}$ partial fits combine to reach the point in the model subspace closest to the data $y$. Each $\hat{\beta_i}$ is thus estimated "controlling for" the other predictors, and are often interpreted as the **unique effects** that cannot be accounted for by other predictors in the model.   
+- If any of the predictors in $X$ is a perfect linear combination of the other predictors, $X$ is **rank-deficient** and does not span the a subspace equal to the number of predictors. In this case, there is no unique solution for $\hat{\beta}$, and the matrix $ (X^TX)^{-1} $ is not invertible.
+- If predictors are correlated but still linearly independent, the variance increases  
+
+
+
+
 
 ## Residuals
 
