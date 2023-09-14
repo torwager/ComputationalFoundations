@@ -7,8 +7,9 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Index &#8212; Computational Foundations for Neuroscience</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Stats in Matlab &#8212; Computational Foundations for Neuroscience</title>
   
   
   
@@ -60,9 +61,10 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'genindex';</script>
-    <link rel="index" title="Index" href="#" />
+    <script>DOCUMENTATION_OPTIONS.pagename = 'ashardataset';</script>
+    <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="General Linear Model (GLM)" href="glm1.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -162,9 +164,9 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="statsinmatlab.html">Stats in Matlab</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">General linear model (GLM)</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="glm1.html">General Linear Model (GLM)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ashardataset.html">Stats in Matlab</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Stats in Matlab</a></li>
 </ul>
 
     </div>
@@ -236,7 +238,24 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/torwager/ComputationalFoundations/issues/new?title=Issue%20on%20page%20%2Fgenindex.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/torwager/ComputationalFoundations/edit/master/docs/ashardataset.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/torwager/ComputationalFoundations/issues/new?title=Issue%20on%20page%20%2Fashardataset.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -248,6 +267,54 @@ const thebe_selector_output = ".output, .cell_output"
   </span>
 <span class="btn__text-container">Open issue</span>
 </a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/ashardataset.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
 </li>
       
   </ul>
@@ -298,7 +365,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1></h1>
+    <h1>Stats in Matlab</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -312,13 +379,37 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
+  <section class="tex2jax_ignore mathjax_ignore" id="stats-in-matlab">
+<h1>Stats in Matlab<a class="headerlink" href="#stats-in-matlab" title="Permalink to this heading">#</a></h1>
+<p><a class="reference download internal" download="" href="_downloads/99fe26b1da6f07bc0afbb536741882b3/Ashar_2022_PRT_backpain.zip"><span class="xref download myst">Download the Ashar dataset</span></a></p>
+<p><a class="reference download internal" download="" href="_downloads/403d126da250ed0538d759d3e0928183/Load_sample_Ashar_dataset.mlx"><span class="xref download myst">Download the Matlab live script</span></a></p>
+<p>Ashar et al. 2022, JAMA Psychiatry
+This study is a randomized clinical trial (RCT) of patients with chronic back pain (&gt;= 4/10 pain for at least 3 months, average duration ~10 years). The trial compares Pain Reprocessing Therapy, Placebo (a single injection into the skin of the back), and Usual Care treatments, with pre-treatment and post-treatment (1 month after treatment initiation), and follow-up to 1 year.</p>
+<p>Let’s recreate a GLM from scratch and do an analysis of this dataset.
+The goal: Assess whether pain changes with Pain Reprocessing Therapy treatment and/or placebo treatment relative to usual care.</p>
+<iframe src="matlab_html/Load_sample_Ashar_dataset.html" width="120%" height="800px"></iframe>
+<p><a class="reference external" href="https://jupyterbook.org">jupyterbook.org</a>.</p>
+</section>
 
-<h1 id="index">Index</h1>
-
-<div class="genindex-jumpbox">
- 
-</div>
-
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
 
                 </article>
               
@@ -331,6 +422,15 @@ document.write(`
   
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="glm1.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">General Linear Model (GLM)</p>
+      </div>
+    </a>
 </div></div>
   
 </div>

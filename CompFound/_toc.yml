@@ -13,3 +13,4 @@ parts:
   - caption: General linear model (GLM)
     chapters:
       - file: glm1.md
+      - file: ashardataset
