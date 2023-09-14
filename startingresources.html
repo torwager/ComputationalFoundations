@@ -378,10 +378,15 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Some resources</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-background">Basic background</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#greek-alphabet">Greek alphabet</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-distributions">Probability distributions</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-a-statistical-test">Choosing a statistical test</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-a-statistical-test">Choosing a statistical test</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started-with-programming">Getting started with programming</a></li>
+</ul>
+</li>
 </ul>
 
             </nav>
@@ -396,9 +401,27 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="some-resources">
 <h1>Some resources<a class="headerlink" href="#some-resources" title="Permalink to this heading">#</a></h1>
+<section id="basic-background">
+<h2>Basic background<a class="headerlink" href="#basic-background" title="Permalink to this heading">#</a></h2>
+<p>Jeanette Mumford has a great series of videos on regression (and other series too, on mixed effects, fMRI)</p>
+<p><a class="reference external" href="https://youtu.be/apt8uAgtgdY">Basic statistics terminology</a> This video gently introduces some of the key concepts that provide the foundation for statistics.
+<a class="reference external" href="https://www.youtube.com/watch?v=yLgPpmXVVbs">Simple Linear Regression</a> This video explains how a regression works using a single variable.
+<a class="reference external" href="https://www.youtube.com/watch?v=fkZj8QoYjq8">Matrix Algebra Basics</a> This video provides the background linear algebra needed for understanding the GLM.
+<a class="reference external" href="https://www.youtube.com/watch?v=qdOG7YMolmA">Multiple Linear Regression</a> This video explains how multiple regression works using linear algebra.
+<a class="reference external" href="https://www.youtube.com/watch?v=ULeg3DH3g9w">Hypothesis Testing</a> This video covers the basics of hypothesis testing.
+<a class="reference external" href="https://www.youtube.com/watch?v=yLgPpmXVVbs&amp;t=631s">Contrasts in Linear Models</a> This video provides an overview of how to test hypotheses using contrasts in the context of the GLM.
+<a class="reference external" href="https://www.youtube.com/watch?v=uClfe4pLrCo">Interpreting Regression Parameters</a> This video covers how to interpret the results from a regression analysis.
+<a class="reference external" href="https://www.youtube.com/watch?v=K4S576j90N8">Mean Centering Regressors</a> This video covers a more subtle detail of why you might consider mean centering your continuous regression variables.</p>
+</section>
 <section id="greek-alphabet">
 <h2>Greek alphabet<a class="headerlink" href="#greek-alphabet" title="Permalink to this heading">#</a></h2>
 <p><img alt="The greek alphabet" src="_images/greekalphabet.png" /></p>
+</section>
+<section id="probability-distributions">
+<h2>Probability distributions<a class="headerlink" href="#probability-distributions" title="Permalink to this heading">#</a></h2>
+<p>We won’t cover these extensively, but it would be good to integrate in the future:
+https://awstip.com/statistical-probability-distributions-89398c4b68c7
+https://en.wikipedia.org/wiki/Relationships_among_probability_distributions</p>
 </section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="choosing-a-statistical-test">
@@ -411,6 +434,26 @@ document.write(`
 <p><img alt="GLM tests with uncorrelated errors" src="_images/glmfamily_iid.png" /></p>
 <p>Here are repeated measures tests:</p>
 <p><img alt="GLM tests with uncorrelated errors" src="_images/glmfamily_correrrors.png" /></p>
+<section id="getting-started-with-programming">
+<h2>Getting started with programming<a class="headerlink" href="#getting-started-with-programming" title="Permalink to this heading">#</a></h2>
+<p>There are many resources – the key is finding which are most useful!</p>
+<p>These may be useful for Matlab:
+Getting started with Matlab - https://matlabacademy.mathworks.com/details/matlab-onramp/gettingstarted
+Matlab fundamentals - https://matlabacademy.mathworks.com/details/matlab-fundamentals/mlbe</p>
+<p><strong>Machine learning</strong>
+Matlab Machine Learning Onramp - https://matlabacademy.mathworks.com/details/machine-learning-onramp/machinelearning
+Matlab Deep Learning Onramp - https://matlabacademy.mathworks.com/details/deep-learning-onramp/deeplearning</p>
+<p><strong>Reinforcement learning</strong>
+Matlab Reinforcement Learning Onramp - https://matlabacademy.mathworks.com/details/reinforcement-learning-onramp/reinforcementlearning
+https://www.mathworks.com/help/reinforcement-learning/getting-started-with-reinforcement-learning-toolbox.html?s_tid=CRUX_topnav</p>
+<p><strong>Google Colab machine learning with tensor flow</strong>
+https://colab.research.google.com/?utm_source=scs-index#scrollTo=P-H6Lw1vyNNd
+https://www.tensorflow.org/hub/tutorials/tf2_text_classification</p>
+<p><strong>Mixed effects in Python</strong>
+https://www.pythonfordatascience.org/mixed-effects-regression-python/
+https://towardsdatascience.com/how-to-run-linear-mixed-effects-models-in-python-jupyter-notebooks-4f8079c4b589
+https://gist.github.com/jcheong0428/f25b47405d9d328691c102787bc92175</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -481,10 +524,15 @@ document.write(`
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Some resources</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-background">Basic background</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#greek-alphabet">Greek alphabet</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-distributions">Probability distributions</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-a-statistical-test">Choosing a statistical test</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-a-statistical-test">Choosing a statistical test</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started-with-programming">Getting started with programming</a></li>
+</ul>
+</li>
 </ul>
 
   </nav></div>
