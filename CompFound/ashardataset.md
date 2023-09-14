@@ -1,4 +1,4 @@
-# Stats in Matlab
+# Sample dataset and analysis 1: Ashar 2022
 
 [Download the Ashar dataset](datasets/Ashar_2022_PRT_backpain.zip)
 
