@@ -3,7 +3,7 @@
 
 title: Computational Foundations for Neuroscience
 author: Tor Wager & others
-logo: logo.png
+logo: images/yellow_flower_logo.png
 
 # Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html

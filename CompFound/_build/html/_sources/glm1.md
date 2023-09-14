@@ -2,6 +2,10 @@
 
 The General Linear Model (GLM) is a statistical linear model that can be written in the form of a linear equation. It encompasses a range of models like simple linear regression, multiple regression, and analysis of variance.
 
+This document describes the GLM with uncorrelated errors.
+
+![GLM tests with uncorrelated errors](images/glmfamily_iid.png)
+
 ## Model Structure
 
 The general formulation of the GLM is:
@@ -140,18 +144,18 @@ Geometrically, this is the **orthogonal projection** of $y$ onto the model subsp
 
 The **model fits** $X\hat{\beta}$ provide the fitted values, the best linear combination of columns of $X$, where "best" minimizes the SSE.
 
-The figure below illustrates this for a dataset with 3 data points, meaning $y$ is a 3-length vector describing a point in 3-D space. This extends to n-D space with $n$ independent observations. The axes are orthogonal if the observations are independent (as assumed in the GLM). $X$ has 2 columns and spans a 2-D space (a plane). The fitted values are contained in the vector closest to the data that lies in the model subspace (in the **image** in algebraic terms). The error values are contained in the vector orthogonal to the fits (in the **kernel** in algebra) that, when added to the fits, matches the data. 
+The figure below illustrates this for a dataset with 3 data points, meaning $y$ is a 3-length vector describing a point in 3-D space. This extends to n-D space with $n$ independent observations. The axes are orthogonal if the observations are independent (as assumed in the GLM). $X$ has 2 columns and spans a 2-D space (a plane). The fitted values are contained in the vector closest to the data that lies in the model subspace (in the **image** in algebraic terms). The error values are contained in the vector orthogonal to the fits (in the **kernel** in algebra) that, when added to the fits, matches the data.
 
 ![Geometry of GLM fits](images/glm_geometry.png)
+From "Practical Regression and Anova using R" by Julian Faraway, 2002
+
+Here's my version, with color:
+![Geometry of GLM fits, tor's version](images/glm_geometry_tor.png)
 
 **multicolinearity**
 Importantly, the projection estimates the best overall linear combination. In an algebraic sense, the $X_{.i}\hat{\beta}$ partial fits combine to reach the point in the model subspace closest to the data $y$. Each $\hat{\beta_i}$ is thus estimated "controlling for" the other predictors, and are often interpreted as the **unique effects** that cannot be accounted for by other predictors in the model.   
 - If any of the predictors in $X$ is a perfect linear combination of the other predictors, $X$ is **rank-deficient** and does not span the a subspace equal to the number of predictors. In this case, there is no unique solution for $\hat{\beta}$, and the matrix $ (X^TX)^{-1} $ is not invertible.
-- If predictors are correlated but still linearly independent, the variance increases  
-
-
-
-
+- If predictors are correlated but still linearly independent, the variance increases in proportion to the correlation.   
 
 ## Residuals
 
@@ -198,7 +202,7 @@ From this, the standard error (SE) of each $\hat{\beta}_i, i=1...p$ is the squar
 
 $$ SE(\hat{\beta_i}) = \sqrt{\text{Var}(\hat{\beta_{ii}})} $$
 
-where $ii$ denotes the $i$th diagonal element of the $p x p$ matrix $$ \text{Var}(\hat{\beta}).
+where $ii$ denotes the $i$th diagonal element of the $p x p$ matrix $ \text{Var}(\hat{\beta}) $.
 
 The standard error provides a measure of the variability or dispersion of the estimator. A smaller standard error indicates a more stable estimator. When conducting hypothesis tests, a larger standard error (relative to the magnitude of $\hat{\beta}$) might make it harder to reject the null hypothesis that the coefficient is zero, since the coefficient estimate is less precise.
 
@@ -206,11 +210,11 @@ More precisely, the $ SE(\hat{\beta_i}) $ is the denominator of the t-statistic 
 
 The standard error is influenced by the sample size. With larger sample sizes, the standard error tends to decrease, which leads to more precise estimates.
 
-## Model Fits
+## Metrics of overall model fits
 
 Model fit indicates how well a statistical model describes the observed data. When creating predictive models, we want our model to represent the underlying data structure accurately. There are various measures and statistics to gauge the fit of a model.
 
-## Coefficient of Determination ($R^2$)
+### Coefficient of Determination ($R^2$)
 
 The coefficient of determination, often denoted as $R^2$, measures the proportion of variance in the dependent variable that is predictable from the independent variable(s).
 
@@ -222,7 +226,7 @@ Where:
 
 A value of $R^2$ close to 1 suggests that a large proportion of the variability in the outcome has been explained by the regression model. A low $R^2$ indicates otherwise.
 
-## Akaike Information Criterion (AIC) and Bayesian Information Criterion (BIC)
+### Akaike Information Criterion (AIC) and Bayesian Information Criterion (BIC)
 
 Both AIC and BIC are criteria used for model selection. They consider the goodness of fit of the model and the complexity of the model.
 

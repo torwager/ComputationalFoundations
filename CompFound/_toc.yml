@@ -4,8 +4,11 @@
 format: jb-book
 root: intro
 parts:
-  - caption: Course Overview
+  - caption: Preliminary background
     chapters:
+      - file: startingresources
+      - file: topicmenu
+      - file: basicdistancecovcorr
       - file: statsinmatlab
   - caption: General linear model (GLM)
     chapters:

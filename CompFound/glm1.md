@@ -2,6 +2,10 @@
 
 The General Linear Model (GLM) is a statistical linear model that can be written in the form of a linear equation. It encompasses a range of models like simple linear regression, multiple regression, and analysis of variance.
 
+This document describes the GLM with uncorrelated errors.
+
+![GLM tests with uncorrelated errors](images/glmfamily_iid.png)
+
 ## Model Structure
 
 The general formulation of the GLM is:
@@ -144,6 +148,9 @@ The figure below illustrates this for a dataset with 3 data points, meaning $y$ 
 
 ![Geometry of GLM fits](images/glm_geometry.png)
 From "Practical Regression and Anova using R" by Julian Faraway, 2002
+
+Here's my version, with color:
+![Geometry of GLM fits, tor's version](images/glm_geometry_tor.png)
 
 **multicolinearity**
 Importantly, the projection estimates the best overall linear combination. In an algebraic sense, the $X_{.i}\hat{\beta}$ partial fits combine to reach the point in the model subspace closest to the data $y$. Each $\hat{\beta_i}$ is thus estimated "controlling for" the other predictors, and are often interpreted as the **unique effects** that cannot be accounted for by other predictors in the model.   

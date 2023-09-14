@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Computational foundations for Social Neuroscience &#8212; Computational Foundations for Neuroscience</title>
+    <title>Computational foundations for Neuroscience &#8212; Computational Foundations for Neuroscience</title>
   
   
   
@@ -64,7 +64,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'intro';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Stats in Matlab" href="statsinmatlab.html" />
+    <link rel="next" title="Some resources" href="startingresources.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -140,8 +140,8 @@ const thebe_selector_output = ".output, .cell_output"
       
     
     
-    <img src="_static/logo.png" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="_static/yellow_flower_logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/yellow_flower_logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
   
   
 </a></div>
@@ -151,12 +151,16 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1 current active">
                 <a class="reference internal" href="#">
-                    Computational foundations for Social Neuroscience
+                    Computational foundations for Neuroscience
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Course Overview</span></p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Preliminary background</span></p>
 <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="startingresources.html">Some resources</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="topicmenu.html">A menu of topics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basicdistancecovcorr.html">Fundamentals of distance, covariance, and correlation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="statsinmatlab.html">Stats in Matlab</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">General linear model (GLM)</span></p>
@@ -362,7 +366,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Computational foundations for Social Neuroscience</h1>
+    <h1>Computational foundations for Neuroscience</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -375,6 +379,22 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#psych-178">Psych 178</a><ul class="nav section-nav flex-column">
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-it-is-what-it-s-not">What it is, what it’s not</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-importance-of-estimating-uncertainty">The importance of estimating uncertainty</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#schedule-and-links">Schedule and links</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#week-1-sept-14">Week 1:   Sept 14</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#week-2-sept-20">Week 2: Sept 20</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#week-3-sept-28">Week 3: Sept 28</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#week-4-oct-5">Week 4: Oct 5</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#week-5-oct-12">Week 5: Oct 12</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#week-6-oct-19">Week 6: Oct 19</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#week-7-oct-26">Week 7: Oct 26</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#week-8-nov-2">Week 8: Nov 2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#week-9-nov-9">Week 9: Nov 9</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#week-10-nov-16">Week 10: Nov 16</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#final-projects">Final projects</a></li>
 </ul>
             </nav>
         </div>
@@ -386,14 +406,18 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="computational-foundations-for-social-neuroscience">
-<h1>Computational foundations for Social Neuroscience<a class="headerlink" href="#computational-foundations-for-social-neuroscience" title="Permalink to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="computational-foundations-for-neuroscience">
+<h1>Computational foundations for Neuroscience<a class="headerlink" href="#computational-foundations-for-neuroscience" title="Permalink to this heading">#</a></h1>
 <section id="psych-178">
 <h2>Psych 178<a class="headerlink" href="#psych-178" title="Permalink to this heading">#</a></h2>
 <p>Fall 2023, Tor Wager</p>
 <div class="toctree-wrapper compound">
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Course Overview</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Preliminary background</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="startingresources.html">Some resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="startingresources.html#choosing-a-statistical-test">Choosing a statistical test</a></li>
+<li class="toctree-l1"><a class="reference internal" href="topicmenu.html">A menu of topics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basicdistancecovcorr.html">Fundamentals of distance, covariance, and correlation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="statsinmatlab.html">Stats in Matlab</a></li>
 </ul>
 </div>
@@ -403,6 +427,113 @@ document.write(`
 <li class="toctree-l1"><a class="reference internal" href="glm1.html">General Linear Model (GLM)</a></li>
 </ul>
 </div>
+</section>
+<section id="what-it-is-what-it-s-not">
+<h2>What it is, what it’s not<a class="headerlink" href="#what-it-is-what-it-s-not" title="Permalink to this heading">#</a></h2>
+<p>What this course is intended to do:</p>
+<ul class="simple">
+<li><p>Provide an expandable series of topics and tutorials</p></li>
+<li><p>Help you gain some fundamental building blocks that will enhance your self-education</p></li>
+<li><p>Take a “back to basics” kind of approach without (hopefully) being too redundant</p></li>
+<li><p>Allow flexibility so you can adapt this to your research</p></li>
+<li><p>Be a collaboration with you!</p></li>
+</ul>
+<p>What this course is not:</p>
+<ul class="simple">
+<li><p>A finished product</p></li>
+<li><p>A complete course in statistics or computation</p></li>
+<li><p>A “how to do this fancy thing with this toolbox” kind of course.</p></li>
+</ul>
+</section>
+<section id="the-importance-of-estimating-uncertainty">
+<h2>The importance of estimating uncertainty<a class="headerlink" href="#the-importance-of-estimating-uncertainty" title="Permalink to this heading">#</a></h2>
+<p>aka: “The importance of knowing that we don’t know”</p>
+<p>Statistical inference is a part of virtually all data analyses efforts in neuroscience and psychology.  When they are not, they usually should be.</p>
+<p>Inference is about establishing how confident we should be that the pattern of effects we see in the data are “real”, i.e., replicable and likely to be observed again in the future.</p>
+<p>Whether we’re observing a multivariate pattern in the data, plotting latent trajectories, testing a new alignment algorithm, fitting a learning model, or whatever, we should all be asking ourselves:</p>
+<ul class="simple">
+<li><p>What is the uncertainty on whatever property I’m interested in?</p></li>
+<li><p>How can I construct a statistical test to characterize the uncertainty and calibrate my confidence level?</p></li>
+</ul>
+<p>This is why we’re starting with some statistical tests that are the most useful and widely used.</p>
+</section>
+<section id="schedule-and-links">
+<h2>Schedule and links<a class="headerlink" href="#schedule-and-links" title="Permalink to this heading">#</a></h2>
+<p>This book:
+https://torwager.github.io/ComputationalFoundations</p>
+<p><a class="reference external" href="https://www.dropbox.com/scl/fo/3te8rk6x2kx4zazec5v5j/h?rlkey=9zbmslsw0h4m1h34svjmr90s0&amp;dl=0">Dropbox link to post assignments</a></p>
+<p><strong>Course Schedule and Timetable: Fall 2023</strong>
+September 11, 2023 – Fall term classes begin</p>
+<section id="week-1-sept-14">
+<h3>Week 1:   Sept 14<a class="headerlink" href="#week-1-sept-14" title="Permalink to this heading">#</a></h3>
+<p>Overview and student feedback, discussion.
+Explore datasets for final projects
+General linear model (GLM)
+Covariates
+Contrasts
+Model diagnostics and VIFs
+Basis functions and nonparametric regression (splines)
+Robust regression
+Autocorrelation and time series models
+No, I do not expect to get through all this!!!</p>
+</section>
+<section id="week-2-sept-20">
+<h3>Week 2: Sept 20<a class="headerlink" href="#week-2-sept-20" title="Permalink to this heading">#</a></h3>
+<p>Multi-level linear models and mixed effects
+IGLS/rIGLS
+Simulating power and false positive rates (bias/variance, precision-recall)
+Inference with randomization tests (bootstrapping, permutation)
+Mediation</p>
+</section>
+<section id="week-3-sept-28">
+<h3>Week 3: Sept 28<a class="headerlink" href="#week-3-sept-28" title="Permalink to this heading">#</a></h3>
+<p>Penalized regression (ridge, LASSO)
+Cross-validation
+Multivariate predictive classification and regression models (SVM, LASSO-PCR)</p>
+</section>
+<section id="week-4-oct-5">
+<h3>Week 4: Oct 5<a class="headerlink" href="#week-4-oct-5" title="Permalink to this heading">#</a></h3>
+<p>Bayesian fundamentals
+Empirical Bayes
+Bayes Factors</p>
+</section>
+<section id="week-5-oct-12">
+<h3>Week 5: Oct 12<a class="headerlink" href="#week-5-oct-12" title="Permalink to this heading">#</a></h3>
+<p>Oct 12: Predictive processing and active inference (Ryan Smith) – all day workshop</p>
+</section>
+<section id="week-6-oct-19">
+<h3>Week 6: Oct 19<a class="headerlink" href="#week-6-oct-19" title="Permalink to this heading">#</a></h3>
+<p>Reinforcement learning and sequential models (Soltani)
+Kalman Filter</p>
+</section>
+<section id="week-7-oct-26">
+<h3>Week 7: Oct 26<a class="headerlink" href="#week-7-oct-26" title="Permalink to this heading">#</a></h3>
+<p>Natural language processing (Manning)</p>
+</section>
+<section id="week-8-nov-2">
+<h3>Week 8: Nov 2<a class="headerlink" href="#week-8-nov-2" title="Permalink to this heading">#</a></h3>
+<p>Recurrent neural networks (Murray)</p>
+</section>
+<section id="week-9-nov-9">
+<h3>Week 9: Nov 9<a class="headerlink" href="#week-9-nov-9" title="Permalink to this heading">#</a></h3>
+<p>Present final projects</p>
+</section>
+<section id="week-10-nov-16">
+<h3>Week 10: Nov 16<a class="headerlink" href="#week-10-nov-16" title="Permalink to this heading">#</a></h3>
+<p>Present final projects
+November 14, 2023 – Fall term classes end</p>
+<p><a class="reference external" href="https://docs.google.com/document/d/16L0Tpt934ySmf4ZO2PbuJuljDOpbKylk9uapWjMoszM/edit#heading=h.u9fpxhsk33it">tor’s working doc</a></p>
+<p><a class="reference external" href="https://www.dropbox.com/scl/fo/cnaoqc60ht08ervbevlhf/h?rlkey=4cdlsoq22zv3ldhf3oxy63gtg&amp;dl=0">tor’s dropbox</a></p>
+</section>
+</section>
+<section id="final-projects">
+<h2>Final projects<a class="headerlink" href="#final-projects" title="Permalink to this heading">#</a></h2>
+<p>Choose one:</p>
+<ol class="arabic simple">
+<li><p>Apply a technique to a dataset you are currently working on and hope to/have published on. Present method and findings.  Create a notebook that will allow other students to access data (or a subset of it) and run.</p></li>
+<li><p>Create a tutorial on a selected topic not already covered.</p></li>
+</ol>
+<p>Present your final project the last 2 weeks of class (20-30 min per presentation)</p>
 <p>Built with <a class="reference external" href="https://jupyterbook.org">Jupyter Book</a></p>
 </section>
 </section>
@@ -439,11 +570,11 @@ document.write(`
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="right-next"
-       href="statsinmatlab.html"
+       href="startingresources.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Stats in Matlab</p>
+        <p class="prev-next-title">Some resources</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -468,6 +599,22 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#psych-178">Psych 178</a><ul class="nav section-nav flex-column">
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-it-is-what-it-s-not">What it is, what it’s not</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-importance-of-estimating-uncertainty">The importance of estimating uncertainty</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#schedule-and-links">Schedule and links</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#week-1-sept-14">Week 1:   Sept 14</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#week-2-sept-20">Week 2: Sept 20</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#week-3-sept-28">Week 3: Sept 28</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#week-4-oct-5">Week 4: Oct 5</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#week-5-oct-12">Week 5: Oct 12</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#week-6-oct-19">Week 6: Oct 19</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#week-7-oct-26">Week 7: Oct 26</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#week-8-nov-2">Week 8: Nov 2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#week-9-nov-9">Week 9: Nov 9</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#week-10-nov-16">Week 10: Nov 16</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#final-projects">Final projects</a></li>
 </ul>
   </nav></div>
 
