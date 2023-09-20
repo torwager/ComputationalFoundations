@@ -44,22 +44,22 @@ Here are repeated measures tests:
 There are many resources -- the key is finding which are most useful!
 
 These may be useful for Matlab:
-Getting started with Matlab - https://matlabacademy.mathworks.com/details/matlab-onramp/gettingstarted
-Matlab fundamentals - https://matlabacademy.mathworks.com/details/matlab-fundamentals/mlbe
+- [Getting started with Matlab](https://matlabacademy.mathworks.com/details/matlab-onramp/gettingstarted)
+- [Matlab fundamentals](https://matlabacademy.mathworks.com/details/matlab-fundamentals/mlbe)
 
 **Machine learning**
-Matlab Machine Learning Onramp - https://matlabacademy.mathworks.com/details/machine-learning-onramp/machinelearning
-Matlab Deep Learning Onramp - https://matlabacademy.mathworks.com/details/deep-learning-onramp/deeplearning
+- [Matlab Machine Learning Onramp](https://matlabacademy.mathworks.com/details/machine-learning-onramp/machinelearning)
+- [Matlab Deep Learning Onramp](https://matlabacademy.mathworks.com/details/deep-learning-onramp/deeplearning)
 
 **Reinforcement learning**
-Matlab Reinforcement Learning Onramp - https://matlabacademy.mathworks.com/details/reinforcement-learning-onramp/reinforcementlearning
-https://www.mathworks.com/help/reinforcement-learning/getting-started-with-reinforcement-learning-toolbox.html?s_tid=CRUX_topnav
+- [Matlab Reinforcement Learning Onramp](https://matlabacademy.mathworks.com/details/reinforcement-learning-onramp/reinforcementlearning)
+- https://www.mathworks.com/help/reinforcement-learning/getting-started-with-reinforcement-learning-toolbox.html?s_tid=CRUX_topnav
 
 **Google Colab machine learning with tensor flow**
-https://colab.research.google.com/?utm_source=scs-index#scrollTo=P-H6Lw1vyNNd
-https://www.tensorflow.org/hub/tutorials/tf2_text_classification
+- https://colab.research.google.com/?utm_source=scs-index#scrollTo=P-H6Lw1vyNNd
+- https://www.tensorflow.org/hub/tutorials/tf2_text_classification
 
 **Mixed effects in Python**
-https://www.pythonfordatascience.org/mixed-effects-regression-python/
-https://towardsdatascience.com/how-to-run-linear-mixed-effects-models-in-python-jupyter-notebooks-4f8079c4b589
-https://gist.github.com/jcheong0428/f25b47405d9d328691c102787bc92175
+- https://www.pythonfordatascience.org/mixed-effects-regression-python/
+- https://towardsdatascience.com/how-to-run-linear-mixed-effects-models-in-python-jupyter-notebooks-4f8079c4b589
+- https://gist.github.com/jcheong0428/f25b47405d9d328691c102787bc92175
