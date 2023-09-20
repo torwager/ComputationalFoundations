@@ -52,7 +52,7 @@ Basis functions and nonparametric regression (splines)
 Robust regression
 Autocorrelation and time series models
 No, I do not expect to get through all this!!!
-### Week 2: Sept 20
+### Week 2: Sept 21
 Multi-level linear models and mixed effects
 IGLS/rIGLS
 Simulating power and false positive rates (bias/variance, precision-recall)
