@@ -13,4 +13,8 @@ parts:
   - caption: General linear model (GLM)
     chapters:
       - file: glm1.md
-      - file: ashardataset
+      - file: glm2_param_inference.md
+      - file: glm3_ashardataset
+  - caption: Mixed effects
+    chapters:
+      - file: mixedfx1_intro.md

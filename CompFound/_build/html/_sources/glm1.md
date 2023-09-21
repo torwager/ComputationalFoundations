@@ -88,7 +88,7 @@ x_{n2} \\
 \end{bmatrix}
 \ldots
 +
-\beta_0
+\beta_p
 *
 \begin{bmatrix}
 x_{1p} \\
@@ -180,7 +180,7 @@ The residual standard deviation is $ \sqrt{var(e)} $. It is a measure of the ave
 
 The degrees of freedom (df) is the number of dimensions along which a quantity can vary. In the GLM, df are associated with both the model and the error. The model df is the dimensionality of the space spanned by the combination of parameters $\beta$. The error df, or dfe, is the dimensionality of the space spanned by $\epsilon$.
 
-In both cases, the dimensionality is equal to the number of independent parameters or errors. In the case of model df, it is generally equal to the number of parameters, assuming none of the predictors in X are redundant.
+In both cases, the dimensionality is equal to the number of independent parameters or errors. In the case of model df, it is generally equal to the number of parameters $p$, assuming none of the predictors in X are redundant. Here, $p$ includes a parameter for the intercept, so $p=1$ for an intercept-only model.
 
 In the case of error df, assuming the errors are independent, it is the number of observations ($n$) minus the number of model parameters estimated, including the intercept ($p$). For example, if there are 3 independent observations and one model parameter estimated (the intercept, which estimates the sample mean in this case), there are only 2 independent dimensions along which the errors can vary. (Once you know the mean and two observations, you can calculate the third). In algebraic terms they span a two-dimensional plane. Thus, the dfe are n - 1 in this simple case.  This is the ReML estimator for the sample variance.
 
@@ -198,6 +198,8 @@ Where:
 - $\sigma^2$ is the variance of the residuals.
 - $X$ is the design matrix.
 
+This is a variance/covariance matrix.
+
 From this, the standard error (SE) of each $\hat{\beta}_i, i=1...p$ is the square root of its variance:
 
 $$ SE(\hat{\beta_i}) = \sqrt{\text{Var}(\hat{\beta_{ii}})} $$
@@ -208,7 +210,9 @@ The standard error provides a measure of the variability or dispersion of the es
 
 More precisely, the $ SE(\hat{\beta_i}) $ is the denominator of the t-statistic that forms the basis for parametric inferences (hypothesis tests).
 
-The standard error is influenced by the sample size. With larger sample sizes, the standard error tends to decrease, which leads to more precise estimates.
+The standard error is influenced by the sample size. With larger sample sizes, the standard error tends to decrease, which leads to more precise estimates. If observations are not indepdendent and errors are correlated, this will also increase the standard error of estimates, as we have less data than we think we have.
+
+Standard errors and degrees of freedom are used in statistical inference.
 
 ## Metrics of overall model fits
 
@@ -221,8 +225,8 @@ The coefficient of determination, often denoted as $R^2$, measures the proportio
 $$ R^2 = 1 - \frac{SS_{\text{res}}}{SS_{\text{tot}}} $$
 
 Where:
-- $SS_{\text{res}}$ is the residual sum of squares.
-- $SS_{\text{tot}}$ is the total sum of squares.
+- $SS_{\text{res}}$ is the residual sum of squares, $e^Te$.
+- $SS_{\text{tot}}$ is the total sum of squares, adjusting for the mean, $(y-\bar{y})^T(y-\bar{y})$.
 
 A value of $R^2$ close to 1 suggests that a large proportion of the variability in the outcome has been explained by the regression model. A low $R^2$ indicates otherwise.
 
@@ -231,3 +235,12 @@ A value of $R^2$ close to 1 suggests that a large proportion of the variability 
 Both AIC and BIC are criteria used for model selection. They consider the goodness of fit of the model and the complexity of the model.
 
 Lower values of AIC or BIC suggest a better-fitting model. When comparing multiple models, the one with the lowest AIC or BIC can often be considered the best fit, taking into account both the goodness of fit and model complexity.
+
+## Activity
+
+Code the GLM in matrix form from scratch using your platform of choice.
+Generally, this will be Python, R, or Matlab.
+
+Include expressions for calculating $\hat{\beta}$, $var(\beta)$, dfe, and $R^2$.
+
+Note: We will validate this later and apply it to a real dataset (Ashar et al. 2022) later.

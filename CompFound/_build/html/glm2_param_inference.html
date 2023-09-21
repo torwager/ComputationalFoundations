@@ -1,0 +1,634 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Parametric inference in the GLM &#8212; Computational Foundations for Neuroscience</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'glm2_param_inference';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Sample dataset and analysis 1: Ashar 2022" href="glm3_ashardataset.html" />
+    <link rel="prev" title="General Linear Model (GLM)" href="glm1.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/yellow_flower_logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/yellow_flower_logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Computational foundations for Neuroscience
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Preliminary background</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="startingresources.html">Some resources</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="topicmenu.html">A menu of topics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basicdistancecovcorr.html">Fundamentals of distance, covariance, and correlation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="statsinmatlab.html">Stats in Matlab</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">General linear model (GLM)</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="glm1.html">General Linear Model (GLM)</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Parametric inference in the GLM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glm3_ashardataset.html">Sample dataset and analysis 1: Ashar 2022</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/torwager/ComputationalFoundations" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/torwager/ComputationalFoundations/edit/master/docs/glm2_param_inference.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/torwager/ComputationalFoundations/issues/new?title=Issue%20on%20page%20%2Fglm2_param_inference.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/glm2_param_inference.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Parametric inference in the GLM</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#t-test">T-test</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contrasts">Contrasts</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#f-test">F-test</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assumptions">Assumptions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#activity">Activity</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="parametric-inference-in-the-glm">
+<h1>Parametric inference in the GLM<a class="headerlink" href="#parametric-inference-in-the-glm" title="Permalink to this heading">#</a></h1>
+<p>In this context, inferences are conclusions about whether an effect exists. P-values are a tool for  inference. In parametric statistics, P-values are derived based on estimates of the effect magnitude (e.g., mean difference, slope <span class="math notranslate nohighlight">\( \beta_j \)</span>, or other magnitude estimate) and its standard error.</p>
+<section id="t-test">
+<h2>T-test<a class="headerlink" href="#t-test" title="Permalink to this heading">#</a></h2>
+<p>A t-test in the context of a regression analysis is commonly used to test if a particular coefficient, say <span class="math notranslate nohighlight">\(\beta_j\)</span>, is significantly different from zero. The t-statistic for testing <span class="math notranslate nohighlight">\(\beta_j = 0\)</span>  in a multiple regression context using matrix notation can be written as:</p>
+<div class="math notranslate nohighlight">
+\[ t_j = \frac{\hat{\beta}_j}{\hat{\sigma}\sqrt{(X^T X)^{-1}_{jj}}} \]</div>
+<p>Here:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\hat{\beta}_j\)</span>  is the estimated coefficient for the <span class="math notranslate nohighlight">\(j\)</span> -th predictor.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\hat{\sigma}^2\)</span> represents the estimated variance of the residuals, and can be calculated as:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[ \hat{\sigma}^2 = \frac{e^T e}{n-p} \]</div>
+<p>where <span class="math notranslate nohighlight">\(e\)</span> is the vector of residuals, <span class="math notranslate nohighlight">\(n\)</span> is the number of observations, and <span class="math notranslate nohighlight">\(p\)</span> is the number of predictors, including the intercept.</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\((X^T X)^{-1}_{jj}\)</span>  is the <span class="math notranslate nohighlight">\(j\)</span> -th diagonal element of the inverse of the matrix <span class="math notranslate nohighlight">\(X^T X\)</span> , which is the matrix of sums of squares and cross-products of the design matrix <span class="math notranslate nohighlight">\(X\)</span> .</p></li>
+</ul>
+<p>The P-value comes from a t-distribution, which is a Normal (Gaussian) distribution adjusted for the fact that there are not really <span class="math notranslate nohighlight">\(n\)</span> independent observations, and thus not really <span class="math notranslate nohighlight">\(n\)</span> error df, if we have estimated some parameters (<span class="math notranslate nohighlight">\(p\)</span> parameters, to be precise) and removed them when estimating the residual error. The t-statistic, <span class="math notranslate nohighlight">\(t_j\)</span> , can be compared to a t-distribution with <span class="math notranslate nohighlight">\(n-p\)</span>  degrees of freedom to determine the significance of the <span class="math notranslate nohighlight">\(j\)</span> -th predictor.</p>
+</section>
+<section id="contrasts">
+<h2>Contrasts<a class="headerlink" href="#contrasts" title="Permalink to this heading">#</a></h2>
+<p>Often, there will be many regressors in a model, and we wish to test a particular linear combination of them. Linear combinations of parameter estimates <span class="math notranslate nohighlight">\(\hat{\beta}\)</span> are termed <strong>contrasts</strong>.</p>
+<p>The <span class="math notranslate nohighlight">\(p \space x \space k\)</span> contrast matrix <span class="math notranslate nohighlight">\(C\)</span> describes a set of column vectors that define a set of <span class="math notranslate nohighlight">\(k\)</span> linear combinations of the <span class="math notranslate nohighlight">\(p\)</span> coefficients.</p>
+<div class="math notranslate nohighlight">
+\[ \hat{C^T\beta} = C^T\hat{\beta} \]</div>
+<p>We assume by convention that the first parameter is <span class="math notranslate nohighlight">\(\hat{\beta_0}\)</span> corresponding to the intercept.</p>
+<p>Contrasts can code differences across regressors of interest. e.g., for the difference between parameters 1 and 2:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\hat{C^T\beta} = \begin{bmatrix}0 &amp; 1 &amp; -1 &amp; \cdots &amp; 0\end{bmatrix}^T
+*
+\begin{bmatrix}
+\hat{\beta_0} \\
+\hat{\beta_1}\\
+\hat{\beta_1} \\
+\vdots \\
+\hat{\beta_p} \\
+\end{bmatrix}
+\end{split}\]</div>
+<p>We refer to this as a t-contrast, as it provides a t-test for the linear combination of parameters, provided that the expected value <span class="math notranslate nohighlight">\(E(\hat{C^T\beta}) = 0\)</span> under the null hypothesis.</p>
+<p>More details are here:
+<a class="reference download internal" download="" href="_downloads/a821acf4f42e75ba326a8e0350cb842e/Wager_GLM_CompFound_Contrasts_Efficiency.pptx"><span class="xref download myst">Contrast Powerpoint</span></a></p>
+<p>To make inferences about contrasts, we need an expression for the variance of the contrast.
+We apply C to the variance of <span class="math notranslate nohighlight">\(\hat{C^T\beta}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+var(\hat{C^T\beta}) = \sigma^2C^T{X^TX}^{-1}C
+\]</div>
+<p>This is a variance-covariance matrix of contrast values. The variances of each contrast are on the diagonals of this matrix.</p>
+<p>The t-values are thus:</p>
+<div class="math notranslate nohighlight">
+\[t_{C^T\beta} = \frac{C^T\hat{\beta}}{{(\sigma^2{diag(C^T{(X^TX)}^{-1}C}))}^{1/2}}\]</div>
+</section>
+<section id="f-test">
+<h2>F-test<a class="headerlink" href="#f-test" title="Permalink to this heading">#</a></h2>
+<p>In the context of the GLM, the F-test is used to compare the fits of different models. Specifically, it’s used to test the hypothesis that a set of predictors has no effect on the response variable.</p>
+<p>Given:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(SSR_{\text{full}}\)</span>  = Sum of Squared Residuals for the full model</p></li>
+<li><p><span class="math notranslate nohighlight">\(SSR_{\text{reduced}}\)</span>  = Sum of Squared Residuals for a reduced model</p></li>
+<li><p><span class="math notranslate nohighlight">\(p\)</span>  = Number of predictors in the full model</p></li>
+<li><p><span class="math notranslate nohighlight">\(q\)</span>  = Number of predictors in the reduced model (with <span class="math notranslate nohighlight">\(q &lt; p\)</span> )</p></li>
+<li><p><span class="math notranslate nohighlight">\(n\)</span>  = Total number of observations</p></li>
+</ul>
+<p>The F-statistic is calculated as:</p>
+<div class="math notranslate nohighlight">
+\[ F = \frac{(SSR_{\text{reduced}} - SSR_{\text{full}}) / (p - q)}{SSR_{\text{full}} / (n - p)} \]</div>
+<p>In matrix notation, the sum of squared residuals for a model can be expressed as:</p>
+<div class="math notranslate nohighlight">
+\[ SSR = e^T e \]</div>
+<p>Where <span class="math notranslate nohighlight">\(e\)</span>  is the vector of residuals, which can be computed as:</p>
+<div class="math notranslate nohighlight">
+\[ e = Y - X\hat{\beta} \]</div>
+<p>Where <span class="math notranslate nohighlight">\(Y\)</span>  is the response vector, <span class="math notranslate nohighlight">\(X\)</span>  is the design matrix, and <span class="math notranslate nohighlight">\(\hat{\beta}\)</span>  is the vector of estimated coefficients.</p>
+<p>When comparing two models, the F-statistic tests the null hypothesis that the reduced model is adequate against the alternative that the full model is better.</p>
+<p>The P-value comes from an F-distribution with <span class="math notranslate nohighlight">\((p-q, n-p)\)</span> degrees of freedom.  The first number is the degrees of freedom (dimensionality) of the model subspace (or, here, the comparison subspace), and the second number is the error df (dfe.)</p>
+<p>A geometric explanation is provided here, courtesy Julian Faraway’s book.
+The full model spans a <span class="math notranslate nohighlight">\(p\)</span>-dimensional subspace, including the intercept.  The reduced model spans a <span class="math notranslate nohighlight">\(q\)</span>-dimensional subspace. In the diagram below, <span class="math notranslate nohighlight">\(p\)</span>=2, so the model spans a plane, and <span class="math notranslate nohighlight">\(q\)</span>=1, so the reduced model spans a line. (This would be an intercept-only model.) The distance between the fitted responses for the full and reduced models is a vector in <span class="math notranslate nohighlight">\(p-q\)</span>-dimensional space.</p>
+<p><img alt="F-test geometry" src="_images/ftest_geometry_faraway.png" /></p>
+<p>Faraway also shows the F-test for the full model, comparing a model with all predictors to one with only to the intercept, as follows:
+<img alt="F-test for full model" src="_images/ftest_allpredictors_faraway.png" /></p>
+</section>
+<section id="assumptions">
+<h2>Assumptions<a class="headerlink" href="#assumptions" title="Permalink to this heading">#</a></h2>
+<p>Parametric inference relies on the assumption that the errors are IID: Independent and identically distributed. This implies that the errors are spherical in a geometric sense: Each lies in a different dimension from all the others, with equal potential magnitude (though estimates may vary). The assumption of <strong>sphericity</strong> entails no correlations between errors <span class="math notranslate nohighlight">\(e_i\)</span> and <span class="math notranslate nohighlight">\(e_j\)</span> for all <span class="math notranslate nohighlight">\(i, j\)</span>.</p>
+<ul class="simple">
+<li><p>No correlations across time</p></li>
+<li><p>No subgroups with different error variances</p></li>
+<li><p>No subgroups of observations that are correlated with other observations (e.g., because they are collected from the same individual).</p></li>
+</ul>
+<p>In addition, they rely on the assumption that the errors are normally distributed, <span class="math notranslate nohighlight">\(e ~ N(0, \sigma^2I) \)</span>.</p>
+<p>In addition to understanding the assumptions made by any statistical test, we must consider the consequences of violating the assumptions.</p>
+<p>If sphericity is violated, we will over-estimate the dfe, and P-values will be too liberal in general. Thus, it is very important to correct the dfe for non-sphericity if there are dependencies.  Mixed effects models estimate these dependencies and adjust for them, but this falls beyond the scope of the basic GLM. Repeated-measures models also include dfe corrections. In particular, one can estimate multiple <strong>variance components</strong>, or error variances from subgroups or nearby measurements in time.</p>
+<p>If normality is violated, In practice, parametric statistics are not so strongly affected. This is due to the Central Limit Theorem, which posits that the standard error of <span class="math notranslate nohighlight">\(\hat{\beta_j}\)</span> becomes normally distributed as <span class="math notranslate nohighlight">\(n\)</span> increases, no matter what the distribution of <span class="math notranslate nohighlight">\(e\)</span>.</p>
+</section>
+<section id="activity">
+<h2>Activity<a class="headerlink" href="#activity" title="Permalink to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Extend your hand-coded GLM to calculate t-tests for each <span class="math notranslate nohighlight">\(\hat{\beta}\)</span> (t values, P-values, and dfe). Print these in a table.</p></li>
+<li><p>Calculate an F-statistic, df, and P-value for the overall model <span class="math notranslate nohighlight">\(R^2\)</span>, comparing the full model to an intercept-only model.</p></li>
+<li><p>Add the ability to perform t-tests for a set of contrasts.</p></li>
+<li><p>Make your script into a function that takes in a design matrix (<span class="math notranslate nohighlight">\(X\)</span>), data (<span class="math notranslate nohighlight">\(y\)</span>), and optional contrast matrix (<span class="math notranslate nohighlight">\(C\)</span>).</p></li>
+</ol>
+<p>Generally, your code will be Python, R, or Matlab.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="glm1.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">General Linear Model (GLM)</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="glm3_ashardataset.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Sample dataset and analysis 1: Ashar 2022</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#t-test">T-test</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contrasts">Contrasts</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#f-test">F-test</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assumptions">Assumptions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#activity">Activity</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Tor Wager & others
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
