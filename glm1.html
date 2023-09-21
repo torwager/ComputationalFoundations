@@ -66,7 +66,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'glm1';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Sample dataset and analysis 1: Ashar 2022" href="ashardataset.html" />
+    <link rel="next" title="Parametric inference in the GLM" href="glm2_param_inference.html" />
     <link rel="prev" title="Stats in Matlab" href="statsinmatlab.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -169,7 +169,8 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">General linear model (GLM)</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">General Linear Model (GLM)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ashardataset.html">Sample dataset and analysis 1: Ashar 2022</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glm2_param_inference.html">Parametric inference in the GLM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glm3_ashardataset.html">Sample dataset and analysis 1: Ashar 2022</a></li>
 </ul>
 
     </div>
@@ -393,6 +394,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#akaike-information-criterion-aic-and-bayesian-information-criterion-bic">Akaike Information Criterion (AIC) and Bayesian Information Criterion (BIC)</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#activity">Activity</a></li>
 </ul>
             </nav>
         </div>
@@ -490,7 +492,7 @@ x_{n2} \\
 \end{bmatrix}
 \ldots
 +
-\beta_0
+\beta_p
 *
 \begin{bmatrix}
 x_{1p} \\
@@ -574,7 +576,7 @@ var(e) = \frac{1}{n-1} \sum_{i=1}^{n} {(e_i)^2} = \frac{S}{n-1}
 <section id="degrees-of-freedom">
 <h2>Degrees of freedom<a class="headerlink" href="#degrees-of-freedom" title="Permalink to this heading">#</a></h2>
 <p>The degrees of freedom (df) is the number of dimensions along which a quantity can vary. In the GLM, df are associated with both the model and the error. The model df is the dimensionality of the space spanned by the combination of parameters <span class="math notranslate nohighlight">\(\beta\)</span>. The error df, or dfe, is the dimensionality of the space spanned by <span class="math notranslate nohighlight">\(\epsilon\)</span>.</p>
-<p>In both cases, the dimensionality is equal to the number of independent parameters or errors. In the case of model df, it is generally equal to the number of parameters, assuming none of the predictors in X are redundant.</p>
+<p>In both cases, the dimensionality is equal to the number of independent parameters or errors. In the case of model df, it is generally equal to the number of parameters <span class="math notranslate nohighlight">\(p\)</span>, assuming none of the predictors in X are redundant. Here, <span class="math notranslate nohighlight">\(p\)</span> includes a parameter for the intercept, so <span class="math notranslate nohighlight">\(p=1\)</span> for an intercept-only model.</p>
 <p>In the case of error df, assuming the errors are independent, it is the number of observations (<span class="math notranslate nohighlight">\(n\)</span>) minus the number of model parameters estimated, including the intercept (<span class="math notranslate nohighlight">\(p\)</span>). For example, if there are 3 independent observations and one model parameter estimated (the intercept, which estimates the sample mean in this case), there are only 2 independent dimensions along which the errors can vary. (Once you know the mean and two observations, you can calculate the third). In algebraic terms they span a two-dimensional plane. Thus, the dfe are n - 1 in this simple case.  This is the ReML estimator for the sample variance.</p>
 </section>
 <section id="standard-error-of-hat-beta-in-the-general-linear-model">
@@ -589,13 +591,15 @@ var(e) = \frac{1}{n-1} \sum_{i=1}^{n} {(e_i)^2} = \frac{S}{n-1}
 <li><p><span class="math notranslate nohighlight">\(\sigma^2\)</span> is the variance of the residuals.</p></li>
 <li><p><span class="math notranslate nohighlight">\(X\)</span> is the design matrix.</p></li>
 </ul>
+<p>This is a variance/covariance matrix.</p>
 <p>From this, the standard error (SE) of each <span class="math notranslate nohighlight">\(\hat{\beta}_i, i=1...p\)</span> is the square root of its variance:</p>
 <div class="math notranslate nohighlight">
 \[ SE(\hat{\beta_i}) = \sqrt{\text{Var}(\hat{\beta_{ii}})} \]</div>
 <p>where <span class="math notranslate nohighlight">\(ii\)</span> denotes the <span class="math notranslate nohighlight">\(i\)</span>th diagonal element of the <span class="math notranslate nohighlight">\(p x p\)</span> matrix <span class="math notranslate nohighlight">\( \text{Var}(\hat{\beta}) \)</span>.</p>
 <p>The standard error provides a measure of the variability or dispersion of the estimator. A smaller standard error indicates a more stable estimator. When conducting hypothesis tests, a larger standard error (relative to the magnitude of <span class="math notranslate nohighlight">\(\hat{\beta}\)</span>) might make it harder to reject the null hypothesis that the coefficient is zero, since the coefficient estimate is less precise.</p>
 <p>More precisely, the <span class="math notranslate nohighlight">\( SE(\hat{\beta_i}) \)</span> is the denominator of the t-statistic that forms the basis for parametric inferences (hypothesis tests).</p>
-<p>The standard error is influenced by the sample size. With larger sample sizes, the standard error tends to decrease, which leads to more precise estimates.</p>
+<p>The standard error is influenced by the sample size. With larger sample sizes, the standard error tends to decrease, which leads to more precise estimates. If observations are not indepdendent and errors are correlated, this will also increase the standard error of estimates, as we have less data than we think we have.</p>
+<p>Standard errors and degrees of freedom are used in statistical inference.</p>
 </section>
 <section id="metrics-of-overall-model-fits">
 <h2>Metrics of overall model fits<a class="headerlink" href="#metrics-of-overall-model-fits" title="Permalink to this heading">#</a></h2>
@@ -607,8 +611,8 @@ var(e) = \frac{1}{n-1} \sum_{i=1}^{n} {(e_i)^2} = \frac{S}{n-1}
 \[ R^2 = 1 - \frac{SS_{\text{res}}}{SS_{\text{tot}}} \]</div>
 <p>Where:</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(SS_{\text{res}}\)</span> is the residual sum of squares.</p></li>
-<li><p><span class="math notranslate nohighlight">\(SS_{\text{tot}}\)</span> is the total sum of squares.</p></li>
+<li><p><span class="math notranslate nohighlight">\(SS_{\text{res}}\)</span> is the residual sum of squares, <span class="math notranslate nohighlight">\(e^Te\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(SS_{\text{tot}}\)</span> is the total sum of squares, adjusting for the mean, <span class="math notranslate nohighlight">\((y-\bar{y})^T(y-\bar{y})\)</span>.</p></li>
 </ul>
 <p>A value of <span class="math notranslate nohighlight">\(R^2\)</span> close to 1 suggests that a large proportion of the variability in the outcome has been explained by the regression model. A low <span class="math notranslate nohighlight">\(R^2\)</span> indicates otherwise.</p>
 </section>
@@ -617,6 +621,13 @@ var(e) = \frac{1}{n-1} \sum_{i=1}^{n} {(e_i)^2} = \frac{S}{n-1}
 <p>Both AIC and BIC are criteria used for model selection. They consider the goodness of fit of the model and the complexity of the model.</p>
 <p>Lower values of AIC or BIC suggest a better-fitting model. When comparing multiple models, the one with the lowest AIC or BIC can often be considered the best fit, taking into account both the goodness of fit and model complexity.</p>
 </section>
+</section>
+<section id="activity">
+<h2>Activity<a class="headerlink" href="#activity" title="Permalink to this heading">#</a></h2>
+<p>Code the GLM in matrix form from scratch using your platform of choice.
+Generally, this will be Python, R, or Matlab.</p>
+<p>Include expressions for calculating <span class="math notranslate nohighlight">\(\hat{\beta}\)</span>, <span class="math notranslate nohighlight">\(var(\beta)\)</span>, dfe, and <span class="math notranslate nohighlight">\(R^2\)</span>.</p>
+<p>Note: We will validate this later and apply it to a real dataset (Ashar et al. 2022) later.</p>
 </section>
 </section>
 
@@ -661,11 +672,11 @@ var(e) = \frac{1}{n-1} \sum_{i=1}^{n} {(e_i)^2} = \frac{S}{n-1}
       </div>
     </a>
     <a class="right-next"
-       href="ashardataset.html"
+       href="glm2_param_inference.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Sample dataset and analysis 1: Ashar 2022</p>
+        <p class="prev-next-title">Parametric inference in the GLM</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -700,6 +711,7 @@ var(e) = \frac{1}{n-1} \sum_{i=1}^{n} {(e_i)^2} = \frac{S}{n-1}
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#akaike-information-criterion-aic-and-bayesian-information-criterion-bic">Akaike Information Criterion (AIC) and Bayesian Information Criterion (BIC)</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#activity">Activity</a></li>
 </ul>
   </nav></div>
 
