@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Mixed effects: Introduction &#8212; Computational Foundations for Neuroscience</title>
+    <title>Mixed effects: Examples &#8212; Computational Foundations for Neuroscience</title>
   
   
   
@@ -61,10 +61,9 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'mixedfx1_intro';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'mixedfx2_examples';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Sample dataset and analysis 1: Ashar 2022" href="glm3_ashardataset.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -170,8 +169,8 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="glm3_ashardataset.html">Sample dataset and analysis 1: Ashar 2022</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Mixed effects</span></p>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Mixed effects: Introduction</a></li>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="mixedfx1_intro.html">Mixed effects: Introduction</a></li>
 </ul>
 
     </div>
@@ -243,7 +242,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/torwager/ComputationalFoundations/edit/master/docs/mixedfx1_intro.md" target="_blank"
+      <li><a href="https://github.com/torwager/ComputationalFoundations/edit/master/docs/mixedfx2_examples.md" target="_blank"
    class="btn btn-sm btn-source-edit-button dropdown-item"
    title="Suggest edit"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -260,7 +259,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/torwager/ComputationalFoundations/issues/new?title=Issue%20on%20page%20%2Fmixedfx1_intro.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/torwager/ComputationalFoundations/issues/new?title=Issue%20on%20page%20%2Fmixedfx2_examples.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -290,7 +289,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="_sources/mixedfx1_intro.md" target="_blank"
+      <li><a href="_sources/mixedfx2_examples.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -372,7 +371,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Mixed effects: Introduction</h1>
+    <h1>Mixed effects: Examples</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -382,7 +381,8 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#starter-simulations">Starter simulations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ashar-dataset">Ashar dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sleepstudy-dataset">Sleepstudy dataset</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#activities">Activities</a></li>
 </ul>
             </nav>
@@ -395,39 +395,44 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="mixed-effects-introduction">
-<h1>Mixed effects: Introduction<a class="headerlink" href="#mixed-effects-introduction" title="Permalink to this heading">#</a></h1>
-<p>What we have done so far with the Ashar dataset is a version of a mixed effects model.
-It is a <strong>two-stage summary statistics</strong> approach.</p>
-<p>We estimated a difference score, Post - Pre-treatment pain, for each individual. Then, we used a GLM to run an analysis on the difference scores.</p>
-<p>The difference scores are contrast values, with a [1 -1] contrast across the <strong>within-person</strong> variable Time (pre vs. post)</p>
-<p>The group membership (PRT, Placebo, Control) is a <strong>between-person</strong> variable, because each person has only one value.</p>
-<p>Therefore, we used contrasts to estimate summary statistics for each person that capture the within-person effects, and analyzed the between-person effects using a single-level GLM.</p>
-<p>Another way to do this is using a mixed effects model.</p>
-<section id="starter-simulations">
-<h2>Starter simulations<a class="headerlink" href="#starter-simulations" title="Permalink to this heading">#</a></h2>
-<p>We’ll take a simulation-based approach to understanding mixed effects and how they perform.
-We’ll address questions including:</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="mixed-effects-examples">
+<h1>Mixed effects: Examples<a class="headerlink" href="#mixed-effects-examples" title="Permalink to this heading">#</a></h1>
+<section id="ashar-dataset">
+<h2>Ashar dataset<a class="headerlink" href="#ashar-dataset" title="Permalink to this heading">#</a></h2>
+<p>Now that we’ve loaded the Ashar back pain dataset, we can try running a mixed effects model and compare:</p>
+<p><a class="reference download internal" download="" href="_downloads/4bdd66d5e15225e1ef57d2de11d2f6f4/ashar_backpain_lme_example.mlx"><span class="xref download myst">Download the Matlab live script</span></a></p>
+<iframe src="matlab_html/ashar_backpain_lme_example.html" width="120%" height="800px"></iframe>
+</section>
+<section id="sleepstudy-dataset">
+<h2>Sleepstudy dataset<a class="headerlink" href="#sleepstudy-dataset" title="Permalink to this heading">#</a></h2>
+<p>This is a classic, and well-behaved, dataset included in R. We include it for comparison across methods and output.
+We’ll fit this 3 ways:</p>
 <ul class="simple">
-<li><p>Is the 2-stage summary statistics approach valid?</p></li>
-<li><p>Is is as powerful as a full mixed effects model?</p></li>
-<li><p>What is the power and false positive rate of different approaches and implementations?</p></li>
-<li><p>What happens when we violate some of the assumptions?</p></li>
+<li><p>Matlab fitlme</p></li>
+<li><p>CANlab IGLS</p></li>
+<li><p>CANlab glmfit_multilevel</p></li>
 </ul>
-<p><a class="reference download internal" download="" href="_downloads/fb0f5964a3e0bc27db6951db667d0464/mixedfx_sims_1.mlx"><span class="xref download myst">Download the Matlab live script</span></a></p>
-<iframe src="matlab_html/mixedfx_sims_1.html" width="120%" height="800px"></iframe>
+<p><a class="reference download internal" download="" href="_downloads/3b2bb8d8c76f8aab2cb590bf97a63ae3/sleepstudy_lme_example.mlx"><span class="xref download myst">Download the Matlab live script</span></a></p>
+<iframe src="matlab_html/sleepstudy_lme_example.html" width="120%" height="800px"></iframe>
 </section>
 <section id="activities">
 <h2>Activities<a class="headerlink" href="#activities" title="Permalink to this heading">#</a></h2>
 <ol class="arabic simple">
-<li><p>Identify and compare residual variance terms, slope estimates, t-values across models</p></li>
-<li><p>Modify the code to generate one or more continuous predictors instead of categorical/experimental ones.</p></li>
-<li><p>Turn the data-generation script into a function, so that you can efficiently simulate power and false positive rates using repeated simulations – two key properties of any statistical model.</p></li>
+<li><p>Fit the same model in R and/or python</p></li>
+<li><p>Make a table comparing t-values, P-values, and dfe for the different methods (3 here and 1-2 new ones)</p></li>
+<li><p>Compare effects of different options (e.g., ReML vs. ML, bootstrap)</p></li>
 </ol>
-<p><strong>Answer key</strong>
-For a pre-cooked answer (Matlab), see:
-<a class="reference download internal" download="" href="_downloads/3a7d08def1a92335246a347fe2793074/sim_generate_mixedfx_data1.mlx"><span class="xref download myst">Download a Matlab data sim function</span></a></p>
-<p>But…don’t peek! Do it yourself!!!</p>
+<p>##Mixed effects in Python</p>
+<p>Mixed effects models are available in R (lmer, lme4) and Matlab (fitlme and related others).</p>
+<p>There are a couple of options in Python, though I’m not sure how well validated these are.
+Python can reportedly access LMER in R using rpy2 and %Rmagic or Pymer4</p>
+<p>Here are some possibly helpful links:
+https://www.pythonfordatascience.org/mixed-effects-regression-python/
+https://towardsdatascience.com/how-to-run-linear-mixed-effects-models-in-python-jupyter-notebooks-4f8079c4b589
+https://gist.github.com/jcheong0428/f25b47405d9d328691c102787bc92175</p>
+<p>Google Colab notebook
+https://gist.github.com/jcheong0428/f25b47405d9d328691c102787bc92175</p>
+<p>https://www.statsmodels.org/stable/examples/notebooks/generated/mixed_lm_example.html</p>
 </section>
 </section>
 
@@ -462,15 +467,6 @@ For a pre-cooked answer (Matlab), see:
   
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="glm3_ashardataset.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Sample dataset and analysis 1: Ashar 2022</p>
-      </div>
-    </a>
 </div></div>
   
 </div>
@@ -489,7 +485,8 @@ For a pre-cooked answer (Matlab), see:
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#starter-simulations">Starter simulations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ashar-dataset">Ashar dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sleepstudy-dataset">Sleepstudy dataset</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#activities">Activities</a></li>
 </ul>
   </nav></div>

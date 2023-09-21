@@ -13,6 +13,8 @@ Therefore, we used contrasts to estimate summary statistics for each person that
 
 Another way to do this is using a mixed effects model.
 
+## Starter simulations
+
 We'll take a simulation-based approach to understanding mixed effects and how they perform.
 We'll address questions including:
 - Is the 2-stage summary statistics approach valid?  
