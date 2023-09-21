@@ -9,6 +9,7 @@ This study is a randomized clinical trial (RCT) of patients with chronic back pa
 
 Here's what the improvement looks like for the 3 groups:
 ![Ashar_violins](images/asharviolins.png)
+![Ashar_violins](images/Asharviolins.png)
 ![Ashar_pre vs post](images/asharprepost.png)
 
 Let's recreate a GLM from scratch and do an analysis of this dataset.
