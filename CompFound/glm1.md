@@ -157,6 +157,18 @@ Importantly, the projection estimates the best overall linear combination. In an
 - If any of the predictors in $X$ is a perfect linear combination of the other predictors, $X$ is **rank-deficient** and does not span the a subspace equal to the number of predictors. In this case, there is no unique solution for $\hat{\beta}$, and the matrix $ (X^TX)^{-1} $ is not invertible.
 - If predictors are correlated but still linearly independent, the variance increases in proportion to the correlation.   
 
+The following movies show a simulation with two predictors (X1 and X2) and a DV (y, Outcome). In both, there are strong positive effects of both predictors.  They differ only in the correlation between X1 and X2.  In the first, they are uncorrelated, and we can see that the regression plane is stable across repeated samples
+:
+
+![Regression with 2 predictors](movies/movie_regression_2preds.gif)
+
+In the second, the two predictors are correlated.  The regression plane tips on a ridge defined by the correlated predictors, and is unstable across repeated samples:
+
+![Regression with 2 predictors](movies/movie_regression_colinear.gif)
+
+[Matlab code for sim 1](movies/movie_regression_2preds.m)
+[and sim 2](movies/movie_regression_colinear.m)
+
 ## Residuals
 
 Residuals are differences between the observed values and the values predicted by the model. If a model fits well, the residuals should be randomly scattered around zero.

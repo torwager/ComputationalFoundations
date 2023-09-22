@@ -172,6 +172,10 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="glm2_param_inference.html">Parametric inference in the GLM</a></li>
 <li class="toctree-l1"><a class="reference internal" href="glm3_ashardataset.html">Sample dataset and analysis 1: Ashar 2022</a></li>
 </ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Mixed effects</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="mixedfx1_intro.html">Mixed effects: Introduction</a></li>
+</ul>
 
     </div>
 </nav></div>
@@ -554,6 +558,13 @@ Importantly, the projection estimates the best overall linear combination. In an
 <li><p>If any of the predictors in <span class="math notranslate nohighlight">\(X\)</span> is a perfect linear combination of the other predictors, <span class="math notranslate nohighlight">\(X\)</span> is <strong>rank-deficient</strong> and does not span the a subspace equal to the number of predictors. In this case, there is no unique solution for <span class="math notranslate nohighlight">\(\hat{\beta}\)</span>, and the matrix <span class="math notranslate nohighlight">\( (X^TX)^{-1} \)</span> is not invertible.</p></li>
 <li><p>If predictors are correlated but still linearly independent, the variance increases in proportion to the correlation.</p></li>
 </ul>
+<p>The following movies show a simulation with two predictors (X1 and X2) and a DV (y, Outcome). In both, there are strong positive effects of both predictors.  They differ only in the correlation between X1 and X2.  In the first, they are uncorrelated, and we can see that the regression plane is stable across repeated samples
+:</p>
+<p><img alt="Regression with 2 predictors" src="_images/movie_regression_2preds.gif" /></p>
+<p>In the second, the two predictors are correlated.  The regression plane tips on a ridge defined by the correlated predictors, and is unstable across repeated samples:</p>
+<p><img alt="Regression with 2 predictors" src="_images/movie_regression_colinear.gif" /></p>
+<p><a class="reference download internal" download="" href="_downloads/e33d68312cb0b04dd8838a72d3952aa9/movie_regression_2preds.m"><span class="xref download myst">Matlab code for sim 1</span></a>
+<a class="reference download internal" download="" href="_downloads/946d0f57ca71b77b5ca3f365ae30d71d/movie_regression_colinear.m"><span class="xref download myst">and sim 2</span></a></p>
 </section>
 <section id="residuals">
 <h2>Residuals<a class="headerlink" href="#residuals" title="Permalink to this heading">#</a></h2>
