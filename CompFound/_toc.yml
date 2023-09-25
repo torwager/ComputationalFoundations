@@ -20,3 +20,8 @@ parts:
   - caption: Mixed effects
     chapters:
       - file: mixedfx1_intro.md
+  - caption: Bayesian models
+    chapters:
+      - file: activeinference_smith.md
+
+      
