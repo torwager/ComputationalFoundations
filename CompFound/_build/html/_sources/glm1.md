@@ -1,6 +1,22 @@
 # General Linear Model (GLM)
 
-The General Linear Model (GLM) is a statistical linear model that can be written in the form of a linear equation. It encompasses a range of models like simple linear regression, multiple regression, and analysis of variance.
+The General Linear Model (GLM) is a statistical linear model that models a continuous dependent variable (DV, $y$ here) as a linear combination of a series of predictors ($X$) plus an independent, identically distributed set of errors ($\epsilon$). It encompasses a range of models like simple linear regression, multiple regression, and analysis of variance. There are several related concepts:
+
+1. **General Linear Model (GLM):**
+   - The GLM is a broad framework that encompasses many linear models, including simple linear regression, multiple regression, ANOVA, and ANCOVA.
+   - The assumptions include (1) linear relationships between predictors and the dependent variable, and (2) independent, normally distributed errors with constant variance (homoscedasticity), and the observations are independent.
+   - The GLM uses the ordinary least squares (OLS) method for estimation.
+
+2. **Generalized Least Squares (GLS):**
+   - GLS is an extension of the OLS approach used in the GLM employed when assumptions of homoscedasticity or independence of observations are not met.
+   - This includes (1) non-constant error variance across groups or levels of a predictor, or (2) autocorrelation due to time-varying processes (errors are not independent)
+   - In a sense, GLS modifies the model to "correct" for these violations so that the modified model satisfies the OLS assumptions.
+   - GLS is also used in mixed effects models, when multiple observations are collected on groups of variables (e.g., multiple trials are collected from each of a series of subjects)
+
+3. **Generalized Linear Model (also abbreviated as GLM):**
+   - The "generalized linear model", is another, different extension of the GLM.
+   - It GLM extends the general linear model to allow for response variables that have error distribution models other than a normal distribution. It includes logistic regression, Poisson regression, etc.
+   - A link function is introduced in this framework to relate the linear predictor to the mean of the response variable.
 
 This document describes the GLM with uncorrelated errors.
 

@@ -171,6 +171,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">General Linear Model (GLM)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="glm2_param_inference.html">Parametric inference in the GLM</a></li>
 <li class="toctree-l1"><a class="reference internal" href="glm3_ashardataset.html">Sample dataset and analysis 1: Ashar 2022</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glm4_weightedleastsquares.html">Generalized Least Squares (GLS) and weighted least squares (WLS)</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Mixed effects</span></p>
 <ul class="nav bd-sidenav">
@@ -412,7 +413,31 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="general-linear-model-glm">
 <h1>General Linear Model (GLM)<a class="headerlink" href="#general-linear-model-glm" title="Permalink to this heading">#</a></h1>
-<p>The General Linear Model (GLM) is a statistical linear model that can be written in the form of a linear equation. It encompasses a range of models like simple linear regression, multiple regression, and analysis of variance.</p>
+<p>The General Linear Model (GLM) is a statistical linear model that models a continuous dependent variable (DV, <span class="math notranslate nohighlight">\(y\)</span> here) as a linear combination of a series of predictors (<span class="math notranslate nohighlight">\(X\)</span>) plus an independent, identically distributed set of errors (<span class="math notranslate nohighlight">\(\epsilon\)</span>). It encompasses a range of models like simple linear regression, multiple regression, and analysis of variance. There are several related concepts:</p>
+<ol class="arabic simple">
+<li><p><strong>General Linear Model (GLM):</strong></p>
+<ul class="simple">
+<li><p>The GLM is a broad framework that encompasses many linear models, including simple linear regression, multiple regression, ANOVA, and ANCOVA.</p></li>
+<li><p>The assumptions include (1) linear relationships between predictors and the dependent variable, and (2) independent, normally distributed errors with constant variance (homoscedasticity), and the observations are independent.</p></li>
+<li><p>The GLM uses the ordinary least squares (OLS) method for estimation.</p></li>
+</ul>
+</li>
+<li><p><strong>Generalized Least Squares (GLS):</strong></p>
+<ul class="simple">
+<li><p>GLS is an extension of the OLS approach used in the GLM employed when assumptions of homoscedasticity or independence of observations are not met.</p></li>
+<li><p>This includes (1) non-constant error variance across groups or levels of a predictor, or (2) autocorrelation due to time-varying processes (errors are not independent)</p></li>
+<li><p>In a sense, GLS modifies the model to “correct” for these violations so that the modified model satisfies the OLS assumptions.</p></li>
+<li><p>GLS is also used in mixed effects models, when multiple observations are collected on groups of variables (e.g., multiple trials are collected from each of a series of subjects)</p></li>
+</ul>
+</li>
+<li><p><strong>Generalized Linear Model (also abbreviated as GLM):</strong></p>
+<ul class="simple">
+<li><p>The “generalized linear model”, is another, different extension of the GLM.</p></li>
+<li><p>It GLM extends the general linear model to allow for response variables that have error distribution models other than a normal distribution. It includes logistic regression, Poisson regression, etc.</p></li>
+<li><p>A link function is introduced in this framework to relate the linear predictor to the mean of the response variable.</p></li>
+</ul>
+</li>
+</ol>
 <p>This document describes the GLM with uncorrelated errors.</p>
 <p><img alt="GLM tests with uncorrelated errors" src="_images/glmfamily_iid.png" /></p>
 <section id="model-structure">
