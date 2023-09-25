@@ -1,7 +1,7 @@
-# Parameterizing models in a glm1
+# Parameterizing models in a GLM
 
 
-## TWo-sample t-test
+## Two-sample t-test
 
 In a two-sample $t$-test, we're comparing means from two groups. The design matrix $X$ has one column of ones (for the intercept) and a second column indicating group membership. The group membership column will use numeric codes for the two groups.  
 

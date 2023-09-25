@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Parameterizing models in a glm1 &#8212; Computational Foundations for Neuroscience</title>
+    <title>Parameterizing models in a GLM &#8212; Computational Foundations for Neuroscience</title>
   
   
   
@@ -171,12 +171,16 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="glm1.html">General Linear Model (GLM)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="glm2_param_inference.html">Parametric inference in the GLM</a></li>
 <li class="toctree-l1"><a class="reference internal" href="glm3_ashardataset.html">Sample dataset and analysis 1: Ashar 2022</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Parameterizing models in a glm1</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Parameterizing models in a GLM</a></li>
 <li class="toctree-l1"><a class="reference internal" href="glm5_weightedleastsquares.html">Generalized Least Squares (GLS)</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Mixed effects</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="mixedfx1_intro.html">Mixed effects: Introduction</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Bayesian models</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="activeinference_smith.html">Active inference</a></li>
 </ul>
 
     </div>
@@ -377,7 +381,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Parameterizing models in a glm1</h1>
+    <h1>Parameterizing models in a GLM</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -387,7 +391,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#two-sample-t-test">TWo-sample t-test</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#two-sample-t-test">Two-sample t-test</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#one-way-anova-with-more-than-2-groups">One-way ANOVA with more than 2 groups</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-and-polynomial-trends-for-ordinal-variables">Linear and polynomial trends for ordinal variables</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ancova">ANCOVA</a></li>
@@ -403,10 +407,10 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="parameterizing-models-in-a-glm1">
-<h1>Parameterizing models in a glm1<a class="headerlink" href="#parameterizing-models-in-a-glm1" title="Permalink to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="parameterizing-models-in-a-glm">
+<h1>Parameterizing models in a GLM<a class="headerlink" href="#parameterizing-models-in-a-glm" title="Permalink to this heading">#</a></h1>
 <section id="two-sample-t-test">
-<h2>TWo-sample t-test<a class="headerlink" href="#two-sample-t-test" title="Permalink to this heading">#</a></h2>
+<h2>Two-sample t-test<a class="headerlink" href="#two-sample-t-test" title="Permalink to this heading">#</a></h2>
 <p>In a two-sample <span class="math notranslate nohighlight">\(t\)</span>-test, we’re comparing means from two groups. The design matrix <span class="math notranslate nohighlight">\(X\)</span> has one column of ones (for the intercept) and a second column indicating group membership. The group membership column will use numeric codes for the two groups.</p>
 <p>We will use <strong>effect codes</strong>, which have values of 1 and -1 for each of the groups.</p>
 <p>Using <span class="math notranslate nohighlight">\(n_1\)</span> to represent the number of samples in Group 1 and <span class="math notranslate nohighlight">\(n_2\)</span> to represent the number of samples in Group 2, the design matrix <span class="math notranslate nohighlight">\(X\)</span> can be depicted as:</p>
@@ -612,7 +616,7 @@ In this case, you would effect code the group, enter continuous codes for the co
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#two-sample-t-test">TWo-sample t-test</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#two-sample-t-test">Two-sample t-test</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#one-way-anova-with-more-than-2-groups">One-way ANOVA with more than 2 groups</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-and-polynomial-trends-for-ordinal-variables">Linear and polynomial trends for ordinal variables</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ancova">ANCOVA</a></li>
