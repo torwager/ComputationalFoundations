@@ -1,0 +1,671 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Generalized Least Squares (GLS) &#8212; Computational Foundations for Neuroscience</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'glm5_weightedleastsquares';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Mixed effects: Introduction" href="mixedfx1_intro.html" />
+    <link rel="prev" title="Parameterizing models in a glm1" href="glm4_parameterizingglm.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/yellow_flower_logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/yellow_flower_logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Computational foundations for Neuroscience
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Preliminary background</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="startingresources.html">Some resources</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="topicmenu.html">A menu of topics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basicdistancecovcorr.html">Fundamentals of distance, covariance, and correlation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="statsinmatlab.html">Stats in Matlab</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">General linear model (GLM)</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="glm1.html">General Linear Model (GLM)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glm2_param_inference.html">Parametric inference in the GLM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glm3_ashardataset.html">Sample dataset and analysis 1: Ashar 2022</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glm4_parameterizingglm.html">Parameterizing models in a glm1</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Generalized Least Squares (GLS)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Mixed effects</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="mixedfx1_intro.html">Mixed effects: Introduction</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/torwager/ComputationalFoundations" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/torwager/ComputationalFoundations/edit/master/docs/glm5_weightedleastsquares.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/torwager/ComputationalFoundations/issues/new?title=Issue%20on%20page%20%2Fglm5_weightedleastsquares.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/glm5_weightedleastsquares.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Generalized Least Squares (GLS)</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#weighted-least-squares">Weighted Least Squares</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variance-of-hat-beta-gls-and-blue">Variance of <span class="math notranslate nohighlight">\(\hat{\beta}_{GLS}\)</span> and BLUE</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#relationship-with-mahalanobis-distance">Relationship with Mahalanobis Distance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#iterative-estimation-unknown-sigma">Iterative estimation: Unknown <span class="math notranslate nohighlight">\(\Sigma\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gls-in-mixed-effects-models">GLS in Mixed Effects Models</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extra-considerations">Extra considerations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gauss-markov-theorem">Gauss-Markov Theorem</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="generalized-least-squares-gls">
+<h1>Generalized Least Squares (GLS)<a class="headerlink" href="#generalized-least-squares-gls" title="Permalink to this heading">#</a></h1>
+<p>Generalized least squares (GLS) is an extension of the ordinary least squares (OLS) method used for regression analysis that allows for the weighting of cases and whitening of correlated residuals.</p>
+<p>The standard GLM equation assumes that errors are IID, <span class="math notranslate nohighlight">\( \sigma^2I \)</span>, where <span class="math notranslate nohighlight">\(I\)</span> is an <span class="math notranslate nohighlight">\(m x m\)</span> identity matrix. This implies that the variances of all errors are equal and uncorrelated. But in many cases, the variances are not equal (i.e., show heteroscedasticity), including:</p>
+<ul class="simple">
+<li><p>Outliers: Some observations are assumed to come from a different distribution, perhaps with poor process control or data acquisition errors or artifacts</p></li>
+<li><p>Group differences in variance: Some groups (e.g., patient groups) have higher or lower error variances</p></li>
+<li><p>Missing data: If the observations reflect averages of lower-level observations, there may be less data for some observations than others.</p></li>
+<li><p>Time series autocorrelation: Observations are correlated across time</p></li>
+</ul>
+<p>Generalized least squares is used in <strong>robust regression</strong>, <strong>time series</strong> models, and <strong>mixed effects</strong> models.</p>
+<p>We begin with a known covariance matrix <span class="math notranslate nohighlight">\(\Sigma\)</span>. In this case, the optimal solution is to project the cases onto the inverse of this matrix. Define <span class="math notranslate nohighlight">\(W = \Sigma^{-1}\)</span>. The diagonals of <span class="math notranslate nohighlight">\(W\)</span> reflect the weights on the cases.  The off-diagonal elements reflect what is needed to “decorrelate” the observations (sometimes called “whitening” or “sphering”, in the sense that “white noise” is uncorrelated).</p>
+<p>The GLS solution minimizes the “decorrelated” SSE, which are projected onto a space defined by the inverse of the variance/covariance matrix of observations <span class="math notranslate nohighlight">\(\Sigma\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[ SSE = (y - X\beta)^T\Sigma^{-1}(y - X\beta) \]</div>
+<p>Given a design matrix <span class="math notranslate nohighlight">\(X\)</span>, a response vector <span class="math notranslate nohighlight">\(Y\)</span>, and a weight matrix <span class="math notranslate nohighlight">\(W\)</span>, the normal equations are:</p>
+<div class="math notranslate nohighlight">
+\[(X^TWX)\hat{\beta}=X^TWy\]</div>
+<p>The WLS estimator <span class="math notranslate nohighlight">\(\hat{\beta}_{GLS}\)</span> for the regression coefficients is given by:</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{\beta}_{GLS} = (X^T W X)^{-1} X^T W Y
+\]</div>
+<p>If <span class="math notranslate nohighlight">\(W = \Sigma^{-1}\)</span>, the inner multiplication by W is a whitening/sphering transformation, which transforms a set random variables with a known covariance matrix into a set of new variables whose covariance is the identity matrix, meaning that they are uncorrelated and each have variance 1.</p>
+<section id="weighted-least-squares">
+<h2>Weighted Least Squares<a class="headerlink" href="#weighted-least-squares" title="Permalink to this heading">#</a></h2>
+<p>A special case is <strong>weighted least squares</strong>, in which W is a diagonal matrix such that the diagonals of W contain weights on the observations and the off-diagonals are 0. In this case, the weights are</p>
+<p>If the errors are still assumed to be uncorrelated, but have unequal variance, then the optimal solution is to weight the observations by their inverses. Weighting means that some observations have more influence on the regression slopes <span class="math notranslate nohighlight">\(\beta\)</span> than others.</p>
+<p>Generally, weighting applies if the error variances of some cases are known and assumed to be different than those of other cases. Craig Aitken (1935) showed that when a weighted sum of squared residuals is minimized, <span class="math notranslate nohighlight">\(\hat{\beta}\)</span> is the Best Linear Unbiased Estimate if each weight is equal to the reciprocal of the variance of the measurement. The best in this context is the minimum variance estimate.  Thus, if we knew the variance of the observations, weighting by their inverse (the <strong>precision</strong>) would give us the BLUE.</p>
+<p>This idea motivates the downweighting of outliers in <strong>robust regression</strong>, and the downweighting of low-precision groups of observations (e.g., low-precision subjects) in <strong>mixed effects models</strong>.</p>
+</section>
+<section id="variance-of-hat-beta-gls-and-blue">
+<h2>Variance of <span class="math notranslate nohighlight">\(\hat{\beta}_{GLS}\)</span> and BLUE<a class="headerlink" href="#variance-of-hat-beta-gls-and-blue" title="Permalink to this heading">#</a></h2>
+<p>The generalization of the GLM to account for correlated variables and unequal variances is an extension of the GLM. Let <span class="math notranslate nohighlight">\(Q\)</span> be the Cholesky decomposition of <span class="math notranslate nohighlight">\(W\)</span>, that is, a matrix such that <span class="math notranslate nohighlight">\(W = Q^TQ\)</span>. If we multiply each side Q, applying <span class="math notranslate nohighlight">\(Q\)</span> to both <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(y\)</span>, we obtain <span class="math notranslate nohighlight">\(Qy=QX\hat{\beta} + Q\epsilon\)</span>.</p>
+<p>The SSE is <span class="math notranslate nohighlight">\({(Q\epsilon)}^T(Q\epsilon)\)</span></p>
+<p>WLS therefore minimizes the weighted sums of squares, with weights of <span class="math notranslate nohighlight">\(Q^TQ=W\)</span>.</p>
+<p>The residual variance <span class="math notranslate nohighlight">\(\sigma^2\)</span> is:</p>
+<div class="math notranslate nohighlight">
+\[
+\sigma^2 = \hat{e}'W\hat{e} ./ (n - p)
+\]</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\hat{e}\)</span> is a vector of residuals</p></li>
+<li><p><span class="math notranslate nohighlight">\(W\)</span> is the weight matrix, equal to the inverse covariance matrix <span class="math notranslate nohighlight">\(\Sigma^{-1}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(n\)</span> is the number of observations</p></li>
+<li><p><span class="math notranslate nohighlight">\(p\)</span> is the number of parameters estimated, including the intercept</p></li>
+<li><p><span class="math notranslate nohighlight">\(n-p\)</span> is the error degrees of freedom</p></li>
+</ul>
+<p>The variance-covariance matrix of <span class="math notranslate nohighlight">\(\hat{\beta}_{GLS}\)</span> is:</p>
+<div class="math notranslate nohighlight">
+\[
+\text{Var}(\hat{\beta}_{WLS}) = \sigma^2(X^T W X)^{-1}
+\]</div>
+<p>There are multiple choices of Q. The important constraint is that <span class="math notranslate nohighlight">\(Q^TQ = W = \Sigma^{-1}\)</span>. Some choices are:</p>
+<ol class="arabic simple">
+<li><p>Mahalanobis or ZCA whitening: <span class="math notranslate nohighlight">\(Q=\Sigma^{-1/2}\)</span></p></li>
+<li><p>Cholesky whitening: <span class="math notranslate nohighlight">\(Q=L^T\)</span>, where <span class="math notranslate nohighlight">\(L\)</span> is the Cholesky decomposition of <span class="math notranslate nohighlight">\(\Sigma^{-1}\)</span></p></li>
+<li><p>PCA whitening</p></li>
+</ol>
+<p>A few more details are in <a class="reference external" href="https://www.sciencedirect.com/science/article/abs/pii/S1053811905000364">this paper</a> on robust regression and pages on <a class="reference external" href="https://en.wikipedia.org/wiki/Weighted_least_squares">WLS</a>, GLS, whitening, and the Faraway book.</p>
+</section>
+<section id="relationship-with-mahalanobis-distance">
+<h2>Relationship with Mahalanobis Distance<a class="headerlink" href="#relationship-with-mahalanobis-distance" title="Permalink to this heading">#</a></h2>
+<p>The GLS solution is closely related to the Mahalanobis Distance.  Mahalanobis distance is a measure of the distance between a point the center of a distribution, taking into account the variances and covariances of the variables. It is especially useful in multivariate data analysis when variables are correlated. The distance is defined as:</p>
+<div class="math notranslate nohighlight">
+\[
+D^2 = diag((X - \bar{X}) \Sigma^{-1} (X - \bar{X})^T)
+\]</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(D^2\)</span> is the squared Mahalanobis distance</p></li>
+<li><p><span class="math notranslate nohighlight">\(X\)</span> is an <span class="math notranslate nohighlight">\(m x p\)</span> matrix of observations, where each column is a point in p-dimensional space</p></li>
+<li><p><span class="math notranslate nohighlight">\(\bar{X}\)</span> is the mean vector of the data.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\Sigma^{-1}\)</span> is the inverse of the covariance matrix of the data.</p></li>
+</ul>
+<p>If X is transposed to be an <span class="math notranslate nohighlight">\(m x p\)</span> matrix, as is our convention here, Matlab code for Mahalanobis distance is:
+<em>d2 = diag((X - mean(X)) * inv(cov(X)) * (X - mean(X))’)</em></p>
+<p>The Mahalanobis distance transforms the data into a space where the covariance matrix is the identity, and then computes the Euclidean distance in this transformed space. This allows it to account for correlations between variables and the relative variability of each variable. Thus, the distance is expressed in units of the standard deviation along the major axes of covariance. The distances are “whitened” or “sphered”.</p>
+<p>Mahalanobis distance is a multivariate distance metric widely used in cluster analysis and classification techniques. It is closely related to Hotelling’s T-square distribution in multivariate statistical testing and Fisher’s Linear Discriminant Analysis, a supervised classification method.</p>
+<p>In the GLS case, if we consider a mean-zero residual error vector <span class="math notranslate nohighlight">\(e\)</span> in <span class="math notranslate nohighlight">\(n\)</span>-dimensional space, where <span class="math notranslate nohighlight">\(n\)</span> is the number of observations, the Mahalanobis distance becomes the weighted SSE, where each point is weighted by the inverse (co)variance of the errors:</p>
+<div class="math notranslate nohighlight">
+\[
+D^2 = e^T\Sigma^{-1}e
+\]</div>
+<p><span class="math notranslate nohighlight">\(\Sigma\)</span> here is the covariance of errors conditional on design matrix <span class="math notranslate nohighlight">\(X\)</span> (i.e., on fixed effects), or <span class="math notranslate nohighlight">\(cov(\epsilon|X)\)</span>. If <span class="math notranslate nohighlight">\(\Sigma\)</span> is diagonal (no correlations among errors), <span class="math notranslate nohighlight">\(\Sigma^{-1}\)</span> is a matrix of the inverse variances:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{bmatrix}
+1/\sigma^2_1 &amp; 0 &amp; 0 &amp; \ldots &amp; 0 \\
+0 &amp; 1/\sigma^2_2 &amp; 0 &amp; \ldots &amp; 0 \\
+\vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+0 &amp; 0 &amp; 0 &amp; \ldots &amp; 1/\sigma^2_n \\
+\end{bmatrix}
+\end{split}\]</div>
+<p>This is the <em>weighted least squares</em> weight matrix.</p>
+</section>
+<section id="iterative-estimation-unknown-sigma">
+<h2>Iterative estimation: Unknown <span class="math notranslate nohighlight">\(\Sigma\)</span><a class="headerlink" href="#iterative-estimation-unknown-sigma" title="Permalink to this heading">#</a></h2>
+<p>In practice, the true variance/covariance matrix <span class="math notranslate nohighlight">\(\Sigma\)</span> is typically unknown. Thus, both the regression coefficients (betas) and the covariance structure of the errors (and thus the weights) must be estimated. As these depend on one another, iterative methods come into play. Some algorithms and methods used for this purpose are:</p>
+<p>Cochrane-Orcutt Algorithm: An iterative procedure to deal with first-order autocorrelation (AR1) in time-series regression. It focuses on estimating the autocorrelation parameter and the regression coefficients iteratively.</p>
+<p>Prais-Winsten Estimation: Very similar to Cochrane-Orcutt but uses a transformation that retains all observations.</p>
+<p>Iterative Feasible Generalized Least Squares (IFGLS): This is a more generalized approach than the previous two and can be applied when the covariance structure is more complicated. It alternates between estimating the covariance structure from residuals and then the regression parameters using this structure until convergence.</p>
+<p>Expectation-Maximization (EM) Algorithm: Especially useful when the error covariance matrix has certain parametric forms. The EM algorithm iterates between estimating the expected value of the likelihood function (E-step) and maximizing this expected value to update parameter estimates (M-step).</p>
+<p>Newton-Raphson and Quasi-Newton Methods: These are optimization techniques that can be applied to the likelihood function in GLS problems, especially when estimating parameters of the covariance structure. They use information about the gradient (and possibly the second derivative) of the likelihood to find the parameter values that maximize (or minimize) it.</p>
+<p>Restricted Maximum Likelihood (REML): Commonly used in the context of mixed models (which can be seen as an extension of GLS). REML iteratively estimates fixed effects (betas) and variance components. Algorithms like EM, Newton-Raphson, or Fisher’s scoring are often employed in the optimization process of REML.</p>
+<p>Generalized Estimating Equations (GEE): While not GLS in the strictest sense, GEE is another approach to handle correlated data, especially for repeated measures or clustered data. It provides a way to estimate regression parameters without fully specifying the entire covariance structure, using a “working” correlation matrix. Iterative methods are used to update parameter estimates based on this working correlation.</p>
+</section>
+<section id="gls-in-mixed-effects-models">
+<h2>GLS in Mixed Effects Models<a class="headerlink" href="#gls-in-mixed-effects-models" title="Permalink to this heading">#</a></h2>
+<p>In mixed effects models, the error terms can have both fixed and random components. The random effects introduce correlation among the observations, and the variance of the residuals might change across levels of a grouping factor. GLS becomes particularly useful in this context.</p>
+<p>When fitting mixed-effects models, the weights <span class="math notranslate nohighlight">\(W\)</span> are used to adjust for this heteroscedasticity and correlation in the residuals. The weighted model gives more weight to observations with smaller variances (higher precision) and less weight to those with larger variances (lower precision).</p>
+</section>
+<section id="extra-considerations">
+<h2>Extra considerations<a class="headerlink" href="#extra-considerations" title="Permalink to this heading">#</a></h2>
+<section id="gauss-markov-theorem">
+<h3>Gauss-Markov Theorem<a class="headerlink" href="#gauss-markov-theorem" title="Permalink to this heading">#</a></h3>
+<p>The Gauss-Markov theorem is a fundamental result in the theory of linear regression. It states that, under certain conditions, the ordinary least squares (OLS) estimator has the smallest variance among all linear unbiased estimators. In other words, OLS is the Best Linear Unbiased Estimator (BLUE).</p>
+<p>The conditions or assumptions of the Gauss-Markov theorem are:</p>
+<ol class="arabic simple">
+<li><p>Linearity: The relationship between the predictors and the response variable is linear.</p></li>
+<li><p>Independence: Observations are independent of each other.</p></li>
+<li><p>Homoscedasticity: The variance of the errors is constant across all levels of the independent variables.</p></li>
+<li><p>No endogeneity: The error terms are uncorrelated with the predictors.</p></li>
+<li><p>No measurement error: The independent variables are measured without error.</p></li>
+</ol>
+<p>It’s important to note that the Gauss-Markov theorem does not require the errors to be normally distributed. However, for hypothesis testing and the construction of confidence intervals, the additional assumption of normally distributed errors is often made.</p>
+<p>One of the Gauss-Markov assumptions is the homoscedasticity of errors. When this assumption is violated, OLS is no longer the Best Linear Unbiased Estimator (BLUE). However, WLS, when correctly specified with the inverse of the variances as weights, becomes BLUE. The “best” in BLUE refers to having the smallest variance among the class of linear unbiased estimators.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="glm4_parameterizingglm.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Parameterizing models in a glm1</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="mixedfx1_intro.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Mixed effects: Introduction</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#weighted-least-squares">Weighted Least Squares</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variance-of-hat-beta-gls-and-blue">Variance of <span class="math notranslate nohighlight">\(\hat{\beta}_{GLS}\)</span> and BLUE</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#relationship-with-mahalanobis-distance">Relationship with Mahalanobis Distance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#iterative-estimation-unknown-sigma">Iterative estimation: Unknown <span class="math notranslate nohighlight">\(\Sigma\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gls-in-mixed-effects-models">GLS in Mixed Effects Models</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extra-considerations">Extra considerations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gauss-markov-theorem">Gauss-Markov Theorem</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Tor Wager & others
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
