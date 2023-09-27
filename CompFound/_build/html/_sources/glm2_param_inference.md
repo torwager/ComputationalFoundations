@@ -39,7 +39,7 @@ $$
 \begin{bmatrix}
 \hat{\beta_0} \\
 \hat{\beta_1}\\
-\hat{\beta_1} \\
+\hat{\beta_2} \\
 \vdots \\
 \hat{\beta_p} \\
 \end{bmatrix}
@@ -54,7 +54,7 @@ To make inferences about contrasts, we need an expression for the variance of th
 We apply C to the variance of $\hat{C^T\beta}$:
 
 $$
-var(\hat{C^T\beta}) = \sigma^2C^T{X^TX}^{-1}C
+var(\hat{C^T\beta}) = \hat{\sigma^2}C^T{X^TX}^{-1}C
 $$
 
 This is a variance-covariance matrix of contrast values. The variances of each contrast are on the diagonals of this matrix.
@@ -63,7 +63,7 @@ The t-values are thus:
 
 $$
 
-t_{C^T\beta} = \frac{C^T\hat{\beta}}{{(\sigma^2{diag(C^T{(X^TX)}^{-1}C}))}^{1/2}}
+t_{C^T\beta} = \frac{C^T\hat{\beta}}{{(\hat{\sigma^2}{diag(C^T{(X^TX)}^{-1}C}))}^{1/2}}
 
 $$
 

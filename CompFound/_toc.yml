@@ -15,6 +15,13 @@ parts:
       - file: glm1.md
       - file: glm2_param_inference.md
       - file: glm3_ashardataset
+      - file: glm4_parameterizingglm
+      - file: glm5_weightedleastsquares
   - caption: Mixed effects
     chapters:
       - file: mixedfx1_intro.md
+  - caption: Bayesian models
+    chapters:
+      - file: activeinference_smith.md
+
+      

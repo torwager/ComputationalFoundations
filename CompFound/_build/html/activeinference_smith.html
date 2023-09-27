@@ -7,8 +7,9 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Index &#8212; Computational Foundations for Neuroscience</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Active inference &#8212; Computational Foundations for Neuroscience</title>
   
   
   
@@ -60,9 +61,10 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'genindex';</script>
-    <link rel="index" title="Index" href="#" />
+    <script>DOCUMENTATION_OPTIONS.pagename = 'activeinference_smith';</script>
+    <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Mixed effects: Introduction" href="mixedfx1_intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -174,8 +176,8 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="mixedfx1_intro.html">Mixed effects: Introduction</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Bayesian models</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="activeinference_smith.html">Active inference</a></li>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Active inference</a></li>
 </ul>
 
     </div>
@@ -247,7 +249,24 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/torwager/ComputationalFoundations/issues/new?title=Issue%20on%20page%20%2Fgenindex.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/torwager/ComputationalFoundations/edit/master/docs/activeinference_smith.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/torwager/ComputationalFoundations/issues/new?title=Issue%20on%20page%20%2Factiveinference_smith.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -259,6 +278,54 @@ const thebe_selector_output = ".output, .cell_output"
   </span>
 <span class="btn__text-container">Open issue</span>
 </a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/activeinference_smith.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
 </li>
       
   </ul>
@@ -298,7 +365,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -309,11 +378,22 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1></h1>
+    <h1>Active inference</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#description-of-the-tutorial">Description of the tutorial</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#software-tools">Software tools</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references-and-background-reading">References and Background Reading</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#schedule">Schedule:</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -323,13 +403,79 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
+  <section class="tex2jax_ignore mathjax_ignore" id="active-inference">
+<h1>Active inference<a class="headerlink" href="#active-inference" title="Permalink to this heading">#</a></h1>
+<p>Guest instructor: Ryan Smith, Laureate Brain Institute</p>
+<section id="description-of-the-tutorial">
+<h2>Description of the tutorial<a class="headerlink" href="#description-of-the-tutorial" title="Permalink to this heading">#</a></h2>
+<p>Active inference is a recently developed computational framework for jointly modeling perception, learning, and decision-making as partially observable Markov decision processes (POMDPs). This framework assumes the brain represents a generative model of the (internal and external) causes of the sensory input it receives; and that it uses approximate Bayesian inference to infer hidden states of the world causing sensory input (perception), model parameters (learning), and optimal action policies (decision-making) within this generative model. It places special emphasis on how the brain infers the observations that will be generated by its own actions. In empirical studies, generative models of task behavior can be constructed; and the parameters of these models can be fit to behavior in individual participants. These individual parameter estimates can then be used as predictors in between-subjects analyses. This framework also affords simulation studies in which precise predictions can be derived from generative models designed to capture broader theoretical proposals.</p>
+<p>At the algorithmic level, active inference proposes that the brain uses variational message passing approaches to approximate Bayesian inference in a biologically plausible manner. This entails a neural process theory of how messages passed between neurons in the brain can be viewed as variational messages – providing information about the sufficient statistics of various probability distributions. Following assumptions associated with neural mass models, this allows active inference to provide empirically testable predictions of neural responses that could be measured with fMRI and EEG, among other neuroimaging measures.
+This tutorial will first introduce the active inference framework at a conceptual and mathematical level. It will then focus on teaching attendees how to build generative models of multiple types of behavioral tasks, and how to fit these models to behavioral data. It will also introduce the neural process theory and teach attendees how to derive simulated neuronal responses that could be applied in their own neuroscientific research.</p>
+</section>
+<section id="software-tools">
+<h2>Software tools<a class="headerlink" href="#software-tools" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>MATLAB: https://matlab.mathworks.com/</p></li>
+<li><p>SPM12: https://www.fil.ion.ucl.ac.uk/spm/software/download/</p></li>
+<li><p>Note: While SPM12 is free, MATLAB requires a license. If you do not have access to a MATLAB license, then you could also download Octave (https://octave.org/). With a few exceptions, most of the tutorial MATLAB code we will use is at least partially compatible with Octave.</p></li>
+</ul>
+</section>
+<section id="references-and-background-reading">
+<h2>References and Background Reading<a class="headerlink" href="#references-and-background-reading" title="Permalink to this heading">#</a></h2>
+<p>This tutorial will be based largely around the following paper:</p>
+<ul class="simple">
+<li><p>Smith, R., Friston, K. J., &amp; Whyte, C. J. (2022). A step-by-step tutorial on active inference and its application to empirical data. Journal of mathematical psychology, 107, 102632.</p></li>
+<li><p>MATLAB code from this paper that we will use can be found here: https://github.com/rssmith33/Active-Inference-Tutorial-Scripts</p></li>
+</ul>
+<p>Some other papers that may be of interest for further conceptual background or mathematical details include:</p>
+<ul class="simple">
+<li><p>Smith, R., Badcock, P., &amp; Friston, K. J. (2021). Recent advances in the application of predictive coding and active inference models within clinical neuroscience. Psychiatry and Clinical Neurosciences, 75(1), 3-13.</p></li>
+<li><p>Da Costa, L., Parr, T., Sajid, N., Veselic, S., Neacsu, V., &amp; Friston, K. (2020). Active inference on discrete state-spaces: A synthesis. Journal of Mathematical Psychology, 99, 102447.</p></li>
+<li><p>Sajid, N., Ball, P. J., Parr, T., &amp; Friston, K. J. (2021). Active inference: demystified and compared. Neural computation, 33(3), 674-712.</p></li>
+<li><p>Friston, K. J., Parr, T., &amp; de Vries, B. (2017). The graphical brain: belief propagation and active inference. Network neuroscience, 1(4), 381-414.</p></li>
+<li><p>Friston, K. J., Rosch, R., Parr, T., Price, C., &amp; Bowman, H. (2018). Deep temporal models and active inference. Neuroscience &amp; Biobehavioral Reviews, 90, 486-501.</p></li>
+<li><p>Parr, T., Markovic, D., Kiebel, S. J., &amp; Friston, K. J. (2019). Neuronal message passing using Mean-field, Bethe, and Marginal approximations. Scientific reports, 9(1), 1-18.</p></li>
+<li><p>Parr, T., &amp; Friston, K. J. (2018). The anatomy of inference: generative models and brain structure. Frontiers in computational neuroscience, 90.</p></li>
+</ul>
+</section>
+<section id="schedule">
+<h2>Schedule:<a class="headerlink" href="#schedule" title="Permalink to this heading">#</a></h2>
+<p>9-11:45am and session 2 from 2-5pm</p>
+<ul class="simple">
+<li><p>9:00 – 10:00 – Initial introduction to the theory and mathematics of perception and decision-making within active inference</p></li>
+<li><p>10:00 – 10:05 – Short break</p></li>
+<li><p>10:05 - 10:50 – Introduction to building generative (POMDP) models of behavioral tasks, with worked examples</p></li>
+<li><p>10:50 – 10:55 – Short break</p></li>
+<li><p>10:55 – 11:45 – Introduction to learning in active inference &amp; practice exercises building generative models of reinforcement learning tasks</p></li>
+<li><p>11:45 – 2:15 – Lunch break</p></li>
+<li><p>2:15 – 3:15 – Introduction to fitting models to behavioral data, with practice exercises</p></li>
+<li><p>3:15 – 3:20 – Short break</p></li>
+<li><p>3:20 – 4:05 – Introduction to variational (marginal) message passing and building deep temporal models</p></li>
+<li><p>4:05 – 4:10 – Short break</p></li>
+<li><p>4:10 - 5:15 – Introduction to simulating neural responses with worked examples</p></li>
+</ul>
+</section>
+</section>
 
-<h1 id="index">Index</h1>
-
-<div class="genindex-jumpbox">
- 
-</div>
-
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
 
                 </article>
               
@@ -342,6 +488,15 @@ document.write(`
   
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="mixedfx1_intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Mixed effects: Introduction</p>
+      </div>
+    </a>
 </div></div>
   
 </div>
@@ -351,6 +506,23 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#description-of-the-tutorial">Description of the tutorial</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#software-tools">Software tools</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references-and-background-reading">References and Background Reading</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#schedule">Schedule:</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
