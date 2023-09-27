@@ -2,7 +2,9 @@
 
 ## Ashar dataset
 
-Now that we've loaded the Ashar back pain dataset, we can try running a mixed effects model and compare:
+Now that we've loaded the Ashar back pain dataset, we can try running a mixed effects model and compare.
+
+Instead of organizing data in a "wide format" table with one row per participant, we can use the "long format" table, in which $y$ (i.e., Pain) is an $[mk x 1]$ vector with $k$ values measured for each of $m$ participants. We model the correlation between within-person repeated measures (Pre and Post-treatment pain) by including a random effect of participant in the error model.
 
 [Download the Matlab live script](matlab_live/ashar_backpain_lme_example.mlx)
 
@@ -19,6 +21,10 @@ We'll fit this 3 ways:
 [Download the Matlab live script](matlab_live/sleepstudy_lme_example.mlx)
 
 <iframe src="matlab_html/sleepstudy_lme_example.html" width="120%" height="800px"></iframe>
+
+## Comparing output from different packages
+
+
 
 ## Activities
 1. Fit the same model in R and/or python
