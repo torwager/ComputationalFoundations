@@ -17,11 +17,12 @@ parts:
       - file: glm3_ashardataset
       - file: glm4_parameterizingglm
       - file: glm5_weightedleastsquares
+      - file: glm6_matlab_glm_answerkey
   - caption: Mixed effects
     chapters:
       - file: mixedfx1_intro.md
+      - file: mixedfx2_examples.md
+      - file: mixedfx3_algebra.md
   - caption: Bayesian models
     chapters:
       - file: activeinference_smith.md
-
-      

@@ -61,10 +61,13 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'mixedfx1_intro';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Sample dataset and analysis 1: Ashar 2022" href="glm3_ashardataset.html" />
+    <link rel="next" title="Mixed effects: Examples" href="mixedfx2_examples.html" />
+    <link rel="prev" title="A hand-coded GLM in MATLAB" href="glm6_matlab_glm_answerkey.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -168,10 +171,19 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="glm1.html">General Linear Model (GLM)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="glm2_param_inference.html">Parametric inference in the GLM</a></li>
 <li class="toctree-l1"><a class="reference internal" href="glm3_ashardataset.html">Sample dataset and analysis 1: Ashar 2022</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glm4_parameterizingglm.html">Parameterizing models in a GLM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glm5_weightedleastsquares.html">Generalized Least Squares (GLS)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glm6_matlab_glm_answerkey.html">A hand-coded GLM in MATLAB</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Mixed effects</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Mixed effects: Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mixedfx2_examples.html">Mixed effects: Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mixedfx3_algebra.html">Mixed effects algebra</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Bayesian models</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="activeinference_smith.html">Active inference</a></li>
 </ul>
 
     </div>
@@ -382,8 +394,11 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#starter-simulations">Starter simulations</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#activities">Activities</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#within-and-between-person-effects">Within- and between-person effects</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#crossed-and-nested-random-effects">Crossed and nested random effects</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#two-stage-summary-statistics-and-mixed-effects">Two-stage summary statistics and mixed effects</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#don-t-ignore-random-effects">Don’t ignore random effects</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#know-when-not-to-model-an-effect-as-random">Know when not to model an effect as random</a></li>
 </ul>
             </nav>
         </div>
@@ -397,37 +412,101 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="mixed-effects-introduction">
 <h1>Mixed effects: Introduction<a class="headerlink" href="#mixed-effects-introduction" title="Permalink to this heading">#</a></h1>
+<p>Note: This is not intended to be a full treatment of mixed effects, and this tutorial assumes you have some exposure. It does review a few key concepts, however.</p>
+<p>Mixed effects models extend the idea of GLS to more complex error structures. In particular, errors can be correlated because they belong to the same <strong>group</strong>. Groups can include multiple measures taken from the same:</p>
+<ul class="simple">
+<li><p>Participant: e.g. trials in a psychology study, or time points in a physiological study (e.g., fMRI)</p></li>
+<li><p>Geographic area: e.g., zip code, in epidemiological or political studies</p></li>
+<li><p>Item: e.g., individual pictures, words, or other stimuli in a psychology experiment</p></li>
+<li><p>Family: e.g., twins or extended family members</p></li>
+<li><p>Cohort: e.g., the same group in a group therapy study</p></li>
+<li><p>Time frame: e.g., day, if multiple participants are tested on a given day</p></li>
+<li><p>Experimenter: e.g., therapist, nurse, or other experimental personnel</p></li>
+</ul>
+<p>In some cases we are interested in the variation across specific levels of these and other experimental variables. In other cases, we would like to <strong>generalize</strong> across levels of these variables. For example, in a marketing study, we may be interested in the difference between two specific items, Advertisement A vs. B. We may test participants in groups, and we would like to generalize across the groups to the population of people exposed to the ad at large. In this case, quantifying the uncertainty (i.e., error variance) so that we can have an appropriate level of confidence in generalizing to new groups requires accounting for the possibility that there may be a random effect of the particular group in which a person is tested.</p>
+<p>As with any GLM, we would like to estimate and make inferences about the population values of some <strong>fixed effects</strong>. Fixed effects are those for which differences across the levels of the specific variables tested are meaningful to us.  e.g.:</p>
+<ul class="simple">
+<li><p>Drug: Prozac vs. placebo</p></li>
+<li><p>Sex: Male vs. female</p></li>
+<li><p>Item: Advertisement A vs. B</p></li>
+</ul>
+<p>We model these in the design matrix, <span class="math notranslate nohighlight">\(X\)</span>.</p>
+<p>Effects whose levels we would like to generalize over when making inferences on the fixed effects must be modeled in the error structure, <span class="math notranslate nohighlight">\(\Sigma\)</span>. These are <strong>random effects</strong>. We estimate parameters for <strong>variance components</strong>–generally, one for residual variance <span class="math notranslate nohighlight">\(\sigma^2\)</span> and a series of parameters reflecting the variances and covariances across observations from the same group. In the example above, Item would be modeled as fixed (estimated with <span class="math notranslate nohighlight">\(\hat\beta\)</span>), and Group would be random (estimated with <span class="math notranslate nohighlight">\(\hat\U\)</span> below).</p>
+<p><span class="math notranslate nohighlight">\(\Sigma\)</span> is structured so that errors on observations from the same groups may be correlated. In the OLS case, <span class="math notranslate nohighlight">\(\Sigma=\sigma^2I\)</span>. In the general mixed effects case, the diagonal elements may be unequal across blocks of observations, reflecting different error variances across different groups or subsamples. The off-diagonal elements will reflect error covariance among observations collected from the same groups.  We model this structure by estimating parameters reflecting these covariances.</p>
+<section id="within-and-between-person-effects">
+<h2>Within- and between-person effects<a class="headerlink" href="#within-and-between-person-effects" title="Permalink to this heading">#</a></h2>
+<p>In psychology and neuroscience experiments (and many other types of studies), it is very common to collect multiple observations from the same individuals.  It is also common to manipulate and/or test effects that vary <em>within-person</em>, e.g., an experimental manipulation of a factor where each person experiences all the levels of a factor. These are <strong>within-person</strong> effects. Examples include:</p>
+<ul class="simple">
+<li><p>Multiple levels of experimental pain intensity administered within-person</p></li>
+<li><p>Difficult and easy math questions assessed within-person</p></li>
+<li><p>Repeated measures across time: Participants are assessed pre- and post-intervention (as with the Ashar dataset)</p></li>
+<li><p>Treatment (in a <strong>crossover</strong> design, in which each person experiences each treatment)</p></li>
+<li><p>Age (in a <strong>longitudinal</strong> study)</p></li>
+</ul>
+<p>These effects would usually be treated as fixed effects. If each person experiences each level of the effect, they are said to be <strong>crossed</strong> with person. In rare cases, e.g., people sampled over multiple years but at different ages, or with missing data, they may not be fully crossed.</p>
+<p>Other things being equal, within-person effects have much lower error variances and are much less susceptible to confounds, because they eliminate many sources of variability among people that can influence the observations. With such effects, “Each person serves as their own control”. Fully crossed designs are also the most powerful.</p>
+<p>Another class of variable is assessed only at the person-level, with one value per person. These are <strong>between-person</strong> variables.
+Examples include:</p>
+<ul class="simple">
+<li><p>Patient status (patient or control)</p></li>
+<li><p>Treatment (in a <strong>parallel groups</strong> design, in which each person experiences only one treatment)</p></li>
+<li><p>Age (in a <strong>cross-sectional</strong> study)</p></li>
+<li><p>Sex</p></li>
+</ul>
+<p>These effects would usually be treated as fixed effects. People are <strong>nested</strong> within these effects, since each person experiences or belongs to only one level of the variable.</p>
+<p>Together, these two kinds of effects can be thought of as organized in a <strong>hierarchy</strong>, with the <strong>1st level</strong> reflecting within-person effects, and the <strong>2nd level</strong> reflecting between-person effects. The intercept at the 2nd level reflects the expected (average) within-person observation when all 2nd-level (between-person) predictors are at 0.</p>
+</section>
+<section id="crossed-and-nested-random-effects">
+<h2>Crossed and nested random effects<a class="headerlink" href="#crossed-and-nested-random-effects" title="Permalink to this heading">#</a></h2>
+<p>If lower-level effects are nested within or crossed with a random effect (e.g., participant), we need to specify that random effect.</p>
+<p><img alt="Wilkinson" src="wilkinsonnotation.png" /></p>
+<p>For more on crossed and nested random effects, see the
+<img alt="Clapham mixed effects video on Youtube" src="https://youtu.be/QCqF-2E86r0" /></p>
+</section>
+<section id="two-stage-summary-statistics-and-mixed-effects">
+<h2>Two-stage summary statistics and mixed effects<a class="headerlink" href="#two-stage-summary-statistics-and-mixed-effects" title="Permalink to this heading">#</a></h2>
+<p>Let’s see how this maps onto the Ashar clinical trial dataset.</p>
 <p>What we have done so far with the Ashar dataset is a version of a mixed effects model.
 It is a <strong>two-stage summary statistics</strong> approach.</p>
-<p>We estimated a difference score, Post - Pre-treatment pain, for each individual. Then, we used a GLM to run an analysis on the difference scores.</p>
+<p>Time (Post vs. Pre-treatment) is a within-person (1st-level) variable.
+Group (PRT vs. Placebo vs. Control) is a between-person (2nd-level) variable.
+Pain (BPI) is the outcome or DV.</p>
+<p>Previously, we used two approaches:</p>
+<ol class="arabic simple">
+<li><p>We estimated a difference score, Post - Pre-treatment Pain, for each individual. This is a within-person contrast. Then, we used a GLM to assess the effect of Group (2 regressors) on the difference scores. The F-test for Group corresponds to a one-way ANOVA on improvement scores by Group, and we coded the 2 regressors for Group to estimate specific contrasts of interest (PRT - Placebo, mean(PRT + Placebo) - Control).</p></li>
+<li><p>We analyzed Group differences in Post-treatment scores (the pain measure expected to show a group difference) controlling for Pre-treatment Pain. This entailed including regressors for Group (as above) and a continuous covariate for Pre-treatment Pain.</p></li>
+</ol>
+<p>The data were organized in a “wide format” table, with only one row per participant. Therefore, when we ran the analyses above, <span class="math notranslate nohighlight">\(y\)</span> was always an <span class="math notranslate nohighlight">\([m x 1]\)</span> vector with 1 value for each of <span class="math notranslate nohighlight">\(m\)</span> participants. Assuming participants’ errors are uncorrelated, the OLS approach is valid.</p>
 <p>The difference scores are contrast values, with a [1 -1] contrast across the <strong>within-person</strong> variable Time (pre vs. post)</p>
 <p>The group membership (PRT, Placebo, Control) is a <strong>between-person</strong> variable, because each person has only one value.</p>
-<p>Therefore, we used contrasts to estimate summary statistics for each person that capture the within-person effects, and analyzed the between-person effects using a single-level GLM.</p>
-<p>Another way to do this is using a mixed effects model.</p>
-<section id="starter-simulations">
-<h2>Starter simulations<a class="headerlink" href="#starter-simulations" title="Permalink to this heading">#</a></h2>
-<p>We’ll take a simulation-based approach to understanding mixed effects and how they perform.
-We’ll address questions including:</p>
-<ul class="simple">
-<li><p>Is the 2-stage summary statistics approach valid?</p></li>
-<li><p>Is is as powerful as a full mixed effects model?</p></li>
-<li><p>What is the power and false positive rate of different approaches and implementations?</p></li>
-<li><p>What happens when we violate some of the assumptions?</p></li>
-</ul>
-<p><a class="reference download internal" download="" href="_downloads/fb0f5964a3e0bc27db6951db667d0464/mixedfx_sims_1.mlx"><span class="xref download myst">Download the Matlab live script</span></a></p>
-<iframe src="matlab_html/mixedfx_sims_1.html" width="120%" height="800px"></iframe>
+<p>Therefore, we used contrasts to estimate summary statistics for each person that capture the within-person effects, and analyzed the between-person effects on those difference scores using a single-level GLM. This corresponds to testing the [Group x Post vs. Pre-treatment] interaction.</p>
+<p>Another way to do this is using a mixed effects model.  Instead of organizing data in a “wide format” table with one row per participant, we can use the “long format” table, in which <span class="math notranslate nohighlight">\(y\)</span> (i.e., Pain) is an <span class="math notranslate nohighlight">\([mk x 1]\)</span> vector with <span class="math notranslate nohighlight">\(k\)</span> values measured for each of <span class="math notranslate nohighlight">\(m\)</span> participants. We model the correlation between within-person repeated measures (Pre and Post-treatment pain) by including a random effect of participant in the error model.</p>
+<p>We explore that next.</p>
 </section>
-<section id="activities">
-<h2>Activities<a class="headerlink" href="#activities" title="Permalink to this heading">#</a></h2>
-<ol class="arabic simple">
-<li><p>Identify and compare residual variance terms, slope estimates, t-values across models</p></li>
-<li><p>Modify the code to generate one or more continuous predictors instead of categorical/experimental ones.</p></li>
-<li><p>Turn the data-generation script into a function, so that you can efficiently simulate power and false positive rates using repeated simulations – two key properties of any statistical model.</p></li>
-</ol>
-<p><strong>Answer key</strong>
-For a pre-cooked answer (Matlab), see:
-<a class="reference download internal" download="" href="_downloads/3a7d08def1a92335246a347fe2793074/sim_generate_mixedfx_data1.mlx"><span class="xref download myst">Download a Matlab data sim function</span></a></p>
-<p>But…don’t peek! Do it yourself!!!</p>
+<section id="don-t-ignore-random-effects">
+<h2>Don’t ignore random effects<a class="headerlink" href="#don-t-ignore-random-effects" title="Permalink to this heading">#</a></h2>
+<p>An important rule of thumb is that if we want to generalize to new, unobserved levels of a variable (e.g., participant), we must (1) estimate the variance across levels of the variable appropriately,  (2) include that variance in the error term inferential test statistics (i.e., t- and F-tests), and (3) adjust the degrees of freedom appropriately.</p>
+<p>If you ignore a random effect (e.g. of participant), then you will not do any of the three things above.  If you model participant as a fixed effect (i.e., create a set of regressors that capture all differences across participants), you will still not be doing any of those critical things.</p>
+<p>If you do not model an effect as random, you will not be able to generalize to unobserved levels. For example, imagine you conduct a study of differences in brain activity for negative vs. positive words. You collect fMRI activity while participants read 10 positive words and 10 negative words (a within-person factor).  If you do not model word identity as a random effect, you will not be able to generalize to new words!  That is, your conclusions might hold for the specific words you chose, but not different words.</p>
+<p>Is this a problem?  Generally, yes. You’re likely going to make conclusions about “positive words” as a class, but your statistical inferences can’t support that generalization. Thus, the idea of “keeping it maximal” and modeling random effects that exist in your study structure is usually a good idea.</p>
+</section>
+<section id="know-when-not-to-model-an-effect-as-random">
+<h2>Know when not to model an effect as random<a class="headerlink" href="#know-when-not-to-model-an-effect-as-random" title="Permalink to this heading">#</a></h2>
+<p>A very common situation in psychology and neuroscience is to measure only a few levels of a variable. You might measure “hard” and “easy” math problems, or 3 levels of pain, or 8 body sites. Do you want to generalize to other levels? You might, but you can’t. For example:</p>
+<ul class="simple">
+<li><p>You can’t say that a training intervention affects performance on math problems that are harder or easier that those you tested.</p></li>
+<li><p>You can’t say that a drug treatment affects pain responses to stimulus intensities or a body site you didn’t test.</p></li>
+</ul>
+<p>In some cases, it doesn’t really make sense to think of these variables as drawn at random from a population.  There’s not an infinite population of pain intensity levels or difficulty levels – there’s a continuum. And unlike participants, which we assume we can sample at random, intensity levels are not interchangeable for one another. The generalizability issue comes down to the question of whether the effects hold beyond the range of conditions under which you tested them. Thus, a solution is to sample a reasonable range and be careful not to extend inferences to levels far outside of that range.  In this situation, you’d model intensity and difficulty levels as fixed effects, or (if more levels are included) treat them as continuous fixed effects.</p>
+<p>Likewise, there is not an infinite population of body sites, and body sites are not interchangeable. It’s most appropriate to model body site as a fixed effect, and sample a range of disparate body sites. If an effect holds for some locations tested on arms, legs, head, and torso, it likely holds for other nearby ones as well. Of course, this can go wrong, and we should always consider that we don’t know the boundary conditions on generalization of effects.</p>
+<p><a class="reference download internal" download="" href="_downloads/62ec54e758b3f7a9fef871892b6c48db/Judd_Westfall_Kenny_2012_JPSP.pdf"><span class="xref download myst">Judd et al. 2012</span></a> showed that when you have crossed random effects of item and subject, the power is limited by the smaller of the two. If you have 1 million participants but only a small number of items, you will never be able to generalize to new items with high power!  In this case you must either choose a different way to generalize, or re-design your study to include more items! By a “different way to generalize”, we mean:</p>
+<ul class="simple">
+<li><p>Replicate the study using a different set of items</p></li>
+<li><p>Make and validate predictions for new (untrained) items</p></li>
+</ul>
+<p><img alt="juddcrossedrfxpower" src="juddcrossedrfxpower.png" /></p>
+<p>More generally, I’m not sure it’s a great idea to ask your P-values to do all the generalization work for you. There will always be boundary conditions that it is difficult to test, and certainly difficult to sample broadly enough to include them as random effects in a mixed effects model. Experimenter, set and setting (testing location), time of year, population, paradigm design features, etc., etc. are all potential boundary conditions that could lead to a failure to generalize.  We need to see which effects are robust across variations in these.</p>
+<p>Replication across different variants can be more convincing than a low P-value in a table.</p>
 </section>
 </section>
 
@@ -463,13 +542,22 @@ For a pre-cooked answer (Matlab), see:
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="glm3_ashardataset.html"
+       href="glm6_matlab_glm_answerkey.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Sample dataset and analysis 1: Ashar 2022</p>
+        <p class="prev-next-title">A hand-coded GLM in MATLAB</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="mixedfx2_examples.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Mixed effects: Examples</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div></div>
   
@@ -489,8 +577,11 @@ For a pre-cooked answer (Matlab), see:
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#starter-simulations">Starter simulations</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#activities">Activities</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#within-and-between-person-effects">Within- and between-person effects</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#crossed-and-nested-random-effects">Crossed and nested random effects</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#two-stage-summary-statistics-and-mixed-effects">Two-stage summary statistics and mixed effects</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#don-t-ignore-random-effects">Don’t ignore random effects</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#know-when-not-to-model-an-effect-as-random">Know when not to model an effect as random</a></li>
 </ul>
   </nav></div>
 

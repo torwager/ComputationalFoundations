@@ -61,9 +61,13 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'mixedfx2_examples';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Mixed effects algebra" href="mixedfx3_algebra.html" />
+    <link rel="prev" title="Mixed effects: Introduction" href="mixedfx1_intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -167,10 +171,19 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="glm1.html">General Linear Model (GLM)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="glm2_param_inference.html">Parametric inference in the GLM</a></li>
 <li class="toctree-l1"><a class="reference internal" href="glm3_ashardataset.html">Sample dataset and analysis 1: Ashar 2022</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glm4_parameterizingglm.html">Parameterizing models in a GLM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glm5_weightedleastsquares.html">Generalized Least Squares (GLS)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glm6_matlab_glm_answerkey.html">A hand-coded GLM in MATLAB</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Mixed effects</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="mixedfx1_intro.html">Mixed effects: Introduction</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Mixed effects: Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mixedfx3_algebra.html">Mixed effects algebra</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Bayesian models</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="activeinference_smith.html">Active inference</a></li>
 </ul>
 
     </div>
@@ -383,6 +396,7 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ashar-dataset">Ashar dataset</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sleepstudy-dataset">Sleepstudy dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-output-from-different-packages">Comparing output from different packages</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#activities">Activities</a></li>
 </ul>
             </nav>
@@ -399,7 +413,8 @@ document.write(`
 <h1>Mixed effects: Examples<a class="headerlink" href="#mixed-effects-examples" title="Permalink to this heading">#</a></h1>
 <section id="ashar-dataset">
 <h2>Ashar dataset<a class="headerlink" href="#ashar-dataset" title="Permalink to this heading">#</a></h2>
-<p>Now that we’ve loaded the Ashar back pain dataset, we can try running a mixed effects model and compare:</p>
+<p>Now that we’ve loaded the Ashar back pain dataset, we can try running a mixed effects model and compare.</p>
+<p>Instead of organizing data in a “wide format” table with one row per participant, we can use the “long format” table, in which <span class="math notranslate nohighlight">\(y\)</span> (i.e., Pain) is an <span class="math notranslate nohighlight">\([mk x 1]\)</span> vector with <span class="math notranslate nohighlight">\(k\)</span> values measured for each of <span class="math notranslate nohighlight">\(m\)</span> participants. We model the correlation between within-person repeated measures (Pre and Post-treatment pain) by including a random effect of participant in the error model.</p>
 <p><a class="reference download internal" download="" href="_downloads/4bdd66d5e15225e1ef57d2de11d2f6f4/ashar_backpain_lme_example.mlx"><span class="xref download myst">Download the Matlab live script</span></a></p>
 <iframe src="matlab_html/ashar_backpain_lme_example.html" width="120%" height="800px"></iframe>
 </section>
@@ -414,6 +429,9 @@ We’ll fit this 3 ways:</p>
 </ul>
 <p><a class="reference download internal" download="" href="_downloads/3b2bb8d8c76f8aab2cb590bf97a63ae3/sleepstudy_lme_example.mlx"><span class="xref download myst">Download the Matlab live script</span></a></p>
 <iframe src="matlab_html/sleepstudy_lme_example.html" width="120%" height="800px"></iframe>
+</section>
+<section id="comparing-output-from-different-packages">
+<h2>Comparing output from different packages<a class="headerlink" href="#comparing-output-from-different-packages" title="Permalink to this heading">#</a></h2>
 </section>
 <section id="activities">
 <h2>Activities<a class="headerlink" href="#activities" title="Permalink to this heading">#</a></h2>
@@ -467,6 +485,24 @@ https://gist.github.com/jcheong0428/f25b47405d9d328691c102787bc92175</p>
   
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="mixedfx1_intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Mixed effects: Introduction</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="mixedfx3_algebra.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Mixed effects algebra</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div></div>
   
 </div>
@@ -487,6 +523,7 @@ https://gist.github.com/jcheong0428/f25b47405d9d328691c102787bc92175</p>
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ashar-dataset">Ashar dataset</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sleepstudy-dataset">Sleepstudy dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-output-from-different-packages">Comparing output from different packages</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#activities">Activities</a></li>
 </ul>
   </nav></div>

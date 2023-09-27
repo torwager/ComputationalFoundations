@@ -7,8 +7,9 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Index &#8212; Computational Foundations for Neuroscience</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>A hand-coded GLM in MATLAB &#8212; Computational Foundations for Neuroscience</title>
   
   
   
@@ -60,9 +61,11 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'genindex';</script>
-    <link rel="index" title="Index" href="#" />
+    <script>DOCUMENTATION_OPTIONS.pagename = 'glm3b_matlab_glm_answerkey';</script>
+    <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Parameterizing models in a GLM" href="glm4_parameterizingglm.html" />
+    <link rel="prev" title="Sample dataset and analysis 1: Ashar 2022" href="glm3_ashardataset.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -162,19 +165,17 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="statsinmatlab.html">Stats in Matlab</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">General linear model (GLM)</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="glm1.html">General Linear Model (GLM)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="glm2_param_inference.html">Parametric inference in the GLM</a></li>
 <li class="toctree-l1"><a class="reference internal" href="glm3_ashardataset.html">Sample dataset and analysis 1: Ashar 2022</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">A hand-coded GLM in MATLAB</a></li>
 <li class="toctree-l1"><a class="reference internal" href="glm4_parameterizingglm.html">Parameterizing models in a GLM</a></li>
 <li class="toctree-l1"><a class="reference internal" href="glm5_weightedleastsquares.html">Generalized Least Squares (GLS)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="glm6_matlab_glm_answerkey.html">A hand-coded GLM in MATLAB</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Mixed effects</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="mixedfx1_intro.html">Mixed effects: Introduction</a></li>
-<li class="toctree-l1"><a class="reference internal" href="mixedfx2_examples.html">Mixed effects: Examples</a></li>
-<li class="toctree-l1"><a class="reference internal" href="mixedfx3_algebra.html">Mixed effects algebra</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Bayesian models</span></p>
 <ul class="nav bd-sidenav">
@@ -250,7 +251,24 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/torwager/ComputationalFoundations/issues/new?title=Issue%20on%20page%20%2Fgenindex.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/torwager/ComputationalFoundations/edit/master/docs/glm3b_matlab_glm_answerkey.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/torwager/ComputationalFoundations/issues/new?title=Issue%20on%20page%20%2Fglm3b_matlab_glm_answerkey.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -262,6 +280,54 @@ const thebe_selector_output = ".output, .cell_output"
   </span>
 <span class="btn__text-container">Open issue</span>
 </a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/glm3b_matlab_glm_answerkey.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
 </li>
       
   </ul>
@@ -312,7 +378,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1></h1>
+    <h1>A hand-coded GLM in MATLAB</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -326,13 +392,62 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
+  <section class="tex2jax_ignore mathjax_ignore" id="a-hand-coded-glm-in-matlab">
+<h1>A hand-coded GLM in MATLAB<a class="headerlink" href="#a-hand-coded-glm-in-matlab" title="Permalink to this heading">#</a></h1>
+<p>This is an “answer key” for a hand-coded GLM in MATLAB</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Core GLM equations</span>
+<span class="c">% -------------------------------------------</span>
+<span class="c">% remove nans from X and y</span>
+<span class="p">[</span><span class="n">wasnan</span><span class="p">,</span><span class="w"> </span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">nanremove</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">);</span>
 
-<h1 id="index">Index</h1>
+<span class="n">xtxi</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">inv</span><span class="p">(</span><span class="n">X</span><span class="o">&#39;*</span><span class="n">X</span><span class="p">);</span>
+<span class="n">bhat</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">xtxi</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">X</span><span class="o">&#39;</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">y</span><span class="p">;</span>
+<span class="n">e</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">X</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">bhat</span><span class="p">;</span>
 
-<div class="genindex-jumpbox">
- 
+<span class="p">[</span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">size</span><span class="p">(</span><span class="n">X</span><span class="p">);</span>
+
+<span class="n">var_bhat</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">e</span><span class="o">&#39;*</span><span class="n">e</span><span class="w"> </span><span class="o">./</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">p</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">xtxi</span><span class="p">;</span>
+<span class="n">t</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">bhat</span><span class="w"> </span><span class="o">./</span><span class="w"> </span><span class="p">(</span><span class="nb">diag</span><span class="p">(</span><span class="n">var_bhat</span><span class="p">)</span><span class="w"> </span><span class="o">.^</span><span class="w"> </span><span class="mf">.5</span><span class="p">);</span>
+
+<span class="n">dfe</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">p</span><span class="p">;</span>
+<span class="n">pval</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">tcdf</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">t</span><span class="p">),</span><span class="w"> </span><span class="n">dfe</span><span class="p">));</span>
+
+<span class="n">se</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">sqrt</span><span class="p">(</span><span class="nb">diag</span><span class="p">(</span><span class="n">var_bhat</span><span class="p">));</span><span class="w"> </span><span class="c">% standard error</span>
+
+<span class="c">% -------------------------------------------</span>
+
+<span class="c">% Contrasts</span>
+<span class="n">chat</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">C</span><span class="o">&#39;</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">bhat</span><span class="p">;</span>
+<span class="n">var_chat</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">sigma_sq</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">C</span><span class="o">&#39;</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">xtxi</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">C</span><span class="p">;</span>
+<span class="n">se_chat</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">diag</span><span class="p">(</span><span class="n">var_chat</span><span class="p">)</span><span class="w"> </span><span class="o">.^</span><span class="w"> </span><span class="mf">0.5</span><span class="p">;</span>
+<span class="n">t_chat</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">chat</span><span class="w"> </span><span class="o">./</span><span class="w"> </span><span class="n">se_chat</span><span class="p">;</span>
+
+<span class="n">pval_chat</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">tcdf</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">t_chat</span><span class="p">),</span><span class="w"> </span><span class="n">dfe</span><span class="p">));</span>
+
+<span class="c">% -------------------------------------------</span>
+</pre></div>
 </div>
+</section>
 
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
 
                 </article>
               
@@ -345,6 +460,24 @@ document.write(`
   
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="glm3_ashardataset.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Sample dataset and analysis 1: Ashar 2022</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="glm4_parameterizingglm.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Parameterizing models in a GLM</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div></div>
   
 </div>
