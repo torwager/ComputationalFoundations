@@ -50,8 +50,25 @@ Together, these two kinds of effects can be thought of as organized in a **hiera
 
 ## Crossed and nested random effects
 
-If lower-level effects are nested within or crossed with a random effect (e.g., participant), we need to specify that random effect.
+If lower-level effects are nested within or crossed with a random effect (e.g., participant), we need to specify that the errors are grouped by that random effect.
 
+Here are some common structures:
+![structure1](images/mixedfx_structural_diagrams1.png)
+
+In the sleepstudy dataset, day (fixed) is measured within-participant. These are crossed, because each participant is measured on each day.  We would model this in Wilkinson notation with the term *(day | participant)*.
+
+In the Ashar pain dataset, time (fixed) is measured within-participant (Pre- vs. Post treatment scores). Time is crossed with participant, because each participant is measured at each time.  Group (3 levels, fixed) is between-participant, as each participant belongs to only one group. We are most interested in the Group x Time interaction (or, perhaps better, the effect on Post controlling for Pre). The errors on the Group effect are *not* grouped by participant, but the errors on Time are.  We would therefore model Group with only fixed effects, and time grouped by the random participant effect. In Wilkinson notation: *Group + Time + Group x Time + (Time | participant)*.
+
+Random effects can be crossed or nested as well. Below, Items (e.g., emotional pictures) are nested within Valence (negative or positive for simplicity, but this could be a continouous variable as well). If we are interested in generalizing to new Items, we should model item-related variance as a random effect.
+![structure1](images/mixedfx_structural_diagrams2.png)
+
+If each Item I1...Ik is measured for each person, Item and Participant are **crossed**.
+We would indicate that with separate random effects:  *Valence + (Valence | participant) + (1 | Item)*. This means that each unique items has its own item-level mean estimate in the model, and the Item-level variance is independent of the Participant-level variance.
+
+However, if  each Item I1...Ik is measured on only ONE person, so that different participants see different items, Item and Participant are **nested**.
+We would indicate that with a nested random effects:  *Valence + (Valence | participant/item)*. However, if you do not have multiple measures on each item, you cannot estimate such a model, because you can't separate item-level variance from residual error variance.
+
+Here is a guide to Wilkinson notation for a number of common structures:
 ![Wilkinson](images/wilkinsonnotation.png)
 
 

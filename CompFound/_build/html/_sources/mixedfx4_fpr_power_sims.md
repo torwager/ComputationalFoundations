@@ -126,11 +126,14 @@ If you pass in true fixed effects of 0, you're generating null-hypothesis data a
 
 Using these functions, we can now write a script that uses the functions to run an entire simulation under both null- and alternative-hypothesis conditions and return **power** and **FPR**.  Furthermore, we can do a series of simulations across variables of interest, like **sample size**.
 
+![mixedfx_sims3_code_map](images/mixedfx_sims3_code_map.png)
+
+Download the live script:
 [mixedfx_sims_3_power_fpr.mlx](matlab_live/mixedfx_sims_3_power_fpr.mlx)
 
 <iframe src="matlab_html/mixedfx_sims_3_power_fpr.html" width="120%" height="800px"></iframe>
 
-###Questions###
+### Questions
 1. How does fitlme perform in estimating fixed effects across sample size?  a. Are there biases? b. How do variance and power change across sample size?
 2. How does fitlme perform in estimating random effects across sample size? a. Are there biases? b. How does bias, variance and power change across sample size?
 
@@ -139,7 +142,7 @@ Using these functions, we can now write a script that uses the functions to run 
 We can use these scripts with different models to compare the models.
 Here is some output comparing fitlme and glmfit_multilevel when all the assumptions hold:
 
-![Comparison](fitlme_glmfitmulti_power_fpr_comp.png)
+![Comparison](images/fitlme_glmfitmulti_power_fpr_comp.png)
 
 Do they perform comparably?
 
