@@ -180,6 +180,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="mixedfx1_intro.html">Mixed effects: Introduction</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Mixed effects: Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mixedfx3_algebra.html">Mixed effects algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mixedfx4_fpr_power_sims.html">Mixed effects simulations</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Bayesian models</span></p>
 <ul class="nav bd-sidenav">
@@ -396,7 +397,12 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ashar-dataset">Ashar dataset</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sleepstudy-dataset">Sleepstudy dataset</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-output-from-different-packages">Comparing output from different packages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-output-from-different-packages">Comparing output from different packages</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fitlme">fitlme</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lmer-in-r">lmer in R</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#igls">IGLS</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#activities">Activities</a></li>
 </ul>
             </nav>
@@ -420,8 +426,10 @@ document.write(`
 </section>
 <section id="sleepstudy-dataset">
 <h2>Sleepstudy dataset<a class="headerlink" href="#sleepstudy-dataset" title="Permalink to this heading">#</a></h2>
-<p>This is a classic, and well-behaved, dataset included in R. We include it for comparison across methods and output.
-We’ll fit this 3 ways:</p>
+<p>This is a classic, and well-behaved, dataset included in R. We include it for comparison across methods and output.</p>
+<p>Here is a plot of the data (generated using part of the script below)
+<img alt="sleepstudy_individualslopes" src="_images/sleepstudy_individualslopes.png" /></p>
+<p>We’ll fit this 3 ways:</p>
 <ul class="simple">
 <li><p>Matlab fitlme</p></li>
 <li><p>CANlab IGLS</p></li>
@@ -432,6 +440,23 @@ We’ll fit this 3 ways:</p>
 </section>
 <section id="comparing-output-from-different-packages">
 <h2>Comparing output from different packages<a class="headerlink" href="#comparing-output-from-different-packages" title="Permalink to this heading">#</a></h2>
+<p>Let’s identify some key corresponding output in each model.</p>
+<section id="fitlme">
+<h3>fitlme<a class="headerlink" href="#fitlme" title="Permalink to this heading">#</a></h3>
+<p><img alt="sleepstudylme" src="_images/sleepstudy_matlablme_1.png" />
+<img alt="sleepstudylme" src="_images/sleepstudy_matlablme_2.png" /></p>
+</section>
+<section id="lmer-in-r">
+<h3>lmer in R<a class="headerlink" href="#lmer-in-r" title="Permalink to this heading">#</a></h3>
+<p><img alt="sleepstudylmer" src="_images/sleepstudy_lmer_1.png" />
+<img alt="sleepstudylmer" src="_images/sleepstudy_lmer_2.png" /></p>
+</section>
+<section id="igls">
+<h3>IGLS<a class="headerlink" href="#igls" title="Permalink to this heading">#</a></h3>
+<p><img alt="sleepstudyigls" src="_images/sleepstudy_igls_1.png" />
+<img alt="sleepstudyigls" src="_images/sleepstudy_igls_2.png" />
+<img alt="sleepstudyigls" src="_images/sleepstudy_igls_3.png" /></p>
+</section>
 </section>
 <section id="activities">
 <h2>Activities<a class="headerlink" href="#activities" title="Permalink to this heading">#</a></h2>
@@ -523,7 +548,12 @@ https://gist.github.com/jcheong0428/f25b47405d9d328691c102787bc92175</p>
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ashar-dataset">Ashar dataset</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sleepstudy-dataset">Sleepstudy dataset</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-output-from-different-packages">Comparing output from different packages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-output-from-different-packages">Comparing output from different packages</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fitlme">fitlme</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lmer-in-r">lmer in R</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#igls">IGLS</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#activities">Activities</a></li>
 </ul>
   </nav></div>

@@ -20,7 +20,7 @@ As with any GLM, we would like to estimate and make inferences about the populat
 
 We model these in the design matrix, $X$.
 
-Effects whose levels we would like to generalize over when making inferences on the fixed effects must be modeled in the error structure, $\Sigma$. These are **random effects**. We estimate parameters for **variance components**--generally, one for residual variance $\sigma^2$ and a series of parameters reflecting the variances and covariances across observations from the same group. In the example above, Item would be modeled as fixed (estimated with $\hat\beta$), and Group would be random (estimated with $\hat\U$ below).
+Effects whose levels we would like to generalize over when making inferences on the fixed effects must be modeled in the error structure, $\Sigma$. These are **random effects**. We estimate parameters for **variance components**--generally, one for residual variance $\sigma^2$ and a series of parameters reflecting the variances and covariances across observations from the same group. In the example above, Item would be modeled as fixed (estimated with $\hat\beta$), and Group would be random (estimated with $\hat{U}$ below).
 
 $\Sigma$ is structured so that errors on observations from the same groups may be correlated. In the OLS case, $\Sigma=\sigma^2I$. In the general mixed effects case, the diagonal elements may be unequal across blocks of observations, reflecting different error variances across different groups or subsamples. The off-diagonal elements will reflect error covariance among observations collected from the same groups.  We model this structure by estimating parameters reflecting these covariances.
 
@@ -52,13 +52,12 @@ Together, these two kinds of effects can be thought of as organized in a **hiera
 
 If lower-level effects are nested within or crossed with a random effect (e.g., participant), we need to specify that random effect.
 
-![Wilkinson](wilkinsonnotation.png)
+![Wilkinson](images/wilkinsonnotation.png)
 
 
+For more on crossed and nested random effects, see the Clapham mixed effects video on Youtube:
 
-For more on crossed and nested random effects, see the
-![Clapham mixed effects video on Youtube](https://youtu.be/QCqF-2E86r0)
-
+[![Clapham](https://youtu.be/QCqF-2E86r0/0.jpg)](https://www.youtube.com/watch?v=QCqF-2E86r0)
 
 ## Two-stage summary statistics and mixed effects
 
@@ -85,7 +84,7 @@ Therefore, we used contrasts to estimate summary statistics for each person that
 
 Another way to do this is using a mixed effects model.  Instead of organizing data in a "wide format" table with one row per participant, we can use the "long format" table, in which $y$ (i.e., Pain) is an $[mk x 1]$ vector with $k$ values measured for each of $m$ participants. We model the correlation between within-person repeated measures (Pre and Post-treatment pain) by including a random effect of participant in the error model.
 
-We explore that next.
+We explore that in the next module.
 
 ## Don't ignore random effects
 An important rule of thumb is that if we want to generalize to new, unobserved levels of a variable (e.g., participant), we must (1) estimate the variance across levels of the variable appropriately,  (2) include that variance in the error term inferential test statistics (i.e., t- and F-tests), and (3) adjust the degrees of freedom appropriately.  

@@ -180,6 +180,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Mixed effects: Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mixedfx2_examples.html">Mixed effects: Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mixedfx3_algebra.html">Mixed effects algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mixedfx4_fpr_power_sims.html">Mixed effects simulations</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Bayesian models</span></p>
 <ul class="nav bd-sidenav">
@@ -431,7 +432,7 @@ document.write(`
 <li><p>Item: Advertisement A vs. B</p></li>
 </ul>
 <p>We model these in the design matrix, <span class="math notranslate nohighlight">\(X\)</span>.</p>
-<p>Effects whose levels we would like to generalize over when making inferences on the fixed effects must be modeled in the error structure, <span class="math notranslate nohighlight">\(\Sigma\)</span>. These are <strong>random effects</strong>. We estimate parameters for <strong>variance components</strong>–generally, one for residual variance <span class="math notranslate nohighlight">\(\sigma^2\)</span> and a series of parameters reflecting the variances and covariances across observations from the same group. In the example above, Item would be modeled as fixed (estimated with <span class="math notranslate nohighlight">\(\hat\beta\)</span>), and Group would be random (estimated with <span class="math notranslate nohighlight">\(\hat\U\)</span> below).</p>
+<p>Effects whose levels we would like to generalize over when making inferences on the fixed effects must be modeled in the error structure, <span class="math notranslate nohighlight">\(\Sigma\)</span>. These are <strong>random effects</strong>. We estimate parameters for <strong>variance components</strong>–generally, one for residual variance <span class="math notranslate nohighlight">\(\sigma^2\)</span> and a series of parameters reflecting the variances and covariances across observations from the same group. In the example above, Item would be modeled as fixed (estimated with <span class="math notranslate nohighlight">\(\hat\beta\)</span>), and Group would be random (estimated with <span class="math notranslate nohighlight">\(\hat{U}\)</span> below).</p>
 <p><span class="math notranslate nohighlight">\(\Sigma\)</span> is structured so that errors on observations from the same groups may be correlated. In the OLS case, <span class="math notranslate nohighlight">\(\Sigma=\sigma^2I\)</span>. In the general mixed effects case, the diagonal elements may be unequal across blocks of observations, reflecting different error variances across different groups or subsamples. The off-diagonal elements will reflect error covariance among observations collected from the same groups.  We model this structure by estimating parameters reflecting these covariances.</p>
 <section id="within-and-between-person-effects">
 <h2>Within- and between-person effects<a class="headerlink" href="#within-and-between-person-effects" title="Permalink to this heading">#</a></h2>
@@ -459,9 +460,9 @@ Examples include:</p>
 <section id="crossed-and-nested-random-effects">
 <h2>Crossed and nested random effects<a class="headerlink" href="#crossed-and-nested-random-effects" title="Permalink to this heading">#</a></h2>
 <p>If lower-level effects are nested within or crossed with a random effect (e.g., participant), we need to specify that random effect.</p>
-<p><img alt="Wilkinson" src="wilkinsonnotation.png" /></p>
-<p>For more on crossed and nested random effects, see the
-<img alt="Clapham mixed effects video on Youtube" src="https://youtu.be/QCqF-2E86r0" /></p>
+<p><img alt="Wilkinson" src="_images/wilkinsonnotation.png" /></p>
+<p>For more on crossed and nested random effects, see the Clapham mixed effects video on Youtube:</p>
+<p><a class="reference external" href="https://www.youtube.com/watch?v=QCqF-2E86r0"><img alt="Clapham" src="https://youtu.be/QCqF-2E86r0/0.jpg" /></a></p>
 </section>
 <section id="two-stage-summary-statistics-and-mixed-effects">
 <h2>Two-stage summary statistics and mixed effects<a class="headerlink" href="#two-stage-summary-statistics-and-mixed-effects" title="Permalink to this heading">#</a></h2>
@@ -481,7 +482,7 @@ Pain (BPI) is the outcome or DV.</p>
 <p>The group membership (PRT, Placebo, Control) is a <strong>between-person</strong> variable, because each person has only one value.</p>
 <p>Therefore, we used contrasts to estimate summary statistics for each person that capture the within-person effects, and analyzed the between-person effects on those difference scores using a single-level GLM. This corresponds to testing the [Group x Post vs. Pre-treatment] interaction.</p>
 <p>Another way to do this is using a mixed effects model.  Instead of organizing data in a “wide format” table with one row per participant, we can use the “long format” table, in which <span class="math notranslate nohighlight">\(y\)</span> (i.e., Pain) is an <span class="math notranslate nohighlight">\([mk x 1]\)</span> vector with <span class="math notranslate nohighlight">\(k\)</span> values measured for each of <span class="math notranslate nohighlight">\(m\)</span> participants. We model the correlation between within-person repeated measures (Pre and Post-treatment pain) by including a random effect of participant in the error model.</p>
-<p>We explore that next.</p>
+<p>We explore that in the next module.</p>
 </section>
 <section id="don-t-ignore-random-effects">
 <h2>Don’t ignore random effects<a class="headerlink" href="#don-t-ignore-random-effects" title="Permalink to this heading">#</a></h2>
