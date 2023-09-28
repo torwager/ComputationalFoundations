@@ -125,26 +125,21 @@ In practice, the true variance/covariance matrix $\Sigma$ is typically unknown. 
 
 Cochrane-Orcutt Algorithm: An iterative procedure to deal with first-order autocorrelation (AR1) in time-series regression. It focuses on estimating the autocorrelation parameter and the regression coefficients iteratively.
 
-Prais-Winsten Estimation: Very similar to Cochrane-Orcutt but uses a transformation that retains all observations.
-
 Iterative Feasible Generalized Least Squares (IFGLS): This is a more generalized approach than the previous two and can be applied when the covariance structure is more complicated. It alternates between estimating the covariance structure from residuals and then the regression parameters using this structure until convergence.
 
-Expectation-Maximization (EM) Algorithm: Especially useful when the error covariance matrix has certain parametric forms. The EM algorithm iterates between estimating the expected value of the likelihood function (E-step) and maximizing this expected value to update parameter estimates (M-step).
+Expectation-Maximization (EM) Algorithm: Especially useful when the error covariance matrix has certain parametric forms. The EM algorithm iterates between estimating the expected value of the likelihood function (E-step) and maximizing this expected value to update parameter estimates (M-step). See [this paper](https://www.tandfonline.com/doi/abs/10.1080/01621459.1988.10478693).
 
 Newton-Raphson and Quasi-Newton Methods: These are optimization techniques that can be applied to the likelihood function in GLS problems, especially when estimating parameters of the covariance structure. They use information about the gradient (and possibly the second derivative) of the likelihood to find the parameter values that maximize (or minimize) it.
 
-Restricted Maximum Likelihood (REML): Commonly used in the context of mixed models (which can be seen as an extension of GLS). REML iteratively estimates fixed effects (betas) and variance components. Algorithms like EM, Newton-Raphson, or Fisher's scoring are often employed in the optimization process of REML.
-
 Generalized Estimating Equations (GEE): While not GLS in the strictest sense, GEE is another approach to handle correlated data, especially for repeated measures or clustered data. It provides a way to estimate regression parameters without fully specifying the entire covariance structure, using a "working" correlation matrix. Iterative methods are used to update parameter estimates based on this working correlation.
-
-
-
 
 ## GLS in Mixed Effects Models
 
 In mixed effects models, the error terms can have both fixed and random components. The random effects introduce correlation among the observations, and the variance of the residuals might change across levels of a grouping factor. GLS becomes particularly useful in this context.
 
 When fitting mixed-effects models, the weights $W$ are used to adjust for this heteroscedasticity and correlation in the residuals. The weighted model gives more weight to observations with smaller variances (higher precision) and less weight to those with larger variances (lower precision).
+
+
 
 ## Extra considerations
 ### Gauss-Markov Theorem

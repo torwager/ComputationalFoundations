@@ -71,6 +71,7 @@ We would indicate that with a nested random effects:  *Valence + (Valence | part
 Here is a guide to Wilkinson notation for a number of common structures:
 ![Wilkinson](images/wilkinsonnotation.png)
 
+[This page](https://www.mathworks.com/help/stats/wilkinson-notation.html) on Wilkinson notation is also really helpful!
 
 For more on crossed and nested random effects, see the Clapham mixed effects video on Youtube:
 
