@@ -400,7 +400,10 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#power-and-false-positive-rates-fpr">Power and false positive rates (FPR)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimating-performance-in-simulations">Estimating performance in simulations</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#turning-our-simulation-code-into-bias-and-variance-simulations">Turning our simulation code into bias and variance simulations</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#power-and-fpr-simulations">Power and FPR Simulations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#power-and-fpr-simulations">Power and FPR Simulations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#questions">Questions</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-models">Comparing Models</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#activity">Activity:</a></li>
 </ul>
@@ -525,19 +528,23 @@ You can:
 2 - Copy this script and modify the matlabLMEstats function to return the summary statistics for any mixed effects model you like</p>
 <p>If you pass in true fixed effects of 0, you’re generating null-hypothesis data and estimating FPR.  If your true fixed effects are not zero, you’re generating alternative-hypothesis data and estimating power.  The same code does both, depending on the true <span class="math notranslate nohighlight">\(\beta\)</span>s.  Code modularity and reuse are good things!</p>
 <p>Using these functions, we can now write a script that uses the functions to run an entire simulation under both null- and alternative-hypothesis conditions and return <strong>power</strong> and <strong>FPR</strong>.  Furthermore, we can do a series of simulations across variables of interest, like <strong>sample size</strong>.</p>
-<p><a class="reference download internal" download="" href="_downloads/817e1f736e6c1e1ad1f2684f3ab9047e/mixedfx_sims_3_power_fpr.mlx"><span class="xref download myst">mixedfx_sims_3_power_fpr.mlx</span></a></p>
+<p><img alt="mixedfx_sims3_code_map" src="_images/mixedfx_sims3_code_map.png" /></p>
+<p>Download the live script:
+<a class="reference download internal" download="" href="_downloads/817e1f736e6c1e1ad1f2684f3ab9047e/mixedfx_sims_3_power_fpr.mlx"><span class="xref download myst">mixedfx_sims_3_power_fpr.mlx</span></a></p>
 <iframe src="matlab_html/mixedfx_sims_3_power_fpr.html" width="120%" height="800px"></iframe>
-<p>###Questions###</p>
+<section id="questions">
+<h3>Questions<a class="headerlink" href="#questions" title="Permalink to this heading">#</a></h3>
 <ol class="arabic simple">
 <li><p>How does fitlme perform in estimating fixed effects across sample size?  a. Are there biases? b. How do variance and power change across sample size?</p></li>
 <li><p>How does fitlme perform in estimating random effects across sample size? a. Are there biases? b. How does bias, variance and power change across sample size?</p></li>
 </ol>
 </section>
+</section>
 <section id="comparing-models">
 <h2>Comparing Models<a class="headerlink" href="#comparing-models" title="Permalink to this heading">#</a></h2>
 <p>We can use these scripts with different models to compare the models.
 Here is some output comparing fitlme and glmfit_multilevel when all the assumptions hold:</p>
-<p><img alt="Comparison" src="fitlme_glmfitmulti_power_fpr_comp.png" /></p>
+<p><img alt="Comparison" src="_images/fitlme_glmfitmulti_power_fpr_comp.png" /></p>
 <p>Do they perform comparably?</p>
 <section id="activity">
 <h3>Activity:<a class="headerlink" href="#activity" title="Permalink to this heading">#</a></h3>
@@ -635,7 +642,10 @@ Here is some output comparing fitlme and glmfit_multilevel when all the assumpti
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#power-and-false-positive-rates-fpr">Power and false positive rates (FPR)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimating-performance-in-simulations">Estimating performance in simulations</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#turning-our-simulation-code-into-bias-and-variance-simulations">Turning our simulation code into bias and variance simulations</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#power-and-fpr-simulations">Power and FPR Simulations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#power-and-fpr-simulations">Power and FPR Simulations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#questions">Questions</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-models">Comparing Models</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#activity">Activity:</a></li>
 </ul>
