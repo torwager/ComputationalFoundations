@@ -53,9 +53,8 @@ We have fit a model without an intercept. Is this OK? Why or why not?
 
 **Answer key**
 For a pre-cooked answer (Matlab), see:
-*Load_sample_Ashar_dataset_with_analysis.mlx*
+[this Matlab live script](matlab_live/Load_sample_Ashar_dataset_with_analysis.mlx)
 
 But...don't peek! Do it yourself!!!
-
 
 [jupyterbook.org](https://jupyterbook.org).

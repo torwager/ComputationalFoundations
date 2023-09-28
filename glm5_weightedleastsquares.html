@@ -66,8 +66,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'glm5_weightedleastsquares';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Mixed effects: Introduction" href="mixedfx1_intro.html" />
-    <link rel="prev" title="Parameterizing models in a glm1" href="glm4_parameterizingglm.html" />
+    <link rel="next" title="A hand-coded GLM in MATLAB" href="glm6_matlab_glm_answerkey.html" />
+    <link rel="prev" title="Parameterizing models in a GLM" href="glm4_parameterizingglm.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -171,12 +171,20 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="glm1.html">General Linear Model (GLM)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="glm2_param_inference.html">Parametric inference in the GLM</a></li>
 <li class="toctree-l1"><a class="reference internal" href="glm3_ashardataset.html">Sample dataset and analysis 1: Ashar 2022</a></li>
-<li class="toctree-l1"><a class="reference internal" href="glm4_parameterizingglm.html">Parameterizing models in a glm1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glm4_parameterizingglm.html">Parameterizing models in a GLM</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Generalized Least Squares (GLS)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glm6_matlab_glm_answerkey.html">A hand-coded GLM in MATLAB</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Mixed effects</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="mixedfx1_intro.html">Mixed effects: Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mixedfx2_examples.html">Mixed effects: Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mixedfx3_algebra.html">Mixed effects algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mixedfx4_fpr_power_sims.html">Mixed effects simulations</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Bayesian models</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="activeinference_smith.html">Active inference</a></li>
 </ul>
 
     </div>
@@ -508,11 +516,9 @@ D^2 = e^T\Sigma^{-1}e
 <h2>Iterative estimation: Unknown <span class="math notranslate nohighlight">\(\Sigma\)</span><a class="headerlink" href="#iterative-estimation-unknown-sigma" title="Permalink to this heading">#</a></h2>
 <p>In practice, the true variance/covariance matrix <span class="math notranslate nohighlight">\(\Sigma\)</span> is typically unknown. Thus, both the regression coefficients (betas) and the covariance structure of the errors (and thus the weights) must be estimated. As these depend on one another, iterative methods come into play. Some algorithms and methods used for this purpose are:</p>
 <p>Cochrane-Orcutt Algorithm: An iterative procedure to deal with first-order autocorrelation (AR1) in time-series regression. It focuses on estimating the autocorrelation parameter and the regression coefficients iteratively.</p>
-<p>Prais-Winsten Estimation: Very similar to Cochrane-Orcutt but uses a transformation that retains all observations.</p>
 <p>Iterative Feasible Generalized Least Squares (IFGLS): This is a more generalized approach than the previous two and can be applied when the covariance structure is more complicated. It alternates between estimating the covariance structure from residuals and then the regression parameters using this structure until convergence.</p>
-<p>Expectation-Maximization (EM) Algorithm: Especially useful when the error covariance matrix has certain parametric forms. The EM algorithm iterates between estimating the expected value of the likelihood function (E-step) and maximizing this expected value to update parameter estimates (M-step).</p>
+<p>Expectation-Maximization (EM) Algorithm: Especially useful when the error covariance matrix has certain parametric forms. The EM algorithm iterates between estimating the expected value of the likelihood function (E-step) and maximizing this expected value to update parameter estimates (M-step). See <a class="reference external" href="https://www.tandfonline.com/doi/abs/10.1080/01621459.1988.10478693">this paper</a>.</p>
 <p>Newton-Raphson and Quasi-Newton Methods: These are optimization techniques that can be applied to the likelihood function in GLS problems, especially when estimating parameters of the covariance structure. They use information about the gradient (and possibly the second derivative) of the likelihood to find the parameter values that maximize (or minimize) it.</p>
-<p>Restricted Maximum Likelihood (REML): Commonly used in the context of mixed models (which can be seen as an extension of GLS). REML iteratively estimates fixed effects (betas) and variance components. Algorithms like EM, Newton-Raphson, or Fisher’s scoring are often employed in the optimization process of REML.</p>
 <p>Generalized Estimating Equations (GEE): While not GLS in the strictest sense, GEE is another approach to handle correlated data, especially for repeated measures or clustered data. It provides a way to estimate regression parameters without fully specifying the entire covariance structure, using a “working” correlation matrix. Iterative methods are used to update parameter estimates based on this working correlation.</p>
 </section>
 <section id="gls-in-mixed-effects-models">
@@ -576,15 +582,15 @@ D^2 = e^T\Sigma^{-1}e
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Parameterizing models in a glm1</p>
+        <p class="prev-next-title">Parameterizing models in a GLM</p>
       </div>
     </a>
     <a class="right-next"
-       href="mixedfx1_intro.html"
+       href="glm6_matlab_glm_answerkey.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Mixed effects: Introduction</p>
+        <p class="prev-next-title">A hand-coded GLM in MATLAB</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
