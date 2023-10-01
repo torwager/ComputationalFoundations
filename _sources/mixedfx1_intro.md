@@ -69,7 +69,7 @@ However, if  each Item I1...Ik is measured on only ONE person, so that different
 We would indicate that with a nested random effects:  *Valence + (Valence | participant/item)*. However, if you do not have multiple measures on each item, you cannot estimate such a model, because you can't separate item-level variance from residual error variance.
 
 Designs can have combinations of crossed and nested random and fixed factors.
-Here are some more examples:  
+Here are some more examples, from [Krzywinski 2014 Nature Methods](papers/Krzywinski_et_al-2014-Nature_Methods.pdf):  
 ![crossednestedfactors.png](images/crossednestedfactors.png)
 
 This schematic uses mouse instead of person, but the same principles apply. We always want to model mouse as a random effect. Unique cells assessed are also a random factor. If we  assess each cell only once, we don't need to model cell as a random effect explicitly; no errors are grouped by cell if there is only one observation per cell. But if we assess each cell multiple times through "technical replicates" (multiple tests of an assay), yielding multiple observations per cell, then we must include Cell as a random effect nested within Mouse.
@@ -87,12 +87,6 @@ Most models will also include error covariance terms for the random effects term
 If there are technical replicates, i.e., multiple observations per cell, we'd model both the random effects crossed with Drug and the nested structure, i.e., Drug + (Drug | Mouse/Cell).
 
 (d) Tests different drugs on different cells extracted from 2 tissues. Drug and Tissue are fixed because we are interested in these specific drugs and tissues (not generalizing to new ones). All effects are crossed with Mouse, so we'd do Tissue * Drug + (Tissue * Drug | Mouse)
-
-**!Important!** In all these cases, if we ignore the random error structure, we will (a) not estimate the error variance correctly, and (b) not adjust the degrees of freedom correctly. This invalidates statistical inferences made on fixed effects.
-
-Testing the significance of random effects requires obtaining P-values for whether the random effects variance is different from 0. This amounts to testing whether there are individual differences across levels of random factors like Subject, Mouse, or Cell above. This is sometimes done with F-tests, but their performance is poor. Likelihood ratio tests excluding the random effects is a more well-accepted approach.
-
-Just because you do not detect a "significant" random effect, it does not mean you can exclude it from the model.  Such tests are not very inaccurate and subject to low power in many cases. As with all classical significance tests, the lack of a significant effect does **not** demonstrate that no effect exists -- just that you cannot detect it with enough confidence. Therefore, do not test the signficance of your random effects and omit them from the model if they are non-significant. You will mis-estimate the error variance and dfe, and make invalid inferences.
 
 **!Important!** In all the cases with random effects above, if we ignore the random error structure, we will (a) not estimate the error variance correctly, and (b) not adjust the degrees of freedom correctly. This invalidates statistical inferences made on fixed effects. More detail is below.
 
@@ -158,6 +152,7 @@ tr(H^TH)^2/tr(H^THH^TH)
 $$
 
 ```matlab
+% Matlab code
 H = X * inv(X'*X) * X';
 dfmodel_Satt = trace(H'*H)^2/trace(H'*H*H'*H) % Degrees of freedom for the column space (model)
 
@@ -177,8 +172,12 @@ $$
 
 
 Given a known autocorrelation matrix $V$, the GLS solution for $H$ and $R$ are:
+
 $$
 H = X(X^TV^{-1}X)^{-1}X'V^{-1}
+$$
+
+$$
 R = I - H
 $$
 
@@ -193,13 +192,14 @@ Note: These last equations need further checking.
 This is a general form for the degrees of freedom based on the residual-inducing matrix and variance components. Note, the exact computation can vary based on the specific model and its assumptions.
 
 ```matlab
-# Simulate a known autocorrelated error structure (AR(1))
+% Matlab code
+% Simulate a known autocorrelated error structure (AR(1))
 c = 0.5.^[0:size(X, 1)-1];  % autocorrelation matrix V under ar(1) with rho = 0.5
 V = toeplitz(c);
 figure; imagesc(V)
 
-H = X * inv(X'*inv(V) * X) * X' * inv(V);
-R = eye(size(H)) - H;  % Residual-inducing matrix
+H = X * inv(X'*inv(V) * X) * X' * inv(V);   % Hat matrix
+R = eye(size(H)) - H;                       % Residual-inducing matrix
 dfe_Satt = trace((R*V)'*(R*V))^2/trace((R*V)'*(R*V)*(R*V)'*(R*V)) % Error degrees of freedom
 ```
 
@@ -223,7 +223,13 @@ $\sigma^2_{w, i}$ depends on:
 
 In practice, some packages like lmer (in R) ignore (3) above and assume equal error variances across all participants.
 
-As shrinkage for is proportional to $\sigma^2_{b, i} + \sigma^2_{w, i}$, the individual-level BLUP or CM is a weighted average of population-level and individual-level estimates, with weights equal to $w = \frac{\hat{U_g}}{\hat{U_g} + \sigma^2{Z^TVZ}^{-1}}
+As shrinkage for is proportional to $\sigma^2_{b, i} + \sigma^2_{w, i}$, the individual-level BLUP or CM is a weighted average of population-level and individual-level estimates, with weights for effects $i={1...I}$ equal to:
+
+$$
+w = diag(\frac{\hat{U_g}}{\hat{U_g} + \sigma^2{Z^TVZ}^{-1}})
+$$
+
+As $sigma^2 --> 0$, the individual estimate becomes very precise, and $w --> 1$.  As $U_g --> 0$, $w --> 0$, and all BLUPs are the population-level estimates. With equal within-person and population-level (random effects) variance, $w = 1/2$.
 
 Note: This section needs further checking for accuracy and completeness.
 

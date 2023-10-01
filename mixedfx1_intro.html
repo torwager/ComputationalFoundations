@@ -476,7 +476,7 @@ We would indicate that with separate random effects:  <em>Valence + (Valence | p
 <p>However, if  each Item I1…Ik is measured on only ONE person, so that different participants see different items, Item and Participant are <strong>nested</strong>.
 We would indicate that with a nested random effects:  <em>Valence + (Valence | participant/item)</em>. However, if you do not have multiple measures on each item, you cannot estimate such a model, because you can’t separate item-level variance from residual error variance.</p>
 <p>Designs can have combinations of crossed and nested random and fixed factors.
-Here are some more examples:<br />
+Here are some more examples, from <a class="reference download internal" download="" href="_downloads/68f149e906a2be6d008d9898d2cab592/Krzywinski_et_al-2014-Nature_Methods.pdf"><span class="xref download myst">Krzywinski 2014 Nature Methods</span></a>:<br />
 <img alt="crossednestedfactors.png" src="_images/crossednestedfactors.png" /></p>
 <p>This schematic uses mouse instead of person, but the same principles apply. We always want to model mouse as a random effect. Unique cells assessed are also a random factor. If we  assess each cell only once, we don’t need to model cell as a random effect explicitly; no errors are grouped by cell if there is only one observation per cell. But if we assess each cell multiple times through “technical replicates” (multiple tests of an assay), yielding multiple observations per cell, then we must include Cell as a random effect nested within Mouse.</p>
 <p>(a) Has only fixed factors. This would be a design in which different animals are used in different combinations of treatments. Our model would have fixed effects of Drug * Dose * Diet (the 3-way interaction implies all main effects and pairwise interactions are also estimated). These are included automatically. As diagrammed, only one cell is assessed and there are no “technical replicates”, so there are no random effects.</p>
@@ -486,9 +486,6 @@ Here are some more examples:<br />
 <p>Most models will also include error covariance terms for the random effects terms as well. Here, this means that the variances across individual mice in the intercept (1) and slope (Drug) may be correlated, and the mixed effects model estimates cov(intercept, Drug). If we wanted to explicitly assume uncorrelated random effects, we would separate the terms like so: (1 | Mouse) + (0 + Drug | Mouse).</p>
 <p>If there are technical replicates, i.e., multiple observations per cell, we’d model both the random effects crossed with Drug and the nested structure, i.e., Drug + (Drug | Mouse/Cell).</p>
 <p>(d) Tests different drugs on different cells extracted from 2 tissues. Drug and Tissue are fixed because we are interested in these specific drugs and tissues (not generalizing to new ones). All effects are crossed with Mouse, so we’d do Tissue * Drug + (Tissue * Drug | Mouse)</p>
-<p><strong>!Important!</strong> In all these cases, if we ignore the random error structure, we will (a) not estimate the error variance correctly, and (b) not adjust the degrees of freedom correctly. This invalidates statistical inferences made on fixed effects.</p>
-<p>Testing the significance of random effects requires obtaining P-values for whether the random effects variance is different from 0. This amounts to testing whether there are individual differences across levels of random factors like Subject, Mouse, or Cell above. This is sometimes done with F-tests, but their performance is poor. Likelihood ratio tests excluding the random effects is a more well-accepted approach.</p>
-<p>Just because you do not detect a “significant” random effect, it does not mean you can exclude it from the model.  Such tests are not very inaccurate and subject to low power in many cases. As with all classical significance tests, the lack of a significant effect does <strong>not</strong> demonstrate that no effect exists – just that you cannot detect it with enough confidence. Therefore, do not test the signficance of your random effects and omit them from the model if they are non-significant. You will mis-estimate the error variance and dfe, and make invalid inferences.</p>
 <p><strong>!Important!</strong> In all the cases with random effects above, if we ignore the random error structure, we will (a) not estimate the error variance correctly, and (b) not adjust the degrees of freedom correctly. This invalidates statistical inferences made on fixed effects. More detail is below.</p>
 <p>Here is a guide to Wilkinson notation for a number of common structures:
 <img alt="Wilkinson" src="_images/wilkinsonnotation.png" /></p>
@@ -538,7 +535,8 @@ H = X(X^TX)^{-1}X';
 \[
 tr(H^TH)^2/tr(H^THH^TH)
 \]</div>
-<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">H</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">X</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nb">inv</span><span class="p">(</span><span class="n">X</span><span class="o">&#39;*</span><span class="n">X</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">X</span><span class="o">&#39;</span><span class="p">;</span>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Matlab code</span>
+<span class="n">H</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">X</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nb">inv</span><span class="p">(</span><span class="n">X</span><span class="o">&#39;*</span><span class="n">X</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">X</span><span class="o">&#39;</span><span class="p">;</span>
 <span class="n">dfmodel_Satt</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">trace</span><span class="p">(</span><span class="n">H</span><span class="o">&#39;*</span><span class="n">H</span><span class="p">)</span>^<span class="mi">2</span><span class="o">/</span><span class="nb">trace</span><span class="p">(</span><span class="n">H</span><span class="o">&#39;*</span><span class="n">H</span><span class="o">*</span><span class="n">H</span><span class="o">&#39;*</span><span class="n">H</span><span class="p">)</span><span class="w"> </span><span class="c">% Degrees of freedom for the column space (model)</span>
 
 <span class="n">R</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">eye</span><span class="p">(</span><span class="nb">size</span><span class="p">(</span><span class="n">H</span><span class="p">))</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">H</span><span class="p">;</span><span class="w">  </span><span class="c">% Residual-inducing matrix</span>
@@ -553,11 +551,15 @@ R = I - H
 $<span class="math notranslate nohighlight">\(
 tr(R^TR)^2/tr(R^TRR^TR)
 \)</span>$</p>
-<p>Given a known autocorrelation matrix <span class="math notranslate nohighlight">\(V\)</span>, the GLS solution for <span class="math notranslate nohighlight">\(H\)</span> and <span class="math notranslate nohighlight">\(R\)</span> are:
-$<span class="math notranslate nohighlight">\(
+<p>Given a known autocorrelation matrix <span class="math notranslate nohighlight">\(V\)</span>, the GLS solution for <span class="math notranslate nohighlight">\(H\)</span> and <span class="math notranslate nohighlight">\(R\)</span> are:</p>
+<div class="math notranslate nohighlight">
+\[
 H = X(X^TV^{-1}X)^{-1}X'V^{-1}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
 R = I - H
-\)</span>$</p>
+\]</div>
 <p>The equation for the Satterthwaite approximation of dfe is:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -565,13 +567,14 @@ R = I - H
 \]</div>
 <p>Note: These last equations need further checking.</p>
 <p>This is a general form for the degrees of freedom based on the residual-inducing matrix and variance components. Note, the exact computation can vary based on the specific model and its assumptions.</p>
-<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span>#<span class="w"> </span><span class="n">Simulate</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">known</span><span class="w"> </span><span class="n">autocorrelated</span><span class="w"> </span><span class="nb">error</span><span class="w"> </span><span class="n">structure</span><span class="w"> </span><span class="p">(</span><span class="n">AR</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Matlab code</span>
+<span class="c">% Simulate a known autocorrelated error structure (AR(1))</span>
 <span class="n">c</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mf">0.5</span><span class="o">.^</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="nb">size</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">];</span><span class="w">  </span><span class="c">% autocorrelation matrix V under ar(1) with rho = 0.5</span>
 <span class="n">V</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">toeplitz</span><span class="p">(</span><span class="n">c</span><span class="p">);</span>
 <span class="nb">figure</span><span class="p">;</span><span class="w"> </span><span class="nb">imagesc</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
 
-<span class="n">H</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">X</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nb">inv</span><span class="p">(</span><span class="n">X</span><span class="o">&#39;*</span><span class="nb">inv</span><span class="p">(</span><span class="n">V</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">X</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">X</span><span class="o">&#39;</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nb">inv</span><span class="p">(</span><span class="n">V</span><span class="p">);</span>
-<span class="n">R</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">eye</span><span class="p">(</span><span class="nb">size</span><span class="p">(</span><span class="n">H</span><span class="p">))</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">H</span><span class="p">;</span><span class="w">  </span><span class="c">% Residual-inducing matrix</span>
+<span class="n">H</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">X</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nb">inv</span><span class="p">(</span><span class="n">X</span><span class="o">&#39;*</span><span class="nb">inv</span><span class="p">(</span><span class="n">V</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">X</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">X</span><span class="o">&#39;</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nb">inv</span><span class="p">(</span><span class="n">V</span><span class="p">);</span><span class="w">   </span><span class="c">% Hat matrix</span>
+<span class="n">R</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">eye</span><span class="p">(</span><span class="nb">size</span><span class="p">(</span><span class="n">H</span><span class="p">))</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">H</span><span class="p">;</span><span class="w">                       </span><span class="c">% Residual-inducing matrix</span>
 <span class="n">dfe_Satt</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">trace</span><span class="p">((</span><span class="n">R</span><span class="o">*</span><span class="n">V</span><span class="p">)</span><span class="o">&#39;*</span><span class="p">(</span><span class="n">R</span><span class="o">*</span><span class="n">V</span><span class="p">))</span>^<span class="mi">2</span><span class="o">/</span><span class="nb">trace</span><span class="p">((</span><span class="n">R</span><span class="o">*</span><span class="n">V</span><span class="p">)</span><span class="o">&#39;*</span><span class="p">(</span><span class="n">R</span><span class="o">*</span><span class="n">V</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">R</span><span class="o">*</span><span class="n">V</span><span class="p">)</span><span class="o">&#39;*</span><span class="p">(</span><span class="n">R</span><span class="o">*</span><span class="n">V</span><span class="p">))</span><span class="w"> </span><span class="c">% Error degrees of freedom</span>
 </pre></div>
 </div>
@@ -592,7 +595,12 @@ R = I - H
 <li><p>The residual variance <span class="math notranslate nohighlight">\(\sigma^2\)</span> and other correlated errors built into the within-person covariance matrix <span class="math notranslate nohighlight">\(V\)</span>.</p></li>
 </ol>
 <p>In practice, some packages like lmer (in R) ignore (3) above and assume equal error variances across all participants.</p>
-<p>As shrinkage for is proportional to <span class="math notranslate nohighlight">\(\sigma^2_{b, i} + \sigma^2_{w, i}\)</span>, the individual-level BLUP or CM is a weighted average of population-level and individual-level estimates, with weights equal to $w = \frac{\hat{U_g}}{\hat{U_g} + \sigma^2{Z^TVZ}^{-1}}</p>
+<p>As shrinkage for is proportional to <span class="math notranslate nohighlight">\(\sigma^2_{b, i} + \sigma^2_{w, i}\)</span>, the individual-level BLUP or CM is a weighted average of population-level and individual-level estimates, with weights for effects <span class="math notranslate nohighlight">\(i={1...I}\)</span> equal to:</p>
+<div class="math notranslate nohighlight">
+\[
+w = diag(\frac{\hat{U_g}}{\hat{U_g} + \sigma^2{Z^TVZ}^{-1}})
+\]</div>
+<p>As <span class="math notranslate nohighlight">\(sigma^2 --&gt; 0\)</span>, the individual estimate becomes very precise, and <span class="math notranslate nohighlight">\(w --&gt; 1\)</span>.  As <span class="math notranslate nohighlight">\(U_g --&gt; 0\)</span>, <span class="math notranslate nohighlight">\(w --&gt; 0\)</span>, and all BLUPs are the population-level estimates. With equal within-person and population-level (random effects) variance, <span class="math notranslate nohighlight">\(w = 1/2\)</span>.</p>
 <p>Note: This section needs further checking for accuracy and completeness.</p>
 </section>
 <section id="don-t-ignore-random-effects">
