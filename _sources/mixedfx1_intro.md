@@ -166,10 +166,10 @@ R = I - H
 $$
 
 Then, the Satterthwaite approximation for dfe is:
+
 $$
 tr(R^TR)^2/tr(R^TRR^TR)
 $$
-
 
 Given a known autocorrelation matrix $V$, the GLS solution for $H$ and $R$ are:
 
@@ -226,10 +226,10 @@ In practice, some packages like lmer (in R) ignore (3) above and assume equal er
 As shrinkage for is proportional to $\sigma^2_{b, i} + \sigma^2_{w, i}$, the individual-level BLUP or CM is a weighted average of population-level and individual-level estimates, with weights for effects $i={1...I}$ equal to:
 
 $$
-w = diag(\frac{\hat{U_g}}{\hat{U_g} + \sigma^2{Z^TVZ}^{-1}})
+w = diag(\frac{\hat{U_g}}{\hat{U_g} + \sigma^2{(Z^TVZ)}^{-1}})
 $$
 
-As $sigma^2 --> 0$, the individual estimate becomes very precise, and $w --> 1$.  As $U_g --> 0$, $w --> 0$, and all BLUPs are the population-level estimates. With equal within-person and population-level (random effects) variance, $w = 1/2$.
+As $sigma^2 \to 0$, the individual estimate becomes very precise, and $w \to  1$.  As $U_g \to 0$, $w \to 0$, and all BLUPs are the population-level estimates. With equal within-person and population-level (random effects) variance, $w = 1/2$.
 
 Note: This section needs further checking for accuracy and completeness.
 
