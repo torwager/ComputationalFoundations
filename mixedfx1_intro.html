@@ -398,6 +398,11 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#within-and-between-person-effects">Within- and between-person effects</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#crossed-and-nested-random-effects">Crossed and nested random effects</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#two-stage-summary-statistics-and-mixed-effects">Two-stage summary statistics and mixed effects</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#degrees-of-freedom-in-mixed-models">Degrees of freedom in mixed models</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#satterthwaite">Satterthwaite</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#shrinkage-in-mixed-models">Shrinkage in mixed models</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#don-t-ignore-random-effects">Don’t ignore random effects</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#know-when-not-to-model-an-effect-as-random">Know when not to model an effect as random</a></li>
 </ul>
@@ -470,11 +475,28 @@ Examples include:</p>
 We would indicate that with separate random effects:  <em>Valence + (Valence | participant) + (1 | Item)</em>. This means that each unique items has its own item-level mean estimate in the model, and the Item-level variance is independent of the Participant-level variance.</p>
 <p>However, if  each Item I1…Ik is measured on only ONE person, so that different participants see different items, Item and Participant are <strong>nested</strong>.
 We would indicate that with a nested random effects:  <em>Valence + (Valence | participant/item)</em>. However, if you do not have multiple measures on each item, you cannot estimate such a model, because you can’t separate item-level variance from residual error variance.</p>
+<p>Designs can have combinations of crossed and nested random and fixed factors.
+Here are some more examples:<br />
+<img alt="crossednestedfactors.png" src="_images/crossednestedfactors.png" /></p>
+<p>This schematic uses mouse instead of person, but the same principles apply. We always want to model mouse as a random effect. Unique cells assessed are also a random factor. If we  assess each cell only once, we don’t need to model cell as a random effect explicitly; no errors are grouped by cell if there is only one observation per cell. But if we assess each cell multiple times through “technical replicates” (multiple tests of an assay), yielding multiple observations per cell, then we must include Cell as a random effect nested within Mouse.</p>
+<p>(a) Has only fixed factors. This would be a design in which different animals are used in different combinations of treatments. Our model would have fixed effects of Drug * Dose * Diet (the 3-way interaction implies all main effects and pairwise interactions are also estimated). These are included automatically. As diagrammed, only one cell is assessed and there are no “technical replicates”, so there are no random effects.</p>
+<p>(b) Is a “parallel groups” design in which different mice are tested on each of 2 drugs. We’d model Drug + (1 | Mouse). Errors are grouped by mouse (with multiple observations per mouse), but Drug is not assessed within-mouse (i.e., crossed with mouse). If there is only one measurement per cell, we do not need to model Cell as a random effect, because no errors are grouped by Cell.  However, if we have technical replicates, we would model Cell as a random effect as well, in which case we would have <strong>nested random effects</strong>. We’d model  Drug + (1 | Mouse/Cell). The random effects include an intercept only, because we do not have Drug effects varying within-Mouse or within-Cell (i.e., Drug and Mouse are not crossed), so we cannot estimate the Drug x Mouse interaction or Drug x Cell interaction.</p>
+<p>(c) Is a “within-participant crossover” design, where Drug is crossed with Mouse.  We would model this Drug + (Drug | Mouse).  This models the Drug x Mouse interaction (the differences in Drug effect across individual levels of Mouse) and includes it in the error term. Equivalently, we can say that it estimates the error variance in the slope of Drug (Drug effect) across mice.</p>
+<p>Including (Drug | Mouse) implies a random intercept term as well, which is included automatically. Thus, this is equivalent to (1 + Drug | Mouse).</p>
+<p>Most models will also include error covariance terms for the random effects terms as well. Here, this means that the variances across individual mice in the intercept (1) and slope (Drug) may be correlated, and the mixed effects model estimates cov(intercept, Drug). If we wanted to explicitly assume uncorrelated random effects, we would separate the terms like so: (1 | Mouse) + (0 + Drug | Mouse).</p>
+<p>If there are technical replicates, i.e., multiple observations per cell, we’d model both the random effects crossed with Drug and the nested structure, i.e., Drug + (Drug | Mouse/Cell).</p>
+<p>(d) Tests different drugs on different cells extracted from 2 tissues. Drug and Tissue are fixed because we are interested in these specific drugs and tissues (not generalizing to new ones). All effects are crossed with Mouse, so we’d do Tissue * Drug + (Tissue * Drug | Mouse)</p>
+<p><strong>!Important!</strong> In all these cases, if we ignore the random error structure, we will (a) not estimate the error variance correctly, and (b) not adjust the degrees of freedom correctly. This invalidates statistical inferences made on fixed effects.</p>
+<p>Testing the significance of random effects requires obtaining P-values for whether the random effects variance is different from 0. This amounts to testing whether there are individual differences across levels of random factors like Subject, Mouse, or Cell above. This is sometimes done with F-tests, but their performance is poor. Likelihood ratio tests excluding the random effects is a more well-accepted approach.</p>
+<p>Just because you do not detect a “significant” random effect, it does not mean you can exclude it from the model.  Such tests are not very inaccurate and subject to low power in many cases. As with all classical significance tests, the lack of a significant effect does <strong>not</strong> demonstrate that no effect exists – just that you cannot detect it with enough confidence. Therefore, do not test the signficance of your random effects and omit them from the model if they are non-significant. You will mis-estimate the error variance and dfe, and make invalid inferences.</p>
+<p><strong>!Important!</strong> In all the cases with random effects above, if we ignore the random error structure, we will (a) not estimate the error variance correctly, and (b) not adjust the degrees of freedom correctly. This invalidates statistical inferences made on fixed effects. More detail is below.</p>
 <p>Here is a guide to Wilkinson notation for a number of common structures:
 <img alt="Wilkinson" src="_images/wilkinsonnotation.png" /></p>
 <p><a class="reference external" href="https://www.mathworks.com/help/stats/wilkinson-notation.html">This page</a> on Wilkinson notation is also really helpful!</p>
-<p>For more on crossed and nested random effects, see the Clapham mixed effects video on Youtube:</p>
-<p><a class="reference external" href="https://www.youtube.com/watch?v=QCqF-2E86r0"><img alt="Clapham" src="https://youtu.be/QCqF-2E86r0/0.jpg" /></a></p>
+<p>For more on crossed and nested random effects, see
+<a class="reference download internal" download="" href="_downloads/68f149e906a2be6d008d9898d2cab592/Krzywinski_et_al-2014-Nature_Methods.pdf"><span class="xref download myst">Krzywinski 2014 Nature Methods</span></a></p>
+<p>the Clapham mixed effects video on Youtube:
+<a class="reference external" href="https://www.youtube.com/watch?v=QCqF-2E86r0"><img alt="Clapham" src="https://youtu.be/QCqF-2E86r0/0.jpg" /></a></p>
 </section>
 <section id="two-stage-summary-statistics-and-mixed-effects">
 <h2>Two-stage summary statistics and mixed effects<a class="headerlink" href="#two-stage-summary-statistics-and-mixed-effects" title="Permalink to this heading">#</a></h2>
@@ -496,12 +518,92 @@ Pain (BPI) is the outcome or DV.</p>
 <p>Another way to do this is using a mixed effects model.  Instead of organizing data in a “wide format” table with one row per participant, we can use the “long format” table, in which <span class="math notranslate nohighlight">\(y\)</span> (i.e., Pain) is an <span class="math notranslate nohighlight">\([mk x 1]\)</span> vector with <span class="math notranslate nohighlight">\(k\)</span> values measured for each of <span class="math notranslate nohighlight">\(m\)</span> participants. We model the correlation between within-person repeated measures (Pre and Post-treatment pain) by including a random effect of participant in the error model.</p>
 <p>We explore that in the next module.</p>
 </section>
+<section id="degrees-of-freedom-in-mixed-models">
+<h2>Degrees of freedom in mixed models<a class="headerlink" href="#degrees-of-freedom-in-mixed-models" title="Permalink to this heading">#</a></h2>
+<p>Most mixed models do not usually directly estimate the individual participants’ predictions (or, more generally, individual level effects for any random effect). Instead, they estimate the variances across levels of those predictions, and use generalized least squares (GLS) to decorrelate the error and estimate the error degrees of freedom (dfe).  (The dfe is debated, and some packages like lmer decline to estimate degrees of freedom).</p>
+<p>Two ways to obtain P-values for fixed effects are:</p>
+<ol class="arabic simple">
+<li><p>Use the Satterthwaite approximation to estimate the dfe. For within-person variables crossed with a random effect of participant, these should usually be close to the number of participants. The same holds for effects nested within or crossed with a random effect.</p></li>
+<li><p>Use model comparison with a likelihood ratio test to compare models with and without a fixed effect of interest (but keeping the random effects in the reduced model).</p></li>
+</ol>
+<section id="satterthwaite">
+<h3>Satterthwaite<a class="headerlink" href="#satterthwaite" title="Permalink to this heading">#</a></h3>
+<p>Given the hat (projection) matrix:</p>
+<div class="math notranslate nohighlight">
+\[
+H = X(X^TX)^{-1}X';
+\]</div>
+<p>The equation for the Satterthwaite approximation in general is:</p>
+<div class="math notranslate nohighlight">
+\[
+tr(H^TH)^2/tr(H^THH^TH)
+\]</div>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">H</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">X</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nb">inv</span><span class="p">(</span><span class="n">X</span><span class="o">&#39;*</span><span class="n">X</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">X</span><span class="o">&#39;</span><span class="p">;</span>
+<span class="n">dfmodel_Satt</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">trace</span><span class="p">(</span><span class="n">H</span><span class="o">&#39;*</span><span class="n">H</span><span class="p">)</span>^<span class="mi">2</span><span class="o">/</span><span class="nb">trace</span><span class="p">(</span><span class="n">H</span><span class="o">&#39;*</span><span class="n">H</span><span class="o">*</span><span class="n">H</span><span class="o">&#39;*</span><span class="n">H</span><span class="p">)</span><span class="w"> </span><span class="c">% Degrees of freedom for the column space (model)</span>
+
+<span class="n">R</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">eye</span><span class="p">(</span><span class="nb">size</span><span class="p">(</span><span class="n">H</span><span class="p">))</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">H</span><span class="p">;</span><span class="w">  </span><span class="c">% Residual-inducing matrix</span>
+</pre></div>
+</div>
+<p>For the error df, or dfe, we need to calculate the residual-inducing matrix:</p>
+<div class="math notranslate nohighlight">
+\[
+R = I - H
+\]</div>
+<p>Then, the Satterthwaite approximation for dfe is:
+$<span class="math notranslate nohighlight">\(
+tr(R^TR)^2/tr(R^TRR^TR)
+\)</span>$</p>
+<p>Given a known autocorrelation matrix <span class="math notranslate nohighlight">\(V\)</span>, the GLS solution for <span class="math notranslate nohighlight">\(H\)</span> and <span class="math notranslate nohighlight">\(R\)</span> are:
+$<span class="math notranslate nohighlight">\(
+H = X(X^TV^{-1}X)^{-1}X'V^{-1}
+R = I - H
+\)</span>$</p>
+<p>The equation for the Satterthwaite approximation of dfe is:</p>
+<div class="math notranslate nohighlight">
+\[
+\text{trace}((RV)^T(RV))^2/\text{trace}((RV)^T(RV)(RV)^T(RV))
+\]</div>
+<p>Note: These last equations need further checking.</p>
+<p>This is a general form for the degrees of freedom based on the residual-inducing matrix and variance components. Note, the exact computation can vary based on the specific model and its assumptions.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span>#<span class="w"> </span><span class="n">Simulate</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">known</span><span class="w"> </span><span class="n">autocorrelated</span><span class="w"> </span><span class="nb">error</span><span class="w"> </span><span class="n">structure</span><span class="w"> </span><span class="p">(</span><span class="n">AR</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">c</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mf">0.5</span><span class="o">.^</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="nb">size</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">];</span><span class="w">  </span><span class="c">% autocorrelation matrix V under ar(1) with rho = 0.5</span>
+<span class="n">V</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">toeplitz</span><span class="p">(</span><span class="n">c</span><span class="p">);</span>
+<span class="nb">figure</span><span class="p">;</span><span class="w"> </span><span class="nb">imagesc</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
+
+<span class="n">H</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">X</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nb">inv</span><span class="p">(</span><span class="n">X</span><span class="o">&#39;*</span><span class="nb">inv</span><span class="p">(</span><span class="n">V</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">X</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">X</span><span class="o">&#39;</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nb">inv</span><span class="p">(</span><span class="n">V</span><span class="p">);</span>
+<span class="n">R</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">eye</span><span class="p">(</span><span class="nb">size</span><span class="p">(</span><span class="n">H</span><span class="p">))</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">H</span><span class="p">;</span><span class="w">  </span><span class="c">% Residual-inducing matrix</span>
+<span class="n">dfe_Satt</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">trace</span><span class="p">((</span><span class="n">R</span><span class="o">*</span><span class="n">V</span><span class="p">)</span><span class="o">&#39;*</span><span class="p">(</span><span class="n">R</span><span class="o">*</span><span class="n">V</span><span class="p">))</span>^<span class="mi">2</span><span class="o">/</span><span class="nb">trace</span><span class="p">((</span><span class="n">R</span><span class="o">*</span><span class="n">V</span><span class="p">)</span><span class="o">&#39;*</span><span class="p">(</span><span class="n">R</span><span class="o">*</span><span class="n">V</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">R</span><span class="o">*</span><span class="n">V</span><span class="p">)</span><span class="o">&#39;*</span><span class="p">(</span><span class="n">R</span><span class="o">*</span><span class="n">V</span><span class="p">))</span><span class="w"> </span><span class="c">% Error degrees of freedom</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="shrinkage-in-mixed-models">
+<h2>Shrinkage in mixed models<a class="headerlink" href="#shrinkage-in-mixed-models" title="Permalink to this heading">#</a></h2>
+<p>Most mixed models do not explicitly identify effects for individual levels of random effects (e.g., slopes for individual participants) in the course of model estimation. All that is required for statistical inference is to estimate their variances and the associated reduction in degrees of freedom for the fixed effects.</p>
+<p>It is possible to obtain individual slope values. These are often called the Best Linear Unbiased Predictors (BLUPs), or in lmer, Conditional Modes (CM, modal random effect levels conditional on fixed population effects).</p>
+<p>The BLUPs/CMs shrink the individual estimates towards the population means in proportion to the variance (inverse precision) of each level of the individual level estimates. For example, they would shrink individual participant slope estimates by the variance for each individual participant when modeling participant as a random effect). In the rest of the discussion below, we use participant to illustrate levels of a random effect, but the same principles apply to all types of random effects (e.g., items, cells, etc).</p>
+<p>More precisely, the variance of an individual level (e.g., person’s) estimate (e.g., slope) is the sum of the between-person variance for a given effect <span class="math notranslate nohighlight">\(i\)</span>, <span class="math notranslate nohighlight">\(\sigma^2_{b, i}\)</span> and within-person variance <span class="math notranslate nohighlight">\(\sigma^2_{w, i}\)</span>. Note these are not residual variances, but variances of regression slopes <span class="math notranslate nohighlight">\(i={1...I}\)</span>.</p>
+<p><span class="math notranslate nohighlight">\(\sigma^2_{b, i}\)</span> depends on the true inter-person variation in effects.  People will differ no matter how much data is collected per person.</p>
+<p><span class="math notranslate nohighlight">\(\sigma^2_{w, i}\)</span> depends on:</p>
+<ol class="arabic simple">
+<li><p>The within-person design matrix <span class="math notranslate nohighlight">\(Z\)</span>. Some effects are estimated more precisely than others.</p></li>
+<li><p>The amount of data collected for that individual person (factored into <span class="math notranslate nohighlight">\(Z^TZ\)</span>)</p></li>
+<li><p>Other sources of error that affect some participants more than others (heteroscedasticity).</p></li>
+<li><p>The residual variance <span class="math notranslate nohighlight">\(\sigma^2\)</span> and other correlated errors built into the within-person covariance matrix <span class="math notranslate nohighlight">\(V\)</span>.</p></li>
+</ol>
+<p>In practice, some packages like lmer (in R) ignore (3) above and assume equal error variances across all participants.</p>
+<p>As shrinkage for is proportional to <span class="math notranslate nohighlight">\(\sigma^2_{b, i} + \sigma^2_{w, i}\)</span>, the individual-level BLUP or CM is a weighted average of population-level and individual-level estimates, with weights equal to $w = \frac{\hat{U_g}}{\hat{U_g} + \sigma^2{Z^TVZ}^{-1}}</p>
+<p>Note: This section needs further checking for accuracy and completeness.</p>
+</section>
 <section id="don-t-ignore-random-effects">
 <h2>Don’t ignore random effects<a class="headerlink" href="#don-t-ignore-random-effects" title="Permalink to this heading">#</a></h2>
 <p>An important rule of thumb is that if we want to generalize to new, unobserved levels of a variable (e.g., participant), we must (1) estimate the variance across levels of the variable appropriately,  (2) include that variance in the error term inferential test statistics (i.e., t- and F-tests), and (3) adjust the degrees of freedom appropriately.</p>
 <p>If you ignore a random effect (e.g. of participant), then you will not do any of the three things above.  If you model participant as a fixed effect (i.e., create a set of regressors that capture all differences across participants), you will still not be doing any of those critical things.</p>
 <p>If you do not model an effect as random, you will not be able to generalize to unobserved levels. For example, imagine you conduct a study of differences in brain activity for negative vs. positive words. You collect fMRI activity while participants read 10 positive words and 10 negative words (a within-person factor).  If you do not model word identity as a random effect, you will not be able to generalize to new words!  That is, your conclusions might hold for the specific words you chose, but not different words.</p>
 <p>Is this a problem?  Generally, yes. You’re likely going to make conclusions about “positive words” as a class, but your statistical inferences can’t support that generalization. Thus, the idea of “keeping it maximal” and modeling random effects that exist in your study structure is usually a good idea.</p>
+<p><strong>!Important!</strong> In all the cases with random effects above, if we ignore the random error structure, we will (a) not estimate the error variance correctly, and (b) not adjust the degrees of freedom correctly. This invalidates statistical inferences made on fixed effects.</p>
+<p>Testing the significance of random effects requires obtaining P-values for whether the random effects variance is different from 0. This amounts to testing whether there are individual differences across levels of random factors like Subject, Mouse, or Cell above. This is sometimes done with F-tests, but their performance is poor. Likelihood ratio tests excluding the random effects is a more well-accepted approach.</p>
+<p>Just because you do not detect a “significant” random effect, it does not mean you can exclude it from the model.  Such tests are not very inaccurate and subject to low power in many cases. As with all classical significance tests, the lack of a significant effect does <strong>not</strong> demonstrate that no effect exists – just that you cannot detect it with enough confidence. Therefore, do not test the signficance of your random effects and omit them from the model if they are non-significant. You will mis-estimate the error variance and dfe, and make invalid inferences.</p>
 </section>
 <section id="know-when-not-to-model-an-effect-as-random">
 <h2>Know when not to model an effect as random<a class="headerlink" href="#know-when-not-to-model-an-effect-as-random" title="Permalink to this heading">#</a></h2>
@@ -593,6 +695,11 @@ Pain (BPI) is the outcome or DV.</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#within-and-between-person-effects">Within- and between-person effects</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#crossed-and-nested-random-effects">Crossed and nested random effects</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#two-stage-summary-statistics-and-mixed-effects">Two-stage summary statistics and mixed effects</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#degrees-of-freedom-in-mixed-models">Degrees of freedom in mixed models</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#satterthwaite">Satterthwaite</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#shrinkage-in-mixed-models">Shrinkage in mixed models</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#don-t-ignore-random-effects">Don’t ignore random effects</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#know-when-not-to-model-an-effect-as-random">Know when not to model an effect as random</a></li>
 </ul>

@@ -68,13 +68,43 @@ We would indicate that with separate random effects:  *Valence + (Valence | part
 However, if  each Item I1...Ik is measured on only ONE person, so that different participants see different items, Item and Participant are **nested**.
 We would indicate that with a nested random effects:  *Valence + (Valence | participant/item)*. However, if you do not have multiple measures on each item, you cannot estimate such a model, because you can't separate item-level variance from residual error variance.
 
+Designs can have combinations of crossed and nested random and fixed factors.
+Here are some more examples:  
+![crossednestedfactors.png](images/crossednestedfactors.png)
+
+This schematic uses mouse instead of person, but the same principles apply. We always want to model mouse as a random effect. Unique cells assessed are also a random factor. If we  assess each cell only once, we don't need to model cell as a random effect explicitly; no errors are grouped by cell if there is only one observation per cell. But if we assess each cell multiple times through "technical replicates" (multiple tests of an assay), yielding multiple observations per cell, then we must include Cell as a random effect nested within Mouse.
+
+(a) Has only fixed factors. This would be a design in which different animals are used in different combinations of treatments. Our model would have fixed effects of Drug * Dose * Diet (the 3-way interaction implies all main effects and pairwise interactions are also estimated). These are included automatically. As diagrammed, only one cell is assessed and there are no "technical replicates", so there are no random effects.
+
+(b) Is a "parallel groups" design in which different mice are tested on each of 2 drugs. We'd model Drug + (1 | Mouse). Errors are grouped by mouse (with multiple observations per mouse), but Drug is not assessed within-mouse (i.e., crossed with mouse). If there is only one measurement per cell, we do not need to model Cell as a random effect, because no errors are grouped by Cell.  However, if we have technical replicates, we would model Cell as a random effect as well, in which case we would have **nested random effects**. We'd model  Drug + (1 | Mouse/Cell). The random effects include an intercept only, because we do not have Drug effects varying within-Mouse or within-Cell (i.e., Drug and Mouse are not crossed), so we cannot estimate the Drug x Mouse interaction or Drug x Cell interaction.
+
+(c) Is a "within-participant crossover" design, where Drug is crossed with Mouse.  We would model this Drug + (Drug | Mouse).  This models the Drug x Mouse interaction (the differences in Drug effect across individual levels of Mouse) and includes it in the error term. Equivalently, we can say that it estimates the error variance in the slope of Drug (Drug effect) across mice.
+
+Including (Drug | Mouse) implies a random intercept term as well, which is included automatically. Thus, this is equivalent to (1 + Drug | Mouse).
+
+Most models will also include error covariance terms for the random effects terms as well. Here, this means that the variances across individual mice in the intercept (1) and slope (Drug) may be correlated, and the mixed effects model estimates cov(intercept, Drug). If we wanted to explicitly assume uncorrelated random effects, we would separate the terms like so: (1 | Mouse) + (0 + Drug | Mouse).
+
+If there are technical replicates, i.e., multiple observations per cell, we'd model both the random effects crossed with Drug and the nested structure, i.e., Drug + (Drug | Mouse/Cell).
+
+(d) Tests different drugs on different cells extracted from 2 tissues. Drug and Tissue are fixed because we are interested in these specific drugs and tissues (not generalizing to new ones). All effects are crossed with Mouse, so we'd do Tissue * Drug + (Tissue * Drug | Mouse)
+
+**!Important!** In all these cases, if we ignore the random error structure, we will (a) not estimate the error variance correctly, and (b) not adjust the degrees of freedom correctly. This invalidates statistical inferences made on fixed effects.
+
+Testing the significance of random effects requires obtaining P-values for whether the random effects variance is different from 0. This amounts to testing whether there are individual differences across levels of random factors like Subject, Mouse, or Cell above. This is sometimes done with F-tests, but their performance is poor. Likelihood ratio tests excluding the random effects is a more well-accepted approach.
+
+Just because you do not detect a "significant" random effect, it does not mean you can exclude it from the model.  Such tests are not very inaccurate and subject to low power in many cases. As with all classical significance tests, the lack of a significant effect does **not** demonstrate that no effect exists -- just that you cannot detect it with enough confidence. Therefore, do not test the signficance of your random effects and omit them from the model if they are non-significant. You will mis-estimate the error variance and dfe, and make invalid inferences.
+
+**!Important!** In all the cases with random effects above, if we ignore the random error structure, we will (a) not estimate the error variance correctly, and (b) not adjust the degrees of freedom correctly. This invalidates statistical inferences made on fixed effects. More detail is below.
+
 Here is a guide to Wilkinson notation for a number of common structures:
 ![Wilkinson](images/wilkinsonnotation.png)
 
 [This page](https://www.mathworks.com/help/stats/wilkinson-notation.html) on Wilkinson notation is also really helpful!
 
-For more on crossed and nested random effects, see the Clapham mixed effects video on Youtube:
+For more on crossed and nested random effects, see
+[Krzywinski 2014 Nature Methods](papers/Krzywinski_et_al-2014-Nature_Methods.pdf)
 
+the Clapham mixed effects video on Youtube:
 [![Clapham](https://youtu.be/QCqF-2E86r0/0.jpg)](https://www.youtube.com/watch?v=QCqF-2E86r0)
 
 ## Two-stage summary statistics and mixed effects
@@ -104,6 +134,99 @@ Another way to do this is using a mixed effects model.  Instead of organizing da
 
 We explore that in the next module.
 
+## Degrees of freedom in mixed models
+
+Most mixed models do not usually directly estimate the individual participants' predictions (or, more generally, individual level effects for any random effect). Instead, they estimate the variances across levels of those predictions, and use generalized least squares (GLS) to decorrelate the error and estimate the error degrees of freedom (dfe).  (The dfe is debated, and some packages like lmer decline to estimate degrees of freedom).
+
+Two ways to obtain P-values for fixed effects are:
+1. Use the Satterthwaite approximation to estimate the dfe. For within-person variables crossed with a random effect of participant, these should usually be close to the number of participants. The same holds for effects nested within or crossed with a random effect.
+
+2. Use model comparison with a likelihood ratio test to compare models with and without a fixed effect of interest (but keeping the random effects in the reduced model).
+
+### Satterthwaite
+
+Given the hat (projection) matrix:
+
+$$
+H = X(X^TX)^{-1}X';
+$$
+
+The equation for the Satterthwaite approximation in general is:
+
+$$
+tr(H^TH)^2/tr(H^THH^TH)
+$$
+
+```matlab
+H = X * inv(X'*X) * X';
+dfmodel_Satt = trace(H'*H)^2/trace(H'*H*H'*H) % Degrees of freedom for the column space (model)
+
+R = eye(size(H)) - H;  % Residual-inducing matrix
+```
+
+For the error df, or dfe, we need to calculate the residual-inducing matrix:
+
+$$
+R = I - H
+$$
+
+Then, the Satterthwaite approximation for dfe is:
+$$
+tr(R^TR)^2/tr(R^TRR^TR)
+$$
+
+
+Given a known autocorrelation matrix $V$, the GLS solution for $H$ and $R$ are:
+$$
+H = X(X^TV^{-1}X)^{-1}X'V^{-1}
+R = I - H
+$$
+
+The equation for the Satterthwaite approximation of dfe is:
+
+$$
+\text{trace}((RV)^T(RV))^2/\text{trace}((RV)^T(RV)(RV)^T(RV))
+$$
+
+Note: These last equations need further checking.
+
+This is a general form for the degrees of freedom based on the residual-inducing matrix and variance components. Note, the exact computation can vary based on the specific model and its assumptions.
+
+```matlab
+# Simulate a known autocorrelated error structure (AR(1))
+c = 0.5.^[0:size(X, 1)-1];  % autocorrelation matrix V under ar(1) with rho = 0.5
+V = toeplitz(c);
+figure; imagesc(V)
+
+H = X * inv(X'*inv(V) * X) * X' * inv(V);
+R = eye(size(H)) - H;  % Residual-inducing matrix
+dfe_Satt = trace((R*V)'*(R*V))^2/trace((R*V)'*(R*V)*(R*V)'*(R*V)) % Error degrees of freedom
+```
+
+## Shrinkage in mixed models
+
+Most mixed models do not explicitly identify effects for individual levels of random effects (e.g., slopes for individual participants) in the course of model estimation. All that is required for statistical inference is to estimate their variances and the associated reduction in degrees of freedom for the fixed effects.
+
+It is possible to obtain individual slope values. These are often called the Best Linear Unbiased Predictors (BLUPs), or in lmer, Conditional Modes (CM, modal random effect levels conditional on fixed population effects).  
+
+The BLUPs/CMs shrink the individual estimates towards the population means in proportion to the variance (inverse precision) of each level of the individual level estimates. For example, they would shrink individual participant slope estimates by the variance for each individual participant when modeling participant as a random effect). In the rest of the discussion below, we use participant to illustrate levels of a random effect, but the same principles apply to all types of random effects (e.g., items, cells, etc).
+
+More precisely, the variance of an individual level (e.g., person's) estimate (e.g., slope) is the sum of the between-person variance for a given effect $i$, $\sigma^2_{b, i}$ and within-person variance $\sigma^2_{w, i}$. Note these are not residual variances, but variances of regression slopes $i={1...I}$.
+
+$\sigma^2_{b, i}$ depends on the true inter-person variation in effects.  People will differ no matter how much data is collected per person.
+
+$\sigma^2_{w, i}$ depends on:
+1.  The within-person design matrix $Z$. Some effects are estimated more precisely than others.
+2.  The amount of data collected for that individual person (factored into $Z^TZ$)
+3.  Other sources of error that affect some participants more than others (heteroscedasticity).
+4.  The residual variance $\sigma^2$ and other correlated errors built into the within-person covariance matrix $V$.
+
+In practice, some packages like lmer (in R) ignore (3) above and assume equal error variances across all participants.
+
+As shrinkage for is proportional to $\sigma^2_{b, i} + \sigma^2_{w, i}$, the individual-level BLUP or CM is a weighted average of population-level and individual-level estimates, with weights equal to $w = \frac{\hat{U_g}}{\hat{U_g} + \sigma^2{Z^TVZ}^{-1}}
+
+Note: This section needs further checking for accuracy and completeness.
+
 ## Don't ignore random effects
 An important rule of thumb is that if we want to generalize to new, unobserved levels of a variable (e.g., participant), we must (1) estimate the variance across levels of the variable appropriately,  (2) include that variance in the error term inferential test statistics (i.e., t- and F-tests), and (3) adjust the degrees of freedom appropriately.  
 
@@ -112,6 +235,13 @@ If you ignore a random effect (e.g. of participant), then you will not do any of
 If you do not model an effect as random, you will not be able to generalize to unobserved levels. For example, imagine you conduct a study of differences in brain activity for negative vs. positive words. You collect fMRI activity while participants read 10 positive words and 10 negative words (a within-person factor).  If you do not model word identity as a random effect, you will not be able to generalize to new words!  That is, your conclusions might hold for the specific words you chose, but not different words.  
 
 Is this a problem?  Generally, yes. You're likely going to make conclusions about "positive words" as a class, but your statistical inferences can't support that generalization. Thus, the idea of "keeping it maximal" and modeling random effects that exist in your study structure is usually a good idea.
+
+**!Important!** In all the cases with random effects above, if we ignore the random error structure, we will (a) not estimate the error variance correctly, and (b) not adjust the degrees of freedom correctly. This invalidates statistical inferences made on fixed effects.
+
+Testing the significance of random effects requires obtaining P-values for whether the random effects variance is different from 0. This amounts to testing whether there are individual differences across levels of random factors like Subject, Mouse, or Cell above. This is sometimes done with F-tests, but their performance is poor. Likelihood ratio tests excluding the random effects is a more well-accepted approach.
+
+Just because you do not detect a "significant" random effect, it does not mean you can exclude it from the model.  Such tests are not very inaccurate and subject to low power in many cases. As with all classical significance tests, the lack of a significant effect does **not** demonstrate that no effect exists -- just that you cannot detect it with enough confidence. Therefore, do not test the signficance of your random effects and omit them from the model if they are non-significant. You will mis-estimate the error variance and dfe, and make invalid inferences.
+
 
 ## Know when not to model an effect as random
 

@@ -97,8 +97,6 @@ Now do the same for CANlab's igls.m and compare them.
 [mixedfx_sims_2_fitlme.mlx](matlab_live/mixedfx_sims_2_fitlme.mlx)
 [mixedfx_sims_2_igls.mlx](matlab_live/mixedfx_sims_2_igls.mlx)
 
-
-
 ## Power and FPR Simulations
 Let's extend our simulations further to simulate power and FPR under different sample sizes.
 This is the main way to test whether an inferential model performs as expected.
@@ -162,5 +160,6 @@ Simulate and compare true positive rates (TPR, power) and  false positive rates 
 - more vs. fewer irrelevant predictors
 - more levels of a predictor (mixed vs ANOVA)
 - crossed random effects with more or fewer levels
+- random effects of intercept and slope are correlated. This will cause a loss in power due to individual differences in scaling across participants in standard summary statistics approaches. does the lmm handle this without substantial power loss?
 
-This will give us the ability to really understand how these models perform!
+These simulations will give us the ability to really understand how these models perform!
