@@ -22,6 +22,8 @@ This tutorial will be based largely around the following paper:
 
 **Before the course**: Read Appendix A of Smith et al. 2022 tutorial paper, and try the "paper and pencil" exercises in Appendix B.
 
+Also, read [this paper](papers/griffiths_bayeschapter.pdf) by Griffiths et al. It is an excellent introduction to Bayesian analysis and some key concepts that are broadly used.
+
 Some other papers that may be of interest for further conceptual background or mathematical details include:
 
 -	Smith, R., Badcock, P., & Friston, K. J. (2021). Recent advances in the application of predictive coding and active inference models within clinical neuroscience. Psychiatry and Clinical Neurosciences, 75(1), 3-13.
