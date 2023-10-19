@@ -27,3 +27,6 @@ parts:
   - caption: Bayesian models
     chapters:
       - file: activeinference_smith.md
+  - caption: Reinforcement Learning
+    chapters:
+      - file: reinforcementlearning.md
