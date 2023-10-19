@@ -64,6 +64,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'reinforcementlearning';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Active inference" href="activeinference_smith.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -181,6 +182,10 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Bayesian models</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="activeinference_smith.html">Active inference</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Reinforcement Learning</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Reinforcement Learning</a></li>
 </ul>
 
     </div>
@@ -397,14 +402,6 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hands-on-2-q-learning">Hands-on 2: Q-learning</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sleepstudy-dataset">Sleepstudy dataset</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-output-from-different-packages">Comparing output from different packages</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fitlme">fitlme</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lmer-in-r">lmer in R</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#igls">IGLS</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#activities">Activities</a></li>
 </ul>
             </nav>
         </div>
@@ -436,59 +433,6 @@ document.write(`
 Q learning tutorial: https://www.gocoder.one/blog/rl-tutorial-with-openai-gym/
 OpenAI’s website (RL intro): https://spinningup.openai.com/en/latest/spinningup/rl_intro.html</p>
 </section>
-</section>
-<section id="sleepstudy-dataset">
-<h2>Sleepstudy dataset<a class="headerlink" href="#sleepstudy-dataset" title="Permalink to this heading">#</a></h2>
-<p>This is a classic, and well-behaved, dataset included in R. We include it for comparison across methods and output.</p>
-<p>Here is a plot of the data (generated using part of the script below)
-<img alt="sleepstudy_individualslopes" src="_images/sleepstudy_individualslopes.png" /></p>
-<p>We’ll fit this 3 ways:</p>
-<ul class="simple">
-<li><p>Matlab fitlme</p></li>
-<li><p>CANlab IGLS</p></li>
-<li><p>CANlab glmfit_multilevel</p></li>
-</ul>
-<p><a class="reference download internal" download="" href="_downloads/3b2bb8d8c76f8aab2cb590bf97a63ae3/sleepstudy_lme_example.mlx"><span class="xref download myst">Download the Matlab live script</span></a></p>
-<iframe src="matlab_html/sleepstudy_lme_example.html" width="120%" height="800px"></iframe>
-</section>
-<section id="comparing-output-from-different-packages">
-<h2>Comparing output from different packages<a class="headerlink" href="#comparing-output-from-different-packages" title="Permalink to this heading">#</a></h2>
-<p>Let’s identify some key corresponding output in each model.</p>
-<section id="fitlme">
-<h3>fitlme<a class="headerlink" href="#fitlme" title="Permalink to this heading">#</a></h3>
-<p><img alt="sleepstudylme" src="_images/sleepstudy_matlablme_1.png" />
-<img alt="sleepstudylme" src="_images/sleepstudy_matlablme_2.png" /></p>
-</section>
-<section id="lmer-in-r">
-<h3>lmer in R<a class="headerlink" href="#lmer-in-r" title="Permalink to this heading">#</a></h3>
-<p><img alt="sleepstudylmer" src="_images/sleepstudy_lmer_1.png" />
-<img alt="sleepstudylmer" src="_images/sleepstudy_lmer_2.png" /></p>
-</section>
-<section id="igls">
-<h3>IGLS<a class="headerlink" href="#igls" title="Permalink to this heading">#</a></h3>
-<p><img alt="sleepstudyigls" src="_images/sleepstudy_igls_1.png" />
-<img alt="sleepstudyigls" src="_images/sleepstudy_igls_2.png" />
-<img alt="sleepstudyigls" src="_images/sleepstudy_igls_3.png" /></p>
-</section>
-</section>
-<section id="activities">
-<h2>Activities<a class="headerlink" href="#activities" title="Permalink to this heading">#</a></h2>
-<ol class="arabic simple">
-<li><p>Fit the same model in R and/or python</p></li>
-<li><p>Make a table comparing t-values, P-values, and dfe for the different methods (3 here and 1-2 new ones)</p></li>
-<li><p>Compare effects of different options (e.g., ReML vs. ML, bootstrap)</p></li>
-</ol>
-<p>##Mixed effects in Python</p>
-<p>Mixed effects models are available in R (lmer, lme4) and Matlab (fitlme and related others).</p>
-<p>There are a couple of options in Python, though I’m not sure how well validated these are.
-Python can reportedly access LMER in R using rpy2 and %Rmagic or Pymer4</p>
-<p>Here are some possibly helpful links:
-https://www.pythonfordatascience.org/mixed-effects-regression-python/
-https://towardsdatascience.com/how-to-run-linear-mixed-effects-models-in-python-jupyter-notebooks-4f8079c4b589
-https://gist.github.com/jcheong0428/f25b47405d9d328691c102787bc92175</p>
-<p>Google Colab notebook
-https://gist.github.com/jcheong0428/f25b47405d9d328691c102787bc92175</p>
-<p>https://www.statsmodels.org/stable/examples/notebooks/generated/mixed_lm_example.html</p>
 </section>
 </section>
 
@@ -523,6 +467,15 @@ https://gist.github.com/jcheong0428/f25b47405d9d328691c102787bc92175</p>
   
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="activeinference_smith.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Active inference</p>
+      </div>
+    </a>
 </div></div>
   
 </div>
@@ -547,14 +500,6 @@ https://gist.github.com/jcheong0428/f25b47405d9d328691c102787bc92175</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hands-on-2-q-learning">Hands-on 2: Q-learning</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sleepstudy-dataset">Sleepstudy dataset</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-output-from-different-packages">Comparing output from different packages</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fitlme">fitlme</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lmer-in-r">lmer in R</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#igls">IGLS</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#activities">Activities</a></li>
 </ul>
   </nav></div>
 
