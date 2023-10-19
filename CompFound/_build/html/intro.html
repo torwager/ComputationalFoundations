@@ -170,10 +170,14 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="glm3_ashardataset.html">Sample dataset and analysis 1: Ashar 2022</a></li>
 <li class="toctree-l1"><a class="reference internal" href="glm4_parameterizingglm.html">Parameterizing models in a GLM</a></li>
 <li class="toctree-l1"><a class="reference internal" href="glm5_weightedleastsquares.html">Generalized Least Squares (GLS)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glm6_matlab_glm_answerkey.html">A hand-coded GLM in MATLAB</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Mixed effects</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="mixedfx1_intro.html">Mixed effects: Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mixedfx2_examples.html">Mixed effects: Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mixedfx3_algebra.html">Mixed effects algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mixedfx4_fpr_power_sims.html">Mixed effects simulations</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Bayesian models</span></p>
 <ul class="nav bd-sidenav">
@@ -423,6 +427,8 @@ document.write(`
 <section id="psych-178">
 <h2>Psych 178<a class="headerlink" href="#psych-178" title="Permalink to this heading">#</a></h2>
 <p>Fall 2023, Tor Wager</p>
+<p>Assignments:
+https://canvas.dartmouth.edu/courses/60516</p>
 <div class="toctree-wrapper compound">
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Preliminary background</span></p>
 <ul>
@@ -441,12 +447,16 @@ document.write(`
 <li class="toctree-l1"><a class="reference internal" href="glm3_ashardataset.html">Sample dataset and analysis 1: Ashar 2022</a></li>
 <li class="toctree-l1"><a class="reference internal" href="glm4_parameterizingglm.html">Parameterizing models in a GLM</a></li>
 <li class="toctree-l1"><a class="reference internal" href="glm5_weightedleastsquares.html">Generalized Least Squares (GLS)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glm6_matlab_glm_answerkey.html">A hand-coded GLM in MATLAB</a></li>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Mixed effects</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="mixedfx1_intro.html">Mixed effects: Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mixedfx2_examples.html">Mixed effects: Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mixedfx3_algebra.html">Mixed effects algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mixedfx4_fpr_power_sims.html">Mixed effects simulations</a></li>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
@@ -489,7 +499,8 @@ document.write(`
 <h2>Schedule and links<a class="headerlink" href="#schedule-and-links" title="Permalink to this heading">#</a></h2>
 <p>This book:
 https://torwager.github.io/ComputationalFoundations</p>
-<p><a class="reference external" href="https://www.dropbox.com/scl/fo/3te8rk6x2kx4zazec5v5j/h?rlkey=9zbmslsw0h4m1h34svjmr90s0&amp;dl=0">Dropbox link to post assignments</a></p>
+<p><a class="reference external" href="https://canvas.dartmouth.edu/courses/60516">Canvas link for Assignments</a></p>
+<p><a class="reference external" href="https://www.dropbox.com/scl/fo/3te8rk6x2kx4zazec5v5j/h?rlkey=9zbmslsw0h4m1h34svjmr90s0&amp;dl=0">OLD Dropbox link to post assignments (don’t use this)</a></p>
 <p><strong>Course Schedule and Timetable: Fall 2023</strong>
 September 11, 2023 – Fall term classes begin</p>
 <section id="week-1-sept-14">
@@ -521,7 +532,9 @@ Multivariate predictive classification and regression models (SVM, LASSO-PCR)</p
 </section>
 <section id="week-4-oct-5">
 <h3>Week 4: Oct 5<a class="headerlink" href="#week-4-oct-5" title="Permalink to this heading">#</a></h3>
-<p>Bayesian fundamentals
+<p><strong>No class</strong>
+Read/prep on:
+Bayesian fundamentals
 Empirical Bayes
 Bayes Factors</p>
 </section>
@@ -550,8 +563,6 @@ Kalman Filter</p>
 <h3>Week 10: Nov 16<a class="headerlink" href="#week-10-nov-16" title="Permalink to this heading">#</a></h3>
 <p>Present final projects
 November 14, 2023 – Fall term classes end</p>
-<p><a class="reference external" href="https://docs.google.com/document/d/16L0Tpt934ySmf4ZO2PbuJuljDOpbKylk9uapWjMoszM/edit#heading=h.u9fpxhsk33it">tor’s working doc</a></p>
-<p><a class="reference external" href="https://www.dropbox.com/scl/fo/cnaoqc60ht08ervbevlhf/h?rlkey=4cdlsoq22zv3ldhf3oxy63gtg&amp;dl=0">tor’s dropbox</a></p>
 </section>
 </section>
 <section id="final-projects">
@@ -562,6 +573,9 @@ November 14, 2023 – Fall term classes end</p>
 <li><p>Create a tutorial on a selected topic not already covered.</p></li>
 </ol>
 <p>Present your final project the last 2 weeks of class (20-30 min per presentation)</p>
+<p>Things you don’t need access to (for Tor’s organization):
+<a class="reference external" href="https://docs.google.com/document/d/16L0Tpt934ySmf4ZO2PbuJuljDOpbKylk9uapWjMoszM/edit#heading=h.u9fpxhsk33it">tor’s working doc</a></p>
+<p><a class="reference external" href="https://www.dropbox.com/scl/fo/cnaoqc60ht08ervbevlhf/h?rlkey=4cdlsoq22zv3ldhf3oxy63gtg&amp;dl=0">tor’s dropbox</a></p>
 <p>Built with <a class="reference external" href="https://jupyterbook.org">Jupyter Book</a></p>
 </section>
 </section>

@@ -2,7 +2,9 @@
 
 ## Ashar dataset
 
-Now that we've loaded the Ashar back pain dataset, we can try running a mixed effects model and compare:
+Now that we've loaded the Ashar back pain dataset, we can try running a mixed effects model and compare.
+
+Instead of organizing data in a "wide format" table with one row per participant, we can use the "long format" table, in which $y$ (i.e., Pain) is an $[mk x 1]$ vector with $k$ values measured for each of $m$ participants. We model the correlation between within-person repeated measures (Pre and Post-treatment pain) by including a random effect of participant in the error model.
 
 [Download the Matlab live script](matlab_live/ashar_backpain_lme_example.mlx)
 
@@ -11,6 +13,10 @@ Now that we've loaded the Ashar back pain dataset, we can try running a mixed ef
 ## Sleepstudy dataset
 
 This is a classic, and well-behaved, dataset included in R. We include it for comparison across methods and output.
+
+Here is a plot of the data (generated using part of the script below)
+![sleepstudy_individualslopes](images/sleepstudy_individualslopes.png)
+
 We'll fit this 3 ways:
 - Matlab fitlme
 - CANlab IGLS
@@ -19,6 +25,23 @@ We'll fit this 3 ways:
 [Download the Matlab live script](matlab_live/sleepstudy_lme_example.mlx)
 
 <iframe src="matlab_html/sleepstudy_lme_example.html" width="120%" height="800px"></iframe>
+
+## Comparing output from different packages
+
+Let's identify some key corresponding output in each model.
+
+### fitlme
+![sleepstudylme](images/sleepstudy_matlablme_1.png)
+![sleepstudylme](images/sleepstudy_matlablme_2.png)
+
+### lmer in R
+![sleepstudylmer](images/sleepstudy_lmer_1.png)
+![sleepstudylmer](images/sleepstudy_lmer_2.png)
+
+### IGLS
+![sleepstudyigls](images/sleepstudy_igls_1.png)
+![sleepstudyigls](images/sleepstudy_igls_2.png)
+![sleepstudyigls](images/sleepstudy_igls_3.png)
 
 ## Activities
 1. Fit the same model in R and/or python

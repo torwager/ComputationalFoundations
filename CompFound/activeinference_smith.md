@@ -15,9 +15,14 @@ This tutorial will first introduce the active inference framework at a conceptua
 ## References and Background Reading
 This tutorial will be based largely around the following paper:
 
--	Smith, R., Friston, K. J., & Whyte, C. J. (2022). A step-by-step tutorial on active inference and its application to empirical data. Journal of mathematical psychology, 107, 102632.
+-	Smith, R., Friston, K. J., & Whyte, C. J. (2022). A step-by-step tutorial on active inference and its application to empirical data. Journal of mathematical psychology, 107, 102632. [Smith 2022 Download](papers/Smith_2022_active_inference_tutorial.pdf)
 
--	MATLAB code from this paper that we will use can be found here: https://github.com/rssmith33/Active-Inference-Tutorial-Scripts
+-	MATLAB code from this paper that we will use can be found here:
+[https://github.com/rssmith33/Active-Inference-Tutorial-Scripts](https://github.com/rssmith33/Active-Inference-Tutorial-Scripts)
+
+**Before the course**: Read Appendix A of Smith et al. 2022 tutorial paper, and try the "paper and pencil" exercises in Appendix B.
+
+Also, read [this paper](papers/griffiths_bayeschapter.pdf) by Griffiths et al. It is an excellent introduction to Bayesian analysis and some key concepts that are broadly used.
 
 Some other papers that may be of interest for further conceptual background or mathematical details include:
 

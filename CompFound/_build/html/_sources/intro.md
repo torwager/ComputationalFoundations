@@ -3,6 +3,9 @@
 ## Psych 178 ##
 Fall 2023, Tor Wager
 
+Assignments:
+https://canvas.dartmouth.edu/courses/60516
+
 ```{tableofcontents}
 ```
 ## What it is, what it's not
@@ -37,7 +40,9 @@ This is why we're starting with some statistical tests that are the most useful 
 This book:
 https://torwager.github.io/ComputationalFoundations
 
-[Dropbox link to post assignments](https://www.dropbox.com/scl/fo/3te8rk6x2kx4zazec5v5j/h?rlkey=9zbmslsw0h4m1h34svjmr90s0&dl=0)
+[Canvas link for Assignments](https://canvas.dartmouth.edu/courses/60516)
+
+[OLD Dropbox link to post assignments (don't use this)](https://www.dropbox.com/scl/fo/3te8rk6x2kx4zazec5v5j/h?rlkey=9zbmslsw0h4m1h34svjmr90s0&dl=0)
 
 **Course Schedule and Timetable: Fall 2023**
 September 11, 2023 -- Fall term classes begin
@@ -63,6 +68,8 @@ Penalized regression (ridge, LASSO)
 Cross-validation
 Multivariate predictive classification and regression models (SVM, LASSO-PCR)
 ### Week 4: Oct 5
+**No class**
+Read/prep on:
 Bayesian fundamentals
 Empirical Bayes
 Bayes Factors
@@ -81,10 +88,6 @@ Present final projects
 Present final projects
 November 14, 2023 -- Fall term classes end
 
-[tor's working doc](https://docs.google.com/document/d/16L0Tpt934ySmf4ZO2PbuJuljDOpbKylk9uapWjMoszM/edit#heading=h.u9fpxhsk33it)
-
-[tor's dropbox](https://www.dropbox.com/scl/fo/cnaoqc60ht08ervbevlhf/h?rlkey=4cdlsoq22zv3ldhf3oxy63gtg&dl=0)
-
 ## Final projects
 
 Choose one:
@@ -92,5 +95,13 @@ Choose one:
 2. Create a tutorial on a selected topic not already covered.
 
 Present your final project the last 2 weeks of class (20-30 min per presentation)
+
+
+
+Things you don't need access to (for Tor's organization):
+[tor's working doc](https://docs.google.com/document/d/16L0Tpt934ySmf4ZO2PbuJuljDOpbKylk9uapWjMoszM/edit#heading=h.u9fpxhsk33it)
+
+[tor's dropbox](https://www.dropbox.com/scl/fo/cnaoqc60ht08ervbevlhf/h?rlkey=4cdlsoq22zv3ldhf3oxy63gtg&dl=0)
+
 
 Built with [Jupyter Book](https://jupyterbook.org)
