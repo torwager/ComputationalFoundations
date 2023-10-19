@@ -18,14 +18,17 @@ Guest instructor: Aryan Yazdanpanah
 
 Guest lecture: Heejung Jung
 
-Q learning tutorial using Open Ai's code
-https://github.com/jungheejung/cue_RL/tree/main
+Q learning tutorial using Open Ai's code:
+
+[Heejung Github](https://github.com/jungheejung/cue_RL/tree/main)
 
 Additional links (but use the github above!)
+
 Q learning tutorial:
 https://www.gocoder.one/blog/rl-tutorial-with-openai-gym/
 
 OpenAI's website (RL intro):
+
 https://spinningup.openai.com/en/latest/spinningup/rl_intro.html
 
 
