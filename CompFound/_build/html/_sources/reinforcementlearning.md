@@ -19,8 +19,15 @@ Guest instructor: Aryan Yazdanpanah
 Guest lecture: Heejung Jung
 
 Q learning tutorial using Open Ai's code
-Q learning tutorial: https://www.gocoder.one/blog/rl-tutorial-with-openai-gym/
-OpenAI's website (RL intro): https://spinningup.openai.com/en/latest/spinningup/rl_intro.html
+https://github.com/jungheejung/cue_RL/tree/main
+
+Additional links (but use the github above!)
+Q learning tutorial:
+https://www.gocoder.one/blog/rl-tutorial-with-openai-gym/
+
+OpenAI's website (RL intro):
+https://spinningup.openai.com/en/latest/spinningup/rl_intro.html
+
 
 ### Hands-on 3: Modeling cue effects on pain
 (and effort and vicarious pain) in SpaceTop
