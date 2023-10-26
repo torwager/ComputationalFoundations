@@ -30,3 +30,7 @@ parts:
   - caption: Reinforcement Learning
     chapters:
       - file: reinforcementlearning.md
+  - caption: Neural networks
+    chapters:
+      - file: recurrentneuralnets.md
+      - file: PsychRNN_Minimal_Example.ipynb
