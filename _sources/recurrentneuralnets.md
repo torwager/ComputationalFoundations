@@ -63,10 +63,17 @@ There are many choices to make in specifying and training a neural network, resu
 We'll use Murray Lab's RNN Python package:
 [https://github.com/murraylab/PsychRNN](https://github.com/murraylab/PsychRNN)
 
-
+The easiest way to install this is:
 pip install psychrnn
 
 
 Ehrlich, D. B.*, Stone, J. T.*, Brandfonbrener, D., Atanasov, A., & Murray, J. D. (2021). PsychRNN: An Accessible and Flexible Python Package for Training Recurrent Neural Network Models on Cognitive Tasks. ENeuro, 8(1).
 
 Start with Hello World to get a quick sense of what PsychRNN does. Then go through the Simple Example to get a feel for how to customize PsychRNN. The rest of Getting Started will help guide you through using available features, defining your own task, and even defining your own model.
+
+
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/murraylab/PsychRNN/blob/master/docs/notebooks/Minimal_Example.ipynb)
+
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](PsychRNN_Minimal_Example.ipynb)
+
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](PsychRNN_Minimal_Example.ipynb)
