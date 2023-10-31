@@ -1,0 +1,1496 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Fundamental statistical principles &#8212; Computational Foundations for Neuroscience</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Basic_principles_Distance_covariance_correlation-Python';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/yellow_flower_logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/yellow_flower_logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Computational foundations for Neuroscience
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Preliminary background</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="startingresources.html">Some resources</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="topicmenu.html">A menu of topics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basicdistancecovcorr.html">Fundamentals of distance, covariance, and correlation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="statsinmatlab.html">Stats in Matlab</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">General linear model (GLM)</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="glm1.html">General Linear Model (GLM)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glm2_param_inference.html">Parametric inference in the GLM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glm3_ashardataset.html">Sample dataset and analysis 1: Ashar 2022</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glm4_parameterizingglm.html">Parameterizing models in a GLM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glm5_weightedleastsquares.html">Generalized Least Squares (GLS)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glm6_matlab_glm_answerkey.html">A hand-coded GLM in MATLAB</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Mixed effects</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="mixedfx1_intro.html">Mixed effects: Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mixedfx2_examples.html">Mixed effects: Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mixedfx3_algebra.html">Mixed effects algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mixedfx4_fpr_power_sims.html">Mixed effects simulations</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Bayesian models</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="activeinference_smith.html">Active inference</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Reinforcement Learning</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="reinforcementlearning.html">Reinforcement Learning</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Neural networks</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="recurrentneuralnets.html">Recurrent Neural networks</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/torwager/ComputationalFoundations" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/torwager/ComputationalFoundations/edit/master/docs/Basic_principles_Distance_covariance_correlation-Python.ipynb" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/torwager/ComputationalFoundations/issues/new?title=Issue%20on%20page%20%2FBasic_principles_Distance_covariance_correlation-Python.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/Basic_principles_Distance_covariance_correlation-Python.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1><span style="color:rgb(213,80,0)">Fundamental statistical principles</span></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><span style="color:rgb(213,80,0)">Fundamental statistical principles</span></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#table-of-contents">Table of Contents</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#notebook-setup">Notebook setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vectors-and-matrices">Vectors and matrices</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vector-similarity-and-distance">Vector similarity and distance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vector-magnitude-norm-and-sums-of-squares">Vector magnitude, norm, and sums of squares</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#covariance-and-correlation">Covariance and correlation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#orthogonality-correlation-and-independence">Orthogonality, correlation, and independence</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#projection">Projection</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#extension-to-matrices">Extension to matrices</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-combinations">Linear combinations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matrix-variance-covariance">Matrix variance/covariance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#independence-of-columns">Independence of columns</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basis-sets">Basis sets</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rotations">Rotations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#projections">Projections</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multivariate-distance-mahalanobis">Multivariate distance (Mahalanobis)</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="span-style-color-rgb-213-80-0-fundamental-statistical-principles-span">
+<h1><span style="color:rgb(213,80,0)">Fundamental statistical principles</span><a class="headerlink" href="#span-style-color-rgb-213-80-0-fundamental-statistical-principles-span" title="Permalink to this heading">#</a></h1>
+<p>  Author: Paxton Fitzpatrick<br>  Adapted from MATLAB version by Tor Wager, Fall 2023</p>
+<section id="table-of-contents">
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Permalink to this heading">#</a></h2>
+<p>  <span class="xref myst">Notebook setup</span><br />
+  <span class="xref myst">Vectors and matrices</span><br />
+  <span class="xref myst">Vector similarity and distance</span><br />
+  <span class="xref myst">Vector magnitude, norm, and sums of squares</span><br />
+  <span class="xref myst">Covariance and correlation</span><br />
+  <span class="xref myst">Orthogonality, correlation, and independence</span><br />
+  <span class="xref myst">Projection</span></p>
+<p><span class="xref myst">Extension to matrices</span><br />
+  <span class="xref myst">Linear combinations</span><br />
+  <span class="xref myst">Matrix variance/covariance</span><br />
+  <span class="xref myst">Independence of columns</span><br />
+  <span class="xref myst">Basis sets</span><br />
+  <span class="xref myst">Rotations</span><br />
+  <span class="xref myst">Projections</span><br />
+  <span class="xref myst">Multivariate distance (Mahalanobis)</span></p>
+</section>
+<section id="notebook-setup">
+<h2>Notebook setup<a class="headerlink" href="#notebook-setup" title="Permalink to this heading">#</a></h2>
+<p>These first two cells define some functions that help make the code and plots below look as similar to the MATLAB version of this notebook as possible.</p>
+<p><span class="xref myst"><strong>Click here to jump to the first section below</strong></span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">mpl_toolkits.mplot3d.art3d</span> <span class="kn">import</span> <span class="n">Path3DCollection</span>
+
+
+<span class="k">def</span> <span class="nf">draw_3d_axes</span><span class="p">(</span><span class="n">limits</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">xtick_freq</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ytick_freq</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ztick_freq</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> 
+                 <span class="n">axes_kwargs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cross_kwargs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">view_kwargs</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create and draw a set of 3D axes pre-styled to look as similar to </span>
+<span class="sd">    the MATLAB/CanlabCore version of this notebook as possible.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># &quot;limits&quot; can be an int/float (min/max of all 3 axes), 3-tuple of </span>
+    <span class="c1"># int/float (min/max for each axis), or 3-tuple of 2-tuples </span>
+    <span class="c1"># (separate min &amp; max for each axis)</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">limits</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
+        <span class="n">xmin</span><span class="p">,</span> <span class="n">ymin</span><span class="p">,</span> <span class="n">zmin</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="n">limits</span><span class="p">,)</span> <span class="o">*</span> <span class="mi">3</span>
+        <span class="n">xmax</span><span class="p">,</span> <span class="n">ymax</span><span class="p">,</span> <span class="n">zmax</span> <span class="o">=</span> <span class="p">(</span><span class="n">limits</span><span class="p">,)</span> <span class="o">*</span> <span class="mi">3</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">limits</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">limits</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
+            <span class="n">xmin</span><span class="p">,</span> <span class="n">ymin</span><span class="p">,</span> <span class="n">zmin</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">limits</span><span class="p">)</span>
+            <span class="n">xmax</span><span class="p">,</span> <span class="n">ymax</span><span class="p">,</span> <span class="n">zmax</span> <span class="o">=</span> <span class="n">limits</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">),</span> <span class="p">(</span><span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span><span class="p">),</span> <span class="p">(</span><span class="n">zmin</span><span class="p">,</span> <span class="n">zmax</span><span class="p">)</span> <span class="o">=</span> <span class="n">limits</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">&quot;&#39;limits&#39; may be an int/float, 3-tuple of int/float, or &quot;</span>
+            <span class="s2">&quot;3-tuple of 3-tuples of int/float&quot;</span>
+        <span class="p">)</span>
+        
+    <span class="n">xtick_freq</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">xtick_freq</span><span class="p">,</span> <span class="nb">abs</span><span class="p">(</span><span class="n">xmin</span><span class="p">),</span> <span class="nb">abs</span><span class="p">(</span><span class="n">xmax</span><span class="p">))</span>
+    <span class="n">ytick_freq</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">ytick_freq</span><span class="p">,</span> <span class="nb">abs</span><span class="p">(</span><span class="n">ymin</span><span class="p">),</span> <span class="nb">abs</span><span class="p">(</span><span class="n">ymax</span><span class="p">))</span>
+    <span class="n">ztick_freq</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">ztick_freq</span><span class="p">,</span> <span class="nb">abs</span><span class="p">(</span><span class="n">zmin</span><span class="p">),</span> <span class="nb">abs</span><span class="p">(</span><span class="n">zmax</span><span class="p">))</span>
+        
+    <span class="n">axes_kwargs</span> <span class="o">=</span> <span class="n">axes_kwargs</span> <span class="ow">or</span> <span class="p">{}</span>
+    <span class="n">cross_kwargs</span> <span class="o">=</span> <span class="n">cross_kwargs</span> <span class="ow">or</span> <span class="p">{}</span>
+    <span class="n">view_kwargs</span> <span class="o">=</span> <span class="n">view_kwargs</span> <span class="ow">or</span> <span class="p">{}</span>
+    
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">,</span> <span class="n">computed_zorder</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    
+    <span class="c1"># plot cross at origin</span>
+    <span class="n">cross_lw</span> <span class="o">=</span> <span class="n">cross_kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;lw&#39;</span><span class="p">,</span> <span class="n">cross_kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;linewidth&#39;</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">))</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="n">cross_lw</span><span class="p">,</span> <span class="o">**</span><span class="n">cross_kwargs</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="n">cross_lw</span><span class="p">,</span> <span class="o">**</span><span class="n">cross_kwargs</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="n">zmin</span><span class="p">,</span> <span class="n">zmax</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="n">cross_lw</span><span class="p">,</span> <span class="o">**</span><span class="n">cross_kwargs</span><span class="p">)</span>
+    
+    <span class="c1"># set axis limits, labels, ticks, and any other styling passed</span>
+    <span class="n">xticks</span> <span class="o">=</span> <span class="n">axes_kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;xticks&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="o">+</span><span class="n">xtick_freq</span><span class="p">,</span> <span class="n">xtick_freq</span><span class="p">))</span>
+    <span class="n">yticks</span> <span class="o">=</span> <span class="n">axes_kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;yticks&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span><span class="o">+</span><span class="n">ytick_freq</span><span class="p">,</span> <span class="n">ytick_freq</span><span class="p">))</span>
+    <span class="n">zticks</span> <span class="o">=</span> <span class="n">axes_kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;zticks&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">zmin</span><span class="p">,</span> <span class="n">zmax</span><span class="o">+</span><span class="n">ztick_freq</span><span class="p">,</span> <span class="n">ztick_freq</span><span class="p">))</span>
+    <span class="n">xlabel</span> <span class="o">=</span> <span class="n">axes_kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;xlabel&#39;</span><span class="p">,</span> <span class="s1">&#39;X1&#39;</span><span class="p">)</span>
+    <span class="n">ylabel</span> <span class="o">=</span> <span class="n">axes_kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;ylabel&#39;</span><span class="p">,</span> <span class="s1">&#39;X2&#39;</span><span class="p">)</span>
+    <span class="n">zlabel</span> <span class="o">=</span> <span class="n">axes_kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;zlabel&#39;</span><span class="p">,</span> <span class="s1">&#39;X3&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlim</span><span class="o">=</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">),</span> <span class="n">ylim</span><span class="o">=</span><span class="p">(</span><span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span><span class="p">),</span> <span class="n">zlim</span><span class="o">=</span><span class="p">(</span><span class="n">zmin</span><span class="p">,</span> <span class="n">zmax</span><span class="p">),</span> 
+           <span class="n">xticks</span><span class="o">=</span><span class="n">xticks</span><span class="p">,</span> <span class="n">yticks</span><span class="o">=</span><span class="n">yticks</span><span class="p">,</span> <span class="n">zticks</span><span class="o">=</span><span class="n">zticks</span><span class="p">,</span> 
+           <span class="n">xlabel</span><span class="o">=</span><span class="n">xlabel</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="n">ylabel</span><span class="p">,</span> <span class="n">zlabel</span><span class="o">=</span><span class="n">zlabel</span><span class="p">,</span> 
+           <span class="o">**</span><span class="n">axes_kwargs</span><span class="p">)</span>
+    
+    <span class="c1"># remove background grid </span>
+    <span class="k">for</span> <span class="n">axis</span> <span class="ow">in</span> <span class="p">(</span><span class="n">ax</span><span class="o">.</span><span class="n">xaxis</span><span class="p">,</span> <span class="n">ax</span><span class="o">.</span><span class="n">yaxis</span><span class="p">,</span> <span class="n">ax</span><span class="o">.</span><span class="n">zaxis</span><span class="p">):</span>
+        <span class="n">axis</span><span class="o">.</span><span class="n">pane</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">axis</span><span class="o">.</span><span class="n">gridlines</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+        
+    <span class="c1"># show z-axis on left instead of right</span>
+    <span class="n">tmp_planes</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">zaxis</span><span class="o">.</span><span class="n">_PLANES</span> 
+    <span class="n">ax</span><span class="o">.</span><span class="n">zaxis</span><span class="o">.</span><span class="n">_PLANES</span> <span class="o">=</span> <span class="p">(</span><span class="n">tmp_planes</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">tmp_planes</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> 
+                        <span class="n">tmp_planes</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">tmp_planes</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> 
+                        <span class="n">tmp_planes</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">tmp_planes</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span>
+    
+    <span class="c1"># adjust view</span>
+    <span class="n">elev</span> <span class="o">=</span> <span class="n">view_kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;elev&#39;</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
+    <span class="n">azim</span> <span class="o">=</span> <span class="n">view_kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;azim&#39;</span><span class="p">,</span> <span class="o">-</span><span class="mi">20</span><span class="p">)</span>
+    <span class="n">roll</span> <span class="o">=</span> <span class="n">view_kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;roll&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">view_init</span><span class="p">(</span><span class="n">elev</span><span class="o">=</span><span class="n">elev</span><span class="p">,</span> <span class="n">azim</span><span class="o">=</span><span class="n">azim</span><span class="p">,</span> <span class="n">roll</span><span class="o">=</span><span class="n">roll</span><span class="p">,</span> <span class="o">**</span><span class="n">view_kwargs</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">ax</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">from</span> <span class="nn">mpl_toolkits.mplot3d.art3d</span> <span class="kn">import</span> <span class="n">Path3DCollection</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="k">def</span> <span class="nf">draw_3d_axes</span><span class="p">(</span><span class="n">limits</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">xtick_freq</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ytick_freq</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ztick_freq</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> 
+<span class="g g-Whitespace">      </span><span class="mi">7</span>                  <span class="n">axes_kwargs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cross_kwargs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">view_kwargs</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;matplotlib&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">draw_vector</span><span class="p">(</span><span class="n">xyz</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="n">headsize</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Plot a vector styled as similarly to the MATLAB/CanlabCore version </span>
+<span class="sd">    of this function as possible.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">ax</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+    
+    <span class="n">lw</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;lw&#39;</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;linewidth&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+    <span class="c1"># draw vector arrow</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">quiver</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">*</span><span class="n">xyz</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="n">lw</span><span class="p">,</span> <span class="n">arrow_length_ratio</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="c1"># replace arrowhead with dot</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="o">*</span><span class="n">xyz</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="n">headsize</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
+    
+    <span class="c1"># recompute data boundaries from plot</span>
+    <span class="n">curr_xmin</span><span class="p">,</span> <span class="n">curr_xmax</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_xlim</span><span class="p">()</span>
+    <span class="n">curr_ymin</span><span class="p">,</span> <span class="n">curr_ymax</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_ylim</span><span class="p">()</span>
+    <span class="n">curr_zmin</span><span class="p">,</span> <span class="n">curr_zmax</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_zlim</span><span class="p">()</span>
+    <span class="n">vecs</span> <span class="o">=</span> <span class="p">[[</span><span class="n">curr_xmin</span><span class="p">,</span> <span class="n">curr_ymin</span><span class="p">,</span> <span class="n">curr_zmin</span><span class="p">],</span> 
+            <span class="p">[</span><span class="n">curr_xmax</span><span class="p">,</span> <span class="n">curr_ymax</span><span class="p">,</span> <span class="n">curr_zmax</span><span class="p">]]</span>
+    <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">ax</span><span class="o">.</span><span class="n">collections</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">Path3DCollection</span><span class="p">):</span>
+            <span class="n">vecs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">_offsets3d</span><span class="p">)</span><span class="o">.</span><span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            
+    <span class="n">axes_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">(</span><span class="n">vecs</span><span class="p">)</span>
+    
+    <span class="c1"># update axes bounds</span>
+    <span class="n">xmin</span><span class="p">,</span> <span class="n">ymin</span><span class="p">,</span> <span class="n">zmin</span> <span class="o">=</span> <span class="n">axes_data</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">xmax</span><span class="p">,</span> <span class="n">ymax</span><span class="p">,</span> <span class="n">zmax</span> <span class="o">=</span> <span class="n">axes_data</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">xtick_freq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">ax</span><span class="o">.</span><span class="n">get_xticks</span><span class="p">())[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">ytick_freq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">ax</span><span class="o">.</span><span class="n">get_yticks</span><span class="p">())[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">ztick_freq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">ax</span><span class="o">.</span><span class="n">get_zticks</span><span class="p">())[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">xticks</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span> <span class="o">+</span> <span class="n">xtick_freq</span><span class="p">,</span> <span class="n">xtick_freq</span><span class="p">)</span>
+    <span class="n">yticks</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span> <span class="o">+</span> <span class="n">ytick_freq</span><span class="p">,</span> <span class="n">ytick_freq</span><span class="p">)</span>
+    <span class="n">zticks</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">zmin</span><span class="p">,</span> <span class="n">zmax</span> <span class="o">+</span> <span class="n">ztick_freq</span><span class="p">,</span> <span class="n">ztick_freq</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlim</span><span class="o">=</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">),</span> <span class="n">ylim</span><span class="o">=</span><span class="p">(</span><span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span><span class="p">),</span> <span class="n">zlim</span><span class="o">=</span><span class="p">(</span><span class="n">zmin</span><span class="p">,</span> <span class="n">zmax</span><span class="p">),</span>
+           <span class="n">xticks</span><span class="o">=</span><span class="n">xticks</span><span class="p">,</span> <span class="n">yticks</span><span class="o">=</span><span class="n">yticks</span><span class="p">,</span> <span class="n">zticks</span><span class="o">=</span><span class="n">zticks</span><span class="p">)</span>
+    
+    <span class="c1"># re-equalize aspect ratio</span>
+    <span class="n">xyz_ranges</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ptp</span><span class="p">(</span><span class="n">axes_data</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_box_aspect</span><span class="p">(</span><span class="n">xyz_ranges</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="vectors-and-matrices">
+<h2>Vectors and matrices<a class="headerlink" href="#vectors-and-matrices" title="Permalink to this heading">#</a></h2>
+<p><strong>Vectors</strong> describe locations in multidimensional space. Each element of a vector describes a dimension in space. If a vector can take on any set of values in <span class="math notranslate nohighlight">\(n\)</span>-dimensional space, we say that it lies in <span class="math notranslate nohighlight">\({\mathbb{R}}^n\)</span>. By convention, we’ll use column vectors in our notation, and row vectors will be indicated by their transpose, <span class="math notranslate nohighlight">\(a^{\prime}\)</span> (or <span class="math notranslate nohighlight">\(a^{T}\)</span>).</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} 
+\begin{align*}
+  \mathbf{a} = \begin{bmatrix}
+    a_{1} \\
+    a_{2} \\
+    a_{3} \\
+  \end{bmatrix}
+  \quad
+  &amp;
+  \quad
+  \mathbf{a^T} = \begin{bmatrix}
+    a_{1} &amp; a_{2} &amp; a_{3} \\
+  \end{bmatrix}
+\end{align*}
+\end{split}\]</div>
+<p><strong>Matrices</strong>, in the way we use them here in statistical models, generally describe a set of <span class="math notranslate nohighlight">\(m\)</span> observations in <span class="math notranslate nohighlight">\(n\)</span>-dimensional space. Rows usually represent observations, and columns dimensions. So an <span class="math notranslate nohighlight">\(\left[m \times n\right]\)</span> matrix may describe a dataset of <span class="math notranslate nohighlight">\(m\)</span> subjects measured on <span class="math notranslate nohighlight">\(n\)</span> independent variables. If these measures are predictors in a linear model, these constitute a <strong>design matrix</strong>, <span class="math notranslate nohighlight">\(X\)</span> (or sometimes <span class="math notranslate nohighlight">\(Z\)</span>). A vector transposed times itself is the sum of the element-wise products of the elements. This is the <a class="reference external" href="https://en.wikipedia.org/wiki/Dot_product"><strong>dot product</strong></a> or the <strong>scalar product</strong> in linear algebra. It is fundamental to measures of similarity, variance, and other aspects of the linear model equations.</p>
+<div class="math notranslate nohighlight">
+\[
+a \cdot b = a^T b = b^T a = \sum_{i=1}^n a_i b_i
+\]</div>
+<p>With a vector with three elements, which represents a point in three-dimensional space, this is:</p>
+<div class="math notranslate nohighlight">
+\[
+a \cdot b = a_x b_x + a_y b_y + a_z b_z
+\]</div>
+<p>In matrix notation, this works out to:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+a \cdot b = a^T b = a^{\prime} b = \begin{bmatrix}
+    a_{1} &amp; a_{2} &amp; a_{3} \\
+  \end{bmatrix}
+  \cdot 
+  \begin{bmatrix}
+    b_{1} \\
+    b_{2} \\
+    b_{3} \\
+  \end{bmatrix}
+\end{split}\]</div>
+</section>
+<section id="vector-similarity-and-distance">
+<h2>Vector similarity and distance<a class="headerlink" href="#vector-similarity-and-distance" title="Permalink to this heading">#</a></h2>
+<p>The dot product of two vectors <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> is related to both their magnitudes and the similarity of the angle between them. We can think of it as a scale-dependent measure of similarity.</p>
+<div class="math notranslate nohighlight">
+\[
+x \cdot y = \| x \| \cdot \| y \|~\cos(\theta_{xy})
+\]</div>
+<p>The cosine of the angle between the vectors is called the <strong>cosine similarity,</strong> and it provides a “scale-free” measure of similarity:</p>
+<div class="math notranslate nohighlight">
+\[
+\cos(\theta_{xy}) = \frac{x \cdot y}{\| x \| \cdot \|y\|}
+\]</div>
+<p>This is a commonly used distance metric, where the distance is related to the similarity of the two vectors in multidimensional space.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="n">draw_3d_axes</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">ztick_freq</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">draw_vector</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">)</span>
+<span class="n">draw_vector</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="p">[</span><span class="mf">.2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">.2</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/76aaac9df8358d069fdd1a9e29a32c44da3968341d2d01a3ad235d6756a1ce23.png" src="_images/76aaac9df8358d069fdd1a9e29a32c44da3968341d2d01a3ad235d6756a1ce23.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># define a function that calculates cosine similarity</span>
+<span class="k">def</span> <span class="nf">cos_sim</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
+
+
+<span class="c1"># or, alternatively:</span>
+<span class="kn">from</span> <span class="nn">scipy.spatial.distance</span> <span class="kn">import</span> <span class="n">cosine</span>
+<span class="k">def</span> <span class="nf">cos_sim_alt</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">cosine</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+
+<span class="c1"># calculate the cosine sim</span>
+<span class="n">cossim_xy</span> <span class="o">=</span> <span class="n">cos_sim</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="c1"># (also calculate it with the alternative function to show they&#39;re the same)</span>
+<span class="n">cossim_xy_alt</span> <span class="o">=</span> <span class="n">cos_sim_alt</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">cossim_xy</span><span class="w"> </span><span class="si">= }</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">cossim_xy_alt</span><span class="w"> </span><span class="si">= }</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>cossim_xy = -0.3779644730092272
+cossim_xy_alt = -0.3779644730092273
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># calculate theta, the angle (in radians)</span>
+<span class="n">theta_hat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arccos</span><span class="p">(</span><span class="n">cossim_xy</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">theta_hat</span><span class="w"> </span><span class="si">= }</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># convert radians to degrees. radians = (pi/180) * degrees</span>
+<span class="n">theta_hat</span> <span class="o">*</span> <span class="mi">180</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span>  <span class="c1"># in degrees</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>theta_hat = 1.958393013450077
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>112.2076542985965
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Euclidean distances</strong> are calculated as the straight-line distances between points. By the Pythagorean Theorem, <span class="math notranslate nohighlight">\(c^2 = a^2 + b^2\)</span>, so <span class="math notranslate nohighlight">\(c = \sqrt{a^2 + b^2}\)</span>. Here, <span class="math notranslate nohighlight">\(\mathbf{a}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{b}\)</span> are dimensions, defined by elements of <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{y}\)</span>. So the dot product <span class="math notranslate nohighlight">\(\left[ x - y\right]^T \left[x - y \right]\)</span> is a measure of the squared geometric distance between <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{y}\)</span>. The Euclidean distance is the root mean square.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">eucliddist</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">y</span><span class="p">))</span> <span class="o">**</span> <span class="mf">0.5</span>
+
+
+<span class="c1"># is the same as</span>
+<span class="k">def</span> <span class="nf">eucliddist2</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">y</span><span class="p">,</span> <span class="n">x</span> <span class="o">-</span> <span class="n">y</span><span class="p">))</span>
+    
+<span class="c1"># and also the same as</span>
+<span class="k">def</span> <span class="nf">eucliddist3</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">))</span>
+
+
+<span class="c1"># or, more simply</span>
+<span class="k">def</span> <span class="nf">eucliddist4</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">eucliddist</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="si">= }</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">eucliddist2</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="si">= }</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">eucliddist3</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="si">= }</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">eucliddist4</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="si">= }</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>eucliddist(x, y) = 4.47213595499958
+eucliddist2(x, y) = 4.47213595499958
+eucliddist3(x, y) = 4.47213595499958
+eucliddist4(x, y) = 4.47213595499958
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># SciPy is a free and open-source Python library used for scientific and </span>
+<span class="c1"># technical computing. It contains modules for optimization, linear </span>
+<span class="c1"># algebra, integration, interpolation, special functions, FFT, signal </span>
+<span class="c1"># and image processing, ODE solvers, and other tasks common in science </span>
+<span class="c1"># and engineering. </span>
+<span class="c1"># Within SciPy, the scipy.spatial.distance module&#39;s &quot;pdist&quot; function </span>
+<span class="c1"># calculates pairwise distances between any set of points (vectors), </span>
+<span class="c1"># where rows define the points and columns the dimensions of the space.</span>
+
+<span class="c1"># Note: in the equivalent MATLAB code, `d = pdist([x&#39;; y&#39;], &#39;Euclidean&#39;)`,</span>
+<span class="c1"># `[x&#39;; y&#39;]` vertically concatenates (stacks) the two vectors `x` and `y`.</span>
+<span class="c1"># The `numpy.vstack()` function does the same thing in Python.</span>
+<span class="kn">from</span> <span class="nn">scipy.spatial.distance</span> <span class="kn">import</span> <span class="n">pdist</span>
+
+<span class="n">d</span> <span class="o">=</span> <span class="n">pdist</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)),</span> <span class="s1">&#39;euclidean&#39;</span><span class="p">)</span> <span class="c1"># like in MATLAB, Euclidean distance is the default metric</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">d</span><span class="w"> </span><span class="si">= }</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>d = array([4.47213595])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot two vectors in 3-D space: a in blue, b in green.</span>
+<span class="c1"># Show the distance as a dashed black line.</span>
+<span class="n">draw_3d_axes</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">ztick_freq</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">draw_vector</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">)</span>
+<span class="n">draw_vector</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="p">[</span><span class="mf">.2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">.2</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="mi">2</span><span class="p">]],</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/ac1e57e80ff0427ea832502797258909bdd663695be996b88bace2b3609f84ea.png" src="_images/ac1e57e80ff0427ea832502797258909bdd663695be996b88bace2b3609f84ea.png" />
+</div>
+</div>
+</section>
+<section id="vector-magnitude-norm-and-sums-of-squares">
+<h2>Vector magnitude, norm, and sums of squares<a class="headerlink" href="#vector-magnitude-norm-and-sums-of-squares" title="Permalink to this heading">#</a></h2>
+<p><span class="math notranslate nohighlight">\(x^\prime x\)</span> (or <span class="math notranslate nohighlight">\(x^T x\)</span>) is the sum of squared values.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]])</span><span class="o">.</span><span class="n">T</span>  <span class="c1"># or, x = np.array([[1], [2], [3]])</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">x</span><span class="w"> </span><span class="si">= }</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="w"> </span><span class="si">= }</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">((</span><span class="n">x</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">item</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="mi">1</span><span class="o">**</span><span class="mi">2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2</span><span class="o">**</span><span class="mi">2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">3</span><span class="o">**</span><span class="mi">2</span><span class="w"> </span><span class="si">= }</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>x = array([[1],
+       [2],
+       [3]])
+x.shape = (3, 1)
+14
+1**2 + 2**2 + 3**2 = 14
+</pre></div>
+</div>
+</div>
+</div>
+<p>In geometric terms, the square root of <span class="math notranslate nohighlight">\(x^\prime x\)</span> (a.k.a. <span class="math notranslate nohighlight">\(x^T x\)</span>), or <span class="math notranslate nohighlight">\(\sqrt{\| x \|}\)</span> , is the distance from zero. This is the vector’s <strong>magnitude</strong>, also known as it’s <strong>2-norm</strong> or  <strong>L2-norm,</strong> or <strong>Euclidean norm.</strong> A <strong>unit vector</strong> is a vector with a magnitude of 1, often used to represent a direction without regard to magnitude.The dot product <span class="math notranslate nohighlight">\(x^\prime x\)</span> is a measure of the squared geometric distance from 0. The Euclidean distance from zero is its square root.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span> <span class="o">=</span> <span class="n">draw_3d_axes</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">xtick_freq</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">ytick_freq</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">draw_vector</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/da305cc4a9d66fcf8cae08c02e797dbbb59b231fb69c510ff086a88dfc9d4710.png" src="_images/da305cc4a9d66fcf8cae08c02e797dbbb59b231fb69c510ff086a88dfc9d4710.png" />
+</div>
+</div>
+<p>In a linear model, the 3 dimensions here can represent observations or model predictors, depending on the equation in question. If zero is a meaningful value, then <span class="math notranslate nohighlight">\(x^\prime x\)</span> takes on particular meaning. For example, if <span class="math notranslate nohighlight">\(x\)</span> is an <span class="math notranslate nohighlight">\(\left[m \times 1\right]\)</span> vector of residuals from <span class="math notranslate nohighlight">\(m\)</span> observations, <span class="math notranslate nohighlight">\(e\)</span>, from a linear model, then <span class="math notranslate nohighlight">\(e^\prime e\)</span> is the  <strong>sums of squared errors (SSE).</strong> So the SSE is (1) the norm of the error vector and (2) the distance of the error vector from 0 in a space defined my <span class="math notranslate nohighlight">\(m\)</span> independent observations. The <strong>mean squared error</strong> (MSE) is the average squared error per observation (element of <span class="math notranslate nohighlight">\(e\)</span>), or <span class="math notranslate nohighlight">\(\frac{x^\prime x}{m}\)</span></p>
+</section>
+<section id="covariance-and-correlation">
+<h2>Covariance and correlation<a class="headerlink" href="#covariance-and-correlation" title="Permalink to this heading">#</a></h2>
+<p>Often, the mean of a vector is uninteresting, and we want to understand how observations vary around the mean. This is generally true in statistics, where we are usually interested in analyzing variation among observations. <strong>Variance</strong> is a measure of deviations around a sample mean. It is defined as the mean squared deviation from the sample mean, divided by the <strong>degrees of freedom</strong> (df). The <strong>df</strong> is the number of independent dimensions along which scores can vary. Here this is the number of independent observations - 1 (as we have estimated the mean). Here we use <span class="math notranslate nohighlight">\(m - 1\)</span> instead of <span class="math notranslate nohighlight">\(m\)</span> to account for the loss of a degree of freedom when estimating the sample mean:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathrm{var}(x) = \frac{(x - \bar{x} )^T (x - \bar{x})}{m - 1} = \frac{\| x \|^2}{m - 1}
+\]</div>
+<p>The standard deviation is the square root of variance. If <span class="math notranslate nohighlight">\(e\)</span> is a vector of errors from a model:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathrm{var}(e) = \sigma^2, \quad \mathrm{std}(e) = \sigma
+\]</div>
+<p>Covariance is a measure of similarity of shared deviations from a mean. The covariance of two <span class="math notranslate nohighlight">\(m\)</span>-length vectors <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> is:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathrm{cov}(x, y) = \frac{(x - \bar{x})^T (y - \bar{y})}{m - 1}
+\]</div>
+<p>Covariance is often defined in terms of the expected values of <strong>random variables,</strong> which do not have discrete values but instead are:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+  \mathrm{Cov}(X, Y) &amp;= E\left[(X - E \left[ X \right])(Y - E\left[ Y \right])\right] \\
+  \mathrm{Cov}(X, Y) &amp;= E\left[XY\right]-E\left[X\right]E\left[Y\right]
+\end{align*}
+\end{split}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate instances of two normally distributed random variables a and b,</span>
+<span class="c1"># with m = 10 observations each.</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>    <span class="c1"># Seed the random state for consistent output</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="n">cv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">cv</span><span class="w"> </span><span class="si">= }</span><span class="s2">&quot;</span><span class="p">)</span>
+
+
+<span class="n">cv2</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span> <span class="o">-</span> <span class="n">a</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="p">(</span><span class="n">b</span> <span class="o">-</span> <span class="n">b</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span> <span class="o">/</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">cv2</span><span class="w"> </span><span class="si">= }</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Note: `cv` is the covariance *matrix*; `cv2` is specifically the </span>
+<span class="c1"># covariance between `a` &amp; `b`, which is the upper right &amp; lower left </span>
+<span class="c1"># elements of the matrix</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>cv = array([[0.03781221, 0.02337308],
+       [0.02337308, 0.12876287]])
+cv2 = 0.023373083984198725
+</pre></div>
+</div>
+</div>
+</div>
+<p>Like the dot product, the units of covariance depend on the <strong>scale</strong> of the variables. For example, we can measure reaction times in seconds or minutes, and changing the units affects the scale of the  response (and thus the mean, variance, and covariance), but not the similarity in reaction times across two tasks. <strong>Correlation</strong> additionally scales each variable by its variance. For a <span class="math notranslate nohighlight">\(z\)</span>-scored variable standardized to mean 0 and standard deviation 1:</p>
+<div class="math notranslate nohighlight">
+\[
+z_x = \frac{x - \bar{x}}{\mathrm{std}(x)}, \quad z_y = \frac{y - \bar{y}}{\mathrm{std}(y)}
+\]</div>
+<p>Pearson’s correlation (<span class="math notranslate nohighlight">\(r\)</span>) is the covariance of the standardized variables:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">zscore</span><span class="p">,</span> <span class="n">pearsonr</span>
+
+<span class="c1"># Note: calling `scipy.stats.zscore` with `ddof=0` (the default) computes</span>
+<span class="c1"># the z-score based on the *population* standard deviation. Passing </span>
+<span class="c1"># `ddof=1` computes it based on the sample standard deviation, which is </span>
+<span class="c1"># the default behavior of MATLAB&#39;s `zscore` function </span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="n">zscore</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">zscore</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)),</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="c1"># or equivalently:</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="c1"># or, more conveniently for only two sets of observations:</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pearsonr</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="c1"># and finally, as shown in the MATLAB version:</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">cv</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">cv</span><span class="p">)</span> <span class="o">**</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">r</span><span class="w"> </span><span class="si">= }</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[1.         0.33496905]
+ [0.33496905 1.        ]] 
+
+[[1.         0.33496905]
+ [0.33496905 1.        ]] 
+
+PearsonRResult(statistic=0.3349690490522055, pvalue=0.3440851015397072) 
+
+r = 0.3349690490522054
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="orthogonality-correlation-and-independence">
+<h2>Orthogonality, correlation, and independence<a class="headerlink" href="#orthogonality-correlation-and-independence" title="Permalink to this heading">#</a></h2>
+<p>Orthogonality refers to the concept of two vectors being perpendicular to each other in a given vector space. Mathematically, two vectors <span class="math notranslate nohighlight">\(\mathbf{a}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{b}\)</span> are orthogonal if and only if their dot product is zero. This means that they are at <em>right angles</em> to one another.</p>
+<p>Below, we’ll plot two vectors in 3-D space: <span class="math notranslate nohighlight">\(\mathbf{a}\)</span> in blue, <span class="math notranslate nohighlight">\(\mathbf{b}\)</span> in green.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">draw_3d_axes</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">draw_vector</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">)</span>
+<span class="n">draw_vector</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="p">[</span><span class="mf">.2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">.2</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">view_init</span><span class="p">(</span><span class="mf">9.29</span><span class="p">,</span> <span class="o">-</span><span class="mf">88.59</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/4e433ae5a23c393f167dc757a0569d945ec5ddee4272a101660ca378cc13ec42.png" src="_images/4e433ae5a23c393f167dc757a0569d945ec5ddee4272a101660ca378cc13ec42.png" />
+</div>
+</div>
+<p>Does this mean that they are uncorrelated?</p>
+<p>Does it mean that they are linearly independent?</p>
+<p>These are different concepts:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> are linearly independent iff there is no constant  <span class="math notranslate nohighlight">\(a\)</span> such that <span class="math notranslate nohighlight">\(aX -  Y = 0\)</span>. Unless vectors are perfectly aligned so that <span class="math notranslate nohighlight">\(\vert\mathrm{cos}(\theta)\vert=1\)</span>, vectors are linearly independent.</p></li>
+<li><p><span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> are orthogonal iff <span class="math notranslate nohighlight">\(X^\prime Y = 0\)</span>.  All orthogonal vectors are independent, so orthogonality is a special case of independence.</p></li>
+<li><p><span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> are uncorrelated iff <span class="math notranslate nohighlight">\((X - \bar{X})^\prime(Y - \bar{Y}) = 0\)</span>. Vectors can be orthogonal but not uncorrelated. If both varables are mean-zero and uncorrelated, they must be orthogonal. But if they are not mean-zero, they may be uncorrelated but nonorthogonal.</p></li>
+</ul>
+<p>Consider the vectors <span class="math notranslate nohighlight">\(\vec{a}\)</span> and <span class="math notranslate nohighlight">\(\vec{b}\)</span> above.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Consider orthogonality</span>
+<span class="n">dotproduct</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">dotproduct</span><span class="w"> </span><span class="si">= }</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Consider the correlation</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">pearsonr</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>    <span class="c1"># `pearsonr` returns r- &amp; p-values; `[0]` gets just r</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">r</span><span class="w"> </span><span class="si">= }</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>dotproduct = 0
+r = -0.5000000000000001
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span> <span class="o">=</span> <span class="n">draw_3d_axes</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">draw_vector</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">)</span>
+<span class="n">draw_vector</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="p">[</span><span class="mf">.2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">.2</span><span class="p">])</span>
+<span class="n">draw_vector</span><span class="p">(</span><span class="n">a</span> <span class="o">-</span> <span class="n">a</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">draw_vector</span><span class="p">(</span><span class="n">b</span> <span class="o">-</span> <span class="n">b</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="p">[</span><span class="mf">.2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">.2</span><span class="p">],</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">view_init</span><span class="p">(</span><span class="mf">1.51</span><span class="p">,</span> <span class="o">-</span><span class="mi">89</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Mean-centered vectors (dashed) not orthogonal&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/8da4f0b82c0425144c55a68338fc21ac75649bb8b760c1cf80c3ac7c8efaecb1.png" src="_images/8da4f0b82c0425144c55a68338fc21ac75649bb8b760c1cf80c3ac7c8efaecb1.png" />
+</div>
+</div>
+<p>Here is a useful Venn diagram of the relationships from this paper:</p>
+<p><img alt="" src="https://d3i71xaburhd42.cloudfront.net/177dc3b719fdb7b2c01d6c341e0bd58a09a47a83/2-Figure1-1.png" /></p>
+</section>
+<section id="projection">
+<h2>Projection<a class="headerlink" href="#projection" title="Permalink to this heading">#</a></h2>
+<p>The projection of vector <span class="math notranslate nohighlight">\(\vec{a}\)</span> onto vector <span class="math notranslate nohighlight">\(\vec{b}\)</span> is the length of vector <span class="math notranslate nohighlight">\(\vec{a}\)</span> along the direction defined by vector <span class="math notranslate nohighlight">\(\vec{b}\)</span>. We can think of it like the “shadow” of <span class="math notranslate nohighlight">\(\vec{a}\)</span> in the direction defined by <span class="math notranslate nohighlight">\(\vec{b}\)</span>. <a class="reference external" href="https://www.cuemath.com/algebra/dot-product/">This link</a> or <a class="reference external" href="https://en.wikipedia.org/wiki/Dot_product">this one</a> has more.</p>
+<div class="math notranslate nohighlight">
+\[
+proj_b(a) = \mathrm{cos}(\theta_{ab})~\mathrm{norm}(a) = \frac{a \cdot b}{\| b \|}
+\]</div>
+<p>This gives the scalar projection, a magnitude, to be multiplied by the unit vector in the direction of <span class="math notranslate nohighlight">\(\vec{b}\)</span>, <span class="math notranslate nohighlight">\(\frac{b}{\| b \|}\)</span></p>
+<p>In statistical modeling, <span class="math notranslate nohighlight">\(\vec{b}\)</span> will be a predictor (or a set of them defining a model subspace), and <span class="math notranslate nohighlight">\(\vec{a}\)</span> will be a data vector that we are projecting onto the model subspace.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+
+<span class="n">a_onto_b</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">b</span><span class="p">))</span> <span class="o">*</span> <span class="p">(</span><span class="n">b</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">draw_3d_axes</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">draw_vector</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">)</span>
+<span class="n">draw_vector</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="p">[</span><span class="mf">.2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">.2</span><span class="p">])</span>
+
+<span class="c1"># note: these two lines are redundant with the two above, but they exist </span>
+<span class="c1"># in the MATLAB version so they&#39;re also included here</span>
+<span class="n">draw_vector</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">draw_vector</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="p">[</span><span class="mf">.2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">.2</span><span class="p">],</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+
+<span class="n">draw_vector</span><span class="p">(</span><span class="n">a_onto_b</span><span class="p">,</span> <span class="p">[</span><span class="mf">.7</span><span class="p">,</span> <span class="mf">.7</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">view_init</span><span class="p">(</span><span class="mf">1.51</span><span class="p">,</span> <span class="o">-</span><span class="mi">89</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Light blue: Projection of a onto b&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_zlabel</span><span class="p">(</span><span class="n">ax</span><span class="o">.</span><span class="n">get_zlabel</span><span class="p">(),</span> <span class="n">labelpad</span><span class="o">=-</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/3c2d5351e850871a03de6a7c15fece5160154cfd788cdc1a85cf7d83bfa9d372.png" src="_images/3c2d5351e850871a03de6a7c15fece5160154cfd788cdc1a85cf7d83bfa9d372.png" />
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="extension-to-matrices">
+<h1>Extension to matrices<a class="headerlink" href="#extension-to-matrices" title="Permalink to this heading">#</a></h1>
+<section id="linear-combinations">
+<h2>Linear combinations<a class="headerlink" href="#linear-combinations" title="Permalink to this heading">#</a></h2>
+<p>A linear combination is  an expression constructed from a set of terms (variables) by multiplying each term by a scalar (positive or negative) and adding the results. In the context of matrices, it involves multiplying vectors by scalars and adding or subtracting the resulting products.</p>
+<div class="math notranslate nohighlight">
+\[
+w = a_1 v_1 + a_2 v_2 + \ldots + a_n v_n
+\]</div>
+<p>The coefficients <span class="math notranslate nohighlight">\(\left[a_1~a_2~a_3\right]\)</span> define the linear combination.</p>
+<p>The set of all possible linear combinations of <span class="math notranslate nohighlight">\(p\)</span> independent variables includes all points within a <span class="math notranslate nohighlight">\(p\)</span>-dimensional <strong>subspace</strong>. In 2-D, this would be a plane, or in 3-D a volume.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+  v_1 &amp;= \left[1, 2\right]^T \\
+  v_2 &amp;= \left[3, 4\right]^T \\
+  w &amp;= 2v_1 - 3v_2 = 2\left[1, 2\right]^T - 3\left[3, 4\right]^T = \left[-7, -10\right]^T
+\end{align*}
+\end{split}\]</div>
+</section>
+<section id="matrix-variance-covariance">
+<h2>Matrix variance/covariance<a class="headerlink" href="#matrix-variance-covariance" title="Permalink to this heading">#</a></h2>
+<p>If <span class="math notranslate nohighlight">\(X\)</span> has multiple columns, <span class="math notranslate nohighlight">\(X^\prime X\)</span> is a <strong>square matrix</strong> with the sum of squares on the diagonal, and dot products of its columns on the off-diagonal. This is the <em>normal matrix</em> or <a class="reference external" href="https://en.wikipedia.org/wiki/Gram_matrix">Gram matrix</a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>    <span class="c1"># Seed the random state for consistent output</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">X</span><span class="p">)</span>    <span class="c1"># or, X.T @ X</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[17.00671286, 13.91239596, 10.03158447, 13.48354696],
+       [13.91239596, 16.98596379,  9.87812844, 13.40549406],
+       [10.03158447,  9.87812844, 12.8081555 , 10.61002285],
+       [13.48354696, 13.40549406, 10.61002285, 18.98150792]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>It is related to the variance/covariance matrix of the columns of <span class="math notranslate nohighlight">\(X\)</span>.  As above, if columns are mean-zero, <span class="math notranslate nohighlight">\(X^\prime X\)</span> is the covariance matrix * df.  The df is the number of independent dimensions along which scores can vary, which is the independent observations - 1 (as we have estimated the mean).</p>
+<p>Thus, if <span class="math notranslate nohighlight">\(X\)</span> columns are mean-centered, <span class="math notranslate nohighlight">\(X^\prime X = \mathrm{cov}(X) * (m - 1)\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(((</span><span class="n">X</span> <span class="o">-</span> <span class="n">X</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="p">(</span><span class="n">X</span> <span class="o">-</span> <span class="n">X</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)))</span> <span class="o">/</span> <span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">rowvar</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>  <span class="c1"># compare: same</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[ 0.09406389  0.02628998  0.00142318  0.00266454]
+ [ 0.02628998  0.08430674 -0.00542458 -0.00390935]
+ [ 0.00142318 -0.00542458  0.09803052 -0.00243922]
+ [ 0.00266454 -0.00390935 -0.00243922  0.09386722]] 
+
+[[ 0.09406389  0.02628998  0.00142318  0.00266454]
+ [ 0.02628998  0.08430674 -0.00542458 -0.00390935]
+ [ 0.00142318 -0.00542458  0.09803052 -0.00243922]
+ [ 0.00266454 -0.00390935 -0.00243922  0.09386722]]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="independence-of-columns">
+<h2>Independence of columns<a class="headerlink" href="#independence-of-columns" title="Permalink to this heading">#</a></h2>
+<p>The number of independent column vectors defines the dimensionality of the space that a matrix spans. This is called the <strong>rank</strong> of the matrix. If <span class="math notranslate nohighlight">\(X\)</span> is a design matrix, this is the number of independent predictors (i.e., regressors).</p>
+<p>If the values in the rows fill all the dimensions, the matrix will be <strong>full rank</strong>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">matrix_rank</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4
+</pre></div>
+</div>
+</div>
+</div>
+<p>Only if a matrix is <strong>full-rank</strong> is its normal matrix invertible. This inversion is critical to solving the normal equation and estimating regression coefficients <span class="math notranslate nohighlight">\(\hat{\beta}\)</span>. If the matrix is not full rank, there will be no unique solution for <span class="math notranslate nohighlight">\(\hat{\beta}\)</span>, but rather an infinite family of solutions. An intuition for this is that two perfectly redundant predictors should each explain the data (<span class="math notranslate nohighlight">\(y\)</span>) equally well, so it’s unclear which should be assigned a higher <span class="math notranslate nohighlight">\(\hat{\beta}\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">X</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 0.21426526, -0.11286282, -0.03858485, -0.05092786],
+       [-0.11286282,  0.208894  , -0.03149835, -0.04975041],
+       [-0.03858485, -0.03149835,  0.17032031, -0.04554911],
+       [-0.05092786, -0.04975041, -0.04554911,  0.14945568]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Consider <span class="math notranslate nohighlight">\(Y\)</span>, which is a copy of <span class="math notranslate nohighlight">\(X\)</span> with an additional column. The additional column is a perfect <strong>linear combination</strong> of the other columns, so it “lives within” the existing 4-dimensional space and does not add a new dimension.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">X</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="p">[</span><span class="mf">.5</span><span class="p">,</span> <span class="mf">.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">.4</span><span class="p">,</span> <span class="mi">0</span><span class="p">])[</span><span class="o">...</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]))</span>
+<span class="c1"># The new column of Y is a linear combination of other variables</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;rank of Y: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">matrix_rank</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># NOTE: this function doesn&#39;t warn about rank deficient matrices like </span>
+<span class="c1"># MATLAB&#39;s version does, but the results will be inaccurate. </span>
+<span class="c1"># `numpy.linalg.matrix_rank()` should be checked instead.</span>
+<span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">Y</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">Y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>rank of Y: 4
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 3.74526007e+13,  3.74526007e+13, -2.99620805e+13,
+        -2.27546536e-02, -7.49052013e+13],
+       [ 3.74526007e+13,  3.74526007e+13, -2.99620805e+13,
+        -2.15772081e-02, -7.49052013e+13],
+       [-2.99620805e+13, -2.99620805e+13,  2.39696644e+13,
+        -6.80876726e-02,  5.99241611e+13],
+       [-3.10415303e-02, -2.98640848e-02, -6.14581712e-02,
+         1.49455677e-01, -3.97726567e-02],
+       [-7.49052013e+13, -7.49052013e+13,  5.99241611e+13,
+        -5.63464102e-02,  1.49810403e+14]])
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="basis-sets">
+<h2>Basis sets<a class="headerlink" href="#basis-sets" title="Permalink to this heading">#</a></h2>
+<p>In linear algebra, a basis set is a set of vectors that span a vector space <span class="math notranslate nohighlight">\(V\)</span>. This defines a coordinate system for vectors in the space. A basis set consists of <span class="math notranslate nohighlight">\(p\)</span> vectors that satisfies two main properties:</p>
+<ol class="arabic simple">
+<li><p>The vectors are linearly independent, meaning that no vector is a linear combination of the others.</p></li>
+<li><p>The vectors span the space <span class="math notranslate nohighlight">\(V\)</span>, meaning that there is a linear combination of the basis vectors that can reach any point in the space <span class="math notranslate nohighlight">\(V\)</span>.</p></li>
+</ol>
+<p>For example,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+e_1 = \begin{bmatrix}
+  1 \\
+  0 \\
+  0 \\
+\end{bmatrix},
+\quad
+e_2 = \begin{bmatrix}
+  0 \\
+  1 \\
+  0 \\
+\end{bmatrix},
+\quad
+e_3 = \begin{bmatrix}
+  0 \\
+  0 \\
+  1 \\
+\end{bmatrix}
+\end{split}\]</div>
+<p>is the standard basis for <span class="math notranslate nohighlight">\({\mathbb{R}}^3\)</span>, 3-D geometric space. These can be collected into a matrix:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+E = \begin{pmatrix} 
+  1 &amp; 0 &amp; 0 \\
+  0 &amp; 1 &amp; 0 \\
+  0 &amp; 0 &amp; 1 \\
+\end{pmatrix}
+\end{split}\]</div>
+<p>If the basis vectors are orthogonal and have a norm = 1, this is an <strong>orthonormal</strong> basis set, and the matrix <span class="math notranslate nohighlight">\(E\)</span> is an  <strong>orthogonal matrix.</strong> Here, <span class="math notranslate nohighlight">\(E\)</span> is the <strong>identity matrix</strong>, the simplest kind of orthogonal matrix.</p>
+<p>In the GLM, columns of the design matrix (<span class="math notranslate nohighlight">\(X\)</span>) are vectors that provide a basis set. These are usually not orthogonal, though they can be if the design matrix reflects an experimental design with orthogonal factors. The data vector is projected onto the basis set using an optimal linear combination <span class="math notranslate nohighlight">\(\hat{\beta}\)</span> to produce fitted values.</p>
+</section>
+<section id="rotations">
+<h2>Rotations<a class="headerlink" href="#rotations" title="Permalink to this heading">#</a></h2>
+<p>Rotation matrices are <a class="reference external" href="https://en.wikipedia.org/wiki/Square_matrix">square matrices</a>, with <a class="reference external" href="https://en.wikipedia.org/wiki/Real_number">real</a> entries. More specifically, they can be characterized as <a class="reference external" href="https://en.wikipedia.org/wiki/Orthogonal_matrix">orthogonal matrices</a> with <a class="reference external" href="https://en.wikipedia.org/wiki/Determinant">determinant</a> 1. (The determinant can be thought of as related to the volume described by the columns of a matrix. The determinant of the identity matrix is 1). The columns of <span class="math notranslate nohighlight">\(R\)</span> form a basis set for the space in which the rotation occurs. Orthogonal matrices representing rotations (as opposed to reflections) have a determinant of +1. If the determinant is -1, it represents a reflection. A few properties of rotation matrices include:</p>
+<ul class="simple">
+<li><p>They are square matrices.</p></li>
+<li><p>They are orthogonal matrices, meaning their rows and columns are orthonormal unit vectors. Consequently, the inverse of a rotation matrix is simply its transpose (<span class="math notranslate nohighlight">\(R^{-1} = R^T\)</span>).</p></li>
+<li><p>Their determinant is 1 (or -1 if they include reflection).</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+R = \begin{pmatrix}
+  \mathrm{cos}(\theta) &amp; -\mathrm{sin}(\theta) &amp; 0 \\
+  \mathrm{sin}(\theta) &amp; \mathrm{cos}(\theta) &amp; 0 \\
+  0 &amp; 0 &amp; 1
+\end{pmatrix}
+\end{split}\]</div>
+<p>If the 3 dimensions of  <span class="math notranslate nohighlight">\(R\)</span> are <span class="math notranslate nohighlight">\(x\)</span>, <span class="math notranslate nohighlight">\(y\)</span>, and <span class="math notranslate nohighlight">\(z\)</span> spatial dimensions, respectively, this matrix represents a counterclockwise rotation of <span class="math notranslate nohighlight">\(\theta\)</span> radians around the <span class="math notranslate nohighlight">\(z\)</span>-axis. The matrix can be extended for other axes and more dimensions. Zeros on the off-diagonals</p>
+<p>An <strong>orthogonal rotation</strong> is a linear transformation that preserves the lengths of vectors and the angles between them. The transformation is carried out through multiplication by an <strong>orthogonal matrix</strong>.</p>
+</section>
+<section id="projections">
+<h2>Projections<a class="headerlink" href="#projections" title="Permalink to this heading">#</a></h2>
+<p>A <a class="reference external" href="https://en.wikipedia.org/wiki/Projection_matrix"><strong>projection matrix</strong></a> is a square matrix that implements a projection onto a subspace spanned by the columns of <span class="math notranslate nohighlight">\(P\)</span>.  This generalizes the idea of a projection onto a 1-D line above. Unlike rotation matrices, projection matrices can rescale the data to which they are applied. Projection matrices:</p>
+<ul class="simple">
+<li><p>Do not necessarily preserve the length of vectors.</p></li>
+<li><p>Are idempotent, which means applying the matrix multiple times has the same effect as applying it once: <span class="math notranslate nohighlight">\(P^2 = P\)</span>.</p></li>
+<li><p>Their determinant can be 0, in the case where they project onto a subspace of lower dimensionality than the original space.</p></li>
+</ul>
+<p>A symmetric projection matrix is an <strong>orthogonal projection matrix (<span class="math notranslate nohighlight">\(P\)</span>),</strong> sometimes also called the <strong>influence matrix</strong> or <strong>hat matrix (<span class="math notranslate nohighlight">\(H\)</span>).</strong> This is also the matrix that produces the model fits in the GLM when applied to data.</p>
+<p>An <strong>orthogonal projection matrix</strong> is a special kind of projection matrix used to project vectors orthogonally onto a subspace. In this context, “orthogonally” means that the vectors are projected onto the closest point in the subspace, resulting in the residual vector being perpendicular to the subspace.</p>
+<p>An orthogonal projection matrix <span class="math notranslate nohighlight">\(P\)</span> satisfies two main properties:</p>
+<ol class="arabic simple">
+<li><p>It is symmetric: <span class="math notranslate nohighlight">\(P = P^T\)</span></p></li>
+<li><p>It is idempotent, which means applying the matrix multiple times has the same effect as applying it once: <span class="math notranslate nohighlight">\(P^2 = P\)</span></p></li>
+</ol>
+<p>The formula for constructing an <strong>orthogonal projection matrix</strong> onto the column space of a given matrix <span class="math notranslate nohighlight">\(X\)</span> (with linearly independent columns) is:</p>
+<div class="math notranslate nohighlight">
+\[
+P = X(X^\prime X)^{-1} X^\prime
+\]</div>
+<p>We can think of this as being broken down into the outer product <span class="math notranslate nohighlight">\(XX^\prime\)</span>, and the inner product <span class="math notranslate nohighlight">\((X^\prime X)^{-1}\)</span> . If <span class="math notranslate nohighlight">\(X\)</span> were an orthonormal basis set, <span class="math notranslate nohighlight">\((X^\prime X)^{-1}\)</span> would be the identity matrix, and it would not change the product relationship.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Consider orthogonal predictors</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span><span class="o">.</span><span class="n">T</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">X</span><span class="w"> </span><span class="si">= }</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="c1"># generate an arbitrary data vector</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">y</span><span class="w"> </span><span class="si">= }</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Normal matrix&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">X</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>  <span class="c1"># normal matrix. off diag are 0 because ortho.</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Inverse normal matrix&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">X</span><span class="p">),</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Projection matrix&#39;</span><span class="p">)</span>
+<span class="n">H</span> <span class="o">=</span> <span class="n">X</span> <span class="o">@</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">X</span><span class="p">)</span> <span class="o">@</span> <span class="n">X</span><span class="o">.</span><span class="n">T</span>  <span class="c1"># Hat matrix, projection matrix</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Three ways of calculating the scalar projections for each column&#39;</span><span class="p">)</span>
+<span class="c1"># Note: there are only two here, but the same is true in the MATLAB version</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">pinv</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="w"> </span><span class="o">@</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="si">= }</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">((</span><span class="n">X</span><span class="o">.</span><span class="n">T</span><span class="w"> </span><span class="o">@</span><span class="w"> </span><span class="n">X</span><span class="p">))</span><span class="w"> </span><span class="o">@</span><span class="w"> </span><span class="n">X</span><span class="o">.</span><span class="n">T</span><span class="w"> </span><span class="o">@</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="si">= }</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Because predictors are orthogonal, we can apply the 1-D projection separately and get the same thing:&#39;</span><span class="p">)</span>
+<span class="n">y_onto_x1</span> <span class="o">=</span> <span class="n">y</span> <span class="o">@</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])</span> <span class="o">**</span> <span class="mi">2</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">y_onto_x1</span><span class="w"> </span><span class="si">= }</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">y_onto_x2</span> <span class="o">=</span> <span class="n">y</span> <span class="o">@</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span> <span class="o">**</span> <span class="mi">2</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">y_onto_x2</span><span class="w"> </span><span class="si">= }</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">y_onto_x</span> <span class="o">=</span> <span class="n">y</span> <span class="o">@</span> <span class="n">X</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">y_onto_x</span><span class="w"> </span><span class="si">= }</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;This is the same as the vector of sample means:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="p">[</span><span class="n">y</span><span class="p">[</span><span class="n">X</span><span class="p">[:,</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span><span class="w"> </span><span class="n">y</span><span class="p">[</span><span class="n">X</span><span class="p">[:,</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()]</span><span class="w"> </span><span class="si">= }</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The resulting projection:&#39;</span><span class="p">)</span>
+<span class="n">y_hat</span> <span class="o">=</span> <span class="n">H</span> <span class="o">@</span> <span class="n">y</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">y_hat</span><span class="w"> </span><span class="si">= }</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>X = array([[1, 0],
+       [1, 0],
+       [1, 0],
+       [0, 1],
+       [0, 1],
+       [0, 1]])
+
+y = array([3, 6, 4, 2, 5, 1])
+
+Normal matrix
+[[3 0]
+ [0 3]] 
+
+Inverse normal matrix
+[[0.33333333 0.        ]
+ [0.         0.33333333]] 
+
+Projection matrix
+[[0.33333333 0.33333333 0.33333333 0.         0.         0.        ]
+ [0.33333333 0.33333333 0.33333333 0.         0.         0.        ]
+ [0.33333333 0.33333333 0.33333333 0.         0.         0.        ]
+ [0.         0.         0.         0.33333333 0.33333333 0.33333333]
+ [0.         0.         0.         0.33333333 0.33333333 0.33333333]
+ [0.         0.         0.         0.33333333 0.33333333 0.33333333]] 
+
+Three ways of calculating the scalar projections for each column
+np.linalg.pinv(X) @ y = array([4.33333333, 2.66666667])
+np.linalg.inv((X.T @ X)) @ X.T @ y = array([4.33333333, 2.66666667])
+
+Because predictors are orthogonal, we can apply the 1-D projection separately and get the same thing:
+y_onto_x1 = 4.333333333333334
+y_onto_x2 = 2.666666666666667
+y_onto_x = array([4.33333333, 2.66666667])
+
+This is the same as the vector of sample means:
+[y[X[:, 0] == 1].mean(), y[X[:, 1] == 1].mean()] = [4.333333333333333, 2.6666666666666665]
+
+The resulting projection:
+y_hat = array([4.33333333, 4.33333333, 4.33333333, 2.66666667, 2.66666667,
+       2.66666667])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Questions:</p>
+<ul class="simple">
+<li><p>What is the dimensionality of the space spanned by <span class="math notranslate nohighlight">\(X\)</span>?</p></li>
+<li><p>Is <span class="math notranslate nohighlight">\(X\)</span> an orthonormal basis set?  Why/why not?</p></li>
+<li><p>How would you test the idempotency property?</p></li>
+</ul>
+<p>If <span class="math notranslate nohighlight">\(X\)</span> is not orthonormal, <span class="math notranslate nohighlight">\((X^\prime X)^{-1}\)</span> includes several “normalizing” elements:</p>
+<ul class="simple">
+<li><p>It includes a normalizing factor that is related to <span class="math notranslate nohighlight">\(\frac{1}{\mathrm{norm}(X)}\)</span> (and is exactly this for orthogonal matrices).</p></li>
+<li><p>It rotates the axes of the space into an orthogonal space defined by the columns of <span class="math notranslate nohighlight">\(X\)</span>, so that the betas reflect the unique projection onto the corresponding column of <span class="math notranslate nohighlight">\(X\)</span>.</p></li>
+</ul>
+<p>By using the inverse, we are rotating the space, in this case to an orthonormal basis that spans the model subspace defined by <span class="math notranslate nohighlight">\(X\)</span>.</p>
+</section>
+<section id="multivariate-distance-mahalanobis">
+<h2>Multivariate distance (Mahalanobis)<a class="headerlink" href="#multivariate-distance-mahalanobis" title="Permalink to this heading">#</a></h2>
+<p>There is a close relationship between multivariate distance and the solution to beta-hat. We can think of this as rotating the axes of the space  to the axes defined by the covariance of X.</p>
+<p><em>MATLAB version ended here</em>. Note that the SciPy library provides a ready-to-use Mahalanobis distance function:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.spatial.distance</span> <span class="kn">import</span> <span class="n">mahalanobis</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#"><span style="color:rgb(213,80,0)">Fundamental statistical principles</span></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#table-of-contents">Table of Contents</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#notebook-setup">Notebook setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vectors-and-matrices">Vectors and matrices</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vector-similarity-and-distance">Vector similarity and distance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vector-magnitude-norm-and-sums-of-squares">Vector magnitude, norm, and sums of squares</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#covariance-and-correlation">Covariance and correlation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#orthogonality-correlation-and-independence">Orthogonality, correlation, and independence</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#projection">Projection</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#extension-to-matrices">Extension to matrices</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-combinations">Linear combinations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matrix-variance-covariance">Matrix variance/covariance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#independence-of-columns">Independence of columns</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basis-sets">Basis sets</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rotations">Rotations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#projections">Projections</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multivariate-distance-mahalanobis">Multivariate distance (Mahalanobis)</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Tor Wager & others
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

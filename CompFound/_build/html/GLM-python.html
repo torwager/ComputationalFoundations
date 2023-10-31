@@ -1,0 +1,1511 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Load packages &#8212; Computational Foundations for Neuroscience</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'GLM-python';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/yellow_flower_logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/yellow_flower_logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Computational foundations for Neuroscience
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Preliminary background</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="startingresources.html">Some resources</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="topicmenu.html">A menu of topics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basicdistancecovcorr.html">Fundamentals of distance, covariance, and correlation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="statsinmatlab.html">Stats in Matlab</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">General linear model (GLM)</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="glm1.html">General Linear Model (GLM)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glm2_param_inference.html">Parametric inference in the GLM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glm3_ashardataset.html">Sample dataset and analysis 1: Ashar 2022</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glm4_parameterizingglm.html">Parameterizing models in a GLM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glm5_weightedleastsquares.html">Generalized Least Squares (GLS)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glm6_matlab_glm_answerkey.html">A hand-coded GLM in MATLAB</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Mixed effects</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="mixedfx1_intro.html">Mixed effects: Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mixedfx2_examples.html">Mixed effects: Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mixedfx3_algebra.html">Mixed effects algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mixedfx4_fpr_power_sims.html">Mixed effects simulations</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Bayesian models</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="activeinference_smith.html">Active inference</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Reinforcement Learning</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="reinforcementlearning.html">Reinforcement Learning</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Neural networks</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="recurrentneuralnets.html">Recurrent Neural networks</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/torwager/ComputationalFoundations" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/torwager/ComputationalFoundations/edit/master/docs/GLM-python.ipynb" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/torwager/ComputationalFoundations/issues/new?title=Issue%20on%20page%20%2FGLM-python.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/GLM-python.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Load packages</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Load packages</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#implement-a-glm-from-scratch">Implement a GLM from scratch</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#load-in-and-clean-some-data-to-test-it-out">Load in (and clean) some data to test it out!</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#select-a-subset-of-variables-to-use-as-predictors">select a subset of variables to use as predictors</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#fit-the-model-and-display-results">fit the model and display results</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#run-some-individual-t-tests">run some individual t-tests</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#run-some-f-tests-on-a-few-subsets-of-predictors">run some F-tests on a few subsets of predictors</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#test-some-contrasts">test some contrasts</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#predict-response-variable-for-some-fake-new-data">predict response variable for some (fake) new data</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="load-packages">
+<h1>Load packages<a class="headerlink" href="#load-packages" title="Permalink to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">davos</span>
+<span class="k">except</span> <span class="ne">ModuleNotFoundError</span><span class="p">:</span>
+    <span class="o">%</span><span class="k">pip</span> install davos
+    <span class="kn">import</span> <span class="nn">davos</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Defaulting to user installation because normal site-packages is not writeable
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting davos
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Obtaining dependency information for davos from https://files.pythonhosted.org/packages/98/dd/2c948b689686d3c3f00947d80b49d3731ae0b25f66ef826910ae203312bf/davos-0.2.3-py3-none-any.whl.metadata
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Downloading davos-0.2.3-py3-none-any.whl.metadata (49 kB)
+?25l     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/49.5 kB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━ <span class=" -Color -Color-Green">41.0/49.5 kB</span> <span class=" -Color -Color-Red">2.6 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">49.5/49.5 kB</span> <span class=" -Color -Color-Red">841.9 kB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+?25hRequirement already satisfied: packaging in /Users/f003vz1/Library/Python/3.8/lib/python/site-packages (from davos) (23.1)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading davos-0.2.3-py3-none-any.whl (102 kB)
+?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/102.2 kB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━ <span class=" -Color -Color-Green">92.2/102.2 kB</span> <span class=" -Color -Color-Red">2.6 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">102.2/102.2 kB</span> <span class=" -Color -Color-Red">1.4 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+?25h
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Yellow">DEPRECATION: psychrnn 1.0.0 has a non-standard dependency specifier python-version!=&quot;3.0*&quot;,!=&quot;3.1*&quot;,!=&quot;3.2*&quot;,!=&quot;3.3*&quot;,&gt;=&quot;2.7&quot;. pip 23.3 will enforce this behaviour change. A possible replacement is to upgrade to a newer version of psychrnn or contact the author to suggest that they release a version with a conforming dependency specifiers. Discussion can be found at https://github.com/pypa/pip/issues/12063</span>
+
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Installing collected packages: davos
+Successfully installed davos-0.2.3
+
+<span class=" -Color -Color-Bold">[</span><span class=" -Color -Color-Blue">notice</span><span class=" -Color -Color-Bold">]</span> A new release of pip is available: <span class=" -Color -Color-Red">23.2.1</span> -&gt; <span class=" -Color -Color-Green">23.3.1</span>
+<span class=" -Color -Color-Bold">[</span><span class=" -Color -Color-Blue">notice</span><span class=" -Color -Color-Bold">]</span> To update, run: <span class=" -Color -Color-Green">/Library/Developer/CommandLineTools/usr/bin/Python3 -m pip install --upgrade pip</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Note: you may need to restart the kernel to use updated packages.
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/f003vz1/Library/Python/3.8/lib/python/site-packages/davos/core/project.py:896: UserWarning: Failed to identify notebook path. Falling back to generic default project
+  warnings.warn(
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">collections.abc</span> <span class="n">smuggle</span> <span class="n">Iterable</span>
+
+<span class="n">smuggle</span> <span class="n">numpy</span> <span class="k">as</span> <span class="n">np</span>                 <span class="c1"># pip: numpy==1.26.0</span>
+<span class="n">smuggle</span> <span class="n">pandas</span> <span class="k">as</span> <span class="n">pd</span>                <span class="c1"># pip: pandas==2.1.1</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="n">smuggle</span> <span class="n">stats</span>            <span class="c1"># pip: scipy==1.11.2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Red">ERROR: Could not find a version that satisfies the requirement numpy==1.26.0 (from versions: 1.3.0, 1.4.1, 1.5.0, 1.5.1, 1.6.0, 1.6.1, 1.6.2, 1.7.0, 1.7.1, 1.7.2, 1.8.0, 1.8.1, 1.8.2, 1.9.0, 1.9.1, 1.9.2, 1.9.3, 1.10.0.post2, 1.10.1, 1.10.2, 1.10.4, 1.11.0, 1.11.1, 1.11.2, 1.11.3, 1.12.0, 1.12.1, 1.13.0, 1.13.1, 1.13.3, 1.14.0, 1.14.1, 1.14.2, 1.14.3, 1.14.4, 1.14.5, 1.14.6, 1.15.0, 1.15.1, 1.15.2, 1.15.3, 1.15.4, 1.16.0, 1.16.1, 1.16.2, 1.16.3, 1.16.4, 1.16.5, 1.16.6, 1.17.0, 1.17.1, 1.17.2, 1.17.3, 1.17.4, 1.17.5, 1.18.0, 1.18.1, 1.18.2, 1.18.3, 1.18.4, 1.18.5, 1.19.0, 1.19.1, 1.19.2, 1.19.3, 1.19.4, 1.19.5, 1.20.0, 1.20.1, 1.20.2, 1.20.3, 1.21.0, 1.21.1, 1.21.2, 1.21.3, 1.21.4, 1.21.5, 1.21.6, 1.22.0, 1.22.1, 1.22.2, 1.22.3, 1.22.4, 1.23.0rc1, 1.23.0rc2, 1.23.0rc3, 1.23.0, 1.23.1, 1.23.2, 1.23.3, 1.23.4, 1.23.5, 1.24.0rc1, 1.24.0rc2, 1.24.0, 1.24.1, 1.24.2, 1.24.3, 1.24.4)</span>
+<span class=" -Color -Color-Red">ERROR: No matching distribution found for numpy==1.26.0</span>
+<span class=" -Color -Color-Yellow">WARNING: You are using pip version 20.2.3; however, version 23.3.1 is available.</span>
+<span class=" -Color -Color-Yellow">You should consider upgrading via the &#39;/Library/Developer/CommandLineTools/usr/bin/python3 -m pip install --upgrade pip&#39; command.</span>
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">CalledProcessError</span><span class="g g-Whitespace">                        </span>Traceback (most recent call last)
+<span class="nn">File ~/Library/Python/3.8/lib/python/site-packages/davos/core/core.py:675,</span> in <span class="ni">Onion._pip_install_package</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">674</span> <span class="k">try</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">675</span>     <span class="n">stdout</span> <span class="o">=</span> <span class="n">run_shell_command</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">install_cmd</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">676</span> <span class="k">except</span> <span class="n">CalledProcessError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+
+<span class="nn">File ~/Library/Python/3.8/lib/python/site-packages/davos/core/core.py:936,</span> in <span class="ni">run_shell_command</span><span class="nt">(command, live_stdout)</span>
+<span class="g g-Whitespace">    </span><span class="mi">935</span>         <span class="n">e</span><span class="o">.</span><span class="n">output</span> <span class="o">=</span> <span class="n">stdout</span>
+<span class="ne">--&gt; </span><span class="mi">936</span>     <span class="k">raise</span> <span class="n">e</span>
+<span class="g g-Whitespace">    </span><span class="mi">937</span> <span class="n">stdout</span> <span class="o">=</span> <span class="n">stdout</span><span class="o">.</span><span class="n">getvalue</span><span class="p">()</span>
+
+<span class="nn">File ~/Library/Python/3.8/lib/python/site-packages/davos/core/core.py:929,</span> in <span class="ni">run_shell_command</span><span class="nt">(command, live_stdout)</span>
+<span class="g g-Whitespace">    </span><span class="mi">928</span> <span class="k">try</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">929</span>     <span class="n">_run_shell_command_helper</span><span class="p">(</span><span class="n">command</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">930</span> <span class="k">except</span> <span class="n">CalledProcessError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">931</span>     <span class="c1"># if the exception doesn&#39;t record the output, add it</span>
+<span class="g g-Whitespace">    </span><span class="mi">932</span>     <span class="c1"># manually before raising</span>
+
+<span class="nn">File ~/Library/Python/3.8/lib/python/site-packages/davos/implementations/ipython_common.py:111,</span> in <span class="ni">_run_shell_command_helper</span><span class="nt">(command)</span>
+<span class="g g-Whitespace">    </span><span class="mi">110</span> <span class="k">if</span> <span class="n">retcode</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">111</span>     <span class="k">raise</span> <span class="n">CalledProcessError</span><span class="p">(</span><span class="n">returncode</span><span class="o">=</span><span class="n">retcode</span><span class="p">,</span> <span class="n">cmd</span><span class="o">=</span><span class="n">command</span><span class="p">)</span>
+
+<span class="ne">CalledProcessError</span>: Command &#39;PYTHONUSERBASE=&quot;/Users/f003vz1/.davos/projects/davos-fallback&quot; /Users/f003vz1/Library/Python/3.8/bin/pip install --no-warn-script-location --user numpy==1.26.0&#39; returned non-zero exit status 1.
+
+<span class="n">During</span> <span class="n">handling</span> <span class="n">of</span> <span class="n">the</span> <span class="n">above</span> <span class="n">exception</span><span class="p">,</span> <span class="n">another</span> <span class="n">exception</span> <span class="n">occurred</span><span class="p">:</span>
+
+<span class="ne">InstallerError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">3</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">smuggle</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;collections.abc.Iterable&quot;</span><span class="p">,</span> <span class="n">as_</span><span class="o">=</span><span class="s2">&quot;Iterable&quot;</span><span class="p">)</span>
+<span class="ne">----&gt; </span><span class="mi">3</span> <span class="n">smuggle</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;numpy&quot;</span><span class="p">,</span> <span class="n">as_</span><span class="o">=</span><span class="s2">&quot;np&quot;</span><span class="p">,</span> <span class="n">installer</span><span class="o">=</span><span class="s2">&quot;pip&quot;</span><span class="p">,</span> <span class="n">args_str</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;numpy==1.26.0&quot;&quot;&quot;</span><span class="p">,</span> <span class="n">installer_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;editable&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s1">&#39;spec&#39;</span><span class="p">:</span> <span class="s1">&#39;numpy==1.26.0&#39;</span><span class="p">})</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">smuggle</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;pandas&quot;</span><span class="p">,</span> <span class="n">as_</span><span class="o">=</span><span class="s2">&quot;pd&quot;</span><span class="p">,</span> <span class="n">installer</span><span class="o">=</span><span class="s2">&quot;pip&quot;</span><span class="p">,</span> <span class="n">args_str</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;pandas==2.1.1&quot;&quot;&quot;</span><span class="p">,</span> <span class="n">installer_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;editable&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s1">&#39;spec&#39;</span><span class="p">:</span> <span class="s1">&#39;pandas==2.1.1&#39;</span><span class="p">})</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">smuggle</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;scipy.stats&quot;</span><span class="p">,</span> <span class="n">as_</span><span class="o">=</span><span class="s2">&quot;stats&quot;</span><span class="p">,</span> <span class="n">installer</span><span class="o">=</span><span class="s2">&quot;pip&quot;</span><span class="p">,</span> <span class="n">args_str</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;scipy==1.11.2&quot;&quot;&quot;</span><span class="p">,</span> <span class="n">installer_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;editable&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s1">&#39;spec&#39;</span><span class="p">:</span> <span class="s1">&#39;scipy==1.11.2&#39;</span><span class="p">})</span>
+
+<span class="nn">File ~/Library/Python/3.8/lib/python/site-packages/davos/core/core.py:979,</span> in <span class="ni">use_project.&lt;locals&gt;.smuggle_wrapper</span><span class="nt">(*args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">977</span> <span class="n">importlib</span><span class="o">.</span><span class="n">invalidate_caches</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">978</span> <span class="k">try</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">979</span>     <span class="k">return</span> <span class="n">smuggle_func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">980</span> <span class="k">finally</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">981</span>     <span class="c1"># after (possibly installing and) loading the package,</span>
+<span class="g g-Whitespace">    </span><span class="mi">982</span>     <span class="c1"># remove the project&#39;s site-packages directory from</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">986</span>     <span class="c1"># other dirs being prepended to load modules installed</span>
+<span class="g g-Whitespace">    </span><span class="mi">987</span>     <span class="c1"># in custom locations</span>
+<span class="g g-Whitespace">    </span><span class="mi">988</span>     <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">project</span><span class="o">.</span><span class="n">site_packages_dir</span><span class="p">))</span>
+
+<span class="nn">File ~/Library/Python/3.8/lib/python/site-packages/davos/core/core.py:1077,</span> in <span class="ni">smuggle</span><span class="nt">(name, as_, installer, args_str, installer_kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1073</span>     <span class="k">if</span> <span class="ow">not</span> <span class="n">confirmed</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1074</span>         <span class="k">raise</span> <span class="n">SmugglerError</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1075</span>             <span class="sa">f</span><span class="s2">&quot;package </span><span class="si">{</span><span class="n">pkg_name</span><span class="si">!r}</span><span class="s2"> not installed&quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">1076</span>         <span class="p">)</span> <span class="kn">from</span> <span class="kc">None</span>
+<span class="ne">-&gt; </span><span class="mi">1077</span> <span class="n">installer_stdout</span> <span class="o">=</span> <span class="n">onion</span><span class="o">.</span><span class="n">install_package</span><span class="p">()</span>
+<span class="g g-Whitespace">   </span><span class="mi">1078</span> <span class="c1"># invalidate sys.meta_path module finder caches. Forces import</span>
+<span class="g g-Whitespace">   </span><span class="mi">1079</span> <span class="c1"># machinery to notice newly installed module</span>
+<span class="g g-Whitespace">   </span><span class="mi">1080</span> <span class="n">importlib</span><span class="o">.</span><span class="n">invalidate_caches</span><span class="p">()</span>
+
+<span class="nn">File ~/Library/Python/3.8/lib/python/site-packages/davos/core/core.py:677,</span> in <span class="ni">Onion._pip_install_package</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">675</span>     <span class="n">stdout</span> <span class="o">=</span> <span class="n">run_shell_command</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">install_cmd</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">676</span> <span class="k">except</span> <span class="n">CalledProcessError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">677</span>     <span class="k">raise</span> <span class="n">InstallerError</span><span class="o">.</span><span class="n">from_error</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">678</span> <span class="c1"># handle packages installed in non-standard locations</span>
+<span class="g g-Whitespace">    </span><span class="mi">679</span> <span class="n">install_dir</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">installer_kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;target&#39;</span><span class="p">)</span>
+
+<span class="ne">InstallerError</span>: Command &#39;PYTHONUSERBASE=&quot;/Users/f003vz1/.davos/projects/davos-fallback&quot; /Users/f003vz1/Library/Python/3.8/bin/pip install --no-warn-script-location --user numpy==1.26.0&#39; returned non-zero exit status 1.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="implement-a-glm-from-scratch">
+<h1>Implement a GLM from scratch<a class="headerlink" href="#implement-a-glm-from-scratch" title="Permalink to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">requires_fit</span><span class="p">(</span><span class="n">method</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Decorator used in GLM class to disallow running certain methods </span>
+<span class="sd">    before fitting the model.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">check_fitted_wrapper</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">fitted</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Model must be fit before running self.</span><span class="si">{</span><span class="n">method</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">. &quot;</span>
+                <span class="s2">&quot;Fit the model first with self.fit()&quot;</span>
+            <span class="p">)</span>
+        <span class="k">return</span> <span class="n">method</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">check_fitted_wrapper</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">GLM</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">ensure_intercept</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">predictor_labels</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize a GLM instance to fit, inspect, and run tests.</span>
+<span class="sd">        Accepts a design matrix X and response vector y as lists/numpy</span>
+<span class="sd">        arrays or labeled pandas DataFrames/Series.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        X : array-like</span>
+<span class="sd">            Design matrix with shape (n, p). `n` is the number of</span>
+<span class="sd">            observations and `p` is the number of predictors, optionally</span>
+<span class="sd">            including an intercept (see `ensure_intercept` below).</span>
+<span class="sd">            If X is a pandas DataFrame, column names will be used as</span>
+<span class="sd">            labels for the predictor variables.</span>
+<span class="sd">        y : array-like</span>
+<span class="sd">            Response vector with shape (n,).</span>
+<span class="sd">        ensure_intercept : bool, optional</span>
+<span class="sd">            If True (default), ensure that the first column of X</span>
+<span class="sd">            contains all 1&#39;s for the intercept, inserting one if</span>
+<span class="sd">            necessary. If False, do not include an intercept.</span>
+<span class="sd">        predictor_labels : list of str, optional</span>
+<span class="sd">            List of labels for the predictors in X. If None (default),</span>
+<span class="sd">            use column names from X if X is a pandas DataFrame,</span>
+<span class="sd">            otherwise use generic labels &quot;X_0&quot;, &quot;X_1&quot;, etc.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">predictor_labels</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">predictor_labels</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">predictor_labels</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">predictor_labels</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;X_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])]</span>
+        <span class="k">elif</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">predictor_labels</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;predictor_labels&#39; must be an iterable if passed&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">predictor_labels</span><span class="p">)</span> <span class="o">!=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;&#39;predictor_labels&#39; must contain </span><span class="si">{</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> labels&quot;</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">predictor_labels</span> <span class="o">=</span> <span class="n">predictor_labels</span>
+
+        <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;X and y must have the same number of rows (observations)&quot;</span>
+            <span class="p">)</span>
+        <span class="k">if</span> <span class="n">y</span><span class="o">.</span><span class="n">ndim</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;y must be a n x 1 vector of observed responses&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">ensure_intercept</span> <span class="ow">and</span> <span class="ow">not</span> <span class="p">(</span><span class="n">X</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">X_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">)),</span> <span class="n">X</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">predictor_labels</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;Intercept&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">X_</span> <span class="o">=</span> <span class="n">X</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">y_</span> <span class="o">=</span> <span class="n">y</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_obs</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_predictors</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">X_</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>    <span class="c1"># p includes intercept</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">df_model</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_predictors</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">df_error</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_obs</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_predictors</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fitted</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Fit the model with the data provided at initialization. Both</span>
+<span class="sd">        returns the fitted model and updates it in place (a la</span>
+<span class="sd">        scikit-learn estimators).</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        GLM</span>
+<span class="sd">            The fitted GLM instance</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">gram_inv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">X_</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">X_</span><span class="p">)</span>
+        <span class="c1"># beta-hat, shape: (self.n_predictors,)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">betas</span> <span class="o">=</span> <span class="n">gram_inv</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">X_</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_</span>
+        <span class="c1"># y-hat, shape: (self.n_obs,)</span>
+        <span class="c1"># also alias y_hat as y_pred (standard scikit-learn convention)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">y_hat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_pred</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">X_</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">betas</span>
+        <span class="c1"># residuals, shape: (self.n_obs,)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">residuals</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_hat</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ss_res</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">residuals</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ss_tot</span> <span class="o">=</span> <span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">y_</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">R2</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">ss_res</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">ss_tot</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">AIC</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_obs</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ss_res</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_obs</span><span class="p">)</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_predictors</span>
+        <span class="c1"># variance/covariance matrix for betas,</span>
+        <span class="c1"># shape: (self.n_predictors, self.n_predictors)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">beta_cov</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ss_res</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">df_error</span> <span class="o">*</span> <span class="n">gram_inv</span>
+        <span class="c1"># standard errors for betas, shape: (self.n_predictors,)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">beta_ses</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">beta_cov</span><span class="p">)</span> <span class="o">**</span> <span class="mf">0.5</span>
+        <span class="c1"># t-statistics for betas, shape: (self.n_predictors,)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">beta_ts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">betas</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta_ses</span>
+        <span class="c1"># (2-tailed) p-values for t-tests for betas,</span>
+        <span class="c1"># shape: (self.n_predictors,)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">beta_ps</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">stats</span><span class="o">.</span><span class="n">t</span><span class="o">.</span><span class="n">sf</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">beta_ts</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">df_error</span><span class="p">)</span>
+        <span class="c1"># set fitted flag to True to enable other methods that require</span>
+        <span class="c1"># these computations first</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fitted</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="nd">@requires_fit</span>
+    <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Predict the value of the response variable for new data.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        X : array-like</span>
+<span class="sd">            Array containing with the same number of predictors as the</span>
+<span class="sd">            design matrix used to fit the model. May contain any number</span>
+<span class="sd">            of observations.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        y_pred : 1D array</span>
+<span class="sd">            Predicted values of the response variable for each row of X.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_2d</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">X</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_predictors</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;X must have </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">n_predictors</span><span class="si">}</span><span class="s2"> columns (predictors)&quot;</span>
+            <span class="p">)</span>
+        <span class="k">return</span> <span class="n">X</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">betas</span>
+
+    <span class="nd">@requires_fit</span>
+    <span class="k">def</span> <span class="nf">summary</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Print a formatted summary table of model results.&quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;General Linear Model&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;===================&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of observations: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">n_obs</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of predictors: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">n_predictors</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Model degrees of freedom: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">df_model</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error degrees of freedom: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">df_error</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Residual standard error: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">ss_res</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;R^2: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">R2</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;AIC: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">AIC</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Coefficients:&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-------------&quot;</span><span class="p">)</span>
+        <span class="c1"># Format the table width to fit the longest predictor name</span>
+        <span class="c1"># (min width: 4 cols)</span>
+        <span class="n">name_col_width</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">predictor_labels</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="nb">len</span><span class="p">)),</span> <span class="mi">4</span><span class="p">)</span>
+        <span class="n">header</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\033</span><span class="s2">[1m{:&lt;</span><span class="si">{width}</span><span class="s2">}</span><span class="si">{:&gt;8}{:&gt;8}{:&gt;8}{:&gt;8}</span><span class="se">\033</span><span class="s2">[0m&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="s2">&quot;Name&quot;</span><span class="p">,</span> <span class="s2">&quot;B̂&quot;</span><span class="p">,</span> <span class="s2">&quot;SE&quot;</span><span class="p">,</span> <span class="s2">&quot;t&quot;</span><span class="p">,</span> <span class="s2">&quot;p&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">name_col_width</span>
+        <span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">header</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_predictors</span><span class="p">):</span>
+            <span class="n">label</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">predictor_labels</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">beta</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">betas</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">se</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta_ses</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">t</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta_ts</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta_ps</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">p</span> <span class="o">&lt;</span> <span class="mf">0.001</span><span class="p">:</span>
+                <span class="n">sig</span> <span class="o">=</span> <span class="s1">&#39;***&#39;</span>
+            <span class="k">elif</span> <span class="n">p</span> <span class="o">&lt;</span> <span class="mf">0.01</span><span class="p">:</span>
+                <span class="n">sig</span> <span class="o">=</span> <span class="s1">&#39;**&#39;</span>
+            <span class="k">elif</span> <span class="n">p</span> <span class="o">&lt;</span> <span class="mf">0.05</span><span class="p">:</span>
+                <span class="n">sig</span> <span class="o">=</span> <span class="s1">&#39;*&#39;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">sig</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;{:&lt;</span><span class="si">{width}</span><span class="s2">}</span><span class="si">{:&gt;8.3f}{:&gt;8.3f}{:&gt;8.3f}{:&gt;8.3f}</span><span class="s2"> </span><span class="se">\033</span><span class="s2">[1m</span><span class="si">{sig}</span><span class="se">\033</span><span class="s2">[0m&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">label</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">se</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">name_col_width</span><span class="p">,</span> <span class="n">sig</span><span class="o">=</span><span class="n">sig</span><span class="p">)</span>
+            <span class="p">)</span>
+
+    <span class="nd">@requires_fit</span>
+    <span class="k">def</span> <span class="nf">t_test</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">predictor</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Two-tailed t-test for the null hypothesis that the estimated</span>
+<span class="sd">        coefficient for a given predictor is not significantly</span>
+<span class="sd">        different from zero.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        predictor : int or str</span>
+<span class="sd">            Index or label of predictor for which to run the t-test.</span>
+<span class="sd">            Note that the 0th predictor refers to the intercept.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        t, p</span>
+<span class="sd">            t-statistic and associated p-value as a tuple.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">predictor</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">predictor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">predictor_labels</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">predictor</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">predictor</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;&#39;predictor&#39; must be an int or str&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta_ts</span><span class="p">[</span><span class="n">predictor</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta_ps</span><span class="p">[</span><span class="n">predictor</span><span class="p">]</span>
+
+    <span class="nd">@requires_fit</span>
+    <span class="k">def</span> <span class="nf">test_contrast</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">contrast</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Two-tailed t-test for the null hypothesis that the given</span>
+<span class="sd">        contrast of predictors is not significantly different from zero.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        contrast : array-like</span>
+<span class="sd">            Contrast vector of shape (p,). p is the number of predictors</span>
+<span class="sd">            (including the intercept).</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        t, p</span>
+<span class="sd">            t-statistic and associated p-value as a tuple.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">contrast</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">contrast</span><span class="p">)</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">contrast</span><span class="o">.</span><span class="n">ndim</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;contrast&#39; must be a 1D array&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">contrast</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_predictors</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;&#39;contrast&#39; must have </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">n_predictors</span><span class="si">}</span><span class="s2"> elements&quot;</span>
+            <span class="p">)</span>
+        <span class="c1"># compute t-statistic</span>
+        <span class="c1"># note: contrast matrices not transposed here because numpy</span>
+        <span class="c1"># automatically does so for 1D vectors</span>
+        <span class="n">t_stat</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="p">(</span><span class="n">contrast</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">betas</span><span class="p">)</span> <span class="o">/</span>
+                <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">contrast</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta_cov</span> <span class="o">@</span> <span class="n">contrast</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="c1"># compute (2-tailed) p-value</span>
+        <span class="n">p_value</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">stats</span><span class="o">.</span><span class="n">t</span><span class="o">.</span><span class="n">sf</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">t_stat</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">df_error</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">t_stat</span><span class="p">,</span> <span class="n">p_value</span>
+
+    <span class="nd">@requires_fit</span>
+    <span class="k">def</span> <span class="nf">f_test</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">predictors</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        F-test for the null hypothesis that the given (set of)</span>
+<span class="sd">        predictor(s) has no effect on the response variable (i.e., that</span>
+<span class="sd">        the quality of the model fit would not significantly worsen if</span>
+<span class="sd">        the given predictor(s) were removed).</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        predictors : int, str, or iterable of int or str, optional</span>
+<span class="sd">            index/indices or label(s) of predictor(s) for which to run</span>
+<span class="sd">            the F-test. Note that the 0th predictor refers to the</span>
+<span class="sd">            intercept. If None (default), the F-test is run on all</span>
+<span class="sd">            predictors (i.e., an intercept-only model).</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        F, p: tuple of float</span>
+<span class="sd">            F-statistic and associated p-value as a tuple.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">predictors</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">predictors</span> <span class="o">=</span> <span class="n">predictors</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_predictors</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">predictors</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="n">predictors</span> <span class="o">=</span> <span class="p">[</span><span class="n">predictors</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">predictors</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">predictors</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">predictor_labels</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">predictors</span><span class="p">)]</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">predictors</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">):</span>
+            <span class="n">_predictors</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">predictors</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                    <span class="n">_predictors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">predictor_labels</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">p</span><span class="p">))</span>
+                <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+                    <span class="n">_predictors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+                        <span class="s2">&quot;&#39;predictors&#39; must be an int, str, or iterable of int &quot;</span>
+                        <span class="s2">&quot;or str&quot;</span>
+                    <span class="p">)</span>
+            <span class="n">predictors</span> <span class="o">=</span> <span class="n">_predictors</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="n">p</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_predictors</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">predictors</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;predictors&#39; must be a valid predictor index or &quot;</span>
+                             <span class="s2">&quot;label&quot;</span>
+                             <span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">predictors</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;predictors&#39; must contain at least one index or &quot;</span>
+                             <span class="s2">&quot;label&quot;</span>
+                             <span class="p">)</span>
+        <span class="c1"># get sum of squared residuals for reduced model</span>
+        <span class="n">X_reduced</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">X_</span><span class="p">,</span> <span class="n">predictors</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">betas_reduced</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">X_reduced</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">X_reduced</span><span class="p">)</span> <span class="o">@</span> <span class="n">X_reduced</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_</span>
+        <span class="n">residuals_reduced</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_</span> <span class="o">-</span> <span class="n">X_reduced</span> <span class="o">@</span> <span class="n">betas_reduced</span>
+        <span class="n">ssr_reduced</span> <span class="o">=</span> <span class="p">(</span><span class="n">residuals_reduced</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+        <span class="c1"># compute F-statistic</span>
+        <span class="n">ssr_full</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ss_res</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_predictors</span>
+        <span class="n">q</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">predictors</span><span class="p">)</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_obs</span>
+        <span class="n">f_stat</span> <span class="o">=</span> <span class="p">((</span><span class="n">ssr_reduced</span> <span class="o">-</span> <span class="n">ssr_full</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">p</span> <span class="o">-</span> <span class="n">q</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="n">ssr_full</span> <span class="o">/</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="n">p</span><span class="p">))</span>
+        <span class="c1"># compute p-value</span>
+        <span class="n">p_value</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">f</span><span class="o">.</span><span class="n">sf</span><span class="p">(</span><span class="n">f_stat</span><span class="p">,</span> <span class="n">p</span> <span class="o">-</span> <span class="n">q</span><span class="p">,</span> <span class="n">n</span> <span class="o">-</span> <span class="n">p</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">f_stat</span><span class="p">,</span> <span class="n">p_value</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="load-in-and-clean-some-data-to-test-it-out">
+<h1>Load in (and clean) some data to test it out!<a class="headerlink" href="#load-in-and-clean-some-data-to-test-it-out" title="Permalink to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># load dataset from GitHub</span>
+<span class="n">dataset_url</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s2">&quot;https://github.com/torwager/ComputationalFoundations/raw/&quot;</span>
+    <span class="s2">&quot;79b92a3/CompFound/datasets/Ashar2022_outcomes_demographics.csv&quot;</span>
+<span class="p">)</span>
+<span class="n">df_raw</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">dataset_url</span><span class="p">,</span> <span class="n">na_values</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;current_opioid_use&#39;</span><span class="p">:</span> <span class="s1">&#39;&lt;undefined&gt;&#39;</span><span class="p">})</span>
+
+<span class="c1"># drop individuals that don&#39;t have data for both sessions</span>
+<span class="n">dupes_only</span> <span class="o">=</span> <span class="n">df_raw</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df_raw</span><span class="o">.</span><span class="n">duplicated</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="n">keep</span><span class="o">=</span><span class="kc">False</span><span class="p">)]</span>
+
+<span class="c1"># make sure each individual&#39;s data actually comes from 2 different </span>
+<span class="c1"># sessions (i.e., no duplicates or mislabels)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">dupes_only</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">():</span>
+    <span class="k">assert</span> <span class="nb">set</span><span class="p">(</span><span class="n">dupes_only</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;id == @i&#39;</span><span class="p">)[</span><span class="s1">&#39;time&#39;</span><span class="p">])</span> <span class="o">==</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">}</span>
+
+<span class="c1"># reshape to have one row per participant with data from both sessions</span>
+<span class="c1"># pivot on columns with session-agnostic values (age, gender, etc.)</span>
+<span class="n">same_val_cols</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;group&#39;</span><span class="p">]</span> <span class="o">+</span> 
+    <span class="nb">list</span><span class="p">(</span><span class="n">dupes_only</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">dupes_only</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s1">&#39;education&#39;</span><span class="p">):])</span>
+<span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">dupes_only</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">same_val_cols</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;time&#39;</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">map</span><span class="p">(</span>
+    <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="s2">&quot;before&quot;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s2">&quot;after&quot;</span><span class="si">}</span><span class="s1">&#39;</span>
+<span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+
+<span class="c1"># deal with columns for data that wasn&#39;t collected in both sessions</span>
+<span class="n">all_nan_cols</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)]</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">all_nan_cols</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">colname</span> <span class="ow">in</span> <span class="n">all_nan_cols</span><span class="p">:</span>
+    <span class="n">base_colname</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">suffix</span> <span class="o">=</span> <span class="n">colname</span><span class="o">.</span><span class="n">rpartition</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">)</span>
+    <span class="n">other_suffix</span> <span class="o">=</span> <span class="s1">&#39;before&#39;</span> <span class="k">if</span> <span class="n">suffix</span> <span class="o">==</span> <span class="s1">&#39;after&#39;</span> <span class="k">else</span> <span class="s1">&#39;after&#39;</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">base_colname</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">other_suffix</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">:</span> <span class="n">base_colname</span><span class="p">})</span>
+    
+<span class="c1"># add column for change in pain level</span>
+<span class="c1"># (this will be the response variable for the model)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;bpi_intensity_change&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;bpi_intensity_before&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;bpi_intensity_after&#39;</span><span class="p">]</span>
+<span class="c1"># display dataset</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>group</th>
+      <th>education</th>
+      <th>ethnicity</th>
+      <th>hispanic</th>
+      <th>employment_status</th>
+      <th>exercise</th>
+      <th>handedness</th>
+      <th>sses</th>
+      <th>married_or_living_as_marri</th>
+      <th>...</th>
+      <th>sopa_emo_after</th>
+      <th>pgic</th>
+      <th>tx_satisfaction</th>
+      <th>alcohol_before</th>
+      <th>alcohol_after</th>
+      <th>opioid_before</th>
+      <th>opioid_after</th>
+      <th>cannabis_before</th>
+      <th>cannabis_after</th>
+      <th>bpi_intensity_change</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>12</td>
+      <td>3.0</td>
+      <td>2.0</td>
+      <td>4.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>3.0</td>
+      <td>1.0</td>
+      <td>4.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>8.0</td>
+      <td>1.0</td>
+      <td>52.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>2.000</td>
+      <td>0.000</td>
+      <td>-0.25</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>14</td>
+      <td>3.0</td>
+      <td>3.0</td>
+      <td>4.0</td>
+      <td>0.0</td>
+      <td>3.0</td>
+      <td>4.0</td>
+      <td>1.0</td>
+      <td>9.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>6.0</td>
+      <td>1.0</td>
+      <td>30.5</td>
+      <td>23.0</td>
+      <td>21.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>3.500</td>
+      <td>3.500</td>
+      <td>0.50</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>15</td>
+      <td>3.0</td>
+      <td>2.0</td>
+      <td>5.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>3.0</td>
+      <td>1.0</td>
+      <td>6.0</td>
+      <td>1.0</td>
+      <td>...</td>
+      <td>4.0</td>
+      <td>1.0</td>
+      <td>50.5</td>
+      <td>15.0</td>
+      <td>29.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>-0.50</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>18</td>
+      <td>2.0</td>
+      <td>3.0</td>
+      <td>4.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>3.0</td>
+      <td>1.0</td>
+      <td>5.0</td>
+      <td>1.0</td>
+      <td>...</td>
+      <td>9.0</td>
+      <td>5.0</td>
+      <td>50.0</td>
+      <td>0.0</td>
+      <td>2.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>2.25</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>23</td>
+      <td>2.0</td>
+      <td>3.0</td>
+      <td>2.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>5.0</td>
+      <td>1.0</td>
+      <td>6.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>8.0</td>
+      <td>1.0</td>
+      <td>17.5</td>
+      <td>29.0</td>
+      <td>13.5</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.015</td>
+      <td>0.025</td>
+      <td>0.25</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>130</th>
+      <td>1268</td>
+      <td>2.0</td>
+      <td>3.0</td>
+      <td>4.0</td>
+      <td>0.0</td>
+      <td>2.0</td>
+      <td>4.0</td>
+      <td>1.0</td>
+      <td>8.0</td>
+      <td>1.0</td>
+      <td>...</td>
+      <td>8.0</td>
+      <td>5.0</td>
+      <td>88.0</td>
+      <td>2.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>1.75</td>
+    </tr>
+    <tr>
+      <th>131</th>
+      <td>1277</td>
+      <td>2.0</td>
+      <td>3.0</td>
+      <td>4.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>3.0</td>
+      <td>1.0</td>
+      <td>8.0</td>
+      <td>1.0</td>
+      <td>...</td>
+      <td>10.0</td>
+      <td>5.0</td>
+      <td>46.0</td>
+      <td>23.0</td>
+      <td>30.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>-0.75</td>
+    </tr>
+    <tr>
+      <th>132</th>
+      <td>1294</td>
+      <td>2.0</td>
+      <td>3.0</td>
+      <td>4.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>3.0</td>
+      <td>1.0</td>
+      <td>6.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>8.0</td>
+      <td>2.0</td>
+      <td>54.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <th>133</th>
+      <td>1302</td>
+      <td>3.0</td>
+      <td>3.0</td>
+      <td>4.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>2.0</td>
+      <td>1.0</td>
+      <td>8.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>6.0</td>
+      <td>2.0</td>
+      <td>64.0</td>
+      <td>3.0</td>
+      <td>3.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>0.00</td>
+    </tr>
+    <tr>
+      <th>134</th>
+      <td>1319</td>
+      <td>2.0</td>
+      <td>3.0</td>
+      <td>5.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>3.0</td>
+      <td>1.0</td>
+      <td>5.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>5.0</td>
+      <td>5.0</td>
+      <td>69.0</td>
+      <td>11.0</td>
+      <td>3.0</td>
+      <td>2.0</td>
+      <td>1.0</td>
+      <td>7.000</td>
+      <td>19.000</td>
+      <td>0.75</td>
+    </tr>
+  </tbody>
+</table>
+<p>135 rows × 51 columns</p>
+</div></div></div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="select-a-subset-of-variables-to-use-as-predictors">
+<h1>select a subset of variables to use as predictors<a class="headerlink" href="#select-a-subset-of-variables-to-use-as-predictors" title="Permalink to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">predictors</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;group&#39;</span><span class="p">,</span> <span class="s1">&#39;education&#39;</span><span class="p">,</span> <span class="s1">&#39;ethnicity&#39;</span><span class="p">,</span> <span class="s1">&#39;hispanic&#39;</span><span class="p">,</span> <span class="s1">&#39;employment_status&#39;</span><span class="p">,</span> 
+    <span class="s1">&#39;exercise&#39;</span><span class="p">,</span> <span class="s1">&#39;handedness&#39;</span><span class="p">,</span> <span class="s1">&#39;sses&#39;</span><span class="p">,</span> <span class="s1">&#39;married_or_living_as_marri&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">,</span> 
+    <span class="s1">&#39;weight&#39;</span><span class="p">,</span> <span class="s1">&#39;gender&#39;</span><span class="p">,</span> <span class="s1">&#39;backpain_length&#39;</span>
+<span class="p">]</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">predictors</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;bpi_intensity_change&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="fit-the-model-and-display-results">
+<h1>fit the model and display results<a class="headerlink" href="#fit-the-model-and-display-results" title="Permalink to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">glm</span> <span class="o">=</span> <span class="n">GLM</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">glm</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>General Linear Model
+===================
+Number of observations: 135
+Number of predictors: 14
+Model degrees of freedom: 13
+Error degrees of freedom: 121
+Residual standard error: 193.674
+R^2: 0.399
+AIC: 76.722
+
+Coefficients:
+-------------
+<span class=" -Color -Color-Bold">Name                            B̂      SE       t       p</span>
+Intercept                    5.284   1.641   3.220   0.002 <span class=" -Color -Color-Bold">**</span>
+group                       -1.054   0.137  -7.670   0.000 <span class=" -Color -Color-Bold">***</span>
+education                   -0.543   0.278  -1.955   0.053 
+ethnicity                    0.058   0.219   0.264   0.792 
+hispanic                    -0.373   0.716  -0.522   0.603 
+employment_status           -0.298   0.147  -2.019   0.046 <span class=" -Color -Color-Bold">*</span>
+exercise                    -0.121   0.124  -0.975   0.331 
+handedness                   0.462   0.240   1.924   0.057 
+sses                        -0.047   0.068  -0.681   0.497 
+married_or_living_as_marri   0.119   0.254   0.466   0.642 
+age                          0.009   0.009   1.033   0.304 
+weight                      -0.003   0.004  -0.881   0.380 
+gender                       0.253   0.258   0.981   0.329 
+backpain_length             -0.018   0.014  -1.270   0.206 
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="run-some-individual-t-tests">
+<h1>run some individual t-tests<a class="headerlink" href="#run-some-individual-t-tests" title="Permalink to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;education&#39;</span><span class="p">)</span>
+<span class="n">t</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="n">glm</span><span class="o">.</span><span class="n">t_test</span><span class="p">(</span><span class="s1">&#39;education&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t</span><span class="si">{</span><span class="n">t</span><span class="w"> </span><span class="si">= }</span><span class="s2">, </span><span class="si">{</span><span class="n">p</span><span class="w"> </span><span class="si">= }</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;employment_status&#39;</span><span class="p">)</span>
+<span class="n">t</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="n">glm</span><span class="o">.</span><span class="n">t_test</span><span class="p">(</span><span class="s1">&#39;employment_status&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t</span><span class="si">{</span><span class="n">t</span><span class="w"> </span><span class="si">= }</span><span class="s2">, </span><span class="si">{</span><span class="n">p</span><span class="w"> </span><span class="si">= }</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>education
+	t = -1.9546532038088111, p = 0.05293030529967579
+employment_status
+	t = -2.0186211253690964, p = 0.04573738199608248
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="run-some-f-tests-on-a-few-subsets-of-predictors">
+<h1>run some F-tests on a few subsets of predictors<a class="headerlink" href="#run-some-f-tests-on-a-few-subsets-of-predictors" title="Permalink to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;intercept-only model&#39;</span><span class="p">)</span>
+<span class="n">F</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="n">glm</span><span class="o">.</span><span class="n">f_test</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t</span><span class="si">{</span><span class="n">F</span><span class="w"> </span><span class="si">= }</span><span class="s2">, </span><span class="si">{</span><span class="n">p</span><span class="w"> </span><span class="si">= }</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;[&quot;group&quot;, &quot;employment_status&quot;, &quot;age&quot;]&#39;</span><span class="p">)</span>
+<span class="n">F</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="n">glm</span><span class="o">.</span><span class="n">f_test</span><span class="p">([</span><span class="s2">&quot;employment_status&quot;</span><span class="p">,</span> <span class="s2">&quot;age&quot;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t</span><span class="si">{</span><span class="n">F</span><span class="w"> </span><span class="si">= }</span><span class="s2">, </span><span class="si">{</span><span class="n">p</span><span class="w"> </span><span class="si">= }</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>intercept-only model
+	F = 80.22027070929019, p = 4.903937633539385e-15
+
+[&quot;group&quot;, &quot;employment_status&quot;, &quot;age&quot;]
+	F = 0.36459164573984326, p = 0.9733056577039912
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="test-some-contrasts">
+<h1>test some contrasts<a class="headerlink" href="#test-some-contrasts" title="Permalink to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">group_vs_education</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">glm</span><span class="o">.</span><span class="n">n_predictors</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+<span class="n">group_vs_education</span><span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">group_vs_education</span><span class="w"> </span><span class="si">= }</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">t</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="n">glm</span><span class="o">.</span><span class="n">test_contrast</span><span class="p">(</span><span class="n">group_vs_education</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t</span><span class="si">{</span><span class="n">t</span><span class="w"> </span><span class="si">= }</span><span class="s2">, </span><span class="si">{</span><span class="n">p</span><span class="w"> </span><span class="si">= }</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">ethnicity_vs_employment_status</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">glm</span><span class="o">.</span><span class="n">n_predictors</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+<span class="n">ethnicity_vs_employment_status</span><span class="p">[[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ethnicity_vs_employment_status</span><span class="w"> </span><span class="si">= }</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">t</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="n">glm</span><span class="o">.</span><span class="n">test_contrast</span><span class="p">(</span><span class="n">ethnicity_vs_employment_status</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t</span><span class="si">{</span><span class="n">t</span><span class="w"> </span><span class="si">= }</span><span class="s2">, </span><span class="si">{</span><span class="n">p</span><span class="w"> </span><span class="si">= }</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>group_vs_education = array([ 0,  1, -1,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0])
+	t = -1.7110376121312285, p = 0.0896365856306869
+
+ethnicity_vs_employment_status = array([ 0,  0,  0,  1,  0, -1,  0,  0,  0,  0,  0,  0,  0,  0])
+	t = 1.382285772613835, p = 0.16943021507691455
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="predict-response-variable-for-some-fake-new-data">
+<h1>predict response variable for some (fake) new data<a class="headerlink" href="#predict-response-variable-for-some-fake-new-data" title="Permalink to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">new_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">glm</span><span class="o">.</span><span class="n">X_</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">glm</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">new_data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1.99317962, 0.11215594, 2.29967943])
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Load packages</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#implement-a-glm-from-scratch">Implement a GLM from scratch</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#load-in-and-clean-some-data-to-test-it-out">Load in (and clean) some data to test it out!</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#select-a-subset-of-variables-to-use-as-predictors">select a subset of variables to use as predictors</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#fit-the-model-and-display-results">fit the model and display results</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#run-some-individual-t-tests">run some individual t-tests</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#run-some-f-tests-on-a-few-subsets-of-predictors">run some F-tests on a few subsets of predictors</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#test-some-contrasts">test some contrasts</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#predict-response-variable-for-some-fake-new-data">predict response variable for some (fake) new data</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Tor Wager & others
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
