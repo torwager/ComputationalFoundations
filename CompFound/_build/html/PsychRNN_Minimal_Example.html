@@ -178,6 +178,11 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="mixedfx3_algebra.html">Mixed effects algebra</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mixedfx4_fpr_power_sims.html">Mixed effects simulations</a></li>
 </ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Multivariate statistics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="svd.html">Singular Value Decomposition</a></li>
+
+</ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Bayesian models</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="activeinference_smith.html">Active inference</a></li>
@@ -410,11 +415,11 @@ document.write(`
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Defaulting to user installation because normal site-packages is not writeable
 Requirement already satisfied: psychrnn in /Users/f003vz1/Library/Python/3.8/lib/python/site-packages (1.0.0)
-Requirement already satisfied: python-version!=&quot;3.0*&quot;,!=&quot;3.1*&quot;,!=&quot;3.2*&quot;,!=&quot;3.3*&quot;,&gt;=&quot;2.7&quot; in /Users/f003vz1/Library/Python/3.8/lib/python/site-packages (from psychrnn) (0.0.2)
-Requirement already satisfied: tensorflow in /Users/f003vz1/Library/Python/3.8/lib/python/site-packages (from psychrnn) (2.13.0)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: tensorflow-macos==2.13.0 in /Users/f003vz1/Library/Python/3.8/lib/python/site-packages (from tensorflow-&gt;psychrnn) (2.13.0)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: python-version!=&quot;3.0*&quot;,!=&quot;3.1*&quot;,!=&quot;3.2*&quot;,!=&quot;3.3*&quot;,&gt;=&quot;2.7&quot; in /Users/f003vz1/Library/Python/3.8/lib/python/site-packages (from psychrnn) (0.0.2)
+Requirement already satisfied: tensorflow in /Users/f003vz1/Library/Python/3.8/lib/python/site-packages (from psychrnn) (2.13.0)
+Requirement already satisfied: tensorflow-macos==2.13.0 in /Users/f003vz1/Library/Python/3.8/lib/python/site-packages (from tensorflow-&gt;psychrnn) (2.13.0)
 Requirement already satisfied: absl-py&gt;=1.0.0 in /Users/f003vz1/Library/Python/3.8/lib/python/site-packages (from tensorflow-macos==2.13.0-&gt;tensorflow-&gt;psychrnn) (2.0.0)
 Requirement already satisfied: astunparse&gt;=1.6.0 in /Users/f003vz1/Library/Python/3.8/lib/python/site-packages (from tensorflow-macos==2.13.0-&gt;tensorflow-&gt;psychrnn) (1.6.3)
 Requirement already satisfied: flatbuffers&gt;=23.1.21 in /Users/f003vz1/Library/Python/3.8/lib/python/site-packages (from tensorflow-macos==2.13.0-&gt;tensorflow-&gt;psychrnn) (23.5.26)
@@ -454,18 +459,16 @@ Requirement already satisfied: idna&lt;4,&gt;=2.5 in /Users/f003vz1/Library/Pyth
 Requirement already satisfied: urllib3&lt;3,&gt;=1.21.1 in /Users/f003vz1/Library/Python/3.8/lib/python/site-packages (from requests&lt;3,&gt;=2.21.0-&gt;tensorboard&lt;2.14,&gt;=2.13-&gt;tensorflow-macos==2.13.0-&gt;tensorflow-&gt;psychrnn) (2.0.4)
 Requirement already satisfied: certifi&gt;=2017.4.17 in /Users/f003vz1/Library/Python/3.8/lib/python/site-packages (from requests&lt;3,&gt;=2.21.0-&gt;tensorboard&lt;2.14,&gt;=2.13-&gt;tensorflow-macos==2.13.0-&gt;tensorflow-&gt;psychrnn) (2023.7.22)
 Requirement already satisfied: MarkupSafe&gt;=2.1.1 in /Users/f003vz1/Library/Python/3.8/lib/python/site-packages (from werkzeug&gt;=1.0.1-&gt;tensorboard&lt;2.14,&gt;=2.13-&gt;tensorflow-macos==2.13.0-&gt;tensorflow-&gt;psychrnn) (2.1.3)
+Requirement already satisfied: zipp&gt;=0.5 in /Users/f003vz1/Library/Python/3.8/lib/python/site-packages (from importlib-metadata&gt;=4.4-&gt;markdown&gt;=2.6.8-&gt;tensorboard&lt;2.14,&gt;=2.13-&gt;tensorflow-macos==2.13.0-&gt;tensorflow-&gt;psychrnn) (3.16.2)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: zipp&gt;=0.5 in /Users/f003vz1/Library/Python/3.8/lib/python/site-packages (from importlib-metadata&gt;=4.4-&gt;markdown&gt;=2.6.8-&gt;tensorboard&lt;2.14,&gt;=2.13-&gt;tensorflow-macos==2.13.0-&gt;tensorflow-&gt;psychrnn) (3.16.2)
-Requirement already satisfied: pyasn1&lt;0.6.0,&gt;=0.4.6 in /Users/f003vz1/Library/Python/3.8/lib/python/site-packages (from pyasn1-modules&gt;=0.2.1-&gt;google-auth&lt;3,&gt;=1.6.3-&gt;tensorboard&lt;2.14,&gt;=2.13-&gt;tensorflow-macos==2.13.0-&gt;tensorflow-&gt;psychrnn) (0.5.0)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: pyasn1&lt;0.6.0,&gt;=0.4.6 in /Users/f003vz1/Library/Python/3.8/lib/python/site-packages (from pyasn1-modules&gt;=0.2.1-&gt;google-auth&lt;3,&gt;=1.6.3-&gt;tensorboard&lt;2.14,&gt;=2.13-&gt;tensorflow-macos==2.13.0-&gt;tensorflow-&gt;psychrnn) (0.5.0)
 Requirement already satisfied: oauthlib&gt;=3.0.0 in /Users/f003vz1/Library/Python/3.8/lib/python/site-packages (from requests-oauthlib&gt;=0.7.0-&gt;google-auth-oauthlib&lt;1.1,&gt;=0.5-&gt;tensorboard&lt;2.14,&gt;=2.13-&gt;tensorflow-macos==2.13.0-&gt;tensorflow-&gt;psychrnn) (3.2.2)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Yellow">DEPRECATION: psychrnn 1.0.0 has a non-standard dependency specifier python-version!=&quot;3.0*&quot;,!=&quot;3.1*&quot;,!=&quot;3.2*&quot;,!=&quot;3.3*&quot;,&gt;=&quot;2.7&quot;. pip 23.3 will enforce this behaviour change. A possible replacement is to upgrade to a newer version of psychrnn or contact the author to suggest that they release a version with a conforming dependency specifiers. Discussion can be found at https://github.com/pypa/pip/issues/12063</span>
 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">[</span><span class=" -Color -Color-Blue">notice</span><span class=" -Color -Color-Bold">]</span> A new release of pip is available: <span class=" -Color -Color-Red">23.2.1</span> -&gt; <span class=" -Color -Color-Green">23.3.1</span>
+<span class=" -Color -Color-Bold">[</span><span class=" -Color -Color-Blue">notice</span><span class=" -Color -Color-Bold">]</span> A new release of pip is available: <span class=" -Color -Color-Red">23.2.1</span> -&gt; <span class=" -Color -Color-Green">23.3.1</span>
 <span class=" -Color -Color-Bold">[</span><span class=" -Color -Color-Blue">notice</span><span class=" -Color -Color-Bold">]</span> To update, run: <span class=" -Color -Color-Green">/Library/Developer/CommandLineTools/usr/bin/Python3 -m pip install --upgrade pip</span>
 </pre></div>
 </div>
