@@ -24,6 +24,9 @@ parts:
       - file: mixedfx2_examples.md
       - file: mixedfx3_algebra.md
       - file: mixedfx4_fpr_power_sims.md
+  - caption: Multivariate statistics
+    chapters:
+      - file: svd.ipynb
   - caption: Bayesian models
     chapters:
       - file: activeinference_smith.md

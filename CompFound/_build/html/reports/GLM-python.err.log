@@ -1,0 +1,96 @@
+Traceback (most recent call last):
+  File "/Users/f003vz1/Library/Python/3.8/lib/python/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/Users/f003vz1/Library/Python/3.8/lib/python/site-packages/nbclient/client.py", line 1305, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/Users/f003vz1/Library/Python/3.8/lib/python/site-packages/jupyter_core/utils/__init__.py", line 166, in wrapped
+    return loop.run_until_complete(inner)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.8/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
+    return future.result()
+  File "/Users/f003vz1/Library/Python/3.8/lib/python/site-packages/nbclient/client.py", line 705, in async_execute
+    await self.async_execute_cell(
+  File "/Users/f003vz1/Library/Python/3.8/lib/python/site-packages/nbclient/client.py", line 1058, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/Users/f003vz1/Library/Python/3.8/lib/python/site-packages/nbclient/client.py", line 914, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+from collections.abc smuggle Iterable
+
+smuggle numpy as np                 # pip: numpy==1.26.0
+smuggle pandas as pd                # pip: pandas==2.1.1
+from scipy smuggle stats            # pip: scipy==1.11.2
+------------------
+
+----- stdout -----
+[31mERROR: Could not find a version that satisfies the requirement numpy==1.26.0 (from versions: 1.3.0, 1.4.1, 1.5.0, 1.5.1, 1.6.0, 1.6.1, 1.6.2, 1.7.0, 1.7.1, 1.7.2, 1.8.0, 1.8.1, 1.8.2, 1.9.0, 1.9.1, 1.9.2, 1.9.3, 1.10.0.post2, 1.10.1, 1.10.2, 1.10.4, 1.11.0, 1.11.1, 1.11.2, 1.11.3, 1.12.0, 1.12.1, 1.13.0, 1.13.1, 1.13.3, 1.14.0, 1.14.1, 1.14.2, 1.14.3, 1.14.4, 1.14.5, 1.14.6, 1.15.0, 1.15.1, 1.15.2, 1.15.3, 1.15.4, 1.16.0, 1.16.1, 1.16.2, 1.16.3, 1.16.4, 1.16.5, 1.16.6, 1.17.0, 1.17.1, 1.17.2, 1.17.3, 1.17.4, 1.17.5, 1.18.0, 1.18.1, 1.18.2, 1.18.3, 1.18.4, 1.18.5, 1.19.0, 1.19.1, 1.19.2, 1.19.3, 1.19.4, 1.19.5, 1.20.0, 1.20.1, 1.20.2, 1.20.3, 1.21.0, 1.21.1, 1.21.2, 1.21.3, 1.21.4, 1.21.5, 1.21.6, 1.22.0, 1.22.1, 1.22.2, 1.22.3, 1.22.4, 1.23.0rc1, 1.23.0rc2, 1.23.0rc3, 1.23.0, 1.23.1, 1.23.2, 1.23.3, 1.23.4, 1.23.5, 1.24.0rc1, 1.24.0rc2, 1.24.0, 1.24.1, 1.24.2, 1.24.3, 1.24.4)[0m
+[31mERROR: No matching distribution found for numpy==1.26.0[0m
+[33mWARNING: You are using pip version 20.2.3; however, version 23.3.1 is available.
+You should consider upgrading via the '/Library/Developer/CommandLineTools/usr/bin/python3 -m pip install --upgrade pip' command.[0m
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mCalledProcessError[0m                        Traceback (most recent call last)
+File [0;32m~/Library/Python/3.8/lib/python/site-packages/davos/core/core.py:675[0m, in [0;36mOnion._pip_install_package[0;34m(self)[0m
+[1;32m    674[0m [38;5;28;01mtry[39;00m:
+[0;32m--> 675[0m     stdout [38;5;241m=[39m [43mrun_shell_command[49m[43m([49m[38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43minstall_cmd[49m[43m)[49m
+[1;32m    676[0m [38;5;28;01mexcept[39;00m CalledProcessError [38;5;28;01mas[39;00m e:
+
+File [0;32m~/Library/Python/3.8/lib/python/site-packages/davos/core/core.py:936[0m, in [0;36mrun_shell_command[0;34m(command, live_stdout)[0m
+[1;32m    935[0m         e[38;5;241m.[39moutput [38;5;241m=[39m stdout
+[0;32m--> 936[0m     [38;5;28;01mraise[39;00m e
+[1;32m    937[0m stdout [38;5;241m=[39m stdout[38;5;241m.[39mgetvalue()
+
+File [0;32m~/Library/Python/3.8/lib/python/site-packages/davos/core/core.py:929[0m, in [0;36mrun_shell_command[0;34m(command, live_stdout)[0m
+[1;32m    928[0m [38;5;28;01mtry[39;00m:
+[0;32m--> 929[0m     [43m_run_shell_command_helper[49m[43m([49m[43mcommand[49m[43m)[49m
+[1;32m    930[0m [38;5;28;01mexcept[39;00m CalledProcessError [38;5;28;01mas[39;00m e:
+[1;32m    931[0m     [38;5;66;03m# if the exception doesn't record the output, add it[39;00m
+[1;32m    932[0m     [38;5;66;03m# manually before raising[39;00m
+
+File [0;32m~/Library/Python/3.8/lib/python/site-packages/davos/implementations/ipython_common.py:111[0m, in [0;36m_run_shell_command_helper[0;34m(command)[0m
+[1;32m    110[0m [38;5;28;01mif[39;00m retcode [38;5;241m!=[39m [38;5;241m0[39m:
+[0;32m--> 111[0m     [38;5;28;01mraise[39;00m CalledProcessError(returncode[38;5;241m=[39mretcode, cmd[38;5;241m=[39mcommand)
+
+[0;31mCalledProcessError[0m: Command 'PYTHONUSERBASE="/Users/f003vz1/.davos/projects/davos-fallback" /Users/f003vz1/Library/Python/3.8/bin/pip install --no-warn-script-location --user numpy==1.26.0' returned non-zero exit status 1.
+
+During handling of the above exception, another exception occurred:
+
+[0;31mInstallerError[0m                            Traceback (most recent call last)
+Cell [0;32mIn[2], line 3[0m
+[1;32m      1[0m smuggle(name[38;5;241m=[39m[38;5;124m"[39m[38;5;124mcollections.abc.Iterable[39m[38;5;124m"[39m, as_[38;5;241m=[39m[38;5;124m"[39m[38;5;124mIterable[39m[38;5;124m"[39m)
+[0;32m----> 3[0m [43msmuggle[49m[43m([49m[43mname[49m[38;5;241;43m=[39;49m[38;5;124;43m"[39;49m[38;5;124;43mnumpy[39;49m[38;5;124;43m"[39;49m[43m,[49m[43m [49m[43mas_[49m[38;5;241;43m=[39;49m[38;5;124;43m"[39;49m[38;5;124;43mnp[39;49m[38;5;124;43m"[39;49m[43m,[49m[43m [49m[43minstaller[49m[38;5;241;43m=[39;49m[38;5;124;43m"[39;49m[38;5;124;43mpip[39;49m[38;5;124;43m"[39;49m[43m,[49m[43m [49m[43margs_str[49m[38;5;241;43m=[39;49m[38;5;124;43m"""[39;49m[38;5;124;43mnumpy==1.26.0[39;49m[38;5;124;43m"""[39;49m[43m,[49m[43m [49m[43minstaller_kwargs[49m[38;5;241;43m=[39;49m[43m{[49m[38;5;124;43m'[39;49m[38;5;124;43meditable[39;49m[38;5;124;43m'[39;49m[43m:[49m[43m [49m[38;5;28;43;01mFalse[39;49;00m[43m,[49m[43m [49m[38;5;124;43m'[39;49m[38;5;124;43mspec[39;49m[38;5;124;43m'[39;49m[43m:[49m[43m [49m[38;5;124;43m'[39;49m[38;5;124;43mnumpy==1.26.0[39;49m[38;5;124;43m'[39;49m[43m}[49m[43m)[49m
+[1;32m      4[0m smuggle(name[38;5;241m=[39m[38;5;124m"[39m[38;5;124mpandas[39m[38;5;124m"[39m, as_[38;5;241m=[39m[38;5;124m"[39m[38;5;124mpd[39m[38;5;124m"[39m, installer[38;5;241m=[39m[38;5;124m"[39m[38;5;124mpip[39m[38;5;124m"[39m, args_str[38;5;241m=[39m[38;5;124m"""[39m[38;5;124mpandas==2.1.1[39m[38;5;124m"""[39m, installer_kwargs[38;5;241m=[39m{[38;5;124m'[39m[38;5;124meditable[39m[38;5;124m'[39m: [38;5;28;01mFalse[39;00m, [38;5;124m'[39m[38;5;124mspec[39m[38;5;124m'[39m: [38;5;124m'[39m[38;5;124mpandas==2.1.1[39m[38;5;124m'[39m})
+[1;32m      5[0m smuggle(name[38;5;241m=[39m[38;5;124m"[39m[38;5;124mscipy.stats[39m[38;5;124m"[39m, as_[38;5;241m=[39m[38;5;124m"[39m[38;5;124mstats[39m[38;5;124m"[39m, installer[38;5;241m=[39m[38;5;124m"[39m[38;5;124mpip[39m[38;5;124m"[39m, args_str[38;5;241m=[39m[38;5;124m"""[39m[38;5;124mscipy==1.11.2[39m[38;5;124m"""[39m, installer_kwargs[38;5;241m=[39m{[38;5;124m'[39m[38;5;124meditable[39m[38;5;124m'[39m: [38;5;28;01mFalse[39;00m, [38;5;124m'[39m[38;5;124mspec[39m[38;5;124m'[39m: [38;5;124m'[39m[38;5;124mscipy==1.11.2[39m[38;5;124m'[39m})
+
+File [0;32m~/Library/Python/3.8/lib/python/site-packages/davos/core/core.py:979[0m, in [0;36muse_project.<locals>.smuggle_wrapper[0;34m(*args, **kwargs)[0m
+[1;32m    977[0m importlib[38;5;241m.[39minvalidate_caches()
+[1;32m    978[0m [38;5;28;01mtry[39;00m:
+[0;32m--> 979[0m     [38;5;28;01mreturn[39;00m [43msmuggle_func[49m[43m([49m[38;5;241;43m*[39;49m[43margs[49m[43m,[49m[43m [49m[38;5;241;43m*[39;49m[38;5;241;43m*[39;49m[43mkwargs[49m[43m)[49m
+[1;32m    980[0m [38;5;28;01mfinally[39;00m:
+[1;32m    981[0m     [38;5;66;03m# after (possibly installing and) loading the package,[39;00m
+[1;32m    982[0m     [38;5;66;03m# remove the project's site-packages directory from[39;00m
+[0;32m   (...)[0m
+[1;32m    986[0m     [38;5;66;03m# other dirs being prepended to load modules installed[39;00m
+[1;32m    987[0m     [38;5;66;03m# in custom locations[39;00m
+[1;32m    988[0m     sys[38;5;241m.[39mpath[38;5;241m.[39mremove([38;5;28mstr[39m(project[38;5;241m.[39msite_packages_dir))
+
+File [0;32m~/Library/Python/3.8/lib/python/site-packages/davos/core/core.py:1077[0m, in [0;36msmuggle[0;34m(name, as_, installer, args_str, installer_kwargs)[0m
+[1;32m   1073[0m     [38;5;28;01mif[39;00m [38;5;129;01mnot[39;00m confirmed:
+[1;32m   1074[0m         [38;5;28;01mraise[39;00m SmugglerError(
+[1;32m   1075[0m             [38;5;124mf[39m[38;5;124m"[39m[38;5;124mpackage [39m[38;5;132;01m{[39;00mpkg_name[38;5;132;01m!r}[39;00m[38;5;124m not installed[39m[38;5;124m"[39m
+[1;32m   1076[0m         ) [38;5;28;01mfrom[39;00m [38;5;28;01mNone[39;00m
+[0;32m-> 1077[0m installer_stdout [38;5;241m=[39m [43monion[49m[38;5;241;43m.[39;49m[43minstall_package[49m[43m([49m[43m)[49m
+[1;32m   1078[0m [38;5;66;03m# invalidate sys.meta_path module finder caches. Forces import[39;00m
+[1;32m   1079[0m [38;5;66;03m# machinery to notice newly installed module[39;00m
+[1;32m   1080[0m importlib[38;5;241m.[39minvalidate_caches()
+
+File [0;32m~/Library/Python/3.8/lib/python/site-packages/davos/core/core.py:677[0m, in [0;36mOnion._pip_install_package[0;34m(self)[0m
+[1;32m    675[0m     stdout [38;5;241m=[39m run_shell_command([38;5;28mself[39m[38;5;241m.[39minstall_cmd)
+[1;32m    676[0m [38;5;28;01mexcept[39;00m CalledProcessError [38;5;28;01mas[39;00m e:
+[0;32m--> 677[0m     [38;5;28;01mraise[39;00m InstallerError[38;5;241m.[39mfrom_error(e)
+[1;32m    678[0m [38;5;66;03m# handle packages installed in non-standard locations[39;00m
+[1;32m    679[0m install_dir [38;5;241m=[39m [38;5;28mself[39m[38;5;241m.[39minstaller_kwargs[38;5;241m.[39mget([38;5;124m'[39m[38;5;124mtarget[39m[38;5;124m'[39m)
+
+[0;31mInstallerError[0m: Command 'PYTHONUSERBASE="/Users/f003vz1/.davos/projects/davos-fallback" /Users/f003vz1/Library/Python/3.8/bin/pip install --no-warn-script-location --user numpy==1.26.0' returned non-zero exit status 1.
+

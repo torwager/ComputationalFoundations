@@ -22,6 +22,8 @@ This document describes the GLM with uncorrelated errors.
 
 ![GLM tests with uncorrelated errors](images/glmfamily_iid.png)
 
+[GLM-python.ipynb](GLM-python.ipynb)
+
 ## Model Structure
 
 The general formulation of the GLM is:

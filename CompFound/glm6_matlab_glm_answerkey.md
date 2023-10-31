@@ -1,5 +1,7 @@
 # A hand-coded GLM in MATLAB
 
+[Python version by Paxton Fitzpatrick](GLM-python.ipynb)
+
 ## GLM
 This is an "answer key" for a hand-coded GLM in MATLAB
 Here are the core equations:

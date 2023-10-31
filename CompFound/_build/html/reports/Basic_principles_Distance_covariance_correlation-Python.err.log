@@ -1,0 +1,106 @@
+Traceback (most recent call last):
+  File "/Users/f003vz1/Library/Python/3.8/lib/python/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/Users/f003vz1/Library/Python/3.8/lib/python/site-packages/nbclient/client.py", line 1305, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/Users/f003vz1/Library/Python/3.8/lib/python/site-packages/jupyter_core/utils/__init__.py", line 166, in wrapped
+    return loop.run_until_complete(inner)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.8/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
+    return future.result()
+  File "/Users/f003vz1/Library/Python/3.8/lib/python/site-packages/nbclient/client.py", line 705, in async_execute
+    await self.async_execute_cell(
+  File "/Users/f003vz1/Library/Python/3.8/lib/python/site-packages/nbclient/client.py", line 1058, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/Users/f003vz1/Library/Python/3.8/lib/python/site-packages/nbclient/client.py", line 914, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+import numpy as np
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d.art3d import Path3DCollection
+
+
+def draw_3d_axes(limits=1, xtick_freq=1, ytick_freq=1, ztick_freq=1, 
+                 axes_kwargs=None, cross_kwargs=None, view_kwargs=None):
+    """
+    Create and draw a set of 3D axes pre-styled to look as similar to 
+    the MATLAB/CanlabCore version of this notebook as possible.
+    """
+    # "limits" can be an int/float (min/max of all 3 axes), 3-tuple of 
+    # int/float (min/max for each axis), or 3-tuple of 2-tuples 
+    # (separate min & max for each axis)
+    if isinstance(limits, (int, float)):
+        xmin, ymin, zmin = (-limits,) * 3
+        xmax, ymax, zmax = (limits,) * 3
+    elif isinstance(limits, tuple):
+        if isinstance(limits[0], (int, float)):
+            xmin, ymin, zmin = (-i for i in limits)
+            xmax, ymax, zmax = limits
+        else:
+            (xmin, xmax), (ymin, ymax), (zmin, zmax) = limits
+    else:
+        raise ValueError(
+            "'limits' may be an int/float, 3-tuple of int/float, or "
+            "3-tuple of 3-tuples of int/float"
+        )
+        
+    xtick_freq = min(xtick_freq, abs(xmin), abs(xmax))
+    ytick_freq = min(ytick_freq, abs(ymin), abs(ymax))
+    ztick_freq = min(ztick_freq, abs(zmin), abs(zmax))
+        
+    axes_kwargs = axes_kwargs or {}
+    cross_kwargs = cross_kwargs or {}
+    view_kwargs = view_kwargs or {}
+    
+    fig = plt.figure()
+    ax = fig.add_subplot(projection='3d', computed_zorder=False)
+    
+    # plot cross at origin
+    cross_lw = cross_kwargs.pop('lw', cross_kwargs.pop('linewidth', 1.5))
+    ax.plot([xmin, xmax], [0, 0], [0, 0], c='k', lw=cross_lw, **cross_kwargs)
+    ax.plot([0, 0], [ymin, ymax], [0, 0], c='k', lw=cross_lw, **cross_kwargs)
+    ax.plot([0, 0], [0, 0], [zmin, zmax], c='k', lw=cross_lw, **cross_kwargs)
+    
+    # set axis limits, labels, ticks, and any other styling passed
+    xticks = axes_kwargs.pop('xticks', np.arange(xmin, xmax+xtick_freq, xtick_freq))
+    yticks = axes_kwargs.pop('yticks', np.arange(ymin, ymax+ytick_freq, ytick_freq))
+    zticks = axes_kwargs.pop('zticks', np.arange(zmin, zmax+ztick_freq, ztick_freq))
+    xlabel = axes_kwargs.pop('xlabel', 'X1')
+    ylabel = axes_kwargs.pop('ylabel', 'X2')
+    zlabel = axes_kwargs.pop('zlabel', 'X3')
+    ax.set(xlim=(xmin, xmax), ylim=(ymin, ymax), zlim=(zmin, zmax), 
+           xticks=xticks, yticks=yticks, zticks=zticks, 
+           xlabel=xlabel, ylabel=ylabel, zlabel=zlabel, 
+           **axes_kwargs)
+    
+    # remove background grid 
+    for axis in (ax.xaxis, ax.yaxis, ax.zaxis):
+        axis.pane.set_visible(False)
+        axis.gridlines.set_visible(False)
+        
+    # show z-axis on left instead of right
+    tmp_planes = ax.zaxis._PLANES 
+    ax.zaxis._PLANES = (tmp_planes[2], tmp_planes[3], 
+                        tmp_planes[0], tmp_planes[1], 
+                        tmp_planes[4], tmp_planes[5])
+    
+    # adjust view
+    elev = view_kwargs.pop('elev', 15)
+    azim = view_kwargs.pop('azim', -20)
+    roll = view_kwargs.pop('roll', 0)
+    ax.view_init(elev=elev, azim=azim, roll=roll, **view_kwargs)
+    return ax
+------------------
+
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
+Cell [0;32mIn[1], line 2[0m
+[1;32m      1[0m [38;5;28;01mimport[39;00m [38;5;21;01mnumpy[39;00m [38;5;28;01mas[39;00m [38;5;21;01mnp[39;00m
+[0;32m----> 2[0m [38;5;28;01mimport[39;00m [38;5;21;01mmatplotlib[39;00m[38;5;21;01m.[39;00m[38;5;21;01mpyplot[39;00m [38;5;28;01mas[39;00m [38;5;21;01mplt[39;00m
+[1;32m      3[0m [38;5;28;01mfrom[39;00m [38;5;21;01mmpl_toolkits[39;00m[38;5;21;01m.[39;00m[38;5;21;01mmplot3d[39;00m[38;5;21;01m.[39;00m[38;5;21;01mart3d[39;00m [38;5;28;01mimport[39;00m Path3DCollection
+[1;32m      6[0m [38;5;28;01mdef[39;00m [38;5;21mdraw_3d_axes[39m(limits[38;5;241m=[39m[38;5;241m1[39m, xtick_freq[38;5;241m=[39m[38;5;241m1[39m, ytick_freq[38;5;241m=[39m[38;5;241m1[39m, ztick_freq[38;5;241m=[39m[38;5;241m1[39m, 
+[1;32m      7[0m                  axes_kwargs[38;5;241m=[39m[38;5;28;01mNone[39;00m, cross_kwargs[38;5;241m=[39m[38;5;28;01mNone[39;00m, view_kwargs[38;5;241m=[39m[38;5;28;01mNone[39;00m):
+
+[0;31mModuleNotFoundError[0m: No module named 'matplotlib'
+

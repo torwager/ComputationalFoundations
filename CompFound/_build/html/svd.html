@@ -1,0 +1,894 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Singular Value Decomposition &#8212; Computational Foundations for Neuroscience</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'svd';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Active inference" href="activeinference_smith.html" />
+    <link rel="prev" title="Mixed effects simulations" href="mixedfx4_fpr_power_sims.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/yellow_flower_logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/yellow_flower_logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Computational foundations for Neuroscience
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Preliminary background</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="startingresources.html">Some resources</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="topicmenu.html">A menu of topics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basicdistancecovcorr.html">Fundamentals of distance, covariance, and correlation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="statsinmatlab.html">Stats in Matlab</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">General linear model (GLM)</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="glm1.html">General Linear Model (GLM)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glm2_param_inference.html">Parametric inference in the GLM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glm3_ashardataset.html">Sample dataset and analysis 1: Ashar 2022</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glm4_parameterizingglm.html">Parameterizing models in a GLM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glm5_weightedleastsquares.html">Generalized Least Squares (GLS)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glm6_matlab_glm_answerkey.html">A hand-coded GLM in MATLAB</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Mixed effects</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="mixedfx1_intro.html">Mixed effects: Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mixedfx2_examples.html">Mixed effects: Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mixedfx3_algebra.html">Mixed effects algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mixedfx4_fpr_power_sims.html">Mixed effects simulations</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Multivariate statistics</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Singular Value Decomposition</a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Bayesian models</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="activeinference_smith.html">Active inference</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Reinforcement Learning</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="reinforcementlearning.html">Reinforcement Learning</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Neural networks</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="recurrentneuralnets.html">Recurrent Neural networks</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/torwager/ComputationalFoundations" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/torwager/ComputationalFoundations/edit/master/docs/svd.ipynb" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/torwager/ComputationalFoundations/issues/new?title=Issue%20on%20page%20%2Fsvd.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/svd.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Singular Value Decomposition</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Singular Value Decomposition</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recovery-of-singular-values-with-synthetic-matrices">Recovery of singular values with synthetic matrices</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpreting-svd-of-a-linear-transformation-and-using-it-for-pseudoinverse">Interpreting SVD of a linear transformation and using it for pseudoinverse</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#interpreting-svd-of-a-design-matrix-and-using-it-for-dimensionality-reduction">Interpreting SVD of a design matrix and using it for dimensionality reduction</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-applications">Other applications</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">ortho_group</span><span class="p">,</span> <span class="n">pearsonr</span>
+<span class="kn">from</span> <span class="nn">scipy.linalg</span> <span class="kn">import</span> <span class="n">svdvals</span><span class="p">,</span> <span class="n">svd</span>
+<span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <span class="n">PCA</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">ortho_group</span><span class="p">,</span> <span class="n">pearsonr</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">from</span> <span class="nn">scipy.linalg</span> <span class="kn">import</span> <span class="n">svdvals</span><span class="p">,</span> <span class="n">svd</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;matplotlib&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<section id="singular-value-decomposition">
+<h1>Singular Value Decomposition<a class="headerlink" href="#singular-value-decomposition" title="Permalink to this heading">#</a></h1>
+<ol class="arabic simple">
+<li><p>Definition: <span class="math notranslate nohighlight">\(X = U\Sigma V^T\)</span></p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\Sigma\)</span>: diagonal matrix containing singular values<br></p></li>
+<li><p><span class="math notranslate nohighlight">\(U, V\)</span>: orthogonal matrix<br></p></li>
+</ul>
+</li>
+<li><p>SVD always exists for any matrix and is (somewhat) unique</p></li>
+<li><p>Interpretation of SVD</p>
+<ul class="simple">
+<li><p>SVD of linear transformation: range, null space, rank<br></p></li>
+<li><p>SVD of data matrix: eigen-decomposition of the covariance matrix<br></p></li>
+</ul>
+</li>
+<li><p>Applications <br></p>
+<ul class="simple">
+<li><p>Numerically stable matrix inversion / linear regression <br></p></li>
+<li><p>Dimensionality reduction <br></p></li>
+</ul>
+</li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xxx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="mi">128</span><span class="p">)</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">128</span><span class="p">)</span>
+
+<span class="n">U</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">Vt</span> <span class="o">=</span> <span class="n">svd</span><span class="p">(</span><span class="n">xxx</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">U</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=-</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;RdBu_r&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;U&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">S</span><span class="p">),</span> <span class="n">vmin</span><span class="o">=-</span><span class="mi">2</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;RdBu_r&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;S&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">Vt</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=-</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;RdBu_r&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;$V^T$&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;$V^T$&#39;)
+</pre></div>
+</div>
+<img alt="_images/0daf322856fc5a2c5a38a27750dba0f58ddf92389800389fa16c3579106f38e4.png" src="_images/0daf322856fc5a2c5a38a27750dba0f58ddf92389800389fa16c3579106f38e4.png" />
+</div>
+</div>
+<p>Importantly orthogonal matrices <span class="math notranslate nohighlight">\(U\)</span> and <span class="math notranslate nohighlight">\(V\)</span> are matrices whose inverse is their transpose <span class="math notranslate nohighlight">\(U^TU = UU^T = I\)</span> (same for <span class="math notranslate nohighlight">\(V\)</span>).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># U, V are orthogonal matrices</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">128</span><span class="p">),</span> <span class="n">U</span><span class="nd">@U</span><span class="o">.</span><span class="n">T</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">128</span><span class="p">),</span> <span class="n">U</span><span class="o">.</span><span class="n">T</span><span class="nd">@U</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">128</span><span class="p">),</span> <span class="n">Vt</span><span class="nd">@Vt</span><span class="o">.</span><span class="n">T</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">128</span><span class="p">),</span> <span class="n">Vt</span><span class="o">.</span><span class="n">T</span><span class="nd">@Vt</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+True
+True
+True
+</pre></div>
+</div>
+</div>
+</div>
+<p>This means that we can interpret any matrix operation as a composition of three operations: roation by <span class="math notranslate nohighlight">\(V^T\)</span>, streching by <span class="math notranslate nohighlight">\(S\)</span>, then rotation by <span class="math notranslate nohighlight">\(U\)</span>.</p>
+<section id="recovery-of-singular-values-with-synthetic-matrices">
+<h2>Recovery of singular values with synthetic matrices<a class="headerlink" href="#recovery-of-singular-values-with-synthetic-matrices" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># constructing random matrices with specific singular value spectrums</span>
+<span class="n">S_exp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">0.1</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">128</span><span class="p">))</span>
+<span class="n">S_pow3</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">129</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="mf">1.5</span><span class="p">)</span>
+<span class="n">S_pow2</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">129</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">S_pow1</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">129</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">S_const</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">128</span><span class="p">)</span>
+<span class="n">S_low_rank</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">32</span><span class="p">))[::</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="mf">0.0001</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">96</span><span class="p">)])</span>
+
+<span class="n">S_all</span> <span class="o">=</span> <span class="p">[</span><span class="n">S_exp</span><span class="p">,</span> <span class="n">S_pow3</span><span class="p">,</span> <span class="n">S_pow2</span><span class="p">,</span> <span class="n">S_pow1</span><span class="p">,</span> <span class="n">S_const</span><span class="p">,</span> <span class="n">S_low_rank</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">make_mat_with_sv</span><span class="p">(</span><span class="n">sv</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">256</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">ortho_group</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">m</span><span class="p">)</span><span class="nd">@np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">sv</span><span class="p">)</span><span class="nd">@ortho_group</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">n</span><span class="p">)[:</span><span class="n">m</span><span class="p">]</span>
+
+<span class="n">X_all</span> <span class="o">=</span> <span class="p">[</span><span class="n">make_mat_with_sv</span><span class="p">(</span><span class="n">S</span><span class="p">)</span> <span class="k">for</span> <span class="n">S</span> <span class="ow">in</span> <span class="n">S_all</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">129</span><span class="p">)),</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">S_all</span><span class="p">)</span><span class="o">.</span><span class="n">T</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;exp&#39;</span><span class="p">,</span> <span class="s1">&#39;-1.5&#39;</span><span class="p">,</span> <span class="s1">&#39;-1&#39;</span><span class="p">,</span> <span class="s1">&#39;-0.5&#39;</span><span class="p">,</span> <span class="s1">&#39;const&#39;</span><span class="p">,</span> <span class="s1">&#39;low rank&#39;</span><span class="p">]);</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Original SV&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">s_recovered_all</span> <span class="o">=</span> <span class="p">[</span><span class="n">svdvals</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="k">for</span> <span class="n">X</span> <span class="ow">in</span> <span class="n">X_all</span><span class="p">];</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">129</span><span class="p">)),</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">s_recovered_all</span><span class="p">)</span><span class="o">.</span><span class="n">T</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;exp&#39;</span><span class="p">,</span> <span class="s1">&#39;-1.5&#39;</span><span class="p">,</span> <span class="s1">&#39;-1&#39;</span><span class="p">,</span> <span class="s1">&#39;-0.5&#39;</span><span class="p">,</span> <span class="s1">&#39;const&#39;</span><span class="p">,</span> <span class="s1">&#39;low rank&#39;</span><span class="p">]);</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Recovered SV&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Log(SV)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Log(# component)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Log(# component)&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 0, &#39;Log(# component)&#39;)
+</pre></div>
+</div>
+<img alt="_images/d26689eb165a304af90a72b44865ed2a22f23eedd945579186e889fa9e7a548c.png" src="_images/d26689eb165a304af90a72b44865ed2a22f23eedd945579186e889fa9e7a548c.png" />
+</div>
+</div>
+</section>
+<section id="interpreting-svd-of-a-linear-transformation-and-using-it-for-pseudoinverse">
+<h2>Interpreting SVD of a linear transformation and using it for pseudoinverse<a class="headerlink" href="#interpreting-svd-of-a-linear-transformation-and-using-it-for-pseudoinverse" title="Permalink to this heading">#</a></h2>
+<p>A <span class="math notranslate nohighlight">\(m\times n\)</span> matrix <span class="math notranslate nohighlight">\(M\)</span> represent a linear transformation <span class="math notranslate nohighlight">\(T: \mathbb{R}^n\to\mathbb{R}^m\)</span> or mappings between vector spaces. Linear transformations have a range (the subspace of <span class="math notranslate nohighlight">\(\mathbb{R}^m\)</span> spanned by column space of the corresponding matrix) and a null space (the subspace of <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span> that gets mapped to 0 by <span class="math notranslate nohighlight">\(M\)</span>). These can be very explicitly represented by SVD.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># construct M to have low-rank: 64 non-zero singular values and 64 zero singular values</span>
+
+<span class="n">S_low_rank</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">32</span><span class="p">))[::</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="mf">0.000</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">32</span><span class="p">)])</span>
+<span class="n">M</span> <span class="o">=</span> <span class="n">make_mat_with_sv</span><span class="p">(</span><span class="n">S_low_rank</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">512</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+
+<span class="n">U</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">Vt</span> <span class="o">=</span> <span class="n">svd</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">full_matrices</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">axes</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">S</span><span class="p">),</span> <span class="n">vmin</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;RdBu_r&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;S&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;S&#39;)
+</pre></div>
+</div>
+<img alt="_images/79c4273bd5d04555db2ef7c920c48d2c203907ecd7dcdcaa83ec02842ab504d7.png" src="_images/79c4273bd5d04555db2ef7c920c48d2c203907ecd7dcdcaa83ec02842ab504d7.png" />
+</div>
+</div>
+<p>Even though the matrix is not full rank, SVD still works perfectly.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Rank of M is </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">matrix_rank</span><span class="p">(</span><span class="n">M</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> 
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Shape of M is </span><span class="si">{</span><span class="n">M</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Rank of M is 32
+Shape of M is (512, 64)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Any column in <span class="math notranslate nohighlight">\(V\)</span> that corresponds to a zero singular value is in the <em>null space</em> of <span class="math notranslate nohighlight">\(M\)</span>. Any column in <span class="math notranslate nohighlight">\(U\)</span> that corresponds to a non-zero singular value is in the <em>range</em> of <span class="math notranslate nohighlight">\(M\)</span>.<br>
+If <span class="math notranslate nohighlight">\(M\)</span> is the dataset, then consider a weight vector <span class="math notranslate nohighlight">\(w\)</span>, and a target that is generated through <span class="math notranslate nohighlight">\(y=Mw\)</span>.<br>
+Let there be another vector <span class="math notranslate nohighlight">\(v\)</span> that is in the null space of <span class="math notranslate nohighlight">\(M\)</span>, then <span class="math notranslate nohighlight">\(M(w+v) = Mw+Mv = y+0\)</span>. <br>
+This means that if <span class="math notranslate nohighlight">\(M\)</span> is low rank (aka has colinearity) it is impossible to identify a unique set of ordinary linear regression weights<br>
+See example below:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># generate target</span>
+<span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">64</span><span class="p">)</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">64</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">M</span><span class="nd">@w</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">512</span><span class="p">)</span><span class="o">*</span><span class="mf">0.001</span>
+
+<span class="c1"># naive implementation of linear regression</span>
+<span class="n">w_hat_naive</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">M</span><span class="o">.</span><span class="n">T</span><span class="nd">@M</span><span class="p">)</span><span class="nd">@M</span><span class="o">.</span><span class="n">T</span><span class="nd">@y</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">w_hat_naive</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;True parameters&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Fit parameters&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;Fit parameters&#39;)
+</pre></div>
+</div>
+<img alt="_images/ca870117fefdffe9b952d0f812a2fd3759f743a5c16bc10cce293ef63139dded.png" src="_images/ca870117fefdffe9b952d0f812a2fd3759f743a5c16bc10cce293ef63139dded.png" />
+</div>
+</div>
+<p>The result is terrible since <span class="math notranslate nohighlight">\(M^TM\)</span> is non-invertible. To better understand why this is an issue, see:
+$<span class="math notranslate nohighlight">\(
+M^TM = (USV^T)^TUSV^T = VSU^TUSV^T = VS^2V^T
+\)</span><span class="math notranslate nohighlight">\(
+This means that the square of the singular values are exactly the eigenvalues of the Gram matrix (if the dataset is z-scored, then the Gram matrix is also proportional to the covariance matrix), and the right singular vectors are the eigenvectors of the Gram matrix. &lt;br&gt;
+Now consider another matrix of the form \)</span>W=VUV^T<span class="math notranslate nohighlight">\(, where \)</span>U<span class="math notranslate nohighlight">\( is also diagonal. Then \)</span>W(M^TM)=VUV^TVS^2V^T=VUS^2V^T<span class="math notranslate nohighlight">\(. If \)</span>US^2=I<span class="math notranslate nohighlight">\(, then \)</span>W<span class="math notranslate nohighlight">\( is the inverse of \)</span>M^TM<span class="math notranslate nohighlight">\(. In an ideal case this is easy to solve, just let \)</span>U_{ii}=1/(S_{ii})^2<span class="math notranslate nohighlight">\(. However, since some diagonal of S is 0 (due to \)</span>M<span class="math notranslate nohighlight">\( being low rank), this leads to division by 0.&lt;br&gt;
+Instead, we can try to solve the problem by defining another type of matrix inverse. We know \)</span>Mw=USV^Tw=y<span class="math notranslate nohighlight">\(, then we can define \)</span>\hat{w}=VS^\dagger U^Ty<span class="math notranslate nohighlight">\(, where \)</span>S^\dagger<span class="math notranslate nohighlight">\( is a diagonal matrix which contains the inverse of \)</span>S<span class="math notranslate nohighlight">\('s diagonal elements, except it has 0s where \)</span>S$ is zero, avoiding the division by 0 problem (this is the intuition but there are more rigorous derivations for this, see pseudoinverse).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">eps</span><span class="o">=</span><span class="mf">1e-8</span> <span class="c1"># small value cutoff, any singular value smaller than this will be treated as 0</span>
+<span class="n">S_inv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">S</span><span class="o">&gt;</span><span class="n">eps</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="n">S</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">w_hat_svd</span> <span class="o">=</span> <span class="p">(</span><span class="n">Vt</span><span class="o">.</span><span class="n">T</span><span class="nd">@np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">S_inv</span><span class="p">)</span><span class="nd">@U</span><span class="o">.</span><span class="n">T</span><span class="p">)</span><span class="nd">@y</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">w_hat_svd</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;True parameters&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Fit parameters&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pearsonr</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">w_hat_svd</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>PearsonRResult(statistic=0.7702669533604591, pvalue=9.998714416702584e-14)
+</pre></div>
+</div>
+<img alt="_images/9aaf5d34d4b431253283c2305e5a116e13cac2b56b7a870ff639080b6c349c81.png" src="_images/9aaf5d34d4b431253283c2305e5a116e13cac2b56b7a870ff639080b6c349c81.png" />
+</div>
+</div>
+<p>Not perfect but much better. SVD allows us to isolate the degenerate components of the data matrix, and ignore them in order to avoid numerical instability. This is exactly what numpy uses to solve linear least squares problems.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">w_hat_numpy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">lstsq</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">rcond</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">w_hat_numpy</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">w_hat_svd</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="interpreting-svd-of-a-design-matrix-and-using-it-for-dimensionality-reduction">
+<h1>Interpreting SVD of a design matrix and using it for dimensionality reduction<a class="headerlink" href="#interpreting-svd-of-a-design-matrix-and-using-it-for-dimensionality-reduction" title="Permalink to this heading">#</a></h1>
+<p>Now suppose we want to solve another linear least squares problem. We want a low-rank matrix to approximate the data matrix. Notice that the data matrix has <span class="math notranslate nohighlight">\(m\times n\)</span> numbers, but a rank-k approximation (<span class="math notranslate nohighlight">\(M_k\)</span>) only takes <span class="math notranslate nohighlight">\(m\times k+n\times k\)</span> entries, which is much smaller if <span class="math notranslate nohighlight">\(k\)</span> is small. Mathematicall, we want
+$<span class="math notranslate nohighlight">\(
+\arg\min_{M_k} ||M-M_k||^2
+\)</span>$</p>
+<p>Again we use the SVD of <span class="math notranslate nohighlight">\(M=USV^T\)</span>, we can see that <span class="math notranslate nohighlight">\(||M||^2 = tr((USV^T)^T(USV^T)) = tr(VS^2V^T) = tr(V^TVS^2) = tr(S^2)\)</span>. The norm of a matrix (which equals the total variance of a mean-subtracted dataset) is the sum of its squared singular values. In other words, the total sum of squares of a dataset is equal to the sum of the eigenvalues of its covariance matrix.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">M_jitter</span> <span class="o">=</span> <span class="n">M</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="o">*</span><span class="n">M</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span><span class="o">*</span><span class="mf">0.00000</span> <span class="c1"># no jitter, only low rank components</span>
+
+<span class="n">M_centered</span> <span class="o">=</span> <span class="p">(</span><span class="n">M_jitter</span><span class="o">-</span><span class="n">M_jitter</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span> <span class="c1"># center the dataset</span>
+
+<span class="n">eigvals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eigh</span><span class="p">(</span><span class="n">M_centered</span><span class="o">.</span><span class="n">T</span><span class="nd">@M_centered</span><span class="p">)</span> <span class="c1"># eigenvalues of gran matrix</span>
+
+<span class="n">U_centered</span><span class="p">,</span> <span class="n">S_centered</span><span class="p">,</span> <span class="n">Vt_centered</span> <span class="o">=</span> <span class="n">svd</span><span class="p">(</span><span class="n">M_centered</span><span class="p">,</span> <span class="n">full_matrices</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="c1"># singular values of centered design matrix</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">eigvals</span><span class="p">[</span><span class="mi">0</span><span class="p">][::</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">S_centered</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">eigvals</span><span class="p">[</span><span class="mi">0</span><span class="p">][::</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">eigvals</span><span class="p">[</span><span class="mi">0</span><span class="p">][::</span><span class="o">-</span><span class="mi">1</span><span class="p">]),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;y=sqrt(x)&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Singular values of design matrix&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Eigenvalues of covariance&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/vn/04h3k2gd41v70zhrqdwyg9cw0000gp/T/ipykernel_1745/2654516599.py:10: RuntimeWarning: invalid value encountered in sqrt
+  plt.plot(eigvals[0][::-1], np.sqrt(eigvals[0][::-1]), label=&#39;y=sqrt(x)&#39;, color=&#39;orange&#39;)
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;Eigenvalues of covariance&#39;)
+</pre></div>
+</div>
+<img alt="_images/ff747500766d14744143a5270fe07e1fa64c6044e5014f58e1557f0a488bd21f.png" src="_images/ff747500766d14744143a5270fe07e1fa64c6044e5014f58e1557f0a488bd21f.png" />
+</div>
+</div>
+<p>By performing SVD and removing the components with small singular values, we can get a low-rank approximation of the data. <br><br>
+For dataset with very bad colinearity (smallest singular value=0), this will lead to no loss of information. <br><br>
+By removing each component from the SVD, we remove a part of the dataset whose variance is equal to the square of the singular value. <br><br>
+Removing the components of SVD with the smallest singular values is actually the optimal way of achieving low-rank approximation while preserving variance of the original dataset, but the proof is quite involved. Intuitively, if the component you remove is a “mix” of many SVD components, then its variance explaiend will also be a “mix” of the squares of many singular values, which will be larger than the square of the smallest singular value. <br><br>
+This is exactly what scikitlearn uses for PCA:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pca</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">64</span><span class="p">)</span>
+<span class="n">pca</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">M_jitter</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pca</span><span class="o">.</span><span class="n">explained_variance_ratio_</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;sklearn&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">S_centered</span><span class="p">[:</span><span class="mi">64</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">S_centered</span><span class="p">[:</span><span class="mi">64</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;manual svd&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Component&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Explained Var. Ratio&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;Explained Var. Ratio&#39;)
+</pre></div>
+</div>
+<img alt="_images/3f1dd7f916d5ab0113cb5749106e29bfc8591159e395cf8f84a253f53430e532.png" src="_images/3f1dd7f916d5ab0113cb5749106e29bfc8591159e395cf8f84a253f53430e532.png" />
+</div>
+</div>
+<section id="other-applications">
+<h2>Other applications<a class="headerlink" href="#other-applications" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Partial least squares, canonical correlation, reduced rank regression</p></li>
+<li><p>Procrusties alignment / hyperalignment</p></li>
+<li><p>…</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="mixedfx4_fpr_power_sims.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Mixed effects simulations</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="activeinference_smith.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Active inference</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Singular Value Decomposition</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recovery-of-singular-values-with-synthetic-matrices">Recovery of singular values with synthetic matrices</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpreting-svd-of-a-linear-transformation-and-using-it-for-pseudoinverse">Interpreting SVD of a linear transformation and using it for pseudoinverse</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#interpreting-svd-of-a-design-matrix-and-using-it-for-dimensionality-reduction">Interpreting SVD of a design matrix and using it for dimensionality reduction</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-applications">Other applications</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Tor Wager & others
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
