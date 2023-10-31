@@ -410,8 +410,12 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-resources">More resources</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#videos-lectures">Videos lectures</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reinforcement-learning-libraries">Reinforcement learning libraries</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compiled-resources-on-github-repos">Compiled resources on github repos</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#python">Python</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#matlab">matlab</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sutton-and-barto-book-exercises">Sutton and Barto Book exercises</a></li>
 </ul>
 </li>
 </ul>
@@ -458,13 +462,20 @@ document.write(`
 <section id="hands-on-2-q-learning">
 <h3>Hands-on 2: Q-learning<a class="headerlink" href="#hands-on-2-q-learning" title="Permalink to this heading">#</a></h3>
 <p>Guest lecture: Heejung Jung</p>
-<p>Q learning tutorial using Open Ai’s code:</p>
-<p><a class="reference external" href="https://github.com/jungheejung/cue_RL/tree/main">Heejung Github</a></p>
-<p>Additional links (but use the github above!)</p>
-<p>Q learning tutorial:
-https://www.gocoder.one/blog/rl-tutorial-with-openai-gym/</p>
-<p>OpenAI’s website (RL intro):</p>
-<p>https://spinningup.openai.com/en/latest/spinningup/rl_intro.html</p>
+<p>Q-learning tutorial using Open Ai’s code:</p>
+<ul class="simple">
+<li><p>Here, we walk through a Q-learning tutorial developed by Joy Zhang <a class="reference external" href="https://www.gocoder.one/blog/rl-tutorial-with-openai-gym/">[ link ]</a>. It covers a random agent versus a Q-learning agent in a tax driving environment, and beautifully walks through each component of the Q-learning model.</p></li>
+<li><p>Note, the tutorial is from 2021; there have been some updates in OpenAI’s gym since 2021. It’s now called <a class="reference external" href="https://github.com/Farama-Foundation/Gymnasium">Gymnasium</a> with updates! This means we need to make slight updates to Zhang’s tutorial.. which I’ve done in my edits!</p></li>
+<li><p>So checkout the original blog, but also follow this colab, <a class="reference external" href="https://github.com/jungheejung/cue_RL/blob/main/openai_gym_taxi_tutorial.ipynb">Heejung’s edits to Zhang’s tutorial</a>, which allows you to run the code without debugging.</p></li>
+</ul>
+<p>Links:</p>
+<ul class="simple">
+<li><p>Q-learning tutorial by Joy Zhang: https://www.gocoder.one/blog/rl-tutorial-with-openai-gym/</p></li>
+<li><p><a class="reference external" href="https://github.com/jungheejung/cue_RL/blob/main/openai_gym_taxi_tutorial.ipynb">Heejung’s edits to Zhang’s tutorial</a></p></li>
+<li><p>OpenAI’s website (RL intro): https://spinningup.openai.com/en/latest/spinningup/rl_intro.html</p></li>
+<li><p>Learn more about OpenAI’s Taxi environment: https://www.gymlibrary.dev/environments/toy_text/taxi/</p></li>
+</ul>
+<p>Additional RL resources are <span class="xref myst">hyperlinked in this document</span> or <a class="reference external" href="https://github.com/jungheejung/cue_RL#resources">linked here in Heejung’s github</a></p>
 </section>
 <section id="hands-on-3-modeling-cue-effects-on-pain">
 <h3>Hands-on 3: Modeling cue effects on pain<a class="headerlink" href="#hands-on-3-modeling-cue-effects-on-pain" title="Permalink to this heading">#</a></h3>
@@ -477,14 +488,48 @@ https://www.gocoder.one/blog/rl-tutorial-with-openai-gym/</p>
 </section>
 <section id="more-resources">
 <h2>More resources<a class="headerlink" href="#more-resources" title="Permalink to this heading">#</a></h2>
+<section id="videos-lectures">
+<h3>Videos lectures<a class="headerlink" href="#videos-lectures" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=fdY7dt3ijgY">OpenAI Spinning Up in Deep RL Workshop</a></p></li>
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=2pWv7GOvuf0">RL Course by David Silver</a></p></li>
+</ul>
+</section>
+<section id="reinforcement-learning-libraries">
+<h3>Reinforcement learning libraries<a class="headerlink" href="#reinforcement-learning-libraries" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Open AI Deep RL: https://spinningup.openai.com/</p></li>
+<li><p>DI engine: https://di-engine-docs.readthedocs.io/en/latest/</p></li>
+<li><p>Hugging face: https://huggingface.co/models?pipeline_tag=reinforcement-learning</p></li>
+</ul>
+</section>
+<section id="compiled-resources-on-github-repos">
+<h3>Compiled resources on github repos<a class="headerlink" href="#compiled-resources-on-github-repos" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>https://github.com/ADGEfficiency/rl-resources</p></li>
+<li><p>https://github.com/aikorea/awesome-rl</p></li>
+<li><p>https://github.com/dennybritz/reinforcement-learning</p></li>
+</ul>
+</section>
 <section id="python">
 <h3>Python<a class="headerlink" href="#python" title="Permalink to this heading">#</a></h3>
 <p><a class="reference external" href="https://github.com/openai/baselines">OpenAI Baselines</a></p>
+<ul class="simple">
+<li><p>OpenAI Gym for reinforcement learning()</p></li>
+<li><p><a class="reference external" href="https://compneuro.neuromatch.io/tutorials/W3D4_ReinforcementLearning/chapter_title.html">Neuromatch Computational Neuroscience - RL</a></p></li>
+</ul>
 </section>
 <section id="matlab">
 <h3>matlab<a class="headerlink" href="#matlab" title="Permalink to this heading">#</a></h3>
 <p><a class="reference external" href="https://www.mathworks.com/products/reinforcement-learning.html">Matlab RL toolbox</a>
 https://www.mathworks.com/help/reinforcement-learning/</p>
+</section>
+<section id="sutton-and-barto-book-exercises">
+<h3>Sutton and Barto Book exercises<a class="headerlink" href="#sutton-and-barto-book-exercises" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Python code: https://github.com/ShangtongZhang/reinforcement-learning-an-introduction</p></li>
+<li><p>MATLAB code: https://roboticsbiz.com/wp-content/uploads/2021/11/Reinforcement-Learning-Cheatsheet.pdf</p></li>
+</ul>
 </section>
 </section>
 </section>
@@ -565,8 +610,12 @@ https://www.mathworks.com/help/reinforcement-learning/</p>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-resources">More resources</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#videos-lectures">Videos lectures</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reinforcement-learning-libraries">Reinforcement learning libraries</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compiled-resources-on-github-repos">Compiled resources on github repos</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#python">Python</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#matlab">matlab</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sutton-and-barto-book-exercises">Sutton and Barto Book exercises</a></li>
 </ul>
 </li>
 </ul>

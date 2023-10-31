@@ -39,18 +39,19 @@ Guest instructor: Aryan Yazdanpanah
 
 Guest lecture: Heejung Jung
 
-Q learning tutorial using Open Ai's code:
+Q-learning tutorial using Open Ai's code:
+* Here, we walk through a Q-learning tutorial developed by Joy Zhang [[ link ]](https://www.gocoder.one/blog/rl-tutorial-with-openai-gym/). It covers a random agent versus a Q-learning agent in a tax driving environment, and beautifully walks through each component of the Q-learning model. 
+* Note, the tutorial is from 2021; there have been some updates in OpenAI's gym since 2021. It's now called [Gymnasium](https://github.com/Farama-Foundation/Gymnasium) with updates! This means we need to make slight updates to Zhang's tutorial.. which I've done in my edits!
+* So checkout the original blog, but also follow this colab, [Heejung's edits to Zhang's tutorial](https://github.com/jungheejung/cue_RL/blob/main/openai_gym_taxi_tutorial.ipynb), which allows you to run the code without debugging. 
 
-[Heejung Github](https://github.com/jungheejung/cue_RL/tree/main)
+Links:
 
-Additional links (but use the github above!)
+* Q-learning tutorial by Joy Zhang: https://www.gocoder.one/blog/rl-tutorial-with-openai-gym/
+* [Heejung's edits to Zhang's tutorial](https://github.com/jungheejung/cue_RL/blob/main/openai_gym_taxi_tutorial.ipynb)
+* OpenAI's website (RL intro): https://spinningup.openai.com/en/latest/spinningup/rl_intro.html
+* Learn more about OpenAI's Taxi environment: https://www.gymlibrary.dev/environments/toy_text/taxi/
 
-Q learning tutorial:
-https://www.gocoder.one/blog/rl-tutorial-with-openai-gym/
-
-OpenAI's website (RL intro):
-
-https://spinningup.openai.com/en/latest/spinningup/rl_intro.html
+Additional RL resources are [hyperlinked in this document](#More-resources) or [linked here in Heejung's github](https://github.com/jungheejung/cue_RL#resources)
 
 
 ### Hands-on 3: Modeling cue effects on pain
@@ -66,10 +67,29 @@ Guest instructor: Aryan Yazdanpanah and Heejung
 
 ## More resources
 
-### Python
+### Videos lectures
+* [OpenAI Spinning Up in Deep RL Workshop](https://www.youtube.com/watch?v=fdY7dt3ijgY)
+* [RL Course by David Silver](https://www.youtube.com/watch?v=2pWv7GOvuf0)
 
+### Reinforcement learning libraries
+* Open AI Deep RL: https://spinningup.openai.com/
+* DI engine: https://di-engine-docs.readthedocs.io/en/latest/
+* Hugging face: https://huggingface.co/models?pipeline_tag=reinforcement-learning
+
+### Compiled resources on github repos
+* https://github.com/ADGEfficiency/rl-resources
+* https://github.com/aikorea/awesome-rl
+* https://github.com/dennybritz/reinforcement-learning
+
+### Python
 [OpenAI Baselines](https://github.com/openai/baselines)
+* OpenAI Gym for reinforcement learning()
+* [Neuromatch Computational Neuroscience - RL](https://compneuro.neuromatch.io/tutorials/W3D4_ReinforcementLearning/chapter_title.html)
 
 ### matlab
 [Matlab RL toolbox](https://www.mathworks.com/products/reinforcement-learning.html)
 https://www.mathworks.com/help/reinforcement-learning/
+
+### Sutton and Barto Book exercises
+* Python code: https://github.com/ShangtongZhang/reinforcement-learning-an-introduction
+* MATLAB code: https://roboticsbiz.com/wp-content/uploads/2021/11/Reinforcement-Learning-Cheatsheet.pdf
