@@ -33,6 +33,9 @@ parts:
   - caption: Reinforcement Learning
     chapters:
       - file: reinforcementlearning.md
+  - caption: Natural Language Processing (NLP)
+    chapters:
+      - file: models_of_text_and_language.ipynb
   - caption: Neural networks
     chapters:
       - file: recurrentneuralnets.md
