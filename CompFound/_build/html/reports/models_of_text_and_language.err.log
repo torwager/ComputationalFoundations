@@ -31,7 +31,7 @@ The message was: Cell execution timed out.
 Here is a preview of the cell contents:
 -------------------
 # @title Install and enable Chatify
-smuggle chatify      # pip: git+https://github.com/ContextLab/chatify.git
+smuggle chatify      # pip: chatify
 %load_ext chatify
 
 print('Chatify has been installed and loaded! 🤖')
