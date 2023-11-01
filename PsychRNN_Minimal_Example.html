@@ -64,7 +64,6 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'PsychRNN_Minimal_Example';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Recurrent Neural networks" href="recurrentneuralnets.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -179,6 +178,11 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="mixedfx3_algebra.html">Mixed effects algebra</a></li>
 <li class="toctree-l1"><a class="reference internal" href="mixedfx4_fpr_power_sims.html">Mixed effects simulations</a></li>
 </ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Multivariate statistics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="svd.html">Singular Value Decomposition</a></li>
+
+</ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Bayesian models</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="activeinference_smith.html">Active inference</a></li>
@@ -188,9 +192,8 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="reinforcementlearning.html">Reinforcement Learning</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Neural networks</span></p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="recurrentneuralnets.html">Recurrent Neural networks</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Hello World!</a></li>
 </ul>
 
     </div>
@@ -411,15 +414,13 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Defaulting to user installation because normal site-packages is not writeable
+Requirement already satisfied: psychrnn in /Users/f003vz1/Library/Python/3.8/lib/python/site-packages (1.0.0)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: psychrnn in /Users/f003vz1/Library/Python/3.8/lib/python/site-packages (1.0.0)
-Requirement already satisfied: python-version!=&quot;3.0*&quot;,!=&quot;3.1*&quot;,!=&quot;3.2*&quot;,!=&quot;3.3*&quot;,&gt;=&quot;2.7&quot; in /Users/f003vz1/Library/Python/3.8/lib/python/site-packages (from psychrnn) (0.0.2)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: python-version!=&quot;3.0*&quot;,!=&quot;3.1*&quot;,!=&quot;3.2*&quot;,!=&quot;3.3*&quot;,&gt;=&quot;2.7&quot; in /Users/f003vz1/Library/Python/3.8/lib/python/site-packages (from psychrnn) (0.0.2)
 Requirement already satisfied: tensorflow in /Users/f003vz1/Library/Python/3.8/lib/python/site-packages (from psychrnn) (2.13.0)
 Requirement already satisfied: tensorflow-macos==2.13.0 in /Users/f003vz1/Library/Python/3.8/lib/python/site-packages (from tensorflow-&gt;psychrnn) (2.13.0)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: absl-py&gt;=1.0.0 in /Users/f003vz1/Library/Python/3.8/lib/python/site-packages (from tensorflow-macos==2.13.0-&gt;tensorflow-&gt;psychrnn) (2.0.0)
+Requirement already satisfied: absl-py&gt;=1.0.0 in /Users/f003vz1/Library/Python/3.8/lib/python/site-packages (from tensorflow-macos==2.13.0-&gt;tensorflow-&gt;psychrnn) (2.0.0)
 Requirement already satisfied: astunparse&gt;=1.6.0 in /Users/f003vz1/Library/Python/3.8/lib/python/site-packages (from tensorflow-macos==2.13.0-&gt;tensorflow-&gt;psychrnn) (1.6.3)
 Requirement already satisfied: flatbuffers&gt;=23.1.21 in /Users/f003vz1/Library/Python/3.8/lib/python/site-packages (from tensorflow-macos==2.13.0-&gt;tensorflow-&gt;psychrnn) (23.5.26)
 Requirement already satisfied: gast&lt;=0.4.0,&gt;=0.2.1 in /Users/f003vz1/Library/Python/3.8/lib/python/site-packages (from tensorflow-macos==2.13.0-&gt;tensorflow-&gt;psychrnn) (0.4.0)
@@ -559,15 +560,6 @@ Requirement already satisfied: oauthlib&gt;=3.0.0 in /Users/f003vz1/Library/Pyth
   
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="recurrentneuralnets.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Recurrent Neural networks</p>
-      </div>
-    </a>
 </div></div>
   
 </div>
