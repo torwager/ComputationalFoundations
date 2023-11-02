@@ -1,0 +1,858 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>An introduction to natural language processing in Python &#8212; Computational Foundations for Neuroscience</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'MANNING_NLP_Tutorial_CompFoundations_2023';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Models of text and language" href="models_of_text_and_language.html" />
+    <link rel="prev" title="Reinforcement Learning" href="reinforcementlearning.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/yellow_flower_logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/yellow_flower_logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Computational foundations for Neuroscience
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Preliminary background</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="startingresources.html">Some resources</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="topicmenu.html">A menu of topics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basicdistancecovcorr.html">Fundamentals of distance, covariance, and correlation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="statsinmatlab.html">Stats in Matlab</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">General linear model (GLM)</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="glm1.html">General Linear Model (GLM)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glm2_param_inference.html">Parametric inference in the GLM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glm3_ashardataset.html">Sample dataset and analysis 1: Ashar 2022</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glm4_parameterizingglm.html">Parameterizing models in a GLM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glm5_weightedleastsquares.html">Generalized Least Squares (GLS)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glm6_matlab_glm_answerkey.html">A hand-coded GLM in MATLAB</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Mixed effects</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="mixedfx1_intro.html">Mixed effects: Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mixedfx2_examples.html">Mixed effects: Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mixedfx3_algebra.html">Mixed effects algebra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mixedfx4_fpr_power_sims.html">Mixed effects simulations</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Multivariate statistics</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="svd.html">Singular Value Decomposition</a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Bayesian models</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="activeinference_smith.html">Active inference</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Reinforcement Learning</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="reinforcementlearning.html">Reinforcement Learning</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Natural Language Processing (NLP)</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">An introduction to natural language processing in Python</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="models_of_text_and_language.html">Models of text and language</a></li>
+
+
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Neural networks</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="recurrentneuralnets.html">Recurrent Neural networks</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/torwager/ComputationalFoundations" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/torwager/ComputationalFoundations/edit/master/docs/MANNING_NLP_Tutorial_CompFoundations_2023.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/torwager/ComputationalFoundations/issues/new?title=Issue%20on%20page%20%2FMANNING_NLP_Tutorial_CompFoundations_2023.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/MANNING_NLP_Tutorial_CompFoundations_2023.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>An introduction to natural language processing in Python</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">An introduction to natural language processing in Python</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jeremy-r-manning">Jeremy R. Manning</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#what-s-covered-in-this-tutorial">What’s covered in this tutorial?</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-natural-language-processing">What is natural language processing?</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#early-tasks-part-of-speech-tagging">Early tasks: part of speech tagging</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#early-tasks-stemming-lemmatization">Early tasks: stemming/lemmatization</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#early-tasks-automatic-summarization">Early tasks: automatic summarization</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#but-how-can-we-get-at-the-meaning-of-natural-language">But how can we get at the <em>meaning</em> of natural language?</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#text-embedding-models">Text embedding models</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#latent-semantic-analysis">Latent semantic analysis</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#latent-dirichlet-allocation-lda">Latent Dirichlet Allocation (LDA)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#word2vec">Word2vec</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#consider-the-following-phrases">Consider the following phrases:</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#bag-of-words-vs-context-sensitive-models">Bag of words vs. context-sensitive models</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#universal-sentence-encoder">Universal Sentence Encoder</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#transformers">Transformers</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#transfomers">Transfomers</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Transformers</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#generative-pretrained-transformer-gpt">Generative Pretrained Transformer (GPT)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#nlp-in-practice">NLP in practice</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#nltk">NLTK</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#hugging-face">Hugging Face</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#transformers-library-by-hugging-face"><code class="docutils literal notranslate"><span class="pre">transformers</span></code> library (by Hugging Face)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pydata-wrangler-library"><code class="docutils literal notranslate"><span class="pre">pydata-wrangler</span></code> library</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#interactive-agents-chatbots">Interactive agents (ChatBots)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#langchain-library"><code class="docutils literal notranslate"><span class="pre">langchain</span></code> library</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <p><img alt="bg opacity:0.1" src="https://uploads-ssl.webflow.com/614c82ed388d53640613982e/635bcc3c2b1b16702f8917c9_634fd7afbe19224c4a7a4a0e_6320786b1cfec14310b5f181_natural-language-processing--NLP-.png" /></p>
+<section class="tex2jax_ignore mathjax_ignore" id="an-introduction-to-natural-language-processing-in-python">
+<h1>An introduction to natural language processing in Python<a class="headerlink" href="#an-introduction-to-natural-language-processing-in-python" title="Permalink to this heading">#</a></h1>
+<section id="jeremy-r-manning">
+<h2>Jeremy R. Manning<a class="headerlink" href="#jeremy-r-manning" title="Permalink to this heading">#</a></h2>
+<p>Computational Foundations for Neuroscience
+Dartmouth College 🌲
+November 2, 2023</p>
+<!-- This is a presenter note... -->
+<hr class="docutils" />
+<p><img alt="bg opacity:0.1" src="https://uploads-ssl.webflow.com/614c82ed388d53640613982e/635bcc3c2b1b16702f8917c9_634fd7afbe19224c4a7a4a0e_6320786b1cfec14310b5f181_natural-language-processing--NLP-.png" /></p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="what-s-covered-in-this-tutorial">
+<h1>What’s covered in this tutorial?<a class="headerlink" href="#what-s-covered-in-this-tutorial" title="Permalink to this heading">#</a></h1>
+<ul class="simple">
+<li><p>Today’s <a class="reference external" href="https://tutorials.mindsummerschool.com/content/models_of_text_and_language.html">NLP tutorial</a> provides some background and shows how to apply several different text embedding models to a conversations dataset.</p></li>
+<li><p>The tutorial also shows how to implement a simple chatbot using <code class="docutils literal notranslate"><span class="pre">langchain</span></code>.</p></li>
+<li><p>Suggestion: open the tutorial in Google Colaboratory and select “Run All” from the “Runtime” menu, while I’m going through the slides.  Then you can play around with the different pieces once everything has loaded.</p></li>
+</ul>
+<hr class="docutils" />
+<p><img alt="bg opacity:0.1" src="https://uploads-ssl.webflow.com/614c82ed388d53640613982e/635bcc3c2b1b16702f8917c9_634fd7afbe19224c4a7a4a0e_6320786b1cfec14310b5f181_natural-language-processing--NLP-.png" /></p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="what-is-natural-language-processing">
+<h1>What is natural language processing?<a class="headerlink" href="#what-is-natural-language-processing" title="Permalink to this heading">#</a></h1>
+<ul class="simple">
+<li><p>Branch of computational linguistics</p></li>
+<li><p>Use computational approaches to process, analyze, and understand language</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="early-tasks-part-of-speech-tagging">
+<h1>Early tasks: part of speech tagging<a class="headerlink" href="#early-tasks-part-of-speech-tagging" title="Permalink to this heading">#</a></h1>
+<p><img alt="width:1000px" src="https://byteiota.com/wp-content/uploads/2021/01/POS-Tagging-800x400.jpg" /></p>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="early-tasks-stemming-lemmatization">
+<h1>Early tasks: stemming/lemmatization<a class="headerlink" href="#early-tasks-stemming-lemmatization" title="Permalink to this heading">#</a></h1>
+<p><img alt="width:900px" src="https://thelead.io/wp-content/uploads/2020/05/stemming-reduce-words-to-root-form-1024x576.jpeg" /></p>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="early-tasks-automatic-summarization">
+<h1>Early tasks: automatic summarization<a class="headerlink" href="#early-tasks-automatic-summarization" title="Permalink to this heading">#</a></h1>
+<p><img alt="width:1000px" src="https://techcommunity.microsoft.com/t5/image/serverpage/image-id/180981i9EA877DDFF97D50D/image-size/large?v=v2&amp;px=999" /></p>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="but-how-can-we-get-at-the-meaning-of-natural-language">
+<h1>But how can we get at the <em>meaning</em> of natural language?<a class="headerlink" href="#but-how-can-we-get-at-the-meaning-of-natural-language" title="Permalink to this heading">#</a></h1>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="text-embedding-models">
+<h1>Text embedding models<a class="headerlink" href="#text-embedding-models" title="Permalink to this heading">#</a></h1>
+<ul class="simple">
+<li><p>Preprocess some text to make a “training corpus”</p></li>
+<li><p>Train a model to parse the documents in the corpus</p></li>
+<li><p>Goal: generate “feature vectors” (for words, phrases, documents, etc.) that capture semantic properties of the text</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="latent-semantic-analysis">
+<h1>Latent semantic analysis<a class="headerlink" href="#latent-semantic-analysis" title="Permalink to this heading">#</a></h1>
+<p><img alt="width:800px" src="https://i.ytimg.com/vi/M1duqgg8-IM/maxresdefault.jpg" /></p>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="latent-dirichlet-allocation-lda">
+<h1>Latent Dirichlet Allocation (LDA)<a class="headerlink" href="#latent-dirichlet-allocation-lda" title="Permalink to this heading">#</a></h1>
+<p><img alt="width:600px" src="https://community.alteryx.com/t5/image/serverpage/image-id/124666i826A507A4B5E3107?v=v2" /></p>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="word2vec">
+<h1>Word2vec<a class="headerlink" href="#word2vec" title="Permalink to this heading">#</a></h1>
+<p><img alt="width:1000px" src="https://miro.medium.com/v2/resize:fit:678/1*5F4TXdFYwqi-BWTToQPIfg.jpeg" /></p>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="consider-the-following-phrases">
+<h1>Consider the following phrases:<a class="headerlink" href="#consider-the-following-phrases" title="Permalink to this heading">#</a></h1>
+<p>“My dog ate my homework”</p>
+<p><em>vs.</em></p>
+<p>“My homework ate my dog”</p>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="bag-of-words-vs-context-sensitive-models">
+<h1>Bag of words vs. context-sensitive models<a class="headerlink" href="#bag-of-words-vs-context-sensitive-models" title="Permalink to this heading">#</a></h1>
+<ul class="simple">
+<li><p>BoW models (e.g., LSA, LDA, word2vec) don’t care about word order</p></li>
+<li><p>C-S models “care” about <em>context</em> and <em>grammar</em> by picking up on word order effects</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="universal-sentence-encoder">
+<h1>Universal Sentence Encoder<a class="headerlink" href="#universal-sentence-encoder" title="Permalink to this heading">#</a></h1>
+<p><img alt="width:1000px" src="https://learnopencv.com/wp-content/uploads/2018/11/Universal-Sentence-Encoder.png" /></p>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="transformers">
+<h1>Transformers<a class="headerlink" href="#transformers" title="Permalink to this heading">#</a></h1>
+<p><img alt="width:850px" src="https://miro.medium.com/v2/resize:fit:1400/1*iy12bH-FiUNOy9-0bULgSg.png" /></p>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="transfomers">
+<h1>Transfomers<a class="headerlink" href="#transfomers" title="Permalink to this heading">#</a></h1>
+<ol class="arabic simple">
+<li><p><em>Tokenize</em> text into smaller units (words/sub-words)</p></li>
+<li><p><em>Embed</em> tokens (ignoring order)</p></li>
+<li><p>Update the embeddings to include <em>position</em> information (add features)</p></li>
+<li><p>Update the embeddings using the <em>encoder and decoder</em> layers:
+a. The encoder processes the inputs
+b. The decoder generates outputs</p></li>
+</ol>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>Transformers<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<ul class="simple">
+<li><p>Initially used for “sequence-to-sequence” tasks (e.g., translation)</p></li>
+<li><p>Now the basis of most state-of-the-art NLP models</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="generative-pretrained-transformer-gpt">
+<h1>Generative Pretrained Transformer (GPT)<a class="headerlink" href="#generative-pretrained-transformer-gpt" title="Permalink to this heading">#</a></h1>
+<ul class="simple">
+<li><p>Variant of transformers</p></li>
+<li><p>“Regular” transformers have both an encoder and decoder; GPT only has the decoder part</p></li>
+<li><p>The goal is to predict the next token in a sequence, given the previous context</p></li>
+<li><p>The model is “pre-trained” on a large corpus of text to learn which tokens are likely to follow which other tokens</p></li>
+<li><p>The model can then be “fine-tuned” on specific tasks (e.g., Q&amp;A, following instructions, coding tasks, etc.)</p></li>
+<li><p>Goal: text completion, translation, summarization, writing code, etc.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="nlp-in-practice">
+<h1>NLP in practice<a class="headerlink" href="#nlp-in-practice" title="Permalink to this heading">#</a></h1>
+<ul class="simple">
+<li><p>Natural Language Toolkit (NLTK) implements lots of basic text processing tasks like tokenization, lemmatization, part of speech tagging, etc.</p></li>
+<li><p>Scikit-learn has some basic models, like LDA</p></li>
+<li><p>For fancier models the best place to look is Hugging Face</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="nltk">
+<h1>NLTK<a class="headerlink" href="#nltk" title="Permalink to this heading">#</a></h1>
+<p>Implements lots of fundemantal “traditional” computational linguistics tasks</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">nltk</span>
+
+<span class="n">sentence</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;At eight o&#39;clock on Thursday morning</span>
+<span class="s2">... Arthur didn&#39;t feel very good.&quot;&quot;&quot;</span>
+<span class="n">tokens</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">word_tokenize</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span>
+
+<span class="n">tagged</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">pos_tag</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="hugging-face">
+<h1>Hugging Face<a class="headerlink" href="#hugging-face" title="Permalink to this heading">#</a></h1>
+<p><img alt="width:900px" src="https://huggingface.co/front/assets/activity-feed.png" /></p>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="transformers-library-by-hugging-face">
+<h1><code class="docutils literal notranslate"><span class="pre">transformers</span></code> library (by Hugging Face)<a class="headerlink" href="#transformers-library-by-hugging-face" title="Permalink to this heading">#</a></h1>
+<p>Direct interactions with text and models</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">AutoTokenizer</span><span class="p">,</span> <span class="n">AutoModelForMaskedLM</span>
+
+<span class="n">tokenizer</span> <span class="o">=</span> <span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s2">&quot;bert-base-uncased&quot;</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">AutoModelForMaskedLM</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s2">&quot;bert-base-uncased&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<hr class="docutils" />
+<section id="pydata-wrangler-library">
+<h2><code class="docutils literal notranslate"><span class="pre">pydata-wrangler</span></code> library<a class="headerlink" href="#pydata-wrangler-library" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Wrapper for <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> and Hugging Face models, focused on computing text embeddings</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">datawrangler</span> <span class="k">as</span> <span class="nn">dw</span>
+
+<span class="n">bert</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;model&#39;</span><span class="p">:</span> <span class="s1">&#39;TransformerDocumentEmbeddings&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;args&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;bert-base-uncased&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;kwargs&#39;</span><span class="p">:</span> <span class="p">{}}</span>
+<span class="n">bert_embeddings</span> <span class="o">=</span> <span class="n">dw</span><span class="o">.</span><span class="n">wrangle</span><span class="p">(</span><span class="n">my_text</span><span class="p">,</span>
+                             <span class="n">text_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;model&#39;</span><span class="p">:</span> <span class="n">bert</span><span class="p">})</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Lots of other useful tools for working with data (supports numpy, pandas, text, images, and more)</p></li>
+<li><p>Essentially the core function (<code class="docutils literal notranslate"><span class="pre">dw.wrangle</span></code>) turns messy data into Pandas DataFrames</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="interactive-agents-chatbots">
+<h1>Interactive agents (ChatBots)<a class="headerlink" href="#interactive-agents-chatbots" title="Permalink to this heading">#</a></h1>
+<ul class="simple">
+<li><p>Early implementations (e.g., ELIZA) used clever string manipulation hacks</p></li>
+</ul>
+<p><img alt="width:500px" src="https://upload.wikimedia.org/wikipedia/commons/7/79/ELIZA_conversation.png" /></p>
+<ul class="simple">
+<li><p>Modern chatbots: predictive text models (text embeddings, positional coding, etc.)</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="langchain-library">
+<h1><code class="docutils literal notranslate"><span class="pre">langchain</span></code> library<a class="headerlink" href="#langchain-library" title="Permalink to this heading">#</a></h1>
+<ul class="simple">
+<li><p>Provides some great tools for interfacing with a wide variety of language models from Hugging Face, OpenAI, Meta, and more</p></li>
+<li><p>Infrastructure for chaining together prompts, tasks, models, etc.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="summary">
+<h1>Summary<a class="headerlink" href="#summary" title="Permalink to this heading">#</a></h1>
+<ul class="simple">
+<li><p>Text embeddings: bag of words vs. context-sensitive models</p></li>
+<li><p>Chatbots: string manipulations vs. predictive text models</p></li>
+<li><p>Suggested libraries: <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code>, <code class="docutils literal notranslate"><span class="pre">pydata-wrangler</span></code>, <code class="docutils literal notranslate"><span class="pre">transformers</span></code>, and <code class="docutils literal notranslate"><span class="pre">langchain</span></code></p></li>
+</ul>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="reinforcementlearning.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Reinforcement Learning</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="models_of_text_and_language.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Models of text and language</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">An introduction to natural language processing in Python</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jeremy-r-manning">Jeremy R. Manning</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#what-s-covered-in-this-tutorial">What’s covered in this tutorial?</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-natural-language-processing">What is natural language processing?</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#early-tasks-part-of-speech-tagging">Early tasks: part of speech tagging</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#early-tasks-stemming-lemmatization">Early tasks: stemming/lemmatization</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#early-tasks-automatic-summarization">Early tasks: automatic summarization</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#but-how-can-we-get-at-the-meaning-of-natural-language">But how can we get at the <em>meaning</em> of natural language?</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#text-embedding-models">Text embedding models</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#latent-semantic-analysis">Latent semantic analysis</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#latent-dirichlet-allocation-lda">Latent Dirichlet Allocation (LDA)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#word2vec">Word2vec</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#consider-the-following-phrases">Consider the following phrases:</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#bag-of-words-vs-context-sensitive-models">Bag of words vs. context-sensitive models</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#universal-sentence-encoder">Universal Sentence Encoder</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#transformers">Transformers</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#transfomers">Transfomers</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Transformers</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#generative-pretrained-transformer-gpt">Generative Pretrained Transformer (GPT)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#nlp-in-practice">NLP in practice</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#nltk">NLTK</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#hugging-face">Hugging Face</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#transformers-library-by-hugging-face"><code class="docutils literal notranslate"><span class="pre">transformers</span></code> library (by Hugging Face)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pydata-wrangler-library"><code class="docutils literal notranslate"><span class="pre">pydata-wrangler</span></code> library</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#interactive-agents-chatbots">Interactive agents (ChatBots)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#langchain-library"><code class="docutils literal notranslate"><span class="pre">langchain</span></code> library</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Tor Wager & others
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
