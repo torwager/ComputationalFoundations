@@ -191,6 +191,42 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="reinforcementlearning.html">Reinforcement Learning</a></li>
 </ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Natural Language Processing (NLP)</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="MANNING_NLP_Tutorial_CompFoundations_2023.html">An introduction to natural language processing in Python</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="models_of_text_and_language.html">Models of text and language</a></li>
+
+
+
+
+
+
+
+</ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Neural networks</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="recurrentneuralnets.html">Recurrent Neural networks</a></li>
@@ -438,7 +474,40 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/f003vz1/Library/Python/3.8/lib/python/site-packages/davos/core/project.py:896: UserWarning: Failed to identify notebook path. Falling back to generic default project
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting davos
+  Obtaining dependency information for davos from https://files.pythonhosted.org/packages/98/dd/2c948b689686d3c3f00947d80b49d3731ae0b25f66ef826910ae203312bf/davos-0.2.3-py3-none-any.whl.metadata
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Downloading davos-0.2.3-py3-none-any.whl.metadata (49 kB)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>?25l     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/49.5 kB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">49.5/49.5 kB</span> <span class=" -Color -Color-Red">1.1 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+?25h
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: packaging in /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages (from davos) (23.1)
+Downloading davos-0.2.3-py3-none-any.whl (102 kB)
+?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/102.2 kB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━ <span class=" -Color -Color-Green">92.2/102.2 kB</span> <span class=" -Color -Color-Red">9.5 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">102.2/102.2 kB</span> <span class=" -Color -Color-Red">2.3 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+?25h
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Installing collected packages: davos
+Successfully installed davos-0.2.3
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">[</span><span class=" -Color -Color-Blue">notice</span><span class=" -Color -Color-Bold">]</span> A new release of pip is available: <span class=" -Color -Color-Red">23.2.1</span> -&gt; <span class=" -Color -Color-Green">24.0</span>
+<span class=" -Color -Color-Bold">[</span><span class=" -Color -Color-Blue">notice</span><span class=" -Color -Color-Bold">]</span> To update, run: <span class=" -Color -Color-Green">pip install --upgrade pip</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Note: you may need to restart the kernel to use updated packages.
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/davos/core/project.py:896: UserWarning: Failed to identify notebook path. Falling back to generic default project
   warnings.warn(
 </pre></div>
 </div>
@@ -455,47 +524,63 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Red">ERROR: Could not find a version that satisfies the requirement numpy==1.26.0 (from versions: 1.3.0, 1.4.1, 1.5.0, 1.5.1, 1.6.0, 1.6.1, 1.6.2, 1.7.0, 1.7.1, 1.7.2, 1.8.0, 1.8.1, 1.8.2, 1.9.0, 1.9.1, 1.9.2, 1.9.3, 1.10.0.post2, 1.10.1, 1.10.2, 1.10.4, 1.11.0, 1.11.1, 1.11.2, 1.11.3, 1.12.0, 1.12.1, 1.13.0, 1.13.1, 1.13.3, 1.14.0, 1.14.1, 1.14.2, 1.14.3, 1.14.4, 1.14.5, 1.14.6, 1.15.0, 1.15.1, 1.15.2, 1.15.3, 1.15.4, 1.16.0, 1.16.1, 1.16.2, 1.16.3, 1.16.4, 1.16.5, 1.16.6, 1.17.0, 1.17.1, 1.17.2, 1.17.3, 1.17.4, 1.17.5, 1.18.0, 1.18.1, 1.18.2, 1.18.3, 1.18.4, 1.18.5, 1.19.0, 1.19.1, 1.19.2, 1.19.3, 1.19.4, 1.19.5, 1.20.0, 1.20.1, 1.20.2, 1.20.3, 1.21.0, 1.21.1, 1.21.2, 1.21.3, 1.21.4, 1.21.5, 1.21.6, 1.22.0, 1.22.1, 1.22.2, 1.22.3, 1.22.4, 1.23.0rc1, 1.23.0rc2, 1.23.0rc3, 1.23.0, 1.23.1, 1.23.2, 1.23.3, 1.23.4, 1.23.5, 1.24.0rc1, 1.24.0rc2, 1.24.0, 1.24.1, 1.24.2, 1.24.3, 1.24.4)</span>
-<span class=" -Color -Color-Red">ERROR: No matching distribution found for numpy==1.26.0</span>
-<span class=" -Color -Color-Yellow">WARNING: You are using pip version 20.2.3; however, version 23.3.1 is available.</span>
-<span class=" -Color -Color-Yellow">You should consider upgrading via the &#39;/Library/Developer/CommandLineTools/usr/bin/python3 -m pip install --upgrade pip&#39; command.</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting numpy==1.26.0
+  Obtaining dependency information for numpy==1.26.0 from https://files.pythonhosted.org/packages/35/21/9e150d654da358beb29fe216f339dc17f2b2ac13fff2a89669401a910550/numpy-1.26.0-cp311-cp311-macosx_11_0_arm64.whl.metadata
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Downloading numpy-1.26.0-cp311-cp311-macosx_11_0_arm64.whl.metadata (99 kB)
+?25l     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/99.7 kB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸━━━ <span class=" -Color -Color-Green">92.2/99.7 kB</span> <span class=" -Color -Color-Red">6.2 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">99.7/99.7 kB</span> <span class=" -Color -Color-Red">2.3 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+?25hDownloading numpy-1.26.0-cp311-cp311-macosx_11_0_arm64.whl (14.0 MB)
+?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/14.0 MB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━╺━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">1.9/14.0 MB</span> <span class=" -Color -Color-Red">49.6 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━╸━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">6.5/14.0 MB</span> <span class=" -Color -Color-Red">84.3 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸━━━━━━━━ <span class=" -Color -Color-Green">11.1/14.0 MB</span> <span class=" -Color -Color-Red">112.5 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸ <span class=" -Color -Color-Green">14.0/14.0 MB</span> <span class=" -Color -Color-Red">118.2 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">14.0/14.0 MB</span> <span class=" -Color -Color-Red">85.3 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+?25h
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Installing collected packages: numpy
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Successfully installed numpy-1.26.0
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">[</span><span class=" -Color -Color-Blue">notice</span><span class=" -Color -Color-Bold">]</span> A new release of pip is available: <span class=" -Color -Color-Red">23.2.1</span> -&gt; <span class=" -Color -Color-Green">24.0</span>
+<span class=" -Color -Color-Bold">[</span><span class=" -Color -Color-Blue">notice</span><span class=" -Color -Color-Bold">]</span> To update, run: <span class=" -Color -Color-Green">pip install --upgrade pip</span>
 </pre></div>
 </div>
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">CalledProcessError</span><span class="g g-Whitespace">                        </span>Traceback (most recent call last)
-<span class="nn">File ~/Library/Python/3.8/lib/python/site-packages/davos/core/core.py:675,</span> in <span class="ni">Onion._pip_install_package</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">    </span><span class="mi">674</span> <span class="k">try</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">675</span>     <span class="n">stdout</span> <span class="o">=</span> <span class="n">run_shell_command</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">install_cmd</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">676</span> <span class="k">except</span> <span class="n">CalledProcessError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="ne">StopIteration</span><span class="g g-Whitespace">                             </span>Traceback (most recent call last)
+<span class="nn">File /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/importlib/metadata/__init__.py:563,</span> in <span class="ni">Distribution.from_name</span><span class="nt">(cls, name)</span>
+<span class="g g-Whitespace">    </span><span class="mi">562</span> <span class="k">try</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">563</span>     <span class="k">return</span> <span class="nb">next</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">discover</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">))</span>
+<span class="g g-Whitespace">    </span><span class="mi">564</span> <span class="k">except</span> <span class="ne">StopIteration</span><span class="p">:</span>
 
-<span class="nn">File ~/Library/Python/3.8/lib/python/site-packages/davos/core/core.py:936,</span> in <span class="ni">run_shell_command</span><span class="nt">(command, live_stdout)</span>
-<span class="g g-Whitespace">    </span><span class="mi">935</span>         <span class="n">e</span><span class="o">.</span><span class="n">output</span> <span class="o">=</span> <span class="n">stdout</span>
-<span class="ne">--&gt; </span><span class="mi">936</span>     <span class="k">raise</span> <span class="n">e</span>
-<span class="g g-Whitespace">    </span><span class="mi">937</span> <span class="n">stdout</span> <span class="o">=</span> <span class="n">stdout</span><span class="o">.</span><span class="n">getvalue</span><span class="p">()</span>
-
-<span class="nn">File ~/Library/Python/3.8/lib/python/site-packages/davos/core/core.py:929,</span> in <span class="ni">run_shell_command</span><span class="nt">(command, live_stdout)</span>
-<span class="g g-Whitespace">    </span><span class="mi">928</span> <span class="k">try</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">929</span>     <span class="n">_run_shell_command_helper</span><span class="p">(</span><span class="n">command</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">930</span> <span class="k">except</span> <span class="n">CalledProcessError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">931</span>     <span class="c1"># if the exception doesn&#39;t record the output, add it</span>
-<span class="g g-Whitespace">    </span><span class="mi">932</span>     <span class="c1"># manually before raising</span>
-
-<span class="nn">File ~/Library/Python/3.8/lib/python/site-packages/davos/implementations/ipython_common.py:111,</span> in <span class="ni">_run_shell_command_helper</span><span class="nt">(command)</span>
-<span class="g g-Whitespace">    </span><span class="mi">110</span> <span class="k">if</span> <span class="n">retcode</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">111</span>     <span class="k">raise</span> <span class="n">CalledProcessError</span><span class="p">(</span><span class="n">returncode</span><span class="o">=</span><span class="n">retcode</span><span class="p">,</span> <span class="n">cmd</span><span class="o">=</span><span class="n">command</span><span class="p">)</span>
-
-<span class="ne">CalledProcessError</span>: Command &#39;PYTHONUSERBASE=&quot;/Users/f003vz1/.davos/projects/davos-fallback&quot; /Users/f003vz1/Library/Python/3.8/bin/pip install --no-warn-script-location --user numpy==1.26.0&#39; returned non-zero exit status 1.
+<span class="ne">StopIteration</span>: 
 
 <span class="n">During</span> <span class="n">handling</span> <span class="n">of</span> <span class="n">the</span> <span class="n">above</span> <span class="n">exception</span><span class="p">,</span> <span class="n">another</span> <span class="n">exception</span> <span class="n">occurred</span><span class="p">:</span>
 
-<span class="ne">InstallerError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
+<span class="ne">PackageNotFoundError</span><span class="g g-Whitespace">                      </span>Traceback (most recent call last)
 <span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">3</span>
 <span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">smuggle</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;collections.abc.Iterable&quot;</span><span class="p">,</span> <span class="n">as_</span><span class="o">=</span><span class="s2">&quot;Iterable&quot;</span><span class="p">)</span>
 <span class="ne">----&gt; </span><span class="mi">3</span> <span class="n">smuggle</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;numpy&quot;</span><span class="p">,</span> <span class="n">as_</span><span class="o">=</span><span class="s2">&quot;np&quot;</span><span class="p">,</span> <span class="n">installer</span><span class="o">=</span><span class="s2">&quot;pip&quot;</span><span class="p">,</span> <span class="n">args_str</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;numpy==1.26.0&quot;&quot;&quot;</span><span class="p">,</span> <span class="n">installer_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;editable&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s1">&#39;spec&#39;</span><span class="p">:</span> <span class="s1">&#39;numpy==1.26.0&#39;</span><span class="p">})</span>
 <span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">smuggle</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;pandas&quot;</span><span class="p">,</span> <span class="n">as_</span><span class="o">=</span><span class="s2">&quot;pd&quot;</span><span class="p">,</span> <span class="n">installer</span><span class="o">=</span><span class="s2">&quot;pip&quot;</span><span class="p">,</span> <span class="n">args_str</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;pandas==2.1.1&quot;&quot;&quot;</span><span class="p">,</span> <span class="n">installer_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;editable&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s1">&#39;spec&#39;</span><span class="p">:</span> <span class="s1">&#39;pandas==2.1.1&#39;</span><span class="p">})</span>
 <span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">smuggle</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;scipy.stats&quot;</span><span class="p">,</span> <span class="n">as_</span><span class="o">=</span><span class="s2">&quot;stats&quot;</span><span class="p">,</span> <span class="n">installer</span><span class="o">=</span><span class="s2">&quot;pip&quot;</span><span class="p">,</span> <span class="n">args_str</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;scipy==1.11.2&quot;&quot;&quot;</span><span class="p">,</span> <span class="n">installer_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;editable&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s1">&#39;spec&#39;</span><span class="p">:</span> <span class="s1">&#39;scipy==1.11.2&#39;</span><span class="p">})</span>
 
-<span class="nn">File ~/Library/Python/3.8/lib/python/site-packages/davos/core/core.py:979,</span> in <span class="ni">use_project.&lt;locals&gt;.smuggle_wrapper</span><span class="nt">(*args, **kwargs)</span>
+<span class="nn">File /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/davos/core/core.py:979,</span> in <span class="ni">use_project.&lt;locals&gt;.smuggle_wrapper</span><span class="nt">(*args, **kwargs)</span>
 <span class="g g-Whitespace">    </span><span class="mi">977</span> <span class="n">importlib</span><span class="o">.</span><span class="n">invalidate_caches</span><span class="p">()</span>
 <span class="g g-Whitespace">    </span><span class="mi">978</span> <span class="k">try</span><span class="p">:</span>
 <span class="ne">--&gt; </span><span class="mi">979</span>     <span class="k">return</span> <span class="n">smuggle_func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
@@ -507,24 +592,41 @@ document.write(`
 <span class="g g-Whitespace">    </span><span class="mi">987</span>     <span class="c1"># in custom locations</span>
 <span class="g g-Whitespace">    </span><span class="mi">988</span>     <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">project</span><span class="o">.</span><span class="n">site_packages_dir</span><span class="p">))</span>
 
-<span class="nn">File ~/Library/Python/3.8/lib/python/site-packages/davos/core/core.py:1077,</span> in <span class="ni">smuggle</span><span class="nt">(name, as_, installer, args_str, installer_kwargs)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1073</span>     <span class="k">if</span> <span class="ow">not</span> <span class="n">confirmed</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1074</span>         <span class="k">raise</span> <span class="n">SmugglerError</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">1075</span>             <span class="sa">f</span><span class="s2">&quot;package </span><span class="si">{</span><span class="n">pkg_name</span><span class="si">!r}</span><span class="s2"> not installed&quot;</span>
-<span class="g g-Whitespace">   </span><span class="mi">1076</span>         <span class="p">)</span> <span class="kn">from</span> <span class="kc">None</span>
-<span class="ne">-&gt; </span><span class="mi">1077</span> <span class="n">installer_stdout</span> <span class="o">=</span> <span class="n">onion</span><span class="o">.</span><span class="n">install_package</span><span class="p">()</span>
-<span class="g g-Whitespace">   </span><span class="mi">1078</span> <span class="c1"># invalidate sys.meta_path module finder caches. Forces import</span>
-<span class="g g-Whitespace">   </span><span class="mi">1079</span> <span class="c1"># machinery to notice newly installed module</span>
-<span class="g g-Whitespace">   </span><span class="mi">1080</span> <span class="n">importlib</span><span class="o">.</span><span class="n">invalidate_caches</span><span class="p">()</span>
+<span class="nn">File /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/davos/core/core.py:1091,</span> in <span class="ni">smuggle</span><span class="nt">(name, as_, installer, args_str, installer_kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1087</span>     <span class="n">importlib</span><span class="o">.</span><span class="n">reload</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">[</span><span class="s1">&#39;pkg_resources&#39;</span><span class="p">])</span>
+<span class="g g-Whitespace">   </span><span class="mi">1088</span> <span class="c1"># check whether the smuggled package and/or any</span>
+<span class="g g-Whitespace">   </span><span class="mi">1089</span> <span class="c1"># installed/updated dependencies were already imported during</span>
+<span class="g g-Whitespace">   </span><span class="mi">1090</span> <span class="c1"># the current runtime</span>
+<span class="ne">-&gt; </span><span class="mi">1091</span> <span class="n">prev_imported_pkgs</span> <span class="o">=</span> <span class="n">get_previously_imported_pkgs</span><span class="p">(</span><span class="n">installer_stdout</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1092</span>                                                   <span class="n">onion</span><span class="o">.</span><span class="n">installer</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1093</span> <span class="c1"># if the smuggled package was previously imported, deal with</span>
+<span class="g g-Whitespace">   </span><span class="mi">1094</span> <span class="c1"># it last so it&#39;s reloaded after its dependencies are in place</span>
+<span class="g g-Whitespace">   </span><span class="mi">1095</span> <span class="k">try</span><span class="p">:</span>
 
-<span class="nn">File ~/Library/Python/3.8/lib/python/site-packages/davos/core/core.py:677,</span> in <span class="ni">Onion._pip_install_package</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">    </span><span class="mi">675</span>     <span class="n">stdout</span> <span class="o">=</span> <span class="n">run_shell_command</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">install_cmd</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">676</span> <span class="k">except</span> <span class="n">CalledProcessError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">677</span>     <span class="k">raise</span> <span class="n">InstallerError</span><span class="o">.</span><span class="n">from_error</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">678</span> <span class="c1"># handle packages installed in non-standard locations</span>
-<span class="g g-Whitespace">    </span><span class="mi">679</span> <span class="n">install_dir</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">installer_kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;target&#39;</span><span class="p">)</span>
+<span class="nn">File /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/davos/core/core.py:257,</span> in <span class="ni">get_previously_imported_pkgs</span><span class="nt">(install_cmd_stdout, installer)</span>
+<span class="g g-Whitespace">    </span><span class="mi">255</span> <span class="n">pkg_name</span> <span class="o">=</span> <span class="n">dist_name</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">maxsplit</span><span class="o">=</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="g g-Whitespace">    </span><span class="mi">256</span> <span class="c1"># use the install name to get the package distribution object</span>
+<span class="ne">--&gt; </span><span class="mi">257</span> <span class="n">dist</span> <span class="o">=</span> <span class="n">metadata</span><span class="o">.</span><span class="n">distribution</span><span class="p">(</span><span class="n">pkg_name</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">258</span> <span class="c1"># check the distribution&#39;s metadata for a file containing</span>
+<span class="g g-Whitespace">    </span><span class="mi">259</span> <span class="c1"># top-level import names. Also includes names of namespace</span>
+<span class="g g-Whitespace">    </span><span class="mi">260</span> <span class="c1"># packages (e.g. mpl_toolkits from matplotlib), if any.</span>
+<span class="g g-Whitespace">    </span><span class="mi">261</span> <span class="n">toplevel_names</span> <span class="o">=</span> <span class="n">dist</span><span class="o">.</span><span class="n">read_text</span><span class="p">(</span><span class="s1">&#39;top_level.txt&#39;</span><span class="p">)</span>
 
-<span class="ne">InstallerError</span>: Command &#39;PYTHONUSERBASE=&quot;/Users/f003vz1/.davos/projects/davos-fallback&quot; /Users/f003vz1/Library/Python/3.8/bin/pip install --no-warn-script-location --user numpy==1.26.0&#39; returned non-zero exit status 1.
+<span class="nn">File /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/importlib/metadata/__init__.py:981,</span> in <span class="ni">distribution</span><span class="nt">(distribution_name)</span>
+<span class="g g-Whitespace">    </span><span class="mi">975</span> <span class="k">def</span> <span class="nf">distribution</span><span class="p">(</span><span class="n">distribution_name</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">976</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;Get the ``Distribution`` instance for the named package.</span>
+<span class="g g-Whitespace">    </span><span class="mi">977</span><span class="sd"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">978</span><span class="sd">     :param distribution_name: The name of the distribution package as a string.</span>
+<span class="g g-Whitespace">    </span><span class="mi">979</span><span class="sd">     :return: A ``Distribution`` instance (or subclass thereof).</span>
+<span class="g g-Whitespace">    </span><span class="mi">980</span><span class="sd">     &quot;&quot;&quot;</span>
+<span class="ne">--&gt; </span><span class="mi">981</span>     <span class="k">return</span> <span class="n">Distribution</span><span class="o">.</span><span class="n">from_name</span><span class="p">(</span><span class="n">distribution_name</span><span class="p">)</span>
+
+<span class="nn">File /Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/importlib/metadata/__init__.py:565,</span> in <span class="ni">Distribution.from_name</span><span class="nt">(cls, name)</span>
+<span class="g g-Whitespace">    </span><span class="mi">563</span>     <span class="k">return</span> <span class="nb">next</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">discover</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">))</span>
+<span class="g g-Whitespace">    </span><span class="mi">564</span> <span class="k">except</span> <span class="ne">StopIteration</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">565</span>     <span class="k">raise</span> <span class="n">PackageNotFoundError</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+
+<span class="ne">PackageNotFoundError</span>: No package metadata was found for numpy
 </pre></div>
 </div>
 </div>

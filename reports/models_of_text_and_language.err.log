@@ -1,39 +1,94 @@
 Traceback (most recent call last):
-  File "/Users/f003vz1/Library/Python/3.8/lib/python/site-packages/nbclient/client.py", line 778, in _async_poll_for_reply
-    msg = await ensure_async(self.kc.shell_channel.get_msg(timeout=new_timeout))
-  File "/Users/f003vz1/Library/Python/3.8/lib/python/site-packages/jupyter_core/utils/__init__.py", line 182, in ensure_async
-    result = await obj
-  File "/Users/f003vz1/Library/Python/3.8/lib/python/site-packages/jupyter_client/channels.py", line 315, in get_msg
-    raise Empty
-_queue.Empty
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "/Users/f003vz1/Library/Python/3.8/lib/python/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
     executenb(
-  File "/Users/f003vz1/Library/Python/3.8/lib/python/site-packages/nbclient/client.py", line 1305, in execute
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/nbclient/client.py", line 1305, in execute
     return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
-  File "/Users/f003vz1/Library/Python/3.8/lib/python/site-packages/jupyter_core/utils/__init__.py", line 166, in wrapped
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/jupyter_core/utils/__init__.py", line 166, in wrapped
     return loop.run_until_complete(inner)
-  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.8/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/base_events.py", line 653, in run_until_complete
     return future.result()
-  File "/Users/f003vz1/Library/Python/3.8/lib/python/site-packages/nbclient/client.py", line 705, in async_execute
+           ^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/nbclient/client.py", line 705, in async_execute
     await self.async_execute_cell(
-  File "/Users/f003vz1/Library/Python/3.8/lib/python/site-packages/nbclient/client.py", line 1001, in async_execute_cell
-    exec_reply = await self.task_poll_for_reply
-  File "/Users/f003vz1/Library/Python/3.8/lib/python/site-packages/nbclient/client.py", line 802, in _async_poll_for_reply
-    error_on_timeout_execute_reply = await self._async_handle_timeout(timeout, cell)
-  File "/Users/f003vz1/Library/Python/3.8/lib/python/site-packages/nbclient/client.py", line 852, in _async_handle_timeout
-    raise CellTimeoutError.error_from_timeout_and_cell(
-nbclient.exceptions.CellTimeoutError: A cell timed out while it was being executed, after 30 seconds.
-The message was: Cell execution timed out.
-Here is a preview of the cell contents:
--------------------
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/nbclient/client.py", line 1058, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/nbclient/client.py", line 914, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
 # @title Install and enable Chatify
 smuggle chatify      # pip: chatify
 %load_ext chatify
 
 print('Chatify has been installed and loaded! 🤖')
--------------------
+------------------
+
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mStopIteration[0m                             Traceback (most recent call last)
+File [0;32m/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/importlib/metadata/__init__.py:563[0m, in [0;36mDistribution.from_name[0;34m(cls, name)[0m
+[1;32m    562[0m [38;5;28;01mtry[39;00m:
+[0;32m--> 563[0m     [38;5;28;01mreturn[39;00m [38;5;28;43mnext[39;49m[43m([49m[38;5;28;43mcls[39;49m[38;5;241;43m.[39;49m[43mdiscover[49m[43m([49m[43mname[49m[38;5;241;43m=[39;49m[43mname[49m[43m)[49m[43m)[49m
+[1;32m    564[0m [38;5;28;01mexcept[39;00m [38;5;167;01mStopIteration[39;00m:
+
+[0;31mStopIteration[0m: 
+
+During handling of the above exception, another exception occurred:
+
+[0;31mPackageNotFoundError[0m                      Traceback (most recent call last)
+Cell [0;32mIn[2], line 2[0m
+[1;32m      1[0m [38;5;66;03m# @title Install and enable Chatify[39;00m
+[0;32m----> 2[0m [43msmuggle[49m[43m([49m[43mname[49m[38;5;241;43m=[39;49m[38;5;124;43m"[39;49m[38;5;124;43mchatify[39;49m[38;5;124;43m"[39;49m[43m,[49m[43m [49m[43mas_[49m[38;5;241;43m=[39;49m[38;5;28;43;01mNone[39;49;00m[43m,[49m[43m [49m[43minstaller[49m[38;5;241;43m=[39;49m[38;5;124;43m"[39;49m[38;5;124;43mpip[39;49m[38;5;124;43m"[39;49m[43m,[49m[43m [49m[43margs_str[49m[38;5;241;43m=[39;49m[38;5;124;43m"""[39;49m[38;5;124;43mchatify[39;49m[38;5;124;43m"""[39;49m[43m,[49m[43m [49m[43minstaller_kwargs[49m[38;5;241;43m=[39;49m[43m{[49m[38;5;124;43m'[39;49m[38;5;124;43meditable[39;49m[38;5;124;43m'[39;49m[43m:[49m[43m [49m[38;5;28;43;01mFalse[39;49;00m[43m,[49m[43m [49m[38;5;124;43m'[39;49m[38;5;124;43mspec[39;49m[38;5;124;43m'[39;49m[43m:[49m[43m [49m[38;5;124;43m'[39;49m[38;5;124;43mchatify[39;49m[38;5;124;43m'[39;49m[43m}[49m[43m)[49m
+[1;32m      3[0m get_ipython()[38;5;241m.[39mrun_line_magic([38;5;124m'[39m[38;5;124mload_ext[39m[38;5;124m'[39m, [38;5;124m'[39m[38;5;124mchatify[39m[38;5;124m'[39m)
+[1;32m      5[0m [38;5;28mprint[39m([38;5;124m'[39m[38;5;124mChatify has been installed and loaded! 🤖[39m[38;5;124m'[39m)
+
+File [0;32m/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/davos/core/core.py:979[0m, in [0;36muse_project.<locals>.smuggle_wrapper[0;34m(*args, **kwargs)[0m
+[1;32m    977[0m importlib[38;5;241m.[39minvalidate_caches()
+[1;32m    978[0m [38;5;28;01mtry[39;00m:
+[0;32m--> 979[0m     [38;5;28;01mreturn[39;00m [43msmuggle_func[49m[43m([49m[38;5;241;43m*[39;49m[43margs[49m[43m,[49m[43m [49m[38;5;241;43m*[39;49m[38;5;241;43m*[39;49m[43mkwargs[49m[43m)[49m
+[1;32m    980[0m [38;5;28;01mfinally[39;00m:
+[1;32m    981[0m     [38;5;66;03m# after (possibly installing and) loading the package,[39;00m
+[1;32m    982[0m     [38;5;66;03m# remove the project's site-packages directory from[39;00m
+[0;32m   (...)[0m
+[1;32m    986[0m     [38;5;66;03m# other dirs being prepended to load modules installed[39;00m
+[1;32m    987[0m     [38;5;66;03m# in custom locations[39;00m
+[1;32m    988[0m     sys[38;5;241m.[39mpath[38;5;241m.[39mremove([38;5;28mstr[39m(project[38;5;241m.[39msite_packages_dir))
+
+File [0;32m/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/davos/core/core.py:1091[0m, in [0;36msmuggle[0;34m(name, as_, installer, args_str, installer_kwargs)[0m
+[1;32m   1087[0m     importlib[38;5;241m.[39mreload(sys[38;5;241m.[39mmodules[[38;5;124m'[39m[38;5;124mpkg_resources[39m[38;5;124m'[39m])
+[1;32m   1088[0m [38;5;66;03m# check whether the smuggled package and/or any[39;00m
+[1;32m   1089[0m [38;5;66;03m# installed/updated dependencies were already imported during[39;00m
+[1;32m   1090[0m [38;5;66;03m# the current runtime[39;00m
+[0;32m-> 1091[0m prev_imported_pkgs [38;5;241m=[39m [43mget_previously_imported_pkgs[49m[43m([49m[43minstaller_stdout[49m[43m,[49m
+[1;32m   1092[0m [43m                                                  [49m[43monion[49m[38;5;241;43m.[39;49m[43minstaller[49m[43m)[49m
+[1;32m   1093[0m [38;5;66;03m# if the smuggled package was previously imported, deal with[39;00m
+[1;32m   1094[0m [38;5;66;03m# it last so it's reloaded after its dependencies are in place[39;00m
+[1;32m   1095[0m [38;5;28;01mtry[39;00m:
+
+File [0;32m/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/davos/core/core.py:257[0m, in [0;36mget_previously_imported_pkgs[0;34m(install_cmd_stdout, installer)[0m
+[1;32m    255[0m pkg_name [38;5;241m=[39m dist_name[38;5;241m.[39mrsplit([38;5;124m'[39m[38;5;124m-[39m[38;5;124m'[39m, maxsplit[38;5;241m=[39m[38;5;241m1[39m)[[38;5;241m0[39m]
+[1;32m    256[0m [38;5;66;03m# use the install name to get the package distribution object[39;00m
+[0;32m--> 257[0m dist [38;5;241m=[39m [43mmetadata[49m[38;5;241;43m.[39;49m[43mdistribution[49m[43m([49m[43mpkg_name[49m[43m)[49m
+[1;32m    258[0m [38;5;66;03m# check the distribution's metadata for a file containing[39;00m
+[1;32m    259[0m [38;5;66;03m# top-level import names. Also includes names of namespace[39;00m
+[1;32m    260[0m [38;5;66;03m# packages (e.g. mpl_toolkits from matplotlib), if any.[39;00m
+[1;32m    261[0m toplevel_names [38;5;241m=[39m dist[38;5;241m.[39mread_text([38;5;124m'[39m[38;5;124mtop_level.txt[39m[38;5;124m'[39m)
+
+File [0;32m/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/importlib/metadata/__init__.py:981[0m, in [0;36mdistribution[0;34m(distribution_name)[0m
+[1;32m    975[0m [38;5;28;01mdef[39;00m [38;5;21mdistribution[39m(distribution_name):
+[1;32m    976[0m [38;5;250m    [39m[38;5;124;03m"""Get the ``Distribution`` instance for the named package.[39;00m
+[1;32m    977[0m 
+[1;32m    978[0m [38;5;124;03m    :param distribution_name: The name of the distribution package as a string.[39;00m
+[1;32m    979[0m [38;5;124;03m    :return: A ``Distribution`` instance (or subclass thereof).[39;00m
+[1;32m    980[0m [38;5;124;03m    """[39;00m
+[0;32m--> 981[0m     [38;5;28;01mreturn[39;00m [43mDistribution[49m[38;5;241;43m.[39;49m[43mfrom_name[49m[43m([49m[43mdistribution_name[49m[43m)[49m
+
+File [0;32m/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/importlib/metadata/__init__.py:565[0m, in [0;36mDistribution.from_name[0;34m(cls, name)[0m
+[1;32m    563[0m     [38;5;28;01mreturn[39;00m [38;5;28mnext[39m([38;5;28mcls[39m[38;5;241m.[39mdiscover(name[38;5;241m=[39mname))
+[1;32m    564[0m [38;5;28;01mexcept[39;00m [38;5;167;01mStopIteration[39;00m:
+[0;32m--> 565[0m     [38;5;28;01mraise[39;00m PackageNotFoundError(name)
+
+[0;31mPackageNotFoundError[0m: No package metadata was found for chatify
 
